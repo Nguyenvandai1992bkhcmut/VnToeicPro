@@ -36,5 +36,13 @@ public:
     vector<ModelWordChecked>searchWordChecked(int flag , int id);
 
     void insertWordChecked(ModelWordChecked checked);
+
+    bool checkFavotiteWord(int id);
+
+    void deleteWordFavorite(int id);
+
+    void deleteWordChecked(int id);
+
+    bool checkWordChecked(int id);
 };
 #endif /* SqliteDictionary_hpp */

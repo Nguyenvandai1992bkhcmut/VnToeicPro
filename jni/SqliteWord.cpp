@@ -387,3 +387,62 @@ void SqliteWord::insertWordChecked(ModelWordChecked wchecked){
 
                 sqlite3_step(stmt);
 }
+// check favoriteword
+bool SqliteWord::checkFavotiteWord(int id1){
+    stringstream ss2;
+    ss2 << id1;
+    string id = ss2.str();
+    string sql = "select count(*)from word_favorite where word_favorite.id ="+ id;
+    if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
+          return false;
+    }
+    int count =0;
+    while (sqlite3_step(stmt) == SQLITE_ROW) {
+         count = sqlite3_column_int(this->stmt,0);
+    }
+    if(count == 0)return false;
+    else return true;
+
+}
+
+// check favoriteword
+void SqliteWord::deleteWordFavorite(int id1){
+    stringstream ss2;
+    ss2 << id1;
+    string id = ss2.str();
+    string sql = "delete from word_favorite where word_favorite.id="+ id;
+    if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
+          return;
+    }
+    sqlite3_step(stmt);
+}
+
+void SqliteWord::deleteWordChecked(int id1){
+    stringstream ss2;
+    ss2 << id1;
+    string id = ss2.str();
+    string sql = "delete from word_checked where word_checked.id="+ id;
+    if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
+          return;
+    }
+    sqlite3_step(stmt);
+}
+
+
+
+bool SqliteWord::checkWordChecked(int id1){
+    stringstream ss2;
+    ss2 << id1;
+    string id = ss2.str();
+    string sql = "select count(*)from word_checked where word_checked.id ="+ id;
+    if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
+          return false;
+    }
+    int count =0;
+    while (sqlite3_step(stmt) == SQLITE_ROW) {
+         count = sqlite3_column_int(this->stmt,0);
+    }
+    if(count == 0)return false;
+    else return true;
+
+}

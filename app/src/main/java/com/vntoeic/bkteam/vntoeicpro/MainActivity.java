@@ -60,6 +60,14 @@ public class MainActivity extends AppCompatActivity {
         ModelWordChecked modelWordChecked = new ModelWordChecked(29,0,1,"time_check_insert");
         vc.insertWordChecked(modelWordChecked);
         checked = vc.searchWordChecked();
+
+        Boolean b = vc.checkFavoriteWord(1);
+
+        b= vc.checkWordChecked(29);
+        vc.deleteWordChecked(29);
+        b= vc.checkWordChecked(29);
+        vc.deleteWordFavorite(1);
+        b= vc.checkFavoriteWord(1);
     }
 
 

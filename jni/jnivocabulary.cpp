@@ -410,3 +410,43 @@ Java_sqlite_SqliteVocabulary_insertWordChecked(JNIEnv * env, jobject object , jo
 
 }
 }
+
+
+extern "C"{
+JNIEXPORT jboolean JNICALL
+Java_sqlite_SqliteVocabulary_checkFavoriteWord(JNIEnv * env, jobject object , jint idword){
+        SqliteWord sqlite;
+        int id = (int)idword;
+        bool check = sqlite.checkFavotiteWord( id);
+        return (jboolean)check;
+}
+}
+
+extern "C"{
+JNIEXPORT void JNICALL
+Java_sqlite_SqliteVocabulary_deleteWordFavorite(JNIEnv * env, jobject object , jint idword){
+        SqliteWord sqlite;
+        int id = (int)idword;
+        sqlite.deleteWordFavorite( id);
+}
+}
+
+extern "C"{
+JNIEXPORT void JNICALL
+Java_sqlite_SqliteVocabulary_deleteWordChecked(JNIEnv * env, jobject object , jint idword){
+        SqliteWord sqlite;
+        int id = (int)idword;
+        sqlite.deleteWordChecked( id);
+}
+}
+
+
+extern "C"{
+JNIEXPORT jboolean JNICALL
+Java_sqlite_SqliteVocabulary_checkWordChecked(JNIEnv * env, jobject object , jint idword){
+        SqliteWord sqlite;
+        int id = (int)idword;
+        bool check = sqlite.checkWordChecked(id);
+        return (jboolean)check;
+}
+}

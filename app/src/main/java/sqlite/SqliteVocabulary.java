@@ -31,5 +31,13 @@ public class SqliteVocabulary {
 
     public native ModelWordChecked[]searchWordCheckedId(int id);
 
+    public native boolean checkFavoriteWord(int id);
+
+    public native boolean checkWordChecked(int id);
+
     public native void insertWordChecked(ModelWordChecked checked);
+
+    public native void deleteWordFavorite(int id);
+
+    public native void deleteWordChecked(int id);
 }

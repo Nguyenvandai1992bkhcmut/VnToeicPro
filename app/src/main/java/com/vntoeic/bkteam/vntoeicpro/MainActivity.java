@@ -2,8 +2,12 @@ package com.vntoeic.bkteam.vntoeicpro;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -17,6 +21,7 @@ import model.*;
 
 
 import sqlite.SqliteDictionary;
+import sqlite.SqlitePart1;
 import sqlite.SqliteVocabulary;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,47 +32,68 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         checkDatabase();
-        SqliteDictionary st = new SqliteDictionary();
-        Dictionary[] re = st.searchSimilar("go");
-        Dictionary re1 = st.searchId(10);
-        DictionaryFavorite df = new DictionaryFavorite(100,"dai dep trai","best");
-        st.insertFavorite(df);
-        DictionaryFavorite[]re2 = st.searchFavorite();
+//        SqliteDictionary st = new SqliteDictionary();
+//        Dictionary[] re = st.searchSimilar("go");
+//        Dictionary re1 = st.searchId(10);
+//        DictionaryFavorite df = new DictionaryFavorite(100,"dai dep trai","best");
+//        st.insertFavorite(df);
+//        DictionaryFavorite[]re2 = st.searchFavorite();
+//
+//        SqliteVocabulary vc = new SqliteVocabulary();
+//        ModelSection[]arr = vc.searchAllSection();
+//        ModelTag[]arr1 = vc.searchTaginSection(0);
+//        arr1= vc.searchTaginSection(1);
+//
+//        ModelLesson []arr11 = vc.searchLessonTag(1);
+//        arr11= vc.searchLessonTag(3);
+//        arr11= vc.searchLessonTag(2);
+//        arr11= vc.searchLessonTag(4);
+//
+//        ModelWord modelWord = vc.searchWordId(10);
+//        ModelWordLesson md[] = vc.searchWordLesson(1);
+//
+//        ModelFavoriteWord mm[] = vc.searchFavoriteWord();
+//        ModelFavoriteWord m = new ModelFavoriteWord(1,"nguyenvandai_time");
+//        ModelFavoriteWord m1 = new ModelFavoriteWord(1,"nguyenvandai_time");
+//        ModelFavoriteWord m2 = new ModelFavoriteWord(1,"nguyenvandai_time");
+//        vc.insertFavoriteWord(m);
+//        vc.insertFavoriteWord(m1);
+//        vc.insertFavoriteWord(m2);
+//        mm = vc.searchFavoriteWord();
+//
+//        ModelWordChecked checked[]=vc.searchWordCheckedId(1);
+//        ModelWordChecked modelWordChecked = new ModelWordChecked(29,0,1,"time_check_insert");
+//        vc.insertWordChecked(modelWordChecked);
+//        checked = vc.searchWordChecked();
+//
+//        Boolean b = vc.checkFavoriteWord(1);
+//
+//        b= vc.checkWordChecked(29);
+//        vc.deleteWordChecked(29);
+//        b= vc.checkWordChecked(29);
+//        vc.deleteWordFavorite(1);
+//        b= vc.checkFavoriteWord(1);
+        SqlitePart1 sqlite = new SqlitePart1();
+        ModelPart1 p1 = sqlite.searchPart1Id(10);
+        ModelPart1 p2[] = sqlite.randomPart1(10);
+        ModelPart1 p3[] = sqlite.randomPart1Subject(1,20);
+        ModelPart1 p4[] = sqlite.searchPart1Favorite();
+        Boolean b = sqlite.checkPartFavorite(1,1);
+        b = sqlite.checkPartFavorite(1,10);
+        ModelPartFavorite md = new ModelPartFavorite(1,100,"test insert");
+        sqlite.insertPartFavorite(md);
+        ModelPartFavorite f1[] =  sqlite.searchAllFavoritePart(1);
+        sqlite.deletePartFavorite(1,100);
+        f1 =  sqlite.searchAllFavoritePart(1);
 
-        SqliteVocabulary vc = new SqliteVocabulary();
-        ModelSection[]arr = vc.searchAllSection();
-        ModelTag[]arr1 = vc.searchTaginSection(0);
-        arr1= vc.searchTaginSection(1);
+        ModelPartCheck mc = new ModelPartCheck(1,1000,"test insert",0);
+        sqlite.insertPartCheck(mc);
+        ModelPartCheck c1[] = sqlite.searchAllCheckedPart(1);
+        sqlite.deletePartCheck(1,1000);
+        c1 = sqlite.searchAllCheckedPart(1);
 
-        ModelLesson []arr11 = vc.searchLessonTag(1);
-        arr11= vc.searchLessonTag(3);
-        arr11= vc.searchLessonTag(2);
-        arr11= vc.searchLessonTag(4);
 
-        ModelWord modelWord = vc.searchWordId(10);
-        ModelWordLesson md[] = vc.searchWordLesson(1);
 
-        ModelFavoriteWord mm[] = vc.searchFavoriteWord();
-        ModelFavoriteWord m = new ModelFavoriteWord(1,"nguyenvandai_time");
-        ModelFavoriteWord m1 = new ModelFavoriteWord(1,"nguyenvandai_time");
-        ModelFavoriteWord m2 = new ModelFavoriteWord(1,"nguyenvandai_time");
-        vc.insertFavoriteWord(m);
-        vc.insertFavoriteWord(m1);
-        vc.insertFavoriteWord(m2);
-        mm = vc.searchFavoriteWord();
-
-        ModelWordChecked checked[]=vc.searchWordCheckedId(1);
-        ModelWordChecked modelWordChecked = new ModelWordChecked(29,0,1,"time_check_insert");
-        vc.insertWordChecked(modelWordChecked);
-        checked = vc.searchWordChecked();
-
-        Boolean b = vc.checkFavoriteWord(1);
-
-        b= vc.checkWordChecked(29);
-        vc.deleteWordChecked(29);
-        b= vc.checkWordChecked(29);
-        vc.deleteWordFavorite(1);
-        b= vc.checkFavoriteWord(1);
     }
 
 

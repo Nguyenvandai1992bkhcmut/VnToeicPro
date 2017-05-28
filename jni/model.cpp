@@ -462,119 +462,113 @@ public:
 class Part1{
 private:
     int id;
-    char * img;
-    char * img_token;
-    char * audio;
-    char * audio_token;
-    char * a_script;
-    char * b_script;
-    char * c_script;
-    char * d_script;
-    string sol;
+    const char * token;
+    const char * a_script;
+    const char * b_script;
+    const char * c_script;
+    const char * d_script;
+    const char* sol;
     int level;
+    int time;
 public:
-    Part1(int id, char * img, char *img_token, char * audio, char * audio_token, char * a_sc, char * b_sc, char * c_sc, char * d_sc, string sol, int level){
+    Part1(int id, const char *token,const char * a_sc,const  char * b_sc,const  char * c_sc,const  char * d_sc,const  char* sol, int level, int time){
         this->id = id;
-        this->img= img;
-        this->img_token = img_token;
-        this->audio= audio;
-        this->audio_token = audio_token;
+        this->token = token;
         this->a_script= a_sc;
         this->b_script= b_sc;
         this->c_script = c_sc;
         this->d_script=d_sc;
         this->sol = sol;
         this->level = level;
+        this->time = time;
     }
     //get
     int getId(){
         return this->id;
     }
     
-    char * getImg(){
-        return this->img;
+    const char * getToken(){
+        return this->token;
     }
-    
-    char* getImgToken(){
-        return this->img_token;
-    }
-    
-    char*getAudio(){
-        return this->audio;
-    }
-    
-    char*getAudioToken(){
-        return this->audio_token;
-    }
-    
-    char* getA_script(){
+
+    const char* getA_script(){
         return this->a_script;
     }
     
-    char* getB_script(){
+    const char* getB_script(){
         return this->b_script;
     }
     
-    char* getC_script(){
+    const char* getC_script(){
         return this->c_script;
     }
     
-    char * getD_script(){
+    const char * getD_script(){
         return this->d_script;
     }
     
-    string getSol(){
+    const char * getSol(){
         return sol;
     }
     
     int getLevel(){
         return level;
     }
-    
-    //set
-    
-    //de
-    ~Part1(){
-        if(img!= NULL){
-            delete [] img;
-            img= NULL;
-        }
-        
-        if(img_token!= NULL){
-            delete [] img_token;
-            img_token= NULL;
-        }
-        
-        if(audio!= NULL){
-            delete [] audio;
-            audio = NULL;
-        }
-        
-        if(audio_token!= NULL){
-            delete [] audio_token;
-            audio_token = NULL;
-        }
-        
-        if(a_script!= NULL){
-            delete [] a_script;
-            a_script= NULL;
-        }
-        
-        if(b_script!= NULL){
-            delete [] b_script;
-            b_script= NULL;
-        }
-        
-        if(c_script!= NULL){
-            delete [] c_script;
-            c_script= NULL;
-        }
-        
-        if(d_script!= NULL){
-            delete [] d_script;
-            d_script= NULL;
-        }
+
+    int getTime(){
+        return this->time;
     }
+    //set
+
+};
+
+class ModelFavoritePart{
+    private:
+        int id;
+        const char *date;
+
+    public:
+        ModelFavoritePart(int id , const char * date){
+            this->id= id;
+            this->date = date;
+        }
+
+        //get
+
+        int getId(){
+            return this->id;
+        }
+
+        const char* getDate(){
+            return this->date;
+        }
+};
+
+class ModelCheckPart{
+    private:
+        int id;
+        const char *date;
+        int result;
+
+    public:
+        ModelCheckPart(int id , const char * date, int result){
+            this->id= id;
+            this->date = date;
+            this->result = result;
+        }
+
+        //get
+
+        int getId(){
+            return this->id;
+        }
+
+        const char* getDate(){
+            return this->date;
+        }
+        int getResult(){
+            return this->result;
+        }
 };
 
 class PartSubject{

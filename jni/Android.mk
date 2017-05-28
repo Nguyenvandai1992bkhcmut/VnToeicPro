@@ -83,6 +83,26 @@ LOCAL_MODULE := toeic2
 LOCAL_SRC_FILES := SqliteWord.cpp
 include $(BUILD_SHARED_LIBRARY)
 
+# Build library 6
+include $(CLEAR_VARS)
+LOCAL_STATIC_LIBRARIES := sqlite3-a
+LOCAL_SHARED_LIBRARIES := aaa
+LOCAL_SHARED_LIBRARIES += bbb
+LOCAL_SHARED_LIBRARIES += ccc
+LOCAL_MODULE := toeic3
+LOCAL_SRC_FILES := SqlitePart1.cpp
+include $(BUILD_SHARED_LIBRARY)
+
+# Build library 6
+include $(CLEAR_VARS)
+LOCAL_STATIC_LIBRARIES := sqlite3-a
+LOCAL_SHARED_LIBRARIES := aaa
+LOCAL_SHARED_LIBRARIES += bbb
+LOCAL_SHARED_LIBRARIES += ccc
+LOCAL_MODULE := toeic4
+LOCAL_SRC_FILES := SqliteControlPart.cpp
+include $(BUILD_SHARED_LIBRARY)
+
 
 # Build library 6
 include $(CLEAR_VARS)
@@ -115,4 +135,26 @@ LOCAL_MODULE := jnizxy
 LOCAL_SRC_FILES := jnivocabulary.cpp
 include $(BUILD_SHARED_LIBRARY)
 
+
+# Build library 9
+include $(CLEAR_VARS)
+LOCAL_STATIC_LIBRARIES := sqlite3-a
+LOCAL_SHARED_LIBRARIES := aaa
+LOCAL_SHARED_LIBRARIES += toeic3
+LOCAL_SHARED_LIBRARIES += bbb
+LOCAL_SHARED_LIBRARIES += ccc
+LOCAL_MODULE := jnizcc
+LOCAL_SRC_FILES := jnipart1.cpp
+include $(BUILD_SHARED_LIBRARY)
+
+# Build library 9
+include $(CLEAR_VARS)
+LOCAL_STATIC_LIBRARIES := sqlite3-a
+LOCAL_SHARED_LIBRARIES := aaa
+LOCAL_SHARED_LIBRARIES += toeic4
+LOCAL_SHARED_LIBRARIES += bbb
+LOCAL_SHARED_LIBRARIES += ccc
+LOCAL_MODULE := jnixcc
+LOCAL_SRC_FILES := jnimanagerpart.cpp
+include $(BUILD_SHARED_LIBRARY)
 

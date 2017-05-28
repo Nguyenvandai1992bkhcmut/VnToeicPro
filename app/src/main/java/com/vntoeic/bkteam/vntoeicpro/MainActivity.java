@@ -32,56 +32,58 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         checkDatabase();
-//        SqliteDictionary st = new SqliteDictionary();
-//        Dictionary[] re = st.searchSimilar("go");
-//        Dictionary re1 = st.searchId(10);
-//        DictionaryFavorite df = new DictionaryFavorite(100,"dai dep trai","best");
-//        st.insertFavorite(df);
-//        DictionaryFavorite[]re2 = st.searchFavorite();
-//
-//        SqliteVocabulary vc = new SqliteVocabulary();
-//        ModelSection[]arr = vc.searchAllSection();
-//        ModelTag[]arr1 = vc.searchTaginSection(0);
-//        arr1= vc.searchTaginSection(1);
-//
-//        ModelLesson []arr11 = vc.searchLessonTag(1);
-//        arr11= vc.searchLessonTag(3);
-//        arr11= vc.searchLessonTag(2);
-//        arr11= vc.searchLessonTag(4);
-//
-//        ModelWord modelWord = vc.searchWordId(10);
-//        ModelWordLesson md[] = vc.searchWordLesson(1);
-//
-//        ModelFavoriteWord mm[] = vc.searchFavoriteWord();
-//        ModelFavoriteWord m = new ModelFavoriteWord(1,"nguyenvandai_time");
-//        ModelFavoriteWord m1 = new ModelFavoriteWord(1,"nguyenvandai_time");
-//        ModelFavoriteWord m2 = new ModelFavoriteWord(1,"nguyenvandai_time");
-//        vc.insertFavoriteWord(m);
-//        vc.insertFavoriteWord(m1);
-//        vc.insertFavoriteWord(m2);
-//        mm = vc.searchFavoriteWord();
-//
-//        ModelWordChecked checked[]=vc.searchWordCheckedId(1);
-//        ModelWordChecked modelWordChecked = new ModelWordChecked(29,0,1,"time_check_insert");
-//        vc.insertWordChecked(modelWordChecked);
-//        checked = vc.searchWordChecked();
-//
-//        Boolean b = vc.checkFavoriteWord(1);
-//
-//        b= vc.checkWordChecked(29);
-//        vc.deleteWordChecked(29);
-//        b= vc.checkWordChecked(29);
-//        vc.deleteWordFavorite(1);
-//        b= vc.checkFavoriteWord(1);
+        SqliteDictionary st = new SqliteDictionary();
+        Dictionary[] re = st.searchSimilar("go");
+        Dictionary re1 = st.searchId(10);
+        DictionaryFavorite df = new DictionaryFavorite(100,"dai dep trai","best");
+        st.insertFavorite(df);
+        DictionaryFavorite[]re2 = st.searchFavorite();
+
+        SqliteVocabulary vc = new SqliteVocabulary();
+        ModelSection[]arr = vc.searchAllSection();
+        ModelTag[]arr1 = vc.searchTaginSection(0);
+        arr1= vc.searchTaginSection(1);
+
+        ModelLesson []arr11 = vc.searchLessonTag(1);
+        arr11= vc.searchLessonTag(3);
+        arr11= vc.searchLessonTag(2);
+        arr11= vc.searchLessonTag(4);
+
+        ModelWord modelWord = vc.searchWordId(10);
+        ModelWordLesson md[] = vc.searchWordLesson(1);
+
+        ModelFavoriteWord mm[] = vc.searchFavoriteWord();
+        ModelFavoriteWord m = new ModelFavoriteWord(1,"nguyenvandai_time");
+        ModelFavoriteWord m1 = new ModelFavoriteWord(1,"nguyenvandai_time");
+        ModelFavoriteWord m2 = new ModelFavoriteWord(1,"nguyenvandai_time");
+        vc.insertFavoriteWord(m);
+        vc.insertFavoriteWord(m1);
+        vc.insertFavoriteWord(m2);
+        mm = vc.searchFavoriteWord();
+
+        ModelWordChecked checked[]=vc.searchWordCheckedId(1);
+        ModelWordChecked modelWordChecked = new ModelWordChecked(29,0,1,"time_check_insert");
+        vc.insertWordChecked(modelWordChecked);
+        checked = vc.searchWordChecked();
+
+        Boolean b = vc.checkFavoriteWord(1);
+
+        b= vc.checkWordChecked(29);
+        vc.deleteWordChecked(29);
+        b= vc.checkWordChecked(29);
+        vc.deleteWordFavorite(1);
+        b= vc.checkFavoriteWord(1);
+
+
         SqlitePart1 sqlite = new SqlitePart1();
         ModelPart1 p1 = sqlite.searchPart1Id(10);
         ModelPart1 p2[] = sqlite.randomPart1(10);
         ModelPart1 p3[] = sqlite.randomPart1Subject(1,20);
         ModelPart1 p4[] = sqlite.searchPart1Favorite();
-        Boolean b = sqlite.checkPartFavorite(1,1);
+         b = sqlite.checkPartFavorite(1,1);
         b = sqlite.checkPartFavorite(1,10);
-        ModelPartFavorite md = new ModelPartFavorite(1,100,"test insert");
-        sqlite.insertPartFavorite(md);
+        ModelPartFavorite md1 = new ModelPartFavorite(1,100,"test insert");
+        sqlite.insertPartFavorite(md1);
         ModelPartFavorite f1[] =  sqlite.searchAllFavoritePart(1);
         sqlite.deletePartFavorite(1,100);
         f1 =  sqlite.searchAllFavoritePart(1);
@@ -92,7 +94,13 @@ public class MainActivity extends AppCompatActivity {
         sqlite.deletePartCheck(1,1000);
         c1 = sqlite.searchAllCheckedPart(1);
 
+        ModelWord[]ww = sqlite.searchWordPart(1,1);
 
+        ModelPartSubject[]pp = sqlite.searchPartSubject(1);
+        pp =sqlite.searchPartSubject(2);
+        pp =sqlite.searchPartSubject(3);
+        pp =sqlite.searchPartSubject(4);
+        pp =sqlite.searchPartSubject(5);
 
     }
 

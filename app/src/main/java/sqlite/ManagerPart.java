@@ -1,7 +1,6 @@
 package sqlite;
 
-import model.ModelPartCheck;
-import model.ModelPartFavorite;
+import model.*;
 
 /**
  * Created by dainguyen on 5/28/17.
@@ -26,5 +25,9 @@ public  class ManagerPart {
     public native void deletePartFavorite(int part, int id);
 
     public native void deletePartCheck(int part, int id);
+
+    public native ModelWord[]searchWordPart(int part, int id);
+
+    public native ModelPartSubject[]searchPartSubject(int part);
 
 }

@@ -573,27 +573,20 @@ class ModelCheckPart{
 
 class PartSubject{
 private:
-    
-    int type;
+
     int part_id;
-    int part_subject;
+    const char* part_subject;
     
 public:
-    PartSubject(int type, int part_id, int part_subject){
-        this->type = type;
+    PartSubject(int part_id, const char * part_subject){
         this->part_id = part_id;
         this->part_subject = part_subject;
     }
-    
-    //get
-    
-    int getType(){
-        return type;
-    }
+
     int getPartId(){
         return part_id;
     }
-    int getPartSubject(){
+    const char * getPartSubject(){
         return part_subject;
     }
 };

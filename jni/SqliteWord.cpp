@@ -194,7 +194,6 @@ vector<Section> SqliteWord::searchAllSection(){
               string sql = "select * from lesson_tag,word, meaning where (word.word_id =  meaning.word_id and lesson_tag.lesson_tag_id="+id+")";
                 vector<WordLesson> result;
                if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
-
                   return result;
                 }
                  while (sqlite3_step(stmt) == SQLITE_ROW) {

@@ -31,6 +31,9 @@ public:
     void deletePartFavorite(int part, int id);
      void  deletePartCheck(int part, int id);
 
+     vector<Word *> searchWordPart(int part, int idpart);
+     vector<PartSubject>searchPartSubject(int part);
+
 };
 
 #endif //VNTOEICPRO_SQLITECONTROLPART_H

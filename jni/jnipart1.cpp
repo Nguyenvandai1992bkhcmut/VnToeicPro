@@ -81,7 +81,7 @@ Java_sqlite_SqlitePart1_searchPart1Id(JNIEnv * env , jobject object ,jint id_){
 }
 
 extern "C"{
-JNIEXPORT jobject JNICALL
+JNIEXPORT jobjectArray JNICALL
 Java_sqlite_SqlitePart1_randomPart1(JNIEnv * env , jobject object ,jint number1){
 
     SqlitePart1 sqlite;
@@ -100,7 +100,7 @@ Java_sqlite_SqlitePart1_randomPart1(JNIEnv * env , jobject object ,jint number1)
 }
 
 extern "C"{
-JNIEXPORT jobject JNICALL
+JNIEXPORT jobjectArray JNICALL
 Java_sqlite_SqlitePart1_randomPart1Subject(JNIEnv * env , jobject object ,jint subject1,jint number1){
 
     SqlitePart1 sqlite;
@@ -123,7 +123,7 @@ Java_sqlite_SqlitePart1_randomPart1Subject(JNIEnv * env , jobject object ,jint s
 
 
 extern "C"{
-JNIEXPORT jobject JNICALL
+JNIEXPORT jobjectArray JNICALL
 Java_sqlite_SqlitePart1_searchPart1Favorite(JNIEnv * env , jobject object){
 
     SqlitePart1 sqlite;

@@ -144,11 +144,11 @@ vector<Section> SqliteWord::searchAllSection(){
                              example = decode(exam_);
                              }
 
-                       f=1;
+                            f=1;
                        }
                        //meaning
                        char * meaning1 =(char *)"";
-                        const void * meaning_ = sqlite3_column_blob(stmt, 6);
+                        const void * meaning_ = sqlite3_column_blob(stmt, 7);
                         if(meaning_ !=NULL){
                             meaning1 = decode(meaning_);
                         }
@@ -156,14 +156,14 @@ vector<Section> SqliteWord::searchAllSection(){
 
                          //type
                          char * type1 =(char *)"";
-                        const void * type_ = sqlite3_column_blob(stmt, 7);
+                        const void * type_ = sqlite3_column_blob(stmt, 8);
                         if(type_!=NULL){
                             type1 = decode(type_);
                         }
                         type.push_back(type1);
 
                          //explan
-                        const void * explan_ = sqlite3_column_blob(stmt, 8);
+                        const void * explan_ = sqlite3_column_blob(stmt, 9);
                         char *explan1=(char *)"";
                         if(explan_!=NULL){
                             explan1 = decode(explan_);
@@ -171,7 +171,7 @@ vector<Section> SqliteWord::searchAllSection(){
                         explan.push_back(explan1);
 
                          //similar
-                        const void * similar_ = sqlite3_column_blob(stmt, 9);
+                        const void * similar_ = sqlite3_column_blob(stmt, 10);
                         char *similar1 = (char *)"";
                         if(similar_!=NULL){
                             similar1 = decode(similar_);
@@ -180,7 +180,7 @@ vector<Section> SqliteWord::searchAllSection(){
 
 
                     }
-                Word * result = new Word(idword,word,pronouce,example,meaning,type,explan,similar);
+                Word * result = new Word(id,word,pronouce,example,meaning,type,explan,similar);
                 return result;
 
     }
@@ -225,7 +225,7 @@ vector<Section> SqliteWord::searchAllSection(){
 
                        //meaning
                        char * meaning1 =(char *)"";
-                        const void * meaning_ = sqlite3_column_blob(stmt, 9);
+                        const void * meaning_ = sqlite3_column_blob(stmt, 10);
                         if(meaning_ !=NULL){
                             meaning1 = decode(meaning_);
                         }
@@ -233,14 +233,14 @@ vector<Section> SqliteWord::searchAllSection(){
 
                          //type
                          char * type1 =(char *)"";
-                        const void * type_ = sqlite3_column_blob(stmt, 10);
+                        const void * type_ = sqlite3_column_blob(stmt, 11);
                         if(type_!=NULL){
                             type1 = decode(type_);
                         }
 
 
                          //explan
-                        const void * explan_ = sqlite3_column_blob(stmt, 11);
+                        const void * explan_ = sqlite3_column_blob(stmt, 12);
                         char *explan1=(char *)"";
                         if(explan_!=NULL){
                             explan1 = decode(explan_);
@@ -248,7 +248,7 @@ vector<Section> SqliteWord::searchAllSection(){
 
 
                          //similar
-                        const void * similar_ = sqlite3_column_blob(stmt, 12);
+                        const void * similar_ = sqlite3_column_blob(stmt, 13);
                         char *similar1 = (char *)"";
                         if(similar_!=NULL){
                             similar1 = decode(similar_);

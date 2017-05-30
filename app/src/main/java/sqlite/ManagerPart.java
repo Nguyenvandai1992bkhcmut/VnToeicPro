@@ -28,6 +28,26 @@ public  class ManagerPart {
 
     public native ModelWord[]searchWordPart(int part, int id);
 
+    /*
+    is_aware = 0 -> chua thuoc word
+    is_aware =1  -> da thuoc tu
+    part =[1-7] <=> part1 -> part7
+
+    tim kiem nhung tu trong part filter part isware , id,
+    */
+
+    public native ModelWord[]searchWordPartAware(int part ,int is_aware, int id);
+
     public native ModelPartSubject[]searchPartSubject(int part);
+
+    public native ModelGrammar[] searchAllGrammar();
+
+    public native ModelGrammar searchGrammarId(int idGrammar);
+
+    /*
+    Update colum aware trong word
+    */
+
+    public native void updateWordAware(int idword, int aware);
 
 }

@@ -103,6 +103,16 @@ LOCAL_MODULE := toeic4
 LOCAL_SRC_FILES := SqliteControlPart.cpp
 include $(BUILD_SHARED_LIBRARY)
 
+# Build library 6
+include $(CLEAR_VARS)
+LOCAL_STATIC_LIBRARIES := sqlite3-a
+LOCAL_SHARED_LIBRARIES := aaa
+LOCAL_SHARED_LIBRARIES += bbb
+LOCAL_SHARED_LIBRARIES += ccc
+LOCAL_MODULE := toeic5
+LOCAL_SRC_FILES := SqlitePart5.cpp
+include $(BUILD_SHARED_LIBRARY)
+
 
 # Build library 6
 include $(CLEAR_VARS)
@@ -156,5 +166,16 @@ LOCAL_SHARED_LIBRARIES += bbb
 LOCAL_SHARED_LIBRARIES += ccc
 LOCAL_MODULE := jnixcc
 LOCAL_SRC_FILES := jnimanagerpart.cpp
+include $(BUILD_SHARED_LIBRARY)
+
+# Build library 9
+include $(CLEAR_VARS)
+LOCAL_STATIC_LIBRARIES := sqlite3-a
+LOCAL_SHARED_LIBRARIES := aaa
+LOCAL_SHARED_LIBRARIES += toeic5
+LOCAL_SHARED_LIBRARIES += bbb
+LOCAL_SHARED_LIBRARIES += ccc
+LOCAL_MODULE := jnicxc
+LOCAL_SRC_FILES := jnipart5.cpp
 include $(BUILD_SHARED_LIBRARY)
 

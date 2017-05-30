@@ -1,13 +1,26 @@
 package com.vntoeic.bkteam.vntoeicpro;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.TextView;
+
+import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
+import com.ToxicBakery.viewpager.transforms.BackgroundToForegroundTransformer;
+import com.ToxicBakery.viewpager.transforms.CubeInTransformer;
+import com.ToxicBakery.viewpager.transforms.CubeOutTransformer;
+import com.ToxicBakery.viewpager.transforms.DepthPageTransformer;
+import com.ToxicBakery.viewpager.transforms.FlipHorizontalTransformer;
+import com.ToxicBakery.viewpager.transforms.FlipVerticalTransformer;
+import com.ToxicBakery.viewpager.transforms.RotateDownTransformer;
+import com.ToxicBakery.viewpager.transforms.RotateUpTransformer;
+import com.ToxicBakery.viewpager.transforms.ScaleInOutTransformer;
+import com.ToxicBakery.viewpager.transforms.StackTransformer;
+import com.ToxicBakery.viewpager.transforms.TabletTransformer;
+import com.vntoeic.bkteam.vntoeicpro.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -17,11 +30,22 @@ import java.io.OutputStream;
 
 import model.Dictionary;
 import model.DictionaryFavorite;
-import model.*;
-
-
+import model.ModelFavoriteWord;
+import model.ModelGrammar;
+import model.ModelLesson;
+import model.ModelPart1;
+import model.ModelPart5;
+import model.ModelPartCheck;
+import model.ModelPartFavorite;
+import model.ModelPartSubject;
+import model.ModelSection;
+import model.ModelTag;
+import model.ModelWord;
+import model.ModelWordChecked;
+import model.ModelWordLesson;
 import sqlite.SqliteDictionary;
 import sqlite.SqlitePart1;
+import sqlite.SqlitePart5;
 import sqlite.SqliteVocabulary;
 
 public class MainActivity extends AppCompatActivity {
@@ -75,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         b= vc.checkFavoriteWord(1);
 
 
-        SqlitePart1 sqlite = new SqlitePart1();
+       SqlitePart1 sqlite = new SqlitePart1();
         ModelPart1 p1 = sqlite.searchPart1Id(10);
         ModelPart1 p2[] = sqlite.randomPart1(10);
         ModelPart1 p3[] = sqlite.randomPart1Subject(1,20);
@@ -94,14 +118,38 @@ public class MainActivity extends AppCompatActivity {
         sqlite.deletePartCheck(1,1000);
         c1 = sqlite.searchAllCheckedPart(1);
 
-        ModelWord[]ww = sqlite.searchWordPart(1,1);
+        ModelWord[]ww = sqlite.searchWordPart(5,1);
+        ww = sqlite.searchWordPartAware(5,1,1);
+        sqlite.updateWordAware(671,1);
+        ww = sqlite.searchWordPartAware(5,1,1);
+        ww = sqlite.searchWordPartAware(5,0,1);
 
         ModelPartSubject[]pp = sqlite.searchPartSubject(1);
         pp =sqlite.searchPartSubject(2);
         pp =sqlite.searchPartSubject(3);
         pp =sqlite.searchPartSubject(4);
         pp =sqlite.searchPartSubject(5);
+//
+        ModelGrammar grammar[] = sqlite.searchAllGrammar();
+        ModelGrammar grammar1 = sqlite.searchGrammarId(1);
+        SqlitePart5 sqlite22 = new SqlitePart5();
+        ModelPart5 []md5 = sqlite22.randomPart5(10);
+        md5 = sqlite22.randomPart5Subject(1,20);
+        ModelPartFavorite ma = new ModelPartFavorite(5,1,"anlongnhe");
+        sqlite22.insertPartFavorite(ma);
+        md5 = sqlite22.searchPart5Favorite();
 
+
+       // setUplayout();
+    }
+
+    public void setUplayout(){
+
+        PageAdapterMain adapterMain = new PageAdapterMain(getSupportFragmentManager());
+        ViewPager viewPager= (ViewPager) findViewById(R.id.viewpager_main);
+        viewPager.setAdapter(adapterMain);
+        viewPager.setCurrentItem(1);
+        viewPager.setPageTransformer(true,new AccordionTransformer());
     }
 
 

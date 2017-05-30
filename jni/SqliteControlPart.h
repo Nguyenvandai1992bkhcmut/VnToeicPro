@@ -31,8 +31,14 @@ public:
     void deletePartFavorite(int part, int id);
      void  deletePartCheck(int part, int id);
 
+    vector<Word*>funSeachWord();
      vector<Word *> searchWordPart(int part, int idpart);
+
+      vector<Word *> searchWordPartAware(int part,int aware, int idpart);
      vector<PartSubject>searchPartSubject(int part);
+     vector<Grammar>searchAllGrammar();
+    Grammar* searchGrammarId(int idgrammar);
+    void updateWordAware(int idword, int aware);
 
 };
 

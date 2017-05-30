@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include <string>
-#include<vector>
+#include <vector>
 
 using namespace std;
 
@@ -317,11 +317,11 @@ class WordLesson{
 class Grammar{
     private:
         int id ;
-        char *  title ;
-        char *  content;
+        const char *  title ;
+        const char *  content;
     
     public :
-    Grammar(int id, char * title , char * content){
+    Grammar(int id, const char * title , const char * content){
         this ->id = id;
         this ->title = title;
         this ->content = content;
@@ -331,11 +331,11 @@ class Grammar{
         return this->id;
     }
     
-    char* getTitle(){
+    const char* getTitle(){
         return this ->title;
     }
     
-    char * getContent(){
+   const  char * getContent(){
         return this->content;
     }
     //set
@@ -343,28 +343,12 @@ class Grammar{
         this->id = id;
     }
     void setTitle(char * title){
-        if(title!= NULL){
-            delete []title;
-            title= NULL;
-        }
+
         this ->title = title;
     }
     void setContent(char * content){
-        if(content!= NULL){
-            delete []content;
-            content = NULL;
-        }
+
         this ->content = content;
-    }
-    ~Grammar(){
-        if(title!= NULL){
-            delete []title;
-            title= NULL;
-        }
-        if(content!= NULL){
-            delete []content;
-            content= NULL;
-        }
     }
 };
 //
@@ -520,6 +504,66 @@ public:
     }
     //set
 
+};
+
+class Part5{
+    private:
+        int id;
+        const char * question;
+        const char * a;
+        const char * b;
+        const char * c;
+        const char * d;
+        const char * sol;
+        const char * explan;
+        int level;
+        int time;
+    public :
+        Part5(int id, const char * question, const char * a, const char * b,const char * c, const char *d, const char * sol, const char * explan , int level , int time){
+            this ->id = id;
+            this ->question = question;
+            this->a = a;
+            this->b = b;
+            this ->c = c;
+            this->d = d;
+            this->sol = sol;
+            this->explan = explan;
+            this->level = level;
+            this->time = time;
+        }
+
+        //get
+        int getId(){
+            return this ->id;
+        }
+        const char * getQuestion(){
+            return this->question;
+        }
+        const char * getA(){
+            return this->a;
+        }
+        const char * getB(){
+            return this->b;
+
+        }
+        const char * getC(){
+            return this->c;
+        }
+        const char * getD(){
+            return this->d;
+        }
+        const char * getSol(){
+            return this->sol;
+        }
+        const char * getExplan(){
+           return this->explan;
+        }
+        int getLevel(){
+            return this->level;
+        }
+        int getTime(){
+            return this->time;
+        }
 };
 
 class ModelFavoritePart{

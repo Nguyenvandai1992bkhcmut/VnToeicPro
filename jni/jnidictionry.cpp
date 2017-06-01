@@ -69,8 +69,8 @@ Java_sqlite_SqliteDictionary_searchId(JNIEnv * env , jobject object , jint id_){
            jmethodID methodId1 = env -> GetStaticMethodID(clcv, "convertCStringToJniSafeString",  "([B)Ljava/lang/String;");
 
         if(diction!=NULL){
-         jbyteArray array = env->NewByteArray(strlen(diction->getName()));
-         env->SetByteArrayRegion(array,0,strlen(diction->getName()),(jbyte*)diction->getName());
+           jbyteArray array = env->NewByteArray(strlen(diction->getName()));
+           env->SetByteArrayRegion(array,0,strlen(diction->getName()),(jbyte*)diction->getName());
           jstring str = (jstring)env->CallStaticObjectMethod(clcv, methodId1, array);
 
 
@@ -81,6 +81,44 @@ Java_sqlite_SqliteDictionary_searchId(JNIEnv * env , jobject object , jint id_){
            return ob;
            }
           else return NULL;
+}
+}
+
+//
+extern "C"{
+JNIEXPORT jobject JNICALL
+Java_sqlite_SqliteDictionary_searchHistory(JNIEnv * env , jobject object ){
+
+        SqliteDictionary sqlite;
+        vector<Dictionary>result = sqlite.searchHistory();
+         jclass  cl = env -> FindClass("model/Dictionary");
+         jmethodID methodId = env -> GetMethodID(cl,"<init>", "(ILjava/lang/String;Ljava/lang/String;)V");
+
+           jclass clcv = env -> FindClass("model/Convert");
+           jmethodID methodId1 = env -> GetStaticMethodID(clcv, "convertCStringToJniSafeString",  "([B)Ljava/lang/String;");
+
+            jobjectArray arr = env->NewObjectArray((int)result.size(), cl, NULL);
+        for(int i=0;i<result.size();i++){
+                    Dictionary diction = result.at(i);
+                    jbyteArray array = env->NewByteArray(strlen(diction.getName()));
+                 env->SetByteArrayRegion(array,0,strlen(diction.getName()),(jbyte*)diction.getName());
+                  jstring str = (jstring)env->CallStaticObjectMethod(clcv, methodId1, array);
+                    env->DeleteLocalRef(array);
+
+                  jbyteArray array1 = env->NewByteArray(strlen(diction.getContent()));
+                   env->SetByteArrayRegion(array1,0,strlen(diction.getContent()),(jbyte*)diction.getContent());
+                   jstring str1 = (jstring)env->CallStaticObjectMethod(clcv, methodId1, array1);
+                    env->DeleteLocalRef(array1);
+
+                   jobject ob = env->NewObject(cl, methodId,diction.getId(),str,str1);
+                   env->SetObjectArrayElement(arr, i, ob);
+
+                   env->DeleteLocalRef(str);
+                   env->DeleteLocalRef(str1);
+                   env->DeleteLocalRef(ob);
+        }
+
+         return arr;
 }
 }
 
@@ -149,3 +187,63 @@ Java_sqlite_SqliteDictionary_insertFavorite(JNIEnv * env, jobject object , jobje
 
 }
 
+
+
+extern "C"{
+JNIEXPORT void JNICALL
+Java_sqlite_SqliteDictionary_updateHistory(JNIEnv * env, jobject object , jint id, jint his){
+
+          SqliteDictionary sqlite;
+           sqlite.updateHistory((int)id,(int)his);
+
+}
+
+}
+
+extern "C"{
+JNIEXPORT jboolean JNICALL
+Java_sqlite_SqliteDictionary_checkFavorite(JNIEnv * env, jobject object , jint id){
+
+          SqliteDictionary sqlite;
+          bool b =sqlite.checkFavorite((int)id);
+          return (jboolean)b;
+
+}
+
+}
+
+
+extern "C"{
+JNIEXPORT jobject  JNICALL
+Java_sqlite_SqliteDictionary_searchFavoriteDictionary(JNIEnv * env, jobject object , jint id1){
+
+          SqliteDictionary sqlite;
+          int id =(int)id1;
+          DictionaryFavorite *dic  =sqlite.searchFavoriteDictionary(id);
+          if(dic==NULL)return NULL;
+
+            jclass  cl = env -> FindClass("model/DictionaryFavorite");
+                jmethodID methodId = env -> GetMethodID(cl,"<init>", "(ILjava/lang/String;Ljava/lang/String;)V");
+
+                jclass clcv = env -> FindClass("model/Convert");
+                jmethodID methodId1 = env -> GetStaticMethodID(clcv, "convertCStringToJniSafeString",  "([B)Ljava/lang/String;");
+
+
+
+                    jbyteArray array = env->NewByteArray(strlen(dic->getTime()));
+                      env->SetByteArrayRegion(array,0,strlen(dic->getTime()),(jbyte*)dic->getTime());
+                    jstring str = (jstring)env->CallStaticObjectMethod(clcv, methodId1, array);
+
+
+                     jbyteArray array1 = env->NewByteArray(strlen(dic->getMeaning()));
+                     env->SetByteArrayRegion(array1,0,strlen(dic->getMeaning()),(jbyte*)dic->getMeaning());
+                     jstring str1 = (jstring)env->CallStaticObjectMethod(clcv, methodId1, array1);
+
+                    jobject ob = env->NewObject(cl, methodId,dic->getId(),str,str1);
+
+
+                    return ob;
+
+}
+
+}

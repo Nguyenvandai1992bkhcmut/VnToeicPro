@@ -27,5 +27,10 @@ public:
     vector<DictionaryFavorite> searchFavorite();
     Dictionary * searchId(int id);
     void insertFavorite(DictionaryFavorite dic);
+    vector<Dictionary>searchHistory();
+    void updateHistory(int id, int his);
+
+    bool checkFavorite(int id);
+    DictionaryFavorite *searchFavoriteDictionary(int id);
 };
 #endif /* SqliteDictionary_hpp */

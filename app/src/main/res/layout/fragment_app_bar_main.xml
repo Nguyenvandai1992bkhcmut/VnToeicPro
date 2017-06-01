@@ -17,12 +17,13 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true">
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="VnToeic"
-                android:background="@mipmap/icon"
+                android:textSize="30sp"
                 android:gravity="center"
+                android:textColor="@color/text_icon"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:id="@+id/img_icon" />
@@ -31,19 +32,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:background="@mipmap/ic_search"
+                android:background="@mipmap/icon_search"
                 android:layout_gravity="center_vertical|start"
                 android:id="@+id/img_search"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="15dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@mipmap/icon_setting"
+            android:layout_gravity="center_vertical|start"
+            android:id="@+id/img_menu"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="17sp"
                 android:padding="5dp"
-                android:layout_marginLeft="70dp"
+                android:layout_toRightOf="@id/img_menu"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:focusableInTouchMode="true"
                 android:privateImeOptions="nm"
                 android:inputType="textNoSuggestions"
@@ -56,23 +70,13 @@
                 android:id="@+id/edit_search"
                 android:hint="Enter Key"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_marginLeft="10dp"
-                android:background="@mipmap/icon_menu"
-                android:layout_gravity="center_vertical|start"
-                android:id="@+id/img_menu"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+
         </RelativeLayout>
 
 
     <ScrollView android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#434141"
+        android:background="@mipmap/bitmap_background"
         android:layout_below="@id/relative_top">
 
     <LinearLayout
@@ -93,7 +97,7 @@
                         android:layout_height="50dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                        android:background="@drawable/cricle_white"
+                        android:background="@mipmap/essentialwordsicon"
                         />
                 <TextView android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -116,7 +120,7 @@
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/cricle_white"
+                android:background="@mipmap/mywordsicon"
                 />
             <TextView android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -124,7 +128,7 @@
                 android:textSize="30sp"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:text="Dictionary"/>
+                android:text="Vocabulary"/>
 
         </RelativeLayout>
 
@@ -139,7 +143,7 @@
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/cricle_white"
+                android:background="@mipmap/part1icon"
                 />
             <TextView android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -147,31 +151,7 @@
                 android:textSize="30sp"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:text="Dictionary"/>
-
-        </RelativeLayout>
-
-
-        <RelativeLayout android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/rect_card"
-            android:padding="5dp"
-            android:layout_marginTop="10dp"
-            android:weightSum="1">
-
-            <ImageView android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/cricle_white"
-                />
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:textSize="30sp"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:text="Dictionary"/>
+                android:text="Part1"/>
 
         </RelativeLayout>
 
@@ -187,7 +167,7 @@
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/cricle_white"
+                android:background="@mipmap/part2icon"
                 />
             <TextView android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -195,7 +175,7 @@
                 android:textSize="30sp"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:text="Dictionary"/>
+                android:text="Part2"/>
 
         </RelativeLayout>
 
@@ -211,7 +191,7 @@
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/cricle_white"
+                android:background="@mipmap/part3icon"
                 />
             <TextView android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -219,7 +199,7 @@
                 android:textSize="30sp"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:text="Dictionary"/>
+                android:text="Part3"/>
 
         </RelativeLayout>
 
@@ -235,7 +215,7 @@
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/cricle_white"
+                android:background="@mipmap/part4icon"
                 />
             <TextView android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -243,7 +223,7 @@
                 android:textSize="30sp"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:text="Dictionary"/>
+                android:text="Part4"/>
 
         </RelativeLayout>
 
@@ -259,7 +239,7 @@
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/cricle_white"
+                android:background="@mipmap/part5icon"
                 />
             <TextView android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -267,7 +247,7 @@
                 android:textSize="30sp"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:text="Dictionary"/>
+                android:text="Part5"/>
 
         </RelativeLayout>
 
@@ -283,7 +263,7 @@
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/cricle_white"
+                android:background="@mipmap/part6icon"
                 />
             <TextView android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -291,9 +271,10 @@
                 android:textSize="30sp"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:text="Dictionary"/>
+                android:text="Part6"/>
 
         </RelativeLayout>
+
 
         <RelativeLayout android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -306,7 +287,7 @@
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/cricle_white"
+                android:background="@mipmap/part7icon"
                 />
             <TextView android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -314,16 +295,9 @@
                 android:textSize="30sp"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:text="Dictionary"/>
+                android:text="Part7"/>
 
         </RelativeLayout>
-
-
-
-
-
-
-
 
 
 

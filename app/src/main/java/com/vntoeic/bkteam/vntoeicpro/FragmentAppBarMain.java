@@ -2,8 +2,11 @@ package com.vntoeic.bkteam.vntoeicpro;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,7 +35,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-
+import Dictionary.*;
+import model.Content;
 import model.Dictionary;
 import sqlite.SqliteDictionary;
 
@@ -40,18 +44,31 @@ import sqlite.SqliteDictionary;
  * Created by dainguyen on 5/29/17.
  */
 
-public class FragmentAppBarMain extends Fragment {
-    ImageView img_icon;
-    ImageView img_menu;
-    EditText editText;
-    TextView text_bottom;
+public class FragmentAppBarMain extends Fragment{
+    static Context context;
+    static TextView img_icon;
+    static ImageView img_menu;
+    static EditText editText;
+    public static TextView text_bottom;
     RecyclerView recyclerView;
     ImageView img_search;
-    private float tb_y = 0;
-    private int flag = 0;
-    private float height=0;
-    private PopupWindow popupWindow;
+    private static float tb_y = 0;
+    private static int flag = 0;
+    private static float height=0;
+    private static int rootHeight;
+    public static PopupWindow popupWindow;
+    public static  RelativeLayout relativeLayout;
     InputMethodManager imm;
+    public static Timer timer = new Timer();
+
+
+
+    @Override
+    public void onAttach(Context context1) {
+        context = context1;
+        super.onAttach(context);
+
+    }
 
     @Nullable
     @Override
@@ -62,18 +79,21 @@ public class FragmentAppBarMain extends Fragment {
     }
     public int getStatusBarHeight() {
         int result = 0;
-        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
-            result = getResources().getDimensionPixelSize(resourceId);
+            result = context.getResources().getDimensionPixelSize(resourceId);
         }
         return result;
     }
     public void setUplayout(View view) {
-        final RelativeLayout relativeLayout = (RelativeLayout)view.findViewById(R.id.relative_top);
-        img_icon = (ImageView) view.findViewById(R.id.img_icon);
+
+        relativeLayout = (RelativeLayout)view.findViewById(R.id.relative_top);
+        img_icon = (TextView) view.findViewById(R.id.img_icon);
+        img_icon.setTypeface(MainActivity.typeface);
         img_menu = (ImageView) view.findViewById(R.id.img_menu);
         final View view_result = LayoutInflater.from(getContext()).inflate(R.layout.popup_search, null);
         editText = (EditText) view.findViewById(R.id.edit_search);
+        editText.setTypeface(MainActivity.typeface);
         img_search = (ImageView)view.findViewById(R.id.img_search);
 
         popupWindow = new PopupWindow(view_result, ViewGroup.LayoutParams.MATCH_PARENT, (int) 0);
@@ -88,9 +108,14 @@ public class FragmentAppBarMain extends Fragment {
                 editText.setVisibility(View.VISIBLE);
                 editText.requestFocus();
                 if (flag == 0) {
+                    flag=1;
                     showEdit();
+                    imm.toggleSoftInputFromWindow(img_search.getWindowToken(), 1, 0);
                 } else {
+                    flag=0;
                     hideEdit();
+                    imm.toggleSoftInputFromWindow(img_search.getWindowToken(), 1, 0);
+
                 }
 
             }
@@ -139,36 +164,12 @@ public class FragmentAppBarMain extends Fragment {
 
         text_bottom = (TextView)view.findViewById(R.id.text_bottom);
 
-        final int rootHeight = getContext().getResources().getDisplayMetrics().heightPixels;
+        rootHeight = getContext().getResources().getDisplayMetrics().heightPixels;
 
-        final int title = getStatusBarHeight();
-        System.out.println(title);
-        text_bottom.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                if(tb_y == 0f){
-                    tb_y =  text_bottom.getY();
-                    System.out.println(tb_y);
-                }
-                else if(tb_y-text_bottom.getY()>height){
-                    height =  tb_y - text_bottom.getY();
 
-                } else if(Math.abs(tb_y-text_bottom.getY())<50){
-                    if(popupWindow!=null && popupWindow.isShowing()){
-                        popupWindow.dismiss();
-                        flag=0;
-                    }
-                }
-
-                if(tb_y-text_bottom.getY()>=100 && flag ==0){
-                    popupWindow.setHeight((int)(rootHeight- height- relativeLayout.getHeight()-title));
-                    popupWindow.setAnimationStyle(R.style.PauseDialogAnimation);
-                    popupWindow.showAsDropDown(relativeLayout, 0,0);
-                    recyclerView = (RecyclerView) popupWindow.getContentView().findViewById(R.id.recycle_search);
-                    flag=1;
-                }
-            }
-        });
+        tb_y = text_bottom.getY();
+        MyTimeTask myTimeTask = new MyTimeTask();
+        timer.schedule(myTimeTask,0,100);
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
@@ -182,26 +183,27 @@ public class FragmentAppBarMain extends Fragment {
             }
         };
 
+
     }
 
     public void showEdit(){
         editText.setText("");
         editText.setHint("Enter your key");
         editText.setVisibility(View.VISIBLE);
-        Animation animation = AnimationUtils.loadAnimation(getContext(),R.anim.scale_search);
+        Animation animation = AnimationUtils.loadAnimation(context,R.anim.scale_search);
         editText.startAnimation(animation);
         img_icon.setVisibility(View.INVISIBLE);
-        imm.toggleSoftInputFromWindow(img_search.getWindowToken(), 1, 0);
     }
 
     public void hideEdit(){
         editText.setText("");
         editText.setVisibility(View.GONE);
-        Animation animation = AnimationUtils.loadAnimation(getContext(),R.anim.scale_search_out);
+        Animation animation = AnimationUtils.loadAnimation(context,R.anim.scale_search_out);
         img_icon.setVisibility(View.VISIBLE);
         editText.startAnimation(animation);
-        imm.toggleSoftInputFromWindow(img_search.getWindowToken(), 1, 0);
     }
+
+
 
     public void runDictionaryActivity(){
         Intent intent = new Intent();
@@ -210,11 +212,47 @@ public class FragmentAppBarMain extends Fragment {
     public void setContentRecycle(RecyclerView recycle, String key){
         SqliteDictionary sqlite = new SqliteDictionary();
         Dictionary[] data = sqlite.searchSimilar(key);
-        AdapterWordSearch adapter = new AdapterWordSearch(getContext(),data);
+        AdapterWordSearch adapter = new AdapterWordSearch((MainActivity)getContext(),data);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         recycle.setLayoutManager(linearLayoutManager);
         recycle.setAdapter(adapter);
 
+    }
+
+
+    class MyTimeTask extends TimerTask{
+
+        @Override
+        public void run() {
+            if(tb_y == 0f){
+                tb_y =  text_bottom.getY();
+            }
+            else if(tb_y-text_bottom.getY()>height){
+                height =  tb_y - text_bottom.getY();
+            }else if(tb_y-text_bottom.getY()<50 &&  popupWindow.isShowing()){
+                ((MainActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        popupWindow.dismiss();
+                        if(flag==1)hideEdit();
+                        flag=0;
+                    }
+                });
+
+            }else if(tb_y-text_bottom.getY()>300 && !popupWindow.isShowing() ){
+                ((MainActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        popupWindow.setHeight((int)(rootHeight- height- relativeLayout.getHeight()-getStatusBarHeight()));
+                        popupWindow.setAnimationStyle(R.style.PauseDialogAnimation);
+                        popupWindow.showAsDropDown(relativeLayout, 0,0);
+                        recyclerView = (RecyclerView) popupWindow.getContentView().findViewById(R.id.recycle_search);
+
+                    }
+                });
+
+            }
+        }
     }
 
 

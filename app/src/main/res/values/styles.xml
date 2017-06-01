@@ -20,4 +20,8 @@
         <item name="android:windowExitAnimation">@anim/right_left_out</item>
     </style>
 
+    <style name="PauseDialogFavorit">
+        <item name="android:windowEnterAnimation">@anim/top_bot</item>
+        <item name="android:windowExitAnimation">@anim/top_bot_out</item>
+    </style>
 </resources>

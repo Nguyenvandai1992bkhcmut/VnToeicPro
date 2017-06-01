@@ -3,7 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="header">#e1a7a7</color>
-    <color name="backgroundcardmain">#9f45a9</color>
-    
+    <color name="header">#344960</color>
+    <color name="text_icon">#39AC54</color>
+    <color name="header_bar">#969EB6</color>
+    <color name="text_bar">#92cdf7</color>
+    <color name="backgroundcardmain">#969EB6</color>
+    <color name="background">#272727</color>
+    <color name="bgmenudiction">#7fadae</color>
+    <color name="text_example">#10fa47</color>
 </resources>

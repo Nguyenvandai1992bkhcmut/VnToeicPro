@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 public class Content implements Serializable {
 
-    public String parent;
-    public String vol;
-    public  ArrayList<Meanings> meaningses;
+    private String parent;
+    private String vol;
+    private  ArrayList<Meanings> meaningses;
 
 
     public Content(String parent, String vol, ArrayList<Meanings> meaningses) {
@@ -20,4 +20,27 @@ public class Content implements Serializable {
         this.meaningses = meaningses;
     }
 
+    public ArrayList<Meanings> getMeaningses() {
+        return meaningses;
+    }
+
+    public void setMeaningses(ArrayList<Meanings> meaningses) {
+        this.meaningses = meaningses;
+    }
+
+    public String getParent() {
+        return parent;
+    }
+
+    public void setParent(String parent) {
+        this.parent = parent;
+    }
+
+    public String getVol() {
+        return vol;
+    }
+
+    public void setVol(String vol) {
+        this.vol = vol;
+    }
 }

@@ -39,7 +39,7 @@ public:
      vector<Grammar>searchAllGrammar();
     Grammar* searchGrammarId(int idgrammar);
     void updateWordAware(int idword, int aware);
-
+vector<PartSubjectResult>searhPartSubjectResult(int part);
 };
 
 #endif //VNTOEICPRO_SQLITECONTROLPART_H

@@ -420,3 +420,33 @@ Java_sqlite_ManagerPart_updateWordAware(JNIEnv* env , jobject object , jint idwo
     sqlite.updateWordAware((int)idword,(int)aware);
 }
 }
+
+extern "C"{
+JNIEXPORT jobjectArray JNICALL
+Java_sqlite_ManagerPart_searhPartSubjectResult(JNIEnv* env , jobject object , jint idpart ){
+
+    SqliteControlPart sqlite;
+
+    vector<PartSubjectResult> result = sqlite.searhPartSubjectResult((int)idpart);
+     jclass  cl = env -> FindClass("model/ModelpartResult");
+     jmethodID methodId = env -> GetMethodID(cl,"<init>", "(IILjava/lang/String;II)V");
+
+         jclass clcv = env -> FindClass("model/Convert");
+         jmethodID methodId1 = env -> GetStaticMethodID(clcv, "convertCStringToJniSafeString","([B)Ljava/lang/String;");
+
+        jobjectArray arr = env->NewObjectArray((int)result.size(), cl, NULL);
+        for(int i =0;i<result.size() ;i++){
+            PartSubjectResult part = result.at(i);
+             jbyteArray arraycontent = env->NewByteArray(strlen(part.getTitle()));
+                env->SetByteArrayRegion(arraycontent,0,strlen(part.getTitle()),(jbyte*)part.getTitle());
+                 jstring content = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arraycontent);
+                   env->DeleteLocalRef(arraycontent);
+                    jobject ob = env->NewObject(cl, methodId,idpart, part.getId(),content, part.getCorrect(), part.getCount());
+                 env->SetObjectArrayElement(arr, i, ob);
+
+
+        }
+        return arr;
+
+}
+}

@@ -696,6 +696,39 @@ public:
     }
 };
 
+class PartSubjectResult{
+   private:
+    int id;
+     const char * title;
+     int correct;
+     int count;
+     public :
+     PartSubjectResult(int id, const char * title, int correct, int count){
+        this->id = id;
+        this->title = title;
+        this->correct = correct;
+        this->count = count;
+     }
+
+     // get
+     int getId(){
+            return this->id;
+     }
+
+     const char * getTitle(){
+        return this->title;
+     }
+
+     int getCorrect(){
+        return this->correct;
+     }
+
+     int getCount(){
+        return this->count;
+     }
+
+};
+
 #endif /* model_hpp */
 
 

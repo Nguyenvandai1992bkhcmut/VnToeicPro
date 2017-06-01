@@ -5,6 +5,10 @@
 #ifndef VNTOEICPRO_SQLITEPART1_H
 #define VNTOEICPRO_SQLITEPART1_H
 
+<<<<<<< HEAD
+=======
+#endif //VNTOEICPRO_SQLITEPART1_H
+>>>>>>> vocabularry
 
 #include <stdio.h>
 #include <string>
@@ -19,6 +23,7 @@ class SqlitePart1{
     sqlite3* db;
     sqlite3_stmt * stmt;
 public:
+<<<<<<< HEAD
 
     SqlitePart1();
 
@@ -33,3 +38,10 @@ public:
 };
 
 #endif //VNTOEICPRO_SQLITEPART1_H
+=======
+    SqlitePart1();
+
+
+};
+#endif /* SqliteDictionary_hpp */
+>>>>>>> vocabularry

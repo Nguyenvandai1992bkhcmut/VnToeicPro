@@ -5,6 +5,7 @@
 #include "SqlitePart1.h"
 #include <sstream>
 
+<<<<<<< HEAD
 SqlitePart1::SqlitePart1(){
     sqlite3_open_v2("data/data/com.vntoeic.bkteam.vntoeicpro/databases/database.db", &(this->db),SQLITE_OPEN_READWRITE,NULL);
 }
@@ -110,3 +111,9 @@ vector<Part1*>SqlitePart1::searchPart1Favorite(){
          }
         return funsearchPart();
 }
+=======
+SqliteWord::SqliteWord(){
+    sqlite3_open_v2("data/data/com.vntoeic.bkteam.vntoeicpro/databases/database.db", &(this->db),SQLITE_OPEN_READWRITE,NULL);
+}
+
+>>>>>>> vocabularry

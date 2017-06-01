@@ -7,9 +7,8 @@ package model;
 public class ModelWordChecked {
     private int mWordId;
     private int mLessonId;
-    private String mTimeChecked;
     private int mResult;
-
+    private String mTimeChecked;
     public ModelWordChecked(int mWordId, int mLessonId, int mResult, String mTimeChecked) {
         this.mWordId = mWordId;
         this.mLessonId = mLessonId;

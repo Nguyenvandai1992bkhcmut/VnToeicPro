@@ -83,6 +83,7 @@ LOCAL_MODULE := toeic2
 LOCAL_SRC_FILES := SqliteWord.cpp
 include $(BUILD_SHARED_LIBRARY)
 
+<<<<<<< HEAD
 # Build library 6
 include $(CLEAR_VARS)
 LOCAL_STATIC_LIBRARIES := sqlite3-a
@@ -113,6 +114,8 @@ LOCAL_MODULE := toeic5
 LOCAL_SRC_FILES := SqlitePart5.cpp
 include $(BUILD_SHARED_LIBRARY)
 
+=======
+>>>>>>> vocabularry
 
 # Build library 6
 include $(CLEAR_VARS)
@@ -146,6 +149,7 @@ LOCAL_SRC_FILES := jnivocabulary.cpp
 include $(BUILD_SHARED_LIBRARY)
 
 
+<<<<<<< HEAD
 # Build library 9
 include $(CLEAR_VARS)
 LOCAL_STATIC_LIBRARIES := sqlite3-a
@@ -179,3 +183,5 @@ LOCAL_MODULE := jnicxc
 LOCAL_SRC_FILES := jnipart5.cpp
 include $(BUILD_SHARED_LIBRARY)
 
+=======
+>>>>>>> vocabularry

@@ -1,12 +1,7 @@
 package model;
+import java.io.Serializable;
 
-import android.graphics.PorterDuff;
-
-/**
- * Created by dainguyen on 5/26/17.
- */
-
-public class ModelWordLesson {
+public class ModelWordLesson implements Serializable{
     private ModelWord mWord;
     private int mLessonId;
 

@@ -127,11 +127,19 @@ Java_sqlite_SqliteVocabulary_searchWordId(JNIEnv * env , jobject object , jint i
 
 
         jobjectArray arrmeaning = env->NewObjectArray((int)(word->getMeaning().size()), javastring, NULL);
+<<<<<<< HEAD
         jobjectArray arrtype = env->NewObjectArray((int)(word->getType().size()), javastring, NULL);
         jobjectArray arrexplan = env->NewObjectArray((int)(word->getExplan().size()), javastring, NULL);
         jobjectArray arrsimilar = env->NewObjectArray((int)(word->getSimilar().size()), javastring, NULL);
 
         for(int i=0;i<(int)((word->getMeaning()).size());i++){
+=======
+         jobjectArray arrtype = env->NewObjectArray((int)(word->getType().size()), javastring, NULL);
+         jobjectArray arrexplan = env->NewObjectArray((int)(word->getExplan().size()), javastring, NULL);
+         jobjectArray arrsimilar = env->NewObjectArray((int)(word->getSimilar().size()), javastring, NULL);
+
+           for(int i=0;i<(int)((word->getMeaning()).size());i++){
+>>>>>>> vocabularry
                       const char * m = (word->getMeaning()).at(i);
                      jbyteArray array = env->NewByteArray(strlen(m));
                       env->SetByteArrayRegion(array,0,strlen(m),(jbyte*)m);
@@ -353,7 +361,11 @@ extern "C"{
                           jobject ob = env->NewObject(cl,methodId,word.getIdWord(),word.getIdLesson(),word.getIdResult(), date);
                           env->SetObjectArrayElement(arr, i, ob);
                           env->DeleteLocalRef(date);
+<<<<<<< HEAD
                           env->DeleteLocalRef(ob);
+=======
+                           env->DeleteLocalRef(ob);
+>>>>>>> vocabularry
                }
                return arr;
      }

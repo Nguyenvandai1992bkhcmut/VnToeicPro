@@ -1,11 +1,6 @@
 package model;
 
 import java.io.Serializable;
-
-/**
- * Created by dainguyen on 5/21/17.
- */
-
 public class Dictionary implements Serializable {
     private int id;
     private String name;

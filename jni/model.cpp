@@ -11,7 +11,11 @@
 
 #include <stdio.h>
 #include <string>
+<<<<<<< HEAD
 #include <vector>
+=======
+#include<vector>
+>>>>>>> vocabularry
 
 using namespace std;
 
@@ -317,11 +321,19 @@ class WordLesson{
 class Grammar{
     private:
         int id ;
+<<<<<<< HEAD
         const char *  title ;
         const char *  content;
     
     public :
     Grammar(int id, const char * title , const char * content){
+=======
+        char *  title ;
+        char *  content;
+    
+    public :
+    Grammar(int id, char * title , char * content){
+>>>>>>> vocabularry
         this ->id = id;
         this ->title = title;
         this ->content = content;
@@ -331,11 +343,19 @@ class Grammar{
         return this->id;
     }
     
+<<<<<<< HEAD
     const char* getTitle(){
         return this ->title;
     }
     
    const  char * getContent(){
+=======
+    char* getTitle(){
+        return this ->title;
+    }
+    
+    char * getContent(){
+>>>>>>> vocabularry
         return this->content;
     }
     //set
@@ -343,6 +363,7 @@ class Grammar{
         this->id = id;
     }
     void setTitle(char * title){
+<<<<<<< HEAD
 
         this ->title = title;
     }
@@ -350,6 +371,31 @@ class Grammar{
 
         this ->content = content;
     }
+=======
+        if(title!= NULL){
+            delete []title;
+            title= NULL;
+        }
+        this ->title = title;
+    }
+    void setContent(char * content){
+        if(content!= NULL){
+            delete []content;
+            content = NULL;
+        }
+        this ->content = content;
+    }
+    ~Grammar(){
+        if(title!= NULL){
+            delete []title;
+            title= NULL;
+        }
+        if(content!= NULL){
+            delete []content;
+            content= NULL;
+        }
+    }
+>>>>>>> vocabularry
 };
 //
 
@@ -446,6 +492,7 @@ public:
 class Part1{
 private:
     int id;
+<<<<<<< HEAD
     const char * token;
     const char * a_script;
     const char * b_script;
@@ -458,19 +505,42 @@ public:
     Part1(int id, const char *token,const char * a_sc,const  char * b_sc,const  char * c_sc,const  char * d_sc,const  char* sol, int level, int time){
         this->id = id;
         this->token = token;
+=======
+    char * img;
+    char * img_token;
+    char * audio;
+    char * audio_token;
+    char * a_script;
+    char * b_script;
+    char * c_script;
+    char * d_script;
+    string sol;
+    int level;
+public:
+    Part1(int id, char * img, char *img_token, char * audio, char * audio_token, char * a_sc, char * b_sc, char * c_sc, char * d_sc, string sol, int level){
+        this->id = id;
+        this->img= img;
+        this->img_token = img_token;
+        this->audio= audio;
+        this->audio_token = audio_token;
+>>>>>>> vocabularry
         this->a_script= a_sc;
         this->b_script= b_sc;
         this->c_script = c_sc;
         this->d_script=d_sc;
         this->sol = sol;
         this->level = level;
+<<<<<<< HEAD
         this->time = time;
+=======
+>>>>>>> vocabularry
     }
     //get
     int getId(){
         return this->id;
     }
     
+<<<<<<< HEAD
     const char * getToken(){
         return this->token;
     }
@@ -492,12 +562,48 @@ public:
     }
     
     const char * getSol(){
+=======
+    char * getImg(){
+        return this->img;
+    }
+    
+    char* getImgToken(){
+        return this->img_token;
+    }
+    
+    char*getAudio(){
+        return this->audio;
+    }
+    
+    char*getAudioToken(){
+        return this->audio_token;
+    }
+    
+    char* getA_script(){
+        return this->a_script;
+    }
+    
+    char* getB_script(){
+        return this->b_script;
+    }
+    
+    char* getC_script(){
+        return this->c_script;
+    }
+    
+    char * getD_script(){
+        return this->d_script;
+    }
+    
+    string getSol(){
+>>>>>>> vocabularry
         return sol;
     }
     
     int getLevel(){
         return level;
     }
+<<<<<<< HEAD
 
     int getTime(){
         return this->time;
@@ -613,10 +719,58 @@ class ModelCheckPart{
         int getResult(){
             return this->result;
         }
+=======
+    
+    //set
+    
+    //de
+    ~Part1(){
+        if(img!= NULL){
+            delete [] img;
+            img= NULL;
+        }
+        
+        if(img_token!= NULL){
+            delete [] img_token;
+            img_token= NULL;
+        }
+        
+        if(audio!= NULL){
+            delete [] audio;
+            audio = NULL;
+        }
+        
+        if(audio_token!= NULL){
+            delete [] audio_token;
+            audio_token = NULL;
+        }
+        
+        if(a_script!= NULL){
+            delete [] a_script;
+            a_script= NULL;
+        }
+        
+        if(b_script!= NULL){
+            delete [] b_script;
+            b_script= NULL;
+        }
+        
+        if(c_script!= NULL){
+            delete [] c_script;
+            c_script= NULL;
+        }
+        
+        if(d_script!= NULL){
+            delete [] d_script;
+            d_script= NULL;
+        }
+    }
+>>>>>>> vocabularry
 };
 
 class PartSubject{
 private:
+<<<<<<< HEAD
 
     int part_id;
     const char* part_subject;
@@ -631,6 +785,29 @@ public:
         return part_id;
     }
     const char * getPartSubject(){
+=======
+    
+    int type;
+    int part_id;
+    int part_subject;
+    
+public:
+    PartSubject(int type, int part_id, int part_subject){
+        this->type = type;
+        this->part_id = part_id;
+        this->part_subject = part_subject;
+    }
+    
+    //get
+    
+    int getType(){
+        return type;
+    }
+    int getPartId(){
+        return part_id;
+    }
+    int getPartSubject(){
+>>>>>>> vocabularry
         return part_subject;
     }
 };

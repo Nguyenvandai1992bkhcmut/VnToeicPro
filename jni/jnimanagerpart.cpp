@@ -428,7 +428,7 @@ Java_sqlite_ManagerPart_searhPartSubjectResult(JNIEnv* env , jobject object , ji
     SqliteControlPart sqlite;
 
     vector<PartSubjectResult> result = sqlite.searhPartSubjectResult((int)idpart);
-     jclass  cl = env -> FindClass("model/ModelpartResult");
+     jclass  cl = env -> FindClass("model/ModelPartResult");
      jmethodID methodId = env -> GetMethodID(cl,"<init>", "(IILjava/lang/String;II)V");
 
          jclass clcv = env -> FindClass("model/Convert");

@@ -397,7 +397,7 @@ vector<PartSubjectResult>SqliteControlPart::searhPartSubjectResult(int part1){
      stringstream ss2;
                    ss2<<part1;
                    string part = ss2.str();
-                    string sql ="select * from part"+part+"_result_view from ";
+                    string sql ="select * from part"+part+"_result_view";
             vector<PartSubjectResult>result;
            if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
                  return result;

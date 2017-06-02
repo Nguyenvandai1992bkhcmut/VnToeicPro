@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -38,6 +39,7 @@ import java.util.TimerTask;
 import Dictionary.*;
 import model.Content;
 import model.Dictionary;
+import part5.Part5Activity;
 import sqlite.SqliteDictionary;
 
 /**
@@ -177,11 +179,14 @@ public class FragmentAppBarMain extends Fragment{
                 switch (v.getId()){
                     case R.id.relate_dictionary:
                         runDictionaryActivity();
+                    case R.id.relate_part5:
+                        runPart5Dictionary();
                 }
 
 
             }
         };
+        ((RelativeLayout)view.findViewById(R.id.relate_part5)).setOnClickListener(onClickListener);
 
 
     }
@@ -207,6 +212,14 @@ public class FragmentAppBarMain extends Fragment{
 
     public void runDictionaryActivity(){
         Intent intent = new Intent();
+    }
+
+    public void runPart5Dictionary(){
+        Intent intent = new Intent(getContext(), Part5Activity.class);
+        startActivity(intent);
+        ((MainActivity)getContext()).overridePendingTransition(R.anim.left_to_right_in , R.anim.left_to_right);
+
+
     }
 
     public void setContentRecycle(RecyclerView recycle, String key){

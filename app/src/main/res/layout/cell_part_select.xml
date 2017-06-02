@@ -5,22 +5,32 @@
     android:padding="5dp"
     android:weightSum="1"
     android:id="@+id/relate_dictionary"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ImageView android:layout_width="50dp"
-        android:layout_height="50dp"
+    <ImageView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:background="@mipmap/essentialwordsicon"
         android:id="@+id/img"
         />
+
     <TextView android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/text_example"
-        android:textSize="30sp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:layout_marginLeft="20dp"
         android:text="Dictionary"
-        android:id="@+id/text"/>
+        android:id="@+id/text"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/img"
+        android:layout_toEndOf="@+id/img"
+        android:layout_marginStart="20dp" />
 
 </RelativeLayout>

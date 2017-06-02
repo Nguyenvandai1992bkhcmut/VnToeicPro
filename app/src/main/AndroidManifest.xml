@@ -26,6 +26,19 @@
             android:windowSoftInputMode="adjustResize">
 
             </activity>
+
+        <activity android:name="part5.Part5Activity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize">
+
+        </activity>
+
+        <activity android:name="part5.Part5PractiseAcitvity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize">
+
+        </activity>
+
     </application>
 
 </manifest>

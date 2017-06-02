@@ -41,7 +41,7 @@ public class FragmentPart5 extends Fragment {
        frame_explan= (FrameLayout)view.findViewById(R.id.frame_explan);
        int h = getContext().getResources().getDisplayMetrics().heightPixels;
        RelativeLayout.LayoutParams params ;
-       if(flag==1) {
+       if(flag==0) {
            params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, h / 2);
        }else  params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
@@ -54,6 +54,11 @@ public class FragmentPart5 extends Fragment {
         FragmentPart5Question frag_question = new FragmentPart5Question();
         frag_question.setArguments(getArguments());
         getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).add(R.id.frame_question,frag_question).commit();
+
+        FragmentPart5Explan frag_explan = new FragmentPart5Explan();
+        frag_explan.setArguments(getArguments());
+        getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).add(R.id.frame_explan,frag_explan).commit();
+
     }
 
     public void setMode(int flag){

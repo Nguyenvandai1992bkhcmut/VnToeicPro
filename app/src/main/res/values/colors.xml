@@ -20,4 +20,5 @@
     <color name="transparent_6">#55ffffff</color>
     <color name="transparent_7">#66ffffff</color>
     <color name="transparent_8">#77ffffff</color>
+    <color name="none">#00ffffff</color>
 </resources>

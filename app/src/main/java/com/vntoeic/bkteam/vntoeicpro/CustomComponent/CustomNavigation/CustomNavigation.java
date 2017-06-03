@@ -1,4 +1,4 @@
-package com.vntoeic.bkteam.vntoeicpro.CustomNavigation;
+package com.vntoeic.bkteam.vntoeicpro.CustomComponent.CustomNavigation;
 
 import android.animation.ValueAnimator;
 import android.content.Context;

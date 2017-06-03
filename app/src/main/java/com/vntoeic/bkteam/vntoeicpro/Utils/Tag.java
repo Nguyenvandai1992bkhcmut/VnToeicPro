@@ -43,6 +43,7 @@ public class Tag {
     public static final String HSTAG = "<ar>";
 
     public Tag(String s ){
+        s = "<end>" + s + "<end>";
         span = new SpannableString(s);
         this.s = s;
     }

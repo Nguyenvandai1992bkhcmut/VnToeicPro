@@ -3,13 +3,11 @@ package com.vntoeic.bkteam.vntoeicpro.Vocabulary.Activity;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vntoeic.bkteam.vntoeicpro.BaseFragment;
-import com.vntoeic.bkteam.vntoeicpro.CustomNavigation.CustomNavigation;
+import com.vntoeic.bkteam.vntoeicpro.CustomComponent.CustomNavigation.CustomNavigation;
 import com.vntoeic.bkteam.vntoeicpro.R;
 import com.vntoeic.bkteam.vntoeicpro.Vocabulary.Fragment.TestContentFragment;
 

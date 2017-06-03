@@ -18,7 +18,7 @@
 
     </FrameLayout>
 
-    <com.vntoeic.bkteam.vntoeicpro.CustomNavigation.CustomNavigation
+    <com.vntoeic.bkteam.vntoeicpro.CustomComponent.CustomNavigation.CustomNavigation
         android:layout_width="match_parent"
         android:id="@+id/customNavigation"
         android:layout_height="56dp"
@@ -30,8 +30,8 @@
         app:duration="300"
         app:textColor="@android:color/white">
 
-    </com.vntoeic.bkteam.vntoeicpro.CustomNavigation.CustomNavigation>
-    <com.vntoeic.bkteam.vntoeicpro.CustomNavigation.CustomNavigation
+    </com.vntoeic.bkteam.vntoeicpro.CustomComponent.CustomNavigation.CustomNavigation>
+    <com.vntoeic.bkteam.vntoeicpro.CustomComponent.CustomNavigation.CustomNavigation
         android:layout_width="match_parent"
         android:id="@+id/customNavigation2"
         android:layout_gravity="bottom"
@@ -44,7 +44,7 @@
         app:duration="300"
         app:textColor="@android:color/white">
 
-    </com.vntoeic.bkteam.vntoeicpro.CustomNavigation.CustomNavigation>
+    </com.vntoeic.bkteam.vntoeicpro.CustomComponent.CustomNavigation.CustomNavigation>
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="30dp"

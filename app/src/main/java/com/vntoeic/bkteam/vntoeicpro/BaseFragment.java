@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.vntoeic.bkteam.vntoeicpro.CustomNavigation.CustomNavigation;
+import com.vntoeic.bkteam.vntoeicpro.CustomComponent.CustomNavigation.CustomNavigation;
 
 /**
  * Created by giang on 5/28/17.

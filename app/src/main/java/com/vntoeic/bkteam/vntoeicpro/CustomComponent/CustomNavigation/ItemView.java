@@ -1,4 +1,4 @@
-package com.vntoeic.bkteam.vntoeicpro.CustomNavigation;
+package com.vntoeic.bkteam.vntoeicpro.CustomComponent.CustomNavigation;
 
 /**
  * Created by giang on 5/28/17.

@@ -1,4 +1,4 @@
-package com.vntoeic.bkteam.vntoeicpro.CustomDialog;
+package com.vntoeic.bkteam.vntoeicpro.CustomComponent.CustomDialog;
 
 import android.app.Dialog;
 import android.content.Context;

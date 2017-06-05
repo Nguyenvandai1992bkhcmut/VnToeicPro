@@ -14,4 +14,12 @@
         <item>submit2</item>
         <item>submit2</item>
     </string-array>
+
+    <array name="icons">
+        <item>@drawable/back_png</item>
+        <item>@drawable/back_png</item>
+        <item>@drawable/back_png</item>
+        <item>@drawable/back_png</item>
+        <item>@drawable/back_png</item>
+    </array>
 </resources>

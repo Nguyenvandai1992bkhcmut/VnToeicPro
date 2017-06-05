@@ -50,4 +50,6 @@ public  class ManagerPart {
 
     public native void updateWordAware(int idword, int aware);
 
+    public native ModelPartResult[] searhPartSubjectResult(int part);
+
 }

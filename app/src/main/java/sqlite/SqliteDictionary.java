@@ -18,5 +18,13 @@ public class SqliteDictionary {
 
     public native DictionaryFavorite[] searchFavorite();
 
+    public native DictionaryFavorite searchFavoriteDictionary(int id);
+
+    public native boolean checkFavorite(int idword);
+
     public native void insertFavorite(DictionaryFavorite dictionaryFavorite);
+
+    public native Dictionary[] searchHistory();
+
+    public native void updateHistory(int id, int history);
 }

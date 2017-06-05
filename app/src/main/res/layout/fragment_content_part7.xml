@@ -10,22 +10,28 @@
         android:id="@+id/topBar"
         android:orientation="horizontal">
     </LinearLayout>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <FrameLayout
+            android:background="@drawable/rect_card"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:padding="5dp"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/frameQuestion">
+        </FrameLayout>
+        <FrameLayout
+            android:layout_above="@id/frameQuestion"
             android:background="@drawable/rect_card"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:padding="5dp"
+            android:layout_gravity="bottom"
             android:id="@+id/framePassage">
         </FrameLayout>
-        <FrameLayout
-            android:background="@drawable/rect_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/frameQuestion">
-        </FrameLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

@@ -17,7 +17,7 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@mipmap/iconplay"
+                android:src="@mipmap/icon_play"
                 android:id="@+id/play_btn"/>
             <LinearLayout
                 android:layout_toRightOf="@id/play_btn"
@@ -46,7 +46,7 @@
                 android:layout_width="50dp"
                 android:layout_alignParentRight="true"
                 android:layout_height="50dp"
-                android:src="@mipmap/iconstargray"
+                android:src="@mipmap/icon_favortite_heart"
                 android:id="@+id/mark_btn" />
 
         </RelativeLayout>

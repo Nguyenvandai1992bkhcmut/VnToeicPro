@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,9 +24,12 @@ public class CustomCheckBox extends RelativeLayout implements Checkable{
     private ECheckable mState;
     private boolean isShow;
     private boolean isAnswer;
+    private boolean isSol = false;
+    private int mId = 0;
+    private CheckBoxController mController = null;
 
-    private final int RES_CHECKED = R.mipmap.icon_choosen;
-    private final int RES_NOTCHECKED = R.mipmap.icon_notChoosen;
+    private final int RES_CHECKED = R.mipmap.icon_checked;
+    private final int RES_NOTCHECKED = R.mipmap.icon_notchecked;
     private final int RES_TRUE = R.mipmap.icon_true;
     private final int RES_FALSE = R.mipmap.icon_false;
 
@@ -55,9 +59,10 @@ public class CustomCheckBox extends RelativeLayout implements Checkable{
 
     }
 
-    public CustomCheckBox(Context context) {
+    public CustomCheckBox(Context context, boolean isSol, int id, CheckBoxController controller) {
         super(context);
-        init(context);
+        init(context, isSol, id, controller);
+        controller.add(this);
     }
 
 
@@ -74,12 +79,19 @@ public class CustomCheckBox extends RelativeLayout implements Checkable{
 
 
 
-    private void init(Context context) {
+    private void init(Context context, boolean isSol, int id, CheckBoxController controller) {
 
+        init(context);
+        this.isSol = isSol;
+        this.mId = id;
+        this.mController = controller;
+    }
+
+    private void init(Context context) {
         mRootView = inflate(context, R.layout.custom_checkbox, this);
         mImageView = (ImageView) mRootView.findViewById(R.id.imageView);
         mTextView = (TextView) mRootView.findViewById(R.id.textView);
-        mState = ECheckable.NOT_CHECKED;
+        setState(ECheckable.NOT_CHECKED);
         isShow = false;
         isAnswer = false;
 
@@ -89,6 +101,10 @@ public class CustomCheckBox extends RelativeLayout implements Checkable{
                 toggle();
             }
         });
+    }
+
+    public void setText(String s) {
+        mTextView.setText(s);
     }
 
     private void onStateChanged() {
@@ -135,11 +151,12 @@ public class CustomCheckBox extends RelativeLayout implements Checkable{
     public void toggle() {
         switch (mState){
             case CHECKED:{
-                this.mState = ECheckable.NOT_CHECKED;
+//                setState(ECheckable.NOT_CHECKED);
                 break;
             }
             case NOT_CHECKED:{
-                this.mState = ECheckable.CHECKED;
+                setState(ECheckable.CHECKED);
+                mController.itemOnChangeState(mId);
                 break;
             }
         }

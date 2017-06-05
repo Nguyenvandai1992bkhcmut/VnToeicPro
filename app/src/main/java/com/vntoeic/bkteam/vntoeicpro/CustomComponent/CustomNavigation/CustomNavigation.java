@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -77,7 +78,14 @@ public class CustomNavigation extends FrameLayout {
     }
 
     public void setIcons(int iconArray) {
-        icons = mContext.getResources().getIntArray(iconArray);
+        TypedArray getIcons = getResources().obtainTypedArray(iconArray);
+        if (getIcons != null) {
+//            this.icons = getResources().getIntArray(getIcons);
+            this.icons = new int[getIcons.length()];
+            for (int i = 0; i < getIcons.length(); i++) {
+                this.icons[i] = getIcons.getResourceId(i, 0);
+            }
+        }
     }
 
     private void init(Context context, AttributeSet attrs) {
@@ -92,18 +100,19 @@ public class CustomNavigation extends FrameLayout {
         this.imageSize = typedArray.getDimensionPixelSize(R.styleable.CustomNavigation_imageSize, 0);
         this.duration = typedArray.getInteger(R.styleable.CustomNavigation_duration, 0);
 
-        int getTitles = typedArray.getResourceId(R.styleable.CustomNavigation_titles, 0);
+        int getTitles = typedArray.getResourceId(R.styleable.CustomNavigation_titles, R.array.title_menu);
         if (getTitles != 0){
             this.titles = getResources().getStringArray(getTitles);
         }
 
-        int getIcons = typedArray.getResourceId(R.styleable.CustomNavigation_icons, 0);
-        if (getIcons != 0) {
-            this.icons = getResources().getIntArray(getIcons);
-        }
+        int getIconsArrayId = typedArray.getResourceId(R.styleable.CustomNavigation_icons, R.array.icons);
+
+        setIcons(getIconsArrayId);
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         gridView = (GridView) inflater.inflate(R.layout.custom_navigation, this, false);
+        LayoutParams gridParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -137,7 +146,6 @@ public class CustomNavigation extends FrameLayout {
         @Override
         public void onGlobalLayout() {
             height = gridView.getMeasuredHeight();
-//            if ( Build.VERSION.SDK_INT >= 16) gridView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
         }
 
         public int getHeight() {
@@ -214,6 +222,7 @@ public class CustomNavigation extends FrameLayout {
                 View itemView = inflater.inflate(R.layout.menu_item_view, null, false);
                 MyViewHolder myViewHolder = new MyViewHolder(itemView);
                 myViewHolder.mTextView.setText(titles[position]);
+                myViewHolder.mImageView.setImageResource(icons[position]);
                 return myViewHolder.mView;
             } else return convertView;
 
@@ -223,8 +232,10 @@ public class CustomNavigation extends FrameLayout {
     class MyViewHolder{
         TextView mTextView;
         View mView;
+        ImageView mImageView;
         MyViewHolder(View itemView) {
             this.mTextView = (TextView) itemView.findViewById(R.id.text);
+            this.mImageView = (ImageView) itemView.findViewById(R.id.image);
             this.mView = itemView;
         }
 

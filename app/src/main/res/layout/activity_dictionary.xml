@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
@@ -11,12 +12,13 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true">
 
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="VnToeic"
-            android:background="@mipmap/icon"
+            android:textSize="30sp"
             android:gravity="center"
+            android:textColor="@color/text_icon"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:id="@+id/img_icon" />
@@ -25,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:background="@mipmap/ic_search"
+            android:background="@mipmap/icon_search"
             android:layout_gravity="center_vertical|start"
             android:id="@+id/img_search"
             android:layout_centerVertical="true"
@@ -33,12 +35,26 @@
             android:layout_alignParentEnd="true"
             android:layout_marginRight="15dp"/>
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@mipmap/icon_back"
+            android:layout_gravity="center_vertical|start"
+            android:id="@+id/img_back"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="17sp"
             android:padding="5dp"
-            android:layout_marginLeft="70dp"
+            android:layout_toRightOf="@id/img_back"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:focusableInTouchMode="true"
             android:privateImeOptions="nm"
             android:inputType="textNoSuggestions"
@@ -51,24 +67,15 @@
             android:id="@+id/edit_search"
             android:hint="Enter Key"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_marginLeft="10dp"
-            android:background="@mipmap/icon_menu"
-            android:layout_gravity="center_vertical|start"
-            android:id="@+id/img_menu"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="@color/header"
+        android:background="@color/header_bar"
         android:layout_height="40dp"
         android:orientation="horizontal"
+        android:id="@+id/line_pager"
         android:weightSum="1">
 
         <TextView android:layout_width="wrap_content"
@@ -76,8 +83,9 @@
                 android:gravity="center"
                 android:textSize="20sp"
                 android:layout_weight="0.5"
-                android:textColor="@android:color/white"
-                android:text="Dictionary"/>
+                android:textColor="@color/text_bar"
+                android:text="Dictionary"
+            android:id="@+id/text_dictionary"/>
         <TextView android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -85,12 +93,21 @@
             android:layout_weight="0.5"
             android:textColor="@android:color/white"
             android:alpha="0.6"
-            android:text="History"/>
+            android:text="History"
+            android:id="@+id/text_history"/>
         </LinearLayout>
-    <android.support.v4.view.ViewPager
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/viewpager_dic">
-    </android.support.v4.view.ViewPager>
+        android:background="@mipmap/bitmap_background"
+        android:id="@+id/frame_dic">
+    </FrameLayout>
+
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:id="@+id/text_bottom"
+        android:text="aaaaa"
+        android:textSize="20sp"/>
 
 </LinearLayout>

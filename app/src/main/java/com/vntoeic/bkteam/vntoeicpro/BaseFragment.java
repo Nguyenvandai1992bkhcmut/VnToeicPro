@@ -1,5 +1,6 @@
 package com.vntoeic.bkteam.vntoeicpro;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,6 +23,7 @@ public abstract class BaseFragment extends Fragment {
     public CustomNavigation topNavi, bottomNavi;
     public Context mContext;
     public FrameLayout mFrameLayout, mBlurLayout;
+    private ProgressDialog mProgressDialog;
 
     public void setItemOnClick(CustomNavigation.OnItemClickedListener listener) {
         topNavi.setOnItemClickedListener(listener);
@@ -71,6 +73,21 @@ public abstract class BaseFragment extends Fragment {
     }
 
 
+    public void showProgressDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(mContext);
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.setMessage("Downloading ... ");
+        }
+
+        mProgressDialog.show();
+    }
+
+    public void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+    }
     public abstract void setUpContent(int contentLayoutId);
 
     public abstract void onOpen();

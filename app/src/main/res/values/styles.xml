@@ -48,4 +48,8 @@
         <attr name="civ_shadow_radius" format="float"/>
     </declare-styleable>
 
+    <style name="PauseDialogFavorit">
+        <item name="android:windowEnterAnimation">@anim/top_bot</item>
+        <item name="android:windowExitAnimation">@anim/top_bot_out</item>
+    </style>
 </resources>

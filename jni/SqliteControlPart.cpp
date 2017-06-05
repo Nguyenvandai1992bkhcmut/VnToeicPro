@@ -392,3 +392,33 @@ void SqliteControlPart::updateWordAware(int idword1, int aware1){
               }
              sqlite3_step(stmt);
 }
+
+vector<PartSubjectResult>SqliteControlPart::searhPartSubjectResult(int part1){
+     stringstream ss2;
+                   ss2<<part1;
+                   string part = ss2.str();
+                    string sql ="select * from part"+part+"_result_view";
+            vector<PartSubjectResult>result;
+           if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
+                 return result;
+            }
+
+             while(sqlite3_step(stmt)== SQLITE_ROW){
+                               int id = (int)sqlite3_column_int(stmt,0);
+
+                               const char * title1 = (const char *)sqlite3_column_text(stmt,1);
+                               char * title = new char[strlen(title1)+1];
+                               for(int i=0;i<strlen(title1)+1;i++){
+                                   title[i]=title1[i];
+                               }
+                               int correct = (int)sqlite3_column_int(stmt,2);
+
+                               int count = (int)sqlite3_column_int(stmt,3);
+
+                              PartSubjectResult re(id,title,correct,count);
+                                result.push_back(re);
+
+                         }
+                        return result;
+
+}

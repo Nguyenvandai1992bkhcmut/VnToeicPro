@@ -16,7 +16,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:id="@+id/btn_explanation"
-                android:background="@mipmap/iconplay"/>
+                android:background="@mipmap/icon_play"/>
             <TextView
                 android:layout_marginLeft="8dp"
                 android:layout_width="match_parent"
@@ -38,7 +38,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:id="@+id/btn_unawareWords"
-                android:background="@mipmap/iconplay"/>
+                android:background="@mipmap/icon_play"/>
             <TextView
                 android:layout_marginLeft="8dp"
                 android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:id="@+id/btn_awareWords"
-                android:background="@mipmap/iconplay"/>
+                android:background="@mipmap/icon_play"/>
             <TextView
                 android:layout_marginLeft="8dp"
                 android:layout_width="match_parent"

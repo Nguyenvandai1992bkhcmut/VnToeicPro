@@ -9,7 +9,7 @@
         android:orientation="horizontal">
         <ImageView
             android:layout_width="20dp"
-            android:src="@mipmap/icon_add"
+            android:src="@mipmap/icon_play"
             android:layout_height="20dp"
             android:id="@+id/imageView"/>
         <TextView

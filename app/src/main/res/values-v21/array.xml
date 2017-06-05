@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="title_menu">
+        <item>submit</item>
+        <item>submit</item>
+        <item>submit</item>
+        <item>submit</item>
+        <item>submit</item>
+    </string-array>
+    <string-array name="title_menu2">
+        <item>submit2</item>
+        <item>submit2</item>
+        <item>submit2</item>
+        <item>submit2</item>
+        <item>submit2</item>
+    </string-array>
+</resources>

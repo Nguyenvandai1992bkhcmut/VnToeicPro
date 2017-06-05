@@ -57,7 +57,7 @@ public class WordPageFragment extends Fragment implements View.OnClickListener{
     private void bindData(View view) {
 
         isMark = mSqliteVocabulary.checkWordChecked(mWordLesson.getmWord().getmId());
-        mMarkBtn.setImageResource(isMark? R.mipmap.iconstaryellow : R.mipmap.iconstargray);
+        mMarkBtn.setImageResource(isMark? R.mipmap.icon_checked : R.mipmap.icon_notchecked);
 
         mWord.setText(mWordLesson.getmWord().getmWord());
     }

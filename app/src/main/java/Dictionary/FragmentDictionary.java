@@ -1,23 +1,38 @@
 package Dictionary;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.vntoeic.bkteam.vntoeicpro.MainActivity;
 import com.vntoeic.bkteam.vntoeicpro.R;
 
 import java.util.ArrayList;
 
 import model.Content;
 import model.Dictionary;
+import model.DictionaryFavorite;
 import model.Example;
 import model.Meanings;
+import sqlite.SqliteDictionary;
 
 /**
  * Created by dainguyen on 5/30/17.
@@ -29,13 +44,25 @@ public class FragmentDictionary extends Fragment {
     private TextView text_name;
     private TextView text_pro;
     private ImageView img_star;
+    private RecyclerView recyclerView;
+    private int flag =0;
+    PopupWindow popupWindow;
+    public ArrayList<String>arrMeaning;
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         if(bundle!= null){
             dictionary = (Dictionary) bundle.getSerializable("word");
         }
+        super.onCreate(savedInstanceState);
+
     }
 
     @Nullable
@@ -43,18 +70,115 @@ public class FragmentDictionary extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_word_dictionary,container,false);
 
+        getMeaning();
         setUpLayout(view);
         return view;
     }
 
-    public void setUpLayout(View view){
+    public void getMeaning(){
+        arrMeaning = new ArrayList<>();
+        SqliteDictionary sqlite = new SqliteDictionary();
+        DictionaryFavorite favorite = sqlite.searchFavoriteDictionary(dictionary.getId());
+        if(favorite!=null) {
+            String mean = favorite.getMeaning();
+            String s[] = mean.split("!~!~!");
+            for (int i = 0; i < s.length; i++) {
+                arrMeaning.add(s[i]);
+            }
+        }
+    }
+
+    public void setUpLayout(final View view){
         text_name = (TextView)view.findViewById(R.id.text_name);
+        text_name.setTypeface(MainActivity.typeface);
         text_pro  =(TextView)view.findViewById(R.id.text_pro);
+        text_pro.setTypeface(MainActivity.typeface);
         img_star = (ImageView) view.findViewById(R.id.img_star);
+
+        SqliteDictionary sqlite = new SqliteDictionary();
+        if(sqlite.checkFavorite(dictionary.getId())){
+            img_star.setBackgroundResource(R.mipmap.icon_heart);
+        }else img_star.setBackgroundResource(R.mipmap.icon_heart_while);
+
+        img_star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(flag==0) {
+                    Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.scale_favorite_out);
+                    final Animation animation1 = AnimationUtils.loadAnimation(getContext(), R.anim.scale_favorite_in);
+
+                    img_star.startAnimation(animation);
+                    img_star.setVisibility(View.GONE);
+                    ChangeImageHeart();
+                    if (!popupWindow.isShowing()) {
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                            // Do something for lollipop and above versions
+
+                            Window window = getActivity().getWindow();
+
+
+                            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+                            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                            window.setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.background));
+                        }
+                        popupWindow.setAnimationStyle(R.style.PauseDialogFavorit);
+                        popupWindow.showAtLocation(view, Gravity.TOP, 0, 0);
+                        ((ImageView) popupWindow.getContentView().findViewById(R.id.img_tick)).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                ChangeImageDefault();
+                                if (popupWindow.isShowing()) popupWindow.dismiss();
+                                SaveMeaning();
+                                if(AdapterDiction.arrMeaningSave.size()!=0)img_star.setBackgroundResource(R.mipmap.icon_heart);
+                                else img_star.setBackgroundResource(R.mipmap.icon_heart_while);
+
+                                img_star.setVisibility(View.VISIBLE);
+                                img_star.startAnimation(animation1);
+
+                                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                                    // Do something for lollipop and above versions
+
+                                    Window window = getActivity().getWindow();
+
+
+                                    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+                                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                                    window.setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.header));
+                                }
+                                flag=0;
+                            }
+                        });
+                    }
+                    flag=1;
+                }
+            }
+        });
+
+        View view_tick=LayoutInflater.from(getContext()).inflate(R.layout.popup_favorite_diction,null);
+        int h = (int) (getResources().getDisplayMetrics().density*110);
+        popupWindow = new PopupWindow(view_tick, ViewGroup.LayoutParams.MATCH_PARENT,h);
+        popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+        popupWindow.setFocusable(false);
+        popupWindow.setOutsideTouchable(false);
 
         ArrayList<Content> arrContent = ParseDatatoContent(dictionary);
         text_name.setText(dictionary.getName());
-        text_pro.setText(arrContent.get(0).vol);
+        text_pro.setText(arrContent.get(0).getVol());
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycle_dicmain);
+        AdapterDiction adapterDiction = new AdapterDiction(getContext());
+        adapterDiction.setContent(ParseDatatoContent(dictionary));
+        /*
+        add meaning save
+         */
+        adapterDiction.setArrMeaningSave(arrMeaning);
+        LinearLayoutManager manager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapterDiction);
+
+
     }
 
     public ArrayList<Content> ParseDatatoContent(Dictionary data){
@@ -179,4 +303,29 @@ public class FragmentDictionary extends Fragment {
         }
         return contents;
     }
+
+    public void ChangeImageHeart(){
+        for(int i =0;i<AdapterDiction.arrHoder.size();i++){
+            AdapterDiction.arrHoder.get(i).changeImage();
+        }
+    }
+
+    public void ChangeImageDefault(){
+        for(int i =0;i<AdapterDiction.arrHoder.size();i++){
+            AdapterDiction.arrHoder.get(i).changeImageDefault();
+        }
+    }
+
+    public void SaveMeaning(){
+        String s="";
+        for(int i=0;i<AdapterDiction.arrMeaningSave.size();i++){
+            if(i==0)s+= AdapterDiction.arrMeaningSave.get(i);
+            else s+="!~!~!" + AdapterDiction.arrMeaningSave.get(i);
+        }
+
+        SqliteDictionary sqite = new SqliteDictionary();
+        DictionaryFavorite favorite = new DictionaryFavorite(dictionary.getId(),"time",s);
+        sqite.insertFavorite(favorite);
+    }
+
 }

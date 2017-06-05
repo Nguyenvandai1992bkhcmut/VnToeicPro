@@ -14,8 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:background="@mipmap/iconplay"
-            android:layout_weight="0.1"
+            android:background="@mipmap/icon_play"
             android:id="@+id/img_vol" />
         <LinearLayout
             android:layout_width="wrap_content"
@@ -28,7 +27,7 @@
             android:layout_height="wrap_content"
             android:textSize="25dp"
             android:layout_marginLeft="5dp"
-            android:textColor="@android:color/holo_blue_dark"
+            android:textColor="@android:color/holo_blue_light"
             android:gravity="center_vertical"
             android:text="Considerate"
             android:id="@+id/text_name" />
@@ -36,6 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"
+             android:textColor="@android:color/white"
                 android:layout_marginLeft="5dp"
                 android:gravity="center_vertical"
                 android:text="/......./"
@@ -46,9 +46,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="0.1"
             android:id="@+id/img_star"
-            android:background="@mipmap/iconstargray"
+            android:background="@mipmap/icon_heart_while"
             />
 
     </LinearLayout>

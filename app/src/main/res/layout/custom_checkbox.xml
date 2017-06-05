@@ -6,9 +6,11 @@
         android:id="@+id/imageView"
         android:layout_alignParentLeft="true"/>
     <TextView
+        android:layout_marginLeft="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView"
+        android:textColor="@android:color/white"
         android:layout_toRightOf="@id/imageView"/>
 
 </merge>

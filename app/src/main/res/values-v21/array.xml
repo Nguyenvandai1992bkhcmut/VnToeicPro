@@ -4,14 +4,22 @@
         <item>submit</item>
         <item>submit</item>
         <item>submit</item>
-        <item>submit</item>
-        <item>submit</item>
     </string-array>
     <string-array name="title_menu2">
         <item>submit2</item>
         <item>submit2</item>
         <item>submit2</item>
-        <item>submit2</item>
-        <item>submit2</item>
+
     </string-array>
+    <array name="icons">
+        <item>@drawable/adv</item>
+        <item>@drawable/adv</item>
+        <item>@drawable/adv</item>
+        <item>@drawable/adv</item>
+        <item>@drawable/adv</item>
+
+
+
+
+    </array>
 </resources>

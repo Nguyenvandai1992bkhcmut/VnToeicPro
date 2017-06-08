@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -22,10 +23,17 @@ import supportview.BaseFragment;
 public class FragmentPart5 extends Fragment {
     FrameLayout frame_question;
     FrameLayout frame_explan;
-    private int flag =0;
+    private int mode =0;
+    FragmentPart5Question frag_question ;
+    FragmentPart5Explan frag_explan ;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle bundle =getArguments();
+        if(bundle != null){
+            mode = bundle.getInt("mode");
+        }else mode=0;
     }
 
     @Nullable
@@ -33,6 +41,7 @@ public class FragmentPart5 extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_part5,container,false);
         setUpLayout(view);
+
         return view;
     }
 
@@ -41,27 +50,38 @@ public class FragmentPart5 extends Fragment {
        frame_explan= (FrameLayout)view.findViewById(R.id.frame_explan);
        int h = getContext().getResources().getDisplayMetrics().heightPixels;
        RelativeLayout.LayoutParams params ;
-       if(flag==0) {
-           params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, h / 2);
+       if(mode==0) {
+           params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
        }else  params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
        frame_question.setLayoutParams(params);
+
        setDataFrame();
 
    }
 
     private void setDataFrame() {
-        FragmentPart5Question frag_question = new FragmentPart5Question();
         frag_question.setArguments(getArguments());
         getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).add(R.id.frame_question,frag_question).commit();
-
-        FragmentPart5Explan frag_explan = new FragmentPart5Explan();
+         frag_explan = new FragmentPart5Explan();
         frag_explan.setArguments(getArguments());
         getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).add(R.id.frame_explan,frag_explan).commit();
 
     }
 
-    public void setMode(int flag){
-        this.flag= flag;
+    public void showResult(){
+        int h = getContext().getResources().getDisplayMetrics().heightPixels;
+        RelativeLayout.LayoutParams params ;
+        params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,h/2);
+        frame_question.setLayoutParams(params);
+
     }
+
+    public void addIResult(FragmentPart5Question.IAddResult iAddResult){
+        frag_question = new FragmentPart5Question();
+        frag_question.setiAddResult(iAddResult);
+    }
+
+
+
 }

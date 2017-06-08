@@ -6,8 +6,7 @@
 #include <sstream>
 
 SqlitePart5::SqlitePart5(){
-    sqlite3_open_v2("data/data/com.vntoeic.bkteam.vntoeicpro/databases/database.db", &(this->db),SQLITE_OPEN_READWRITE,NULL);
-}
+    sqlite3_open_v2("/data/user/0/com.vntoeic.bkteam.vntoeicpro/database.db", &(this->db),SQLITE_OPEN_READWRITE,NULL);}
 
 vector<Part5*>SqlitePart5::funsearchPart(){
     vector<Part5*>result;
@@ -44,7 +43,7 @@ vector<Part5*>SqlitePart5::randomPart5(int number1){
     stringstream ss2;
          ss2 << number1;
          string number = ss2.str();
-         string sql = "select * from part5 order by `time` limit "+ number;
+         string sql = "select * from part5 order by `time` asc limit "+ number;
          if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
              vector<Part5*>re;
              const char * xx = sqlite3_errmsg(this->db);
@@ -99,6 +98,19 @@ vector<Part5*>SqlitePart5::searchPart5Favorite(){
              Part1 * p = new Part1(1,x,(const char *)" ",(const char *)" ",(const char *)" ",(const char *)" ",(const char *)" ",0,0);
              re.push_back(p);
              */
+             return re;
+         }
+        return funsearchPart();
+}
+vector<Part5*>SqlitePart5::searchPart5Id(int id1){
+
+stringstream ss2;
+         ss2 << id1;
+         string id = ss2.str();
+         string sql = "select * from part5 where part5_id =" + id;
+         if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
+             vector<Part5*>re;
+
              return re;
          }
         return funsearchPart();

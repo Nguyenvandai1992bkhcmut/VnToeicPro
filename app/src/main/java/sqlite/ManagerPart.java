@@ -52,4 +52,6 @@ public  class ManagerPart {
 
     public native ModelPartResult[] searhPartSubjectResult(int part);
 
+
+    public native boolean updateTimePart(int part, int id);
 }

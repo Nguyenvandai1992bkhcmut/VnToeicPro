@@ -36,7 +36,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-import Dictionary.*;
+import dictionary.*;
 import model.Content;
 import model.Dictionary;
 import part5.Part5Activity;

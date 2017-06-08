@@ -6,8 +6,7 @@
 #include <sstream>
 
 SqliteControlPart::SqliteControlPart(){
-    sqlite3_open_v2("data/data/com.vntoeic.bkteam.vntoeicpro/databases/database.db", &(this->db),SQLITE_OPEN_READWRITE,NULL);
-}
+    sqlite3_open_v2("/data/user/0/com.vntoeic.bkteam.vntoeicpro/database.db", &(this->db),SQLITE_OPEN_READWRITE,NULL);}
 
  vector<ModelFavoritePart>SqliteControlPart::searchAllFavoritePart(int part){
          vector<ModelFavoritePart>result;
@@ -422,3 +421,30 @@ vector<PartSubjectResult>SqliteControlPart::searhPartSubjectResult(int part1){
                         return result;
 
 }
+
+bool SqliteControlPart::updateTimePart(int part1 , int id1){
+       stringstream ss2;
+    ss2<<part1;
+    string part = ss2.str();
+
+    stringstream ss3;
+     ss3<<id1;
+     string id = ss3.str();
+     string sql ="update part"+part+" set time=time+1 where part"+part+".part"+part+"_id = "+id;
+    if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
+
+           return false;
+
+     }
+        const char* data = "Callback function called";
+   char *zErrMsg = 0;
+
+     int rc= sqlite3_exec(db, sql.c_str(), NULL, NULL, NULL);
+    if( rc != SQLITE_OK ){
+            return false;
+     }else{
+            return true;
+     }
+       sqlite3_close(db);
+     return true;
+  }

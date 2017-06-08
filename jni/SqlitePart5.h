@@ -24,8 +24,8 @@ public:
     vector<Part5*>funsearchPart();
     vector<Part5*>randomPart5(int number);
     vector<Part5*>randomPart5Subject(int subject,int number);
-        vector<Part5*>searchPart5Favorite();
-
+     vector<Part5*>searchPart5Favorite();
+  vector<Part5*>searchPart5Id(int id);
 };
 
 #endif //VNTOEICPRO_SQLITEPART5_H

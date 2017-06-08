@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rect_card_dialog">
+    <TextView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/text_icon"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:padding="10dp"
+        android:gravity="center"
+        android:text="Nofication"/>
+    <TextView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="30dp"
+        android:text="Ban chua  Cau 1 2 "
+        android:id="@+id/text_content"/>
+    <ImageView android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/line_gray"/>
+    <TextView android:layout_width="match_parent"
+        android:text="Continue"
+        android:textSize="30sp"
+        android:padding="5dp"
+        android:gravity="center"
+        android:textColor="@android:color/holo_blue_dark"
+        android:id="@+id/text_continue"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

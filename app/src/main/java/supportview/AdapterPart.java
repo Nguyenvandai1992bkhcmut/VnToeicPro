@@ -1,4 +1,4 @@
-package sqlite;
+package supportview;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -63,7 +63,10 @@ public class AdapterPart extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             myhoder1.view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    iCallActivity.funCallActivity(position-4);
+                    if(position==0)iCallActivity.funCallActivity(position-4,"Test");
+                    else if(position==1)iCallActivity.funCallActivity(position-4,"UnLimited Question");
+                    else if(position==2)iCallActivity.funCallActivity(position-4,"Favorite");
+                    else if(position==3)iCallActivity.funCallActivity(position-4,"History");
                 }
             });
 
@@ -74,7 +77,7 @@ public class AdapterPart extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             myhoder2.view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    iCallActivity.funCallActivity(data[position-4].getIdsubject());
+                    iCallActivity.funCallActivity(data[position-4].getIdsubject(),data[position-4].getTitle());
                 }
             });
         }
@@ -120,6 +123,6 @@ public class AdapterPart extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public interface ICallActivity{
-        public void funCallActivity(int idsubject);
+        public void funCallActivity(int idsubject, String title);
     }
 }

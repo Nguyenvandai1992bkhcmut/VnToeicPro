@@ -40,6 +40,8 @@ public:
     Grammar* searchGrammarId(int idgrammar);
     void updateWordAware(int idword, int aware);
 vector<PartSubjectResult>searhPartSubjectResult(int part);
+
+  bool  updateTimePart(int part , int id);
 };
 
 #endif //VNTOEICPRO_SQLITECONTROLPART_H

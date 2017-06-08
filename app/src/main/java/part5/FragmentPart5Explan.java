@@ -18,10 +18,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import model.Dictionary;
 import model.ModelPart5;
 import model.ModelWord;
-import sqlite.AdapterWordPart;
+import supportview.AdapterWordPart;
 import sqlite.SqlitePart5;
 
 /**
@@ -31,10 +30,8 @@ import sqlite.SqlitePart5;
 public class FragmentPart5Explan extends Fragment {
     private LinearLayout line_explan;
     private LinearLayout line_aware;
-    private LinearLayout line_unaware;
     private TextView text_explan;
     private RecyclerView recycle_aware;
-    private RecyclerView recycle_unawre;
     private ModelPart5 data;
 
     @Override
@@ -61,7 +58,7 @@ public class FragmentPart5Explan extends Fragment {
         text_explan = (TextView)view.findViewById(R.id.text_explan);
         recycle_aware = (RecyclerView)view.findViewById(R.id.recycle_aware_word);
 
-
+        text_explan.setText(data.getExplain());
 
         line_explan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +93,11 @@ public class FragmentPart5Explan extends Fragment {
         });
 
 
-
     }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        this.getArguments().clear();
+    }
+
 }

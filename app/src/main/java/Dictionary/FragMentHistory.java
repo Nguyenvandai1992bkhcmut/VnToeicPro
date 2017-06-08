@@ -1,4 +1,4 @@
-package Dictionary;
+package dictionary;
 
 import android.graphics.Color;
 import android.os.Bundle;

@@ -397,6 +397,7 @@ Java_sqlite_ManagerPart_searchAllGrammar(JNIEnv* env , jobject object ){
 }
 
 
+
 extern "C"{
 JNIEXPORT jobject JNICALL
 Java_sqlite_ManagerPart_searchGrammarId(JNIEnv* env , jobject object , jint idgrammar ){
@@ -438,15 +439,27 @@ Java_sqlite_ManagerPart_searhPartSubjectResult(JNIEnv* env , jobject object , ji
         for(int i =0;i<result.size() ;i++){
             PartSubjectResult part = result.at(i);
              jbyteArray arraycontent = env->NewByteArray(strlen(part.getTitle()));
-                env->SetByteArrayRegion(arraycontent,0,strlen(part.getTitle()),(jbyte*)part.getTitle());
-                 jstring content = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arraycontent);
-                   env->DeleteLocalRef(arraycontent);
-                    jobject ob = env->NewObject(cl, methodId,idpart, part.getId(),content, part.getCorrect(), part.getCount());
-                 env->SetObjectArrayElement(arr, i, ob);
-
-
+             env->SetByteArrayRegion(arraycontent,0,strlen(part.getTitle()),(jbyte*)part.getTitle());
+             jstring content = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arraycontent);
+             env->DeleteLocalRef(arraycontent);
+             jobject ob = env->NewObject(cl, methodId,idpart, part.getId(),content, part.getCorrect(), part.getCount());
+             env->SetObjectArrayElement(arr, i, ob);
         }
         return arr;
+
+}
+}
+
+
+extern "C"{
+JNIEXPORT jboolean JNICALL
+Java_sqlite_ManagerPart_updateTimePart(JNIEnv* env , jobject object , jint idpart , jint id ){
+
+    SqliteControlPart sqlite;
+
+   bool b =sqlite.updateTimePart((int)idpart, (int)id);
+
+    return jboolean(b);
 
 }
 }

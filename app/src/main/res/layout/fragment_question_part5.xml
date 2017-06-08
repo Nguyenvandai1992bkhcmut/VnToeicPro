@@ -1,44 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    android:background="@drawable/rect_part">
+    android:background="@drawable/rect_card">
     <TextView android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
         android:text="aaaaaaaa"
         android:id="@+id/text_question"/>
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:id="@+id/line_a">
+        <ImageView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@mipmap/icon_notchecked"
+            android:id="@+id/checkbox_a"/>
 
-    <TextView android:layout_width="match_parent"
+        <com.hanks.htextview.HTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="left"
+            android:text="aaaaaaaa"
+            android:id="@+id/text_a"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:layout_marginLeft="20dp"
         android:padding="5dp"
-        android:text="aaaaaaaa"
-        android:id="@+id/text_a"/>
-    <TextView android:layout_width="match_parent"
+        android:id="@+id/line_b">
+        <ImageView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@mipmap/icon_notchecked"
+            android:id="@+id/checkbox_b"/>
+
+        <com.hanks.htextview.HTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="left"
+            android:text="aaaaaaaa"
+            android:id="@+id/text_b"/>
+    </LinearLayout>
+
+
+
+    <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:layout_marginLeft="20dp"
         android:padding="5dp"
-        android:text="aaaaaaaa"
-        android:layout_marginTop="5dp"
-        android:id="@+id/text_b"/>
-    <TextView android:layout_width="match_parent"
+        android:id="@+id/line_c">
+        <ImageView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@mipmap/icon_notchecked"
+            android:id="@+id/checkbox_c"/>
+
+        <com.hanks.htextview.HTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="left"
+            android:text="aaaaaaaa"
+            android:id="@+id/text_c"/>
+    </LinearLayout>
+
+
+    <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:layout_marginLeft="20dp"
         android:padding="5dp"
-        android:layout_marginTop="5dp"
-        android:text="aaaaaaaa"
-        android:id="@+id/text_c"/>
-    <TextView android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:layout_marginLeft="20dp"
-        android:padding="5dp"
-        android:layout_marginTop="5dp"
-        android:text="aaaaaaaa"
-        android:id="@+id/text_d"/>
+        android:id="@+id/line_d">
+        <ImageView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@mipmap/icon_notchecked"
+            android:id="@+id/checkbox_d"/>
+
+        <com.hanks.htextview.HTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="left"
+            android:text="aaaaaaaa"
+            android:id="@+id/text_d"/>
+    </LinearLayout>
+
 </LinearLayout>

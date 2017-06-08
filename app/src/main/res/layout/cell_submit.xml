@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:textColor="@android:color/white"
+        android:text="Question 1:"
+        android:layout_marginLeft="5dp"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:id="@+id/text_submit_question">
+    </TextView>
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:textColor="@android:color/white"
+        android:text="Choose a"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="17sp"
+        android:textAllCaps="true"
+        android:id="@+id/text_submit_choose">
+    </TextView>
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:textColor="@android:color/holo_red_dark"
+        android:text="true"
+        android:layout_marginRight="5dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true" android:id="@+id/text_submit_result">
+    </TextView>
+
+</RelativeLayout>
+<ImageView android:layout_width="match_parent"
+android:layout_height="2dp"
+android:layout_below="@id/text_submit_result"
+android:background="@drawable/line_gray"/>
+</LinearLayout>

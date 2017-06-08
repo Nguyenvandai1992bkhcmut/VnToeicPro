@@ -92,6 +92,26 @@ Java_sqlite_SqlitePart5_randomPart5(JNIEnv * env , jobject object ,jint number1)
 
 extern "C"{
 JNIEXPORT jobjectArray JNICALL
+Java_sqlite_SqlitePart5_searchPart5Id(JNIEnv * env , jobject object, jint id){
+
+    SqlitePart5 sqlite;
+
+    vector<Part5*>result =sqlite.searchPart5Id((int)id);
+     jclass  cl = env -> FindClass("model/ModelPart5");
+
+     jobjectArray arr = env->NewObjectArray((int)result.size(), cl, NULL);
+     for(int i=0;i<result.size();i++){
+        jobject ob = funConvert(env,object,result.at(i));
+        env->SetObjectArrayElement(arr, i, ob);
+     }
+    return arr;
+
+}
+}
+
+
+extern "C"{
+JNIEXPORT jobjectArray JNICALL
 Java_sqlite_SqlitePart5_randomPart5Subject(JNIEnv * env , jobject object ,jint subject1,jint number1){
 
     SqlitePart5 sqlite;
@@ -129,3 +149,7 @@ Java_sqlite_SqlitePart5_searchPart5Favorite(JNIEnv * env , jobject object){
 
 }
 }
+
+
+
+

@@ -1,16 +1,12 @@
-package sqlite;
+package supportview;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.vntoeic.bkteam.vntoeicpro.R;
@@ -19,11 +15,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Timer;
 
 import model.ModelFavoriteWord;
-import model.ModelPartFavorite;
 import model.ModelWord;
+import sqlite.SqliteVocabulary;
 
 /**
  * Created by dainguyen on 6/2/17.

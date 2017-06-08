@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import Dictionary.*;
+import dictionary.*;
 import model.Dictionary;
 
 /**

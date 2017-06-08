@@ -49,7 +49,7 @@ import sqlite.SqliteDictionary;
 import sqlite.SqlitePart1;
 import sqlite.SqlitePart5;
 import sqlite.SqliteVocabulary;
-import Dictionary.*;
+import dictionary.*;
 
 public class MainActivity extends AppCompatActivity implements AdapterWordSearch.onClickItem{
     private PageAdapterMain pageAdapterMain;
@@ -172,9 +172,10 @@ public class MainActivity extends AppCompatActivity implements AdapterWordSearch
     public void copyDatabase(Context context){
         try{
             InputStream inputStream = context.getAssets().open("Database.db");
-            String outputString = "data/data/com.vntoeic.bkteam.vntoeicpro/databases/database.db";
-            OutputStream outputStream = new FileOutputStream(outputString);
+            String outputString = context.getApplicationInfo().dataDir +"/database.db";
 
+
+            OutputStream outputStream = new FileOutputStream(outputString);
             byte[]arr = new byte[10240];
             int length =0;
             while ((length =inputStream.read(arr))>0){

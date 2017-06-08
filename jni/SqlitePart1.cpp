@@ -6,7 +6,7 @@
 #include <sstream>
 
 SqlitePart1::SqlitePart1(){
-    sqlite3_open_v2("data/data/com.vntoeic.bkteam.vntoeicpro/databases/database.db", &(this->db),SQLITE_OPEN_READWRITE,NULL);
+    sqlite3_open_v2("/data/user/0/com.vntoeic.bkteam.vntoeicpro/database.db", &(this->db),SQLITE_OPEN_READWRITE,NULL);
 }
 vector<Part1*>SqlitePart1::funsearchPart(){
     vector<Part1*>result;

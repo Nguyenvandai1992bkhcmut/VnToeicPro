@@ -1,5 +1,4 @@
 package supportview;
-
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,6 +6,7 @@ import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.support.v7.view.menu.MenuView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,8 @@ import android.widget.Toast;
 import com.vntoeic.bkteam.vntoeicpro.R;
 
 import java.util.ArrayList;
+
+import supportview.ItemView;
 
 /**
  * Created by giang on 5/28/17.
@@ -77,7 +80,14 @@ public class CustomNavigation extends FrameLayout {
     }
 
     public void setIcons(int iconArray) {
-        icons = mContext.getResources().getIntArray(iconArray);
+        TypedArray getIcons = getResources().obtainTypedArray(iconArray);
+        if (getIcons != null) {
+//            this.icons = getResources().getIntArray(getIcons);
+            this.icons = new int[getIcons.length()];
+            for (int i = 0; i < getIcons.length(); i++) {
+                this.icons[i] = getIcons.getResourceId(i, 0);
+            }
+        }
     }
 
     private void init(Context context, AttributeSet attrs) {
@@ -92,15 +102,14 @@ public class CustomNavigation extends FrameLayout {
         this.imageSize = typedArray.getDimensionPixelSize(R.styleable.CustomNavigation_imageSize, 0);
         this.duration = typedArray.getInteger(R.styleable.CustomNavigation_duration, 0);
 
-        int getTitles = typedArray.getResourceId(R.styleable.CustomNavigation_titles, 0);
+        int getTitles = typedArray.getResourceId(R.styleable.CustomNavigation_titles, R.array.title_menu);
         if (getTitles != 0){
             this.titles = getResources().getStringArray(getTitles);
         }
 
-        int getIcons = typedArray.getResourceId(R.styleable.CustomNavigation_icons, 0);
-        if (getIcons != 0) {
-            this.icons = getResources().getIntArray(getIcons);
-        }
+        int getIconsArrayId = typedArray.getResourceId(R.styleable.CustomNavigation_icons, R.array.icons);
+
+        setIcons(getIconsArrayId);
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         gridView = (GridView) inflater.inflate(R.layout.custom_navigation, this, false);
@@ -137,7 +146,6 @@ public class CustomNavigation extends FrameLayout {
         @Override
         public void onGlobalLayout() {
             height = gridView.getMeasuredHeight();
-//            if ( Build.VERSION.SDK_INT >= 16) gridView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
         }
 
         public int getHeight() {
@@ -214,6 +222,7 @@ public class CustomNavigation extends FrameLayout {
                 View itemView = inflater.inflate(R.layout.menu_item_view, null, false);
                 MyViewHolder myViewHolder = new MyViewHolder(itemView);
                 myViewHolder.mTextView.setText(titles[position]);
+                myViewHolder.mImageView.setImageResource(icons[position]);
                 return myViewHolder.mView;
             } else return convertView;
 
@@ -223,8 +232,10 @@ public class CustomNavigation extends FrameLayout {
     class MyViewHolder{
         TextView mTextView;
         View mView;
+        ImageView mImageView;
         MyViewHolder(View itemView) {
             this.mTextView = (TextView) itemView.findViewById(R.id.text);
+            this.mImageView = (ImageView) itemView.findViewById(R.id.image);
             this.mView = itemView;
         }
 
@@ -265,8 +276,8 @@ public class CustomNavigation extends FrameLayout {
             out.writeInt(value);
         }
 
-        public static final Creator<SavedState> CREATOR
-                = new Creator<SavedState>() {
+        public static final Parcelable.Creator<SavedState> CREATOR
+                = new Parcelable.Creator<SavedState>() {
             public SavedState createFromParcel(Parcel in) {
                 return new SavedState(in);
             }

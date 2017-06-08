@@ -1,4 +1,4 @@
-package Dictionary;
+package dictionary;
 
 import android.content.Context;
 import android.os.Bundle;

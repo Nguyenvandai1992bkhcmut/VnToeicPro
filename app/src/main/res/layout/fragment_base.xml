@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             xmlns:app="http://schemas.android.com/apk/res-auto">
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/frame_layout">
 
     </FrameLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,11 +23,12 @@
     <supportview.CustomNavigation
         android:layout_width="match_parent"
         android:id="@+id/customNavigation"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         app:titles="@array/title_menu2"
         app:imageSize="20dp"
         app:textSize="12sp"
         app:isTop="true"
+
         android:visibility="invisible"
         app:duration="300"
         app:textColor="@android:color/white">
@@ -36,7 +39,7 @@
         android:layout_width="match_parent"
         android:id="@+id/customNavigation2"
         android:layout_gravity="bottom"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         app:titles="@array/title_menu2"
         android:visibility="invisible"
         app:imageSize="20dp"

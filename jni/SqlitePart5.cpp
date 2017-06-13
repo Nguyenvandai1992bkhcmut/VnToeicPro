@@ -102,9 +102,21 @@ vector<Part5*>SqlitePart5::searchPart5Favorite(){
          }
         return funsearchPart();
 }
+
+
+
+vector<Part5*>SqlitePart5::searchPart5Check(){
+         string sql = "select * from part5, part5_checked where part5.part5_id = part5_checked.id";
+         if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
+             vector<Part5*>re;
+             return re;
+         }
+        return funsearchPart();
+}
+
 vector<Part5*>SqlitePart5::searchPart5Id(int id1){
 
-stringstream ss2;
+    stringstream ss2;
          ss2 << id1;
          string id = ss2.str();
          string sql = "select * from part5 where part5_id =" + id;

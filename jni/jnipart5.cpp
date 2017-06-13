@@ -151,5 +151,24 @@ Java_sqlite_SqlitePart5_searchPart5Favorite(JNIEnv * env , jobject object){
 }
 
 
+extern "C"{
+JNIEXPORT jobjectArray JNICALL
+Java_sqlite_SqlitePart5_searchPart5Check(JNIEnv * env , jobject object){
+
+    SqlitePart5 sqlite;
+
+    vector<Part5*>result =sqlite.searchPart5Check();
+     jclass  cl = env -> FindClass("model/ModelPart5");
+
+     jobjectArray arr = env->NewObjectArray((int)result.size(), cl, NULL);
+     for(int i=0;i<result.size();i++){
+        jobject ob = funConvert(env,object,result.at(i));
+        env->SetObjectArrayElement(arr, i, ob);
+     }
+    return arr;
+
+}
+}
+
 
 

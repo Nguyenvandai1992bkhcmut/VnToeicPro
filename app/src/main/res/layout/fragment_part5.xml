@@ -5,14 +5,40 @@
     android:background="@drawable/bg_app">
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/frame_question"
+        android:transitionName="share"
         android:layout_alignParentTop="true">
     </FrameLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/frame_question"
         android:id="@+id/frame_explan">
     </FrameLayout>
+
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-15dp"
+        android:layout_above="@id/frame_explan">
+        <ImageView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/icon_facebook"/>
+        <ImageView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:background="@mipmap/icon_facebook"/>
+        <ImageView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/icon_facebook"
+            android:id="@+id/img_figure"/>
+        </RelativeLayout>
+
 </RelativeLayout>

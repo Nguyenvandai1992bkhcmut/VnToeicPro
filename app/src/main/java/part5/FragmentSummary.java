@@ -28,6 +28,8 @@ public class FragmentSummary extends Fragment {
     private ArrayList<String>result;
     private IClickItemSubm iClickItemSubm;
 
+    private int mode =0;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,7 @@ public class FragmentSummary extends Fragment {
             question = bundle.getIntegerArrayList("question");
             choose = bundle.getStringArrayList("choose");
             result = bundle.getStringArrayList("result");
+            mode =  bundle.getInt("mode");
         }
     }
 
@@ -69,19 +72,20 @@ public class FragmentSummary extends Fragment {
             Myholder myholder = (Myholder)holder;
             myholder.text_question.setText("Question "+ String.valueOf(position+1));
             myholder.text_choose.setText(choose.get(position));
-            if(!choose.get(position).equals("Not choose")) {
-                if (choose.get(position).equals(result.get(position))) {
-                    myholder.text_result.setText("True  ");
-                    myholder.text_result.setTextColor(getResources().getColor(R.color.text_example));
+            if(mode==1) {
+                if (!choose.get(position).equals("Not choose")) {
+                    if (choose.get(position).equals(result.get(position))) {
+                        myholder.text_result.setText("True  ");
+                        myholder.text_result.setTextColor(getResources().getColor(R.color.text_example));
+                    } else {
+                        myholder.text_result.setText("False");
+                        myholder.text_result.setTextColor(Color.RED);
+                    }
                 } else {
-                    myholder.text_result.setText("False");
-                    myholder.text_result.setTextColor(Color.RED);
+                    myholder.text_result.setText("........");
+                    myholder.text_result.setTextColor(Color.GRAY);
                 }
-            }else {
-                myholder.text_result.setText("........");
-                myholder.text_result.setTextColor(Color.GRAY);
             }
-
             myholder.view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -93,6 +97,7 @@ public class FragmentSummary extends Fragment {
 
         @Override
         public int getItemCount() {
+
             return question.size();
         }
 

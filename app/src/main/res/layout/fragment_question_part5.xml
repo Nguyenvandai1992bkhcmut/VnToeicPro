@@ -5,101 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:paddingBottom="30dp"
     android:background="@drawable/rect_card">
     <TextView android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
         android:text="aaaaaaaa"
         android:id="@+id/text_question"/>
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:id="@+id/line_a">
-        <ImageView android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@mipmap/icon_notchecked"
-            android:id="@+id/checkbox_a"/>
 
-        <com.hanks.htextview.HTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:layout_marginLeft="10dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:gravity="left"
-            android:text="aaaaaaaa"
-            android:id="@+id/text_a"/>
-    </LinearLayout>
+  <android.support.v7.widget.RecyclerView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      android:layout_marginBottom="10dp"
+      android:overScrollMode="never"
+      android:isScrollContainer="false"
+      android:id="@+id/recycle_ques">
+  </android.support.v7.widget.RecyclerView>
 
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:id="@+id/line_b">
-        <ImageView android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@mipmap/icon_notchecked"
-            android:id="@+id/checkbox_b"/>
-
-        <com.hanks.htextview.HTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:layout_marginLeft="10dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:gravity="left"
-            android:text="aaaaaaaa"
-            android:id="@+id/text_b"/>
-    </LinearLayout>
-
-
-
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:id="@+id/line_c">
-        <ImageView android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@mipmap/icon_notchecked"
-            android:id="@+id/checkbox_c"/>
-
-        <com.hanks.htextview.HTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:layout_marginLeft="10dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:gravity="left"
-            android:text="aaaaaaaa"
-            android:id="@+id/text_c"/>
-    </LinearLayout>
-
-
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:id="@+id/line_d">
-        <ImageView android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@mipmap/icon_notchecked"
-            android:id="@+id/checkbox_d"/>
-
-        <com.hanks.htextview.HTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:layout_marginLeft="10dp"
-            android:padding="5dp"
-            android:layout_gravity="center_vertical"
-            android:gravity="left"
-            android:text="aaaaaaaa"
-            android:id="@+id/text_d"/>
-    </LinearLayout>
 
 </LinearLayout>

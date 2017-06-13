@@ -21,4 +21,6 @@ public class SqlitePart5 extends ManagerPart {
     public native ModelPart5[]randomPart5(int number);
 
     public native ModelPart5[]searchPart5Favorite();
+
+    public native ModelPart5[]searchPart5Check();
 }

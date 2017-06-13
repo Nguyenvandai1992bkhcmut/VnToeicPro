@@ -75,21 +75,19 @@ public abstract class BaseFragment extends Fragment  {
         });
 
 
-        view.setOnTouchListener(new View.OnTouchListener() {
+        mFrameLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         orgX = (int) event.getX();
-                        // iCallManager.fun();
                         return true;
-
                     case MotionEvent.ACTION_UP:
                         offsetX = (int) (event.getX() - orgX);
                         if(offsetX<-150)nextQuestion();
                         else if(offsetX>150)backQuestion();
-                        return false;
+                        return true;
                     case MotionEvent.ACTION_POINTER_DOWN:
                     case MotionEvent.ACTION_POINTER_UP:
                         break;

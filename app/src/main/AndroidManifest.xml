@@ -39,6 +39,12 @@
 
         </activity>
 
+        <activity android:name="part5.Part5ReviewActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize">
+
+        </activity>
+
     </application>
 
 </manifest>

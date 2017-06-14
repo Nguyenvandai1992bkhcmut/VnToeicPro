@@ -506,6 +506,50 @@ public:
 
 };
 
+class Part2 {
+    private:
+        int id;
+        const char * token;
+        const char * script;
+        const char * sol;
+        int level ;
+        int time;
+    public :
+        Part2(int id, const char * token, const char * script , const char * sol , int level , int time){
+        this->id =id ;
+        this->token = token ;
+        this->script = script;
+        this->sol = sol;
+        this->level = level;
+        this->time = time;
+    }
+
+    //get
+    int getId(){
+        return this->id ;
+    }
+
+    const char * getToken(){
+        return this->token;
+    }
+
+    const char *getScript(){
+        return this->script;
+    }
+
+    const char * getSol(){
+        return this->sol;
+    }
+
+    int getLevel(){
+        return this->level;
+    }
+
+    int getTime(){
+        return this->time;
+    }
+};
+
 class Part5{
     private:
         int id;

@@ -46,6 +46,7 @@ import supportview.BaseFragment;
 import supportview.CustomNavigation;
 
 import static com.vntoeic.bkteam.vntoeicpro.R.styleable.CustomNavigation;
+import static com.vntoeic.bkteam.vntoeicpro.R.styleable.TextAppearance_android_shadowColor;
 
 /**
  * Created by dainguyen on 6/2/17.
@@ -220,7 +221,7 @@ public class FragmentPart5Manager extends BaseFragment implements CustomNavigati
     }
 
     @Override
-    public void onBottomItemClicked(int index) {
+    public void onBottomItemClicked(final int index) {
             if(index==0){
                 if(mode==0 || mode==2)return;
                 else if (mode==1){
@@ -228,8 +229,34 @@ public class FragmentPart5Manager extends BaseFragment implements CustomNavigati
                         /*
                         chua lam xong khong cho submmit
                          */
+                        final Dialog dialog = new Dialog(getContext(),R.style.ActivityDialog);
+                        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+                        params.width=WindowManager.LayoutParams.WRAP_CONTENT;
+                        params.height=WindowManager.LayoutParams.WRAP_CONTENT;
+                        dialog.setContentView(R.layout.dialog_submit);
+                        dialog.getWindow().setWindowAnimations(R.style.PauseDialogAnimation);
+                        dialog.setCancelable(false);
+                        dialog.show();
+                        dialog.getWindow().setAttributes(params);
+                        TextView textView = (TextView)dialog.findViewById(R.id.text_notify);
+                        TextView text_continues = (TextView)dialog.findViewById(R.id.text_start);
+                        textView.setText("Question " + String.valueOf(arrayChoose.indexOf("Not choose")+1) +" not complete ");
+                        text_continues.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
                         return;
-                    }else issubmit=1;
+                    }else {
+                        issubmit=1;
+                        SqlitePart5 sqlitePart5 = new SqlitePart5();
+                        for(int i= 0;i<arrayChoose.size();i++){
+                            if(!arrayChoose.get(i).equals("Not choose")){
+                                sqlitePart5.updateTimePart(5,arryQuestion.get(i));
+                            }
+                        }
+                    }
                 }
             }
         if(index==1) {

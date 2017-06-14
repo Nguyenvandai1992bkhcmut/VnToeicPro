@@ -44,7 +44,6 @@ public class Part5PractiseAcitvity extends AppCompatActivity{
             bundle.putStringArrayList("choose",fragmentPart5Manager.arrayChoose);
             data.putExtras(bundle);
             setResult(99,data);
-
         }
         super.onBackPressed();
         finish();

@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/rect_card_dialog">
+
     <TextView android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/text_icon"
-        android:textColor="@android:color/white"
+        android:text="Submit invalid!"
+        android:gravity="center"
+        android:background="@color/bgmenudiction"
         android:textSize="30sp"
+        android:textColor="@android:color/white"
         android:padding="10dp"
-        android:gravity="center"
-        android:text="Nofication"/>
+        android:id="@+id/textView2" />
+
     <TextView android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Question : 1,2"
         android:gravity="center"
-        android:padding="30dp"
-        android:text="Ban chua  Cau 1 2 "
-        android:id="@+id/text_content"/>
-    <ImageView android:layout_width="match_parent"
-        android:layout_height="5dp"
+        android:padding="25dp"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:id="@+id/text_notify"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
         android:background="@drawable/line_gray"/>
     <TextView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Continue"
-        android:textSize="30sp"
-        android:padding="5dp"
         android:gravity="center"
-        android:textColor="@android:color/holo_blue_dark"
-        android:id="@+id/text_continue"
-        android:layout_height="wrap_content"/>
+        android:textSize="30sp"
+        android:textColor="@android:color/holo_orange_dark"
+        android:padding="5dp"
+        android:id="@+id/text_start"/>
 </LinearLayout>

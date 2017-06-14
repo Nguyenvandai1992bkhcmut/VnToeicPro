@@ -21,4 +21,5 @@
     <color name="transparent_7">#66ffffff</color>
     <color name="transparent_8">#77ffffff</color>
     <color name="none">#00ffffff</color>
+    <color name="bg_diaglog">#536b84</color>
 </resources>

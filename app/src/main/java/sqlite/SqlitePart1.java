@@ -23,5 +23,4 @@ public class SqlitePart1 extends ManagerPart {
 
     public native ModelPart1[]searchPart1Favorite();
 
-
 }

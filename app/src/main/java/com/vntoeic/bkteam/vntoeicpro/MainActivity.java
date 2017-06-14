@@ -36,6 +36,7 @@ import model.ModelFavoriteWord;
 import model.ModelGrammar;
 import model.ModelLesson;
 import model.ModelPart1;
+import model.ModelPart2;
 import model.ModelPart5;
 import model.ModelPartCheck;
 import model.ModelPartFavorite;
@@ -47,6 +48,7 @@ import model.ModelWordChecked;
 import model.ModelWordLesson;
 import sqlite.SqliteDictionary;
 import sqlite.SqlitePart1;
+import sqlite.SqlitePart2;
 import sqlite.SqlitePart5;
 import sqlite.SqliteVocabulary;
 import dictionary.*;
@@ -64,6 +66,12 @@ public class MainActivity extends AppCompatActivity implements AdapterWordSearch
         Boolean b = sqliteDictionary.checkFavorite(54205);
         SqliteDictionary sqlite = new SqliteDictionary();
         DictionaryFavorite favorite = sqlite.searchFavoriteDictionary(54205);
+
+//        SqlitePart2 ss = new SqlitePart2();
+//        ModelPart2 d[] = ss.randomPart2(10);
+//        ModelPart2 a = ss.searchPart2Id(1);
+//        d  = ss.searchPart2Favorite();
+//        d=ss.randomPart2Subject(1,10);
 //        SqliteDictionary st = new SqliteDictionary();
 //        Dictionary[] re = st.searchSimilar("go");
 //        Dictionary re1 = st.searchId(10);

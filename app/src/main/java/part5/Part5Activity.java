@@ -97,14 +97,15 @@ public class Part5Activity extends AppCompatActivity implements AdapterPart.ICal
                 bundle.putInt("mode",1);
                 bundle.putInt("key",0);
                 bundle.putString("title",title);
-                final Dialog dialog = new Dialog(Part5Activity.this);
+                final Dialog dialog = new Dialog(Part5Activity.this,R.style.ActivityDialog);
                 WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
-                params.width=400;
+                params.width=WindowManager.LayoutParams.WRAP_CONTENT;
+                params.height=WindowManager.LayoutParams.WRAP_CONTENT;
                 dialog.setContentView(R.layout.dialog_time_part5);
-                dialog.getWindow().setAttributes(params);
-                dialog.show();
+                dialog.getWindow().setWindowAnimations(R.style.PauseDialogAnimation);
 
-              //  clearReference();
+                dialog.show();
+                dialog.getWindow().setAttributes(params);
                 CheckReference();
 
                 final SeekBar seekBar = (SeekBar)dialog.findViewById(R.id.seekbar_time);
@@ -123,6 +124,7 @@ public class Part5Activity extends AppCompatActivity implements AdapterPart.ICal
                             bundle.putStringArrayList("choose",choosen);
                             intent.putExtras(bundle);
                             dialog.dismiss();
+                            clearReference();
                             startActivityForResult(intent,99);
                         }
                     });
@@ -153,6 +155,7 @@ public class Part5Activity extends AppCompatActivity implements AdapterPart.ICal
                         dialog.dismiss();
                         bundle.putInt("Time",20+seekBar.getProgress());
                         intent.putExtras(bundle);
+                        clearReference();
                         startActivityForResult(intent,99);
                     }
                 });

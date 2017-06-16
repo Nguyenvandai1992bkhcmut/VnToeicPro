@@ -2,6 +2,7 @@ package com.vntoeic.bkteam.vntoeicpro;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -37,6 +38,7 @@ import model.ModelGrammar;
 import model.ModelLesson;
 import model.ModelPart1;
 import model.ModelPart2;
+import model.ModelPart3;
 import model.ModelPart5;
 import model.ModelPartCheck;
 import model.ModelPartFavorite;
@@ -49,6 +51,7 @@ import model.ModelWordLesson;
 import sqlite.SqliteDictionary;
 import sqlite.SqlitePart1;
 import sqlite.SqlitePart2;
+import sqlite.SqlitePart3;
 import sqlite.SqlitePart5;
 import sqlite.SqliteVocabulary;
 import dictionary.*;
@@ -63,17 +66,25 @@ public class MainActivity extends AppCompatActivity implements AdapterWordSearch
 
         checkDatabase();
         SqliteDictionary sqliteDictionary = new SqliteDictionary();
-        Boolean b = sqliteDictionary.checkFavorite(54205);
+        Boolean b = sqliteDictionary.checkFavorite(100);
         SqliteDictionary sqlite = new SqliteDictionary();
-        DictionaryFavorite favorite = sqlite.searchFavoriteDictionary(54205);
+        DictionaryFavorite favorite = sqlite.searchFavoriteDictionary(100);
 
-//        SqlitePart2 ss = new SqlitePart2();
-//        ModelPart2 d[] = ss.randomPart2(10);
-//        ModelPart2 a = ss.searchPart2Id(1);
+
+        SqlitePart3  sqlitePart3 = new SqlitePart3();
+        ModelPart3 ddd[]= sqlitePart3.randomPart3(10);
+       // SqlitePart2 ss = new SqlitePart2();
+      //  ModelPart2 d[] = ss.randomPart2(10);
+       // ModelPart2 a = ss.searchPart2Id(1);
 //        d  = ss.searchPart2Favorite();
 //        d=ss.randomPart2Subject(1,10);
-//        SqliteDictionary st = new SqliteDictionary();
-//        Dictionary[] re = st.searchSimilar("go");
+
+
+        ModelPart3 mm = sqlitePart3.searchPart3Id(10);
+        sqlitePart3.insertPartFavorite(new ModelPartFavorite(3,99,"time"));
+        ModelPartCheck mmmm[]=sqlitePart3.searchAllCheckedPart(3);
+        ddd = sqlitePart3.searchPart3Favorite();
+
 //        Dictionary re1 = st.searchId(10);
 //        DictionaryFavorite df = new DictionaryFavorite(100,"dai dep trai","best");
 //        st.insertFavorite(df);

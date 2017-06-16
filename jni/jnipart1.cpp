@@ -140,3 +140,4 @@ Java_sqlite_SqlitePart1_searchPart1Favorite(JNIEnv * env , jobject object){
 
 }
 }
+

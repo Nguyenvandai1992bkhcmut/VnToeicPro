@@ -6,8 +6,11 @@
 #include <sstream>
 
 SqlitePart2::SqlitePart2(){
+
     sqlite3_open_v2("/data/user/0/com.vntoeic.bkteam.vntoeicpro/database.db", &(this->db),SQLITE_OPEN_READWRITE,NULL);
+
 }
+
 
 vector<Part2*>SqlitePart2::funsearchPart(){
      vector<Part2*>result;
@@ -51,6 +54,11 @@ vector<Part2*>SqlitePart2::randomPart2(int number1){
     stringstream ss2;
          ss2 << number1;
          string number = ss2.str();
+         if(db==NULL){
+          vector<Part2*>re;
+          re.push_back(new Part2(1,"111","1111","1111",1,1));
+          return re;
+         }
          string sql = "select * from part2 order by `time` limit "+ number;
          if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
              vector<Part2*>re;

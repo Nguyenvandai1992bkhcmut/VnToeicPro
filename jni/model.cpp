@@ -550,6 +550,162 @@ class Part2 {
     }
 };
 
+class Part3{
+    private:
+        int id;
+        const char * token;
+        const char * script;
+        const char * q1;
+        const char * a1;
+        const char * b1;
+        const char * c1;
+        const char * d1;
+        const char * sol1;
+
+        const char * q2;
+        const char * a2;
+        const char * b2;
+        const char * c2;
+        const char * d2;
+        const char * sol2;
+
+        const char * q3;
+        const char * a3;
+        const char * b3;
+        const char * c3;
+        const char * d3;
+        const char * sol3;
+
+        int level;
+        int time;
+
+     public:
+        Part3(int id , const char * token , const char * script , const char * q1 , const char * a1 , const char * b1, const char * c1, const char *d1 , const char * sol1 , const char * q2 , const char * a2, const char * b2, const char * c2, const char *d2, const char * sol2 , const char* q3, const char * a3, const char * b3, const char * c3, const char * d3, const char * sol3 , int level,  int time ){
+            this->id = id;
+            this->token = token;
+            this->script=  script;
+
+            this->q1= q1;
+            this->a1= a1;
+            this->b1= b1;
+            this->c1= c1;
+            this->d1= d1;
+            this->sol1 = sol1;
+
+                        this->q2= q2;
+                        this->a2= a2;
+                        this->b2= b2;
+                        this->c2= c2;
+                        this->d2= d2;
+                        this->sol2 = sol2;
+
+                                    this->q3= q3;
+                                    this->a3= a3;
+                                    this->b3= b3;
+                                    this->c3= c3;
+                                    this->d3= d3;
+                                    this->sol3 = sol3;
+
+                                           this->time = time ;
+                                           this->level = level;
+        }
+
+        //get
+
+        int getId(){
+            return this->id;
+        }
+
+        const char * getToken(){
+            return this->token;
+        }
+
+        const char * getScript(){
+            return this->script;
+        }
+
+        const char * getQ1(){
+            return this->q1;
+        }
+
+        const char * getA1(){
+            return this->a1;
+        }
+
+        const char * getB1(){
+            return this->b1;
+        }
+
+        const char * getC1(){
+            return this->c1;
+        }
+
+        const char * getD1(){
+            return this->d1;
+        }
+
+        const char * getSol1(){
+            return this->sol1;
+        }
+
+        const char * getQ2(){
+                    return this->q2;
+                }
+
+                const char * getA2(){
+                    return this->a2;
+                }
+
+                const char * getB2(){
+                    return this->b2;
+                }
+
+                const char * getC2(){
+                    return this->c2;
+                }
+
+                const char * getD2(){
+                    return this->d2;
+                }
+
+                const char * getSol2(){
+                    return this->sol2;
+                }
+
+
+                const char * getQ3(){
+                            return this->q3;
+                        }
+
+                        const char * getA3(){
+                            return this->a3;
+                        }
+
+                        const char * getB3(){
+                            return this->b3;
+                        }
+
+                        const char * getC3(){
+                            return this->c3;
+                        }
+
+                        const char * getD3(){
+                            return this->d3;
+                        }
+
+                        const char * getSol3(){
+                            return this->sol3;
+                        }
+
+                        int getLevel(){
+                            return this->level;
+                        }
+
+                        int getTime(){
+                            return this->time;
+                        }
+};
+
 class Part5{
     private:
         int id;

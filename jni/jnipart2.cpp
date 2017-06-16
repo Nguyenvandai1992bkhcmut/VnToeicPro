@@ -32,13 +32,13 @@ funConvert(JNIEnv* env , jobject object , Part2 * part ){
     jbyteArray arrayA = env->NewByteArray(strlen(part->getScript()));
      env->SetByteArrayRegion(arrayA,0,strlen(part->getScript()),(jbyte*)part->getScript());
      jstring script = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arrayA);
-          env->DeleteLocalRef(arrayA);
+     env->DeleteLocalRef(arrayA);
 
 
     jbyteArray arraysol = env->NewByteArray(strlen(part->getSol()));
     env->SetByteArrayRegion(arraysol,0,strlen(part->getSol()),(jbyte*)part->getSol());
     jstring sol = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arraysol);
-             env->DeleteLocalRef(arraysol);
+    env->DeleteLocalRef(arraysol);
 
 
     jobject ob = env->NewObject(cl, methodId,part->getId(),token,script,sol,part->getLevel(),part->getTime());

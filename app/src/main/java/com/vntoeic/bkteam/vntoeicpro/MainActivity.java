@@ -39,6 +39,7 @@ import model.ModelLesson;
 import model.ModelPart1;
 import model.ModelPart2;
 import model.ModelPart3;
+import model.ModelPart4;
 import model.ModelPart5;
 import model.ModelPartCheck;
 import model.ModelPartFavorite;
@@ -52,6 +53,7 @@ import sqlite.SqliteDictionary;
 import sqlite.SqlitePart1;
 import sqlite.SqlitePart2;
 import sqlite.SqlitePart3;
+import sqlite.SqlitePart4;
 import sqlite.SqlitePart5;
 import sqlite.SqliteVocabulary;
 import dictionary.*;
@@ -70,6 +72,17 @@ public class MainActivity extends AppCompatActivity implements AdapterWordSearch
         SqliteDictionary sqlite = new SqliteDictionary();
         DictionaryFavorite favorite = sqlite.searchFavoriteDictionary(100);
 
+
+        SqlitePart4 sqlitePart4 = new SqlitePart4();
+        ModelPart4 ll[] = sqlitePart4.randomPart4(10);
+        sqlitePart4.insertPartFavorite(new ModelPartFavorite(4,99,"time"));
+        sqlitePart4.insertPartFavorite(new ModelPartFavorite(4,98,"time"));
+        sqlitePart4.insertPartFavorite(new ModelPartFavorite(4,97,"time"));
+
+
+
+        ll = sqlitePart4.searchPart4Favorite();
+        ModelPart4 l = sqlitePart4.searchPart4Id(99);
 
         SqlitePart3  sqlitePart3 = new SqlitePart3();
         ModelPart3 ddd[]= sqlitePart3.randomPart3(10);

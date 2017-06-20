@@ -12,6 +12,9 @@
     <color name="bgmenudiction">#7fadae</color>
     <color name="text_example">#10fa47</color>
     <color name="gray_green">#36495F</color>
+    <color name="gray">#969EB6</color>
+
+
     <color name="transparent_1">#00ffffff</color>
     <color name="transparent_2">#11ffffff</color>
     <color name="transparent_3">#22ffffff</color>

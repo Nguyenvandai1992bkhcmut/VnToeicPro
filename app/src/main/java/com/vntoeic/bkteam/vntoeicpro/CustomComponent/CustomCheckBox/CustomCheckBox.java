@@ -4,8 +4,6 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -91,7 +89,6 @@ public class CustomCheckBox extends RelativeLayout implements Checkable{
 
     private void init(Context context) {
         mRootView = inflate(context, R.layout.custom_checkbox, this);
-        mRootView.setBackgroundColor(getResources().getColor(R.color.gray_green));
         mImageView = (ImageView) mRootView.findViewById(R.id.imageView);
         mTextView = (TextView) mRootView.findViewById(R.id.textView);
         setState(ECheckable.NOT_CHECKED);
@@ -136,7 +133,6 @@ public class CustomCheckBox extends RelativeLayout implements Checkable{
     private void setDrawable(int resId) {
         mImageView.setImageResource(resId);
     }
-
 
 
 

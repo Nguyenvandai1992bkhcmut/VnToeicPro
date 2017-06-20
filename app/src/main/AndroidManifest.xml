@@ -14,20 +14,14 @@
         android:supportsRtl="true"
 
         android:theme="@style/AppTheme.NoActionBar">
+
         <activity android:name=".MainActivity">
-
-        </activity>
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< Updated upstream
-=======
-        <activity android:name=".Vocabulary.Activity.TagActivity"/>
->>>>>>> Stashed changes
         <activity android:name="Dictionary.DictionaryActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize">

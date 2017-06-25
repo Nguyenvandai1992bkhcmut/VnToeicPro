@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rect_card_dialog">
+
+    <TextView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pick"
+        android:gravity="center"
+        android:background="@color/bgmenudiction"
+        android:textSize="30sp"
+        android:textColor="@android:color/white"
+        android:padding="10dp"
+        android:id="@+id/textView2" />
+
+    <TextView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Time : 40 minutes"
+        android:gravity="center"
+        android:padding="5dp"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:id="@+id/text_time"/>
+    <android.support.v7.widget.AppCompatSeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:id="@+id/seekbar_time"/>
+    <TextView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Continue Older Test!"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:textColor="@android:color/holo_blue_light"
+        android:padding="5dp"
+        android:visibility="gone"
+        android:id="@+id/text_continue"/>
+    <TextView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textColor="@android:color/holo_orange_dark"
+        android:padding="5dp"
+        android:id="@+id/text_start"/>
+</LinearLayout>

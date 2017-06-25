@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:id="@+id/linear_dic_main">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:id="@+id/linear_name">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@mipmap/icon_play"
+            android:id="@+id/img_vol" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_weight=".8"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:layout_marginLeft="5dp"
+            android:textColor="@android:color/holo_blue_light"
+            android:gravity="center_vertical"
+            android:text="Considerate"
+            android:id="@+id/text_name" />
+         <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+             android:textColor="@android:color/white"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical"
+                android:text="/......./"
+                android:id="@+id/text_pro" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/img_star"
+            android:background="@mipmap/icon_heart_while"
+            />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:id="@+id/recycle_dicmain">
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

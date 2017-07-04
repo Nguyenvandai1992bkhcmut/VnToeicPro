@@ -80,6 +80,41 @@ Java_sqlite_ManagerPart_searchAllCheckedPart(JNIEnv* env , jobject object , jint
 }
 }
 
+// check part id
+extern "C"{
+JNIEXPORT jobjectArray JNICALL
+Java_sqlite_ManagerPart_searchAllCheckPartId(JNIEnv* env , jobject object , jint idpart , jint idquestion){
+
+
+    jclass  cl = env -> FindClass("model/ModelPartCheck");
+    jmethodID methodId = env -> GetMethodID(cl,"<init>", "(IILjava/lang/String;I)V");
+
+    jclass clcv = env -> FindClass("model/Convert");
+    jmethodID methodId1 = env -> GetStaticMethodID(clcv, "convertCStringToJniSafeString","([B)Ljava/lang/String;");
+
+
+    SqliteControlPart sqlite;
+    int id =(int)idpart;
+    int idques = (int)idquestion;
+    vector<ModelCheckPart>result = sqlite.searchAllCheckPartId(id,idques);
+
+    jobjectArray arr = env->NewObjectArray((int)result.size(), cl, NULL);
+
+    for(int i =0;i<result.size();i++){
+
+         jbyteArray arraytime = env->NewByteArray(strlen(result.at(i).getDate()));
+         env->SetByteArrayRegion(arraytime,0,strlen(result.at(i).getDate()),(jbyte*)result.at(i).getDate());
+         jstring time = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arraytime);
+         env->DeleteLocalRef(arraytime);
+         jobject ob = env->NewObject(cl, methodId,id,result.at(i).getId(),time,result.at(i).getResult());
+         env->SetObjectArrayElement(arr, i, ob);
+         env->DeleteLocalRef(ob);
+    }
+
+    return arr;
+}
+}
+//
 
 
 extern "C" {

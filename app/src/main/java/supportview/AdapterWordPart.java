@@ -93,7 +93,7 @@ public class AdapterWordPart extends RecyclerView.Adapter<RecyclerView.ViewHolde
         AdapterWordPart adapter= new AdapterWordPart(context,myhoder,dataWord.get(position).getmTypes(),dataWord.get(position).getmMeanings());
         myhoder.recycle.setLayoutManager(manager);
         myhoder.recycle.setAdapter(adapter);
-
+        myhoder.view.setBackgroundResource(R.color.none);
         myhoder.onclick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,12 +144,6 @@ public class AdapterWordPart extends RecyclerView.Adapter<RecyclerView.ViewHolde
             recycle = (RecyclerView)itemView.findViewById(R.id.recycle_mean);
 
         }
-
-
-
-
-
-
 
     }
 

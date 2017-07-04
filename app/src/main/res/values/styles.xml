@@ -30,7 +30,5 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowBackground">@drawable/rect_card_dialog</item>
-        <item name="android:windowEnterAnimation">@anim/top_bot</item>
-        <item name="android:windowExitAnimation">@anim/top_bot_out</item>
     </style>
 </resources>

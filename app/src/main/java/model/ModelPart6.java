@@ -1,12 +1,15 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+
+import sqlite.SqlitePart6;
 
 /**
  * Created by dainguyen on 6/16/17.
  */
 
-public class ModelPart6 {
+public class ModelPart6   implements Serializable,IDataPart {
     private int id;
     private String content;
     private ArrayList<Part6Question>arrQuestion;
@@ -37,7 +40,7 @@ public class ModelPart6 {
     public void setArrQuestion(ArrayList<Part6Question> arrQuestion) {
         this.arrQuestion = arrQuestion;
     }
-
+    @Override
     public int getId() {
         return id;
     }
@@ -65,6 +68,7 @@ public class ModelPart6 {
         this.time = time;
     }
 
+    @Override
     public String getContent() {
         return content;
     }
@@ -73,15 +77,24 @@ public class ModelPart6 {
         this.content = content;
     }
 
+    @Override
     public String getExplan() {
         return explan;
     }
+
+    @Override
+    public ModelWord[] getListWord() {
+        SqlitePart6 sqlitePart6 = new SqlitePart6();
+        return sqlitePart6.searchWordPart(6,this.id);
+    }
+
+
 
     public void setExplan(String explan) {
         this.explan = explan;
     }
 
-    public class Part6Question{
+    public class Part6Question implements Serializable{
 
         public String a;
         public String b;

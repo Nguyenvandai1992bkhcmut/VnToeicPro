@@ -2,11 +2,13 @@ package model;
 
 import java.io.Serializable;
 
+import sqlite.SqlitePart5;
+
 /**
  * Created by dainguyen on 2/22/17.
  */
 
-public class ModelPart5 implements Serializable {
+public class ModelPart5   implements Serializable,IDataPart {
 
 
     private int id;
@@ -90,6 +92,7 @@ public class ModelPart5 implements Serializable {
         this.level = level;
     }
 
+
     public String getQuestion() {
         return question;
     }
@@ -98,11 +101,28 @@ public class ModelPart5 implements Serializable {
         this.question = question;
     }
 
+    @Override
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String getExplan() {
+        return explain;
+    }
+
+    @Override
+    public ModelWord[] getListWord() {
+        SqlitePart5 sqlitePart5 = new SqlitePart5();
+        return sqlitePart5.searchWordPart(5,this.id);
+    }
+
+    @Override
+    public String getContent() {
+        return question;
     }
 }

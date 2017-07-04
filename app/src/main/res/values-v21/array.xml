@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="title_menu">
+    <string-array name="title_menu2">
         <item>submit</item>
         <item>submit</item>
         <item>submit</item>
     </string-array>
-    <string-array name="title_menu2">
-        <item>submit2</item>
-        <item>submit2</item>
-        <item>submit2</item>
+
+    <string-array name="title_menu">
+        <item>Submit</item>
+        <item>     </item>
+        <item>Summary</item>
 
     </string-array>
     <array name="icons">
         <item>@drawable/adv</item>
+        <item>@mipmap/icon_heart</item>
         <item>@drawable/adv</item>
+    </array>
+    <array name="icons2">
         <item>@drawable/adv</item>
+        <item>@mipmap/icon_heart_while</item>
         <item>@drawable/adv</item>
-        <item>@drawable/adv</item>
-
-
-
-
     </array>
 </resources>

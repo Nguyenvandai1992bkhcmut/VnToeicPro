@@ -1,10 +1,11 @@
-package part5;
+package supportview;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
@@ -13,11 +14,15 @@ import com.vntoeic.bkteam.vntoeicpro.R;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import part5.Fragment5Manager;
+import part6.Fragment6Manager;
+import supportview.IManagerPart;
+
 /**
  * Created by dainguyen on 6/2/17.
  */
 
-public class Part5PractiseAcitvity extends AppCompatActivity{
+public class PartPractiseAcitvity extends AppCompatActivity{
     private static TextView text_correct;
     private TextView text_title;
     private static int mode =0;
@@ -26,25 +31,23 @@ public class Part5PractiseAcitvity extends AppCompatActivity{
     private int time =0;
     private int key =0;
     private String title;
-    public CountDownTimer timer ;
-    FragmentPart5Manager fragmentPart5Manager;
+    public static  CountDownTimer timer ;
     private int timesave=0;
+    private int part=0;
+    private IManagerPart manager;
     @Override
     public void onBackPressed() {
         if(timer!=null)timer.cancel();
 
-        if(mode==1 && fragmentPart5Manager.issubmit==0){
+        if(mode==1 && manager.getIsSubmit()==0){
             Intent data = new Intent();
-            Bundle bundle = new Bundle();
+            Bundle bundle = manager.getBunldeSave();
             bundle.putInt("time",timesave);
-            bundle.putInt("begin",fragmentPart5Manager.index);
-            ArrayList<String>arr = new ArrayList<>();
-
-            bundle.putIntegerArrayList("question",fragmentPart5Manager.arryQuestion);
-            bundle.putStringArrayList("choose",fragmentPart5Manager.arrayChoose);
             data.putExtras(bundle);
             setResult(99,data);
         }
+        mode=0;
+        countCorrect=0;
         super.onBackPressed();
         finish();
     }
@@ -60,7 +63,7 @@ public class Part5PractiseAcitvity extends AppCompatActivity{
     }
 
     private void setTime() {
-        int count =time*60*1000;
+        int count =1*60*1000;
         if(key==1 & mode==1){
             count= getIntent().getExtras().getInt("time");
         }
@@ -85,11 +88,14 @@ public class Part5PractiseAcitvity extends AppCompatActivity{
                 auto submit
                  */
                 text_correct.setText("00:00");
-                fragmentPart5Manager.issubmit=1;
-
+                manager.timeSubmit();
             }
 
         }.start();
+    }
+
+    public  static void stopTime(){
+        timer.cancel();
     }
 
 
@@ -97,15 +103,16 @@ public class Part5PractiseAcitvity extends AppCompatActivity{
         text_correct = (TextView)findViewById(R.id.text_correct);
         text_title = (TextView)findViewById(R.id.text_title);
         text_title.setText(title);
-        fragmentPart5Manager = new FragmentPart5Manager();
 
-        fragmentPart5Manager.setArguments(getIntent().getExtras());
-        getSupportFragmentManager().beginTransaction().add(R.id.frame,fragmentPart5Manager).commit();
+        if(part==5)manager = new Fragment5Manager();
+        else if(part==6)manager = new Fragment6Manager();
+        manager.setBundle(getIntent().getExtras());
+        getSupportFragmentManager().beginTransaction().add(R.id.frame,(Fragment) manager).commit();
 
     }
 
     public static void updateTextCorrect(boolean re ,int count){
-        if(mode==0 || mode==2){
+        if(mode!=1){
             if(re)countCorrect = countCorrect+1;
             text_correct.setText("Correct "+String.valueOf(countCorrect) + "/" + String.valueOf(count));
         }
@@ -119,7 +126,8 @@ public class Part5PractiseAcitvity extends AppCompatActivity{
             key =b.getInt("key");
             title =b.getString("title");
             position = b.getInt("position");
-            time = b.getInt("Time");
+            time = b.getInt("time");
+            part=  b.getInt("part");
         }
     }
 

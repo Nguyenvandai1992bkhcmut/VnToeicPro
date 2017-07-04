@@ -79,6 +79,8 @@ public class CustomNavigation extends FrameLayout {
         titles = mContext.getResources().getStringArray(titleArray);
     }
 
+
+
     public void setIcons(int iconArray) {
         TypedArray getIcons = getResources().obtainTypedArray(iconArray);
         if (getIcons != null) {

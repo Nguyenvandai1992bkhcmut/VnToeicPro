@@ -232,3 +232,23 @@ Java_sqlite_SqlitePart6_searchPart6Favorite(JNIEnv * env , jobject object){
 }
 }
 
+
+extern "C"{
+JNIEXPORT jobjectArray JNICALL
+Java_sqlite_SqlitePart6_searchPart6Check(JNIEnv * env , jobject object){
+
+    SqlitePart6 sqlite;
+
+    vector<Part6*>result =sqlite.searchPart6Check();
+     jclass  cl = env -> FindClass("model/ModelPart6");
+
+     jobjectArray arr = env->NewObjectArray((int)result.size(), cl, NULL);
+     for(int i=0;i<result.size();i++){
+        jobject ob = funConvert(env,object,result.at(i));
+        env->SetObjectArrayElement(arr, i, ob);
+     }
+    return arr;
+
+}
+}
+

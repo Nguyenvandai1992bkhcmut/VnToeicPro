@@ -6,10 +6,10 @@
 
     <TextView android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit invalid!"
+        android:text="Thông Báo"
         android:gravity="center"
         android:background="@color/bgmenudiction"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textColor="@android:color/white"
         android:padding="10dp"
         android:id="@+id/textView2" />
@@ -28,7 +28,7 @@
         android:background="@drawable/line_gray"/>
     <TextView android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Continue"
+        android:text="Ok"
         android:gravity="center"
         android:textSize="30sp"
         android:textColor="@android:color/holo_orange_dark"

@@ -22,7 +22,7 @@ import com.vntoeic.bkteam.vntoeicpro.R;
 
 public abstract class BaseFragment extends Fragment  {
     public FloatingActionButton mFloatingActionButton;
-    private boolean isOpen = false;
+    public boolean isOpen = false;
     public CustomNavigation topNavi, bottomNavi;
     public Context mContext;
     public FrameLayout mFrameLayout, mBlurLayout;
@@ -53,8 +53,7 @@ public abstract class BaseFragment extends Fragment  {
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isOpen = !isOpen;
-                if (isOpen) {
+                if (!isOpen) {
                     mBlurLayout.setVisibility(View.VISIBLE);
                     onOpen();
                 } else {
@@ -75,27 +74,27 @@ public abstract class BaseFragment extends Fragment  {
         });
 
 
-        mFrameLayout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        orgX = (int) event.getX();
-                        return true;
-                    case MotionEvent.ACTION_UP:
-                        offsetX = (int) (event.getX() - orgX);
-                        if(offsetX<-150)nextQuestion();
-                        else if(offsetX>150)backQuestion();
-                        return true;
-                    case MotionEvent.ACTION_POINTER_DOWN:
-                    case MotionEvent.ACTION_POINTER_UP:
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-
-                }
-                return false;
-            }});
+//        mFrameLayout.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//
+//                switch (event.getAction()) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        orgX = (int) event.getX();
+//                        return true;
+//                    case MotionEvent.ACTION_UP:
+//                        offsetX = (int) (event.getX() - orgX);
+//                        if(offsetX<-150)nextQuestion();
+//                        else if(offsetX>150)backQuestion();
+//                        return true;
+//                    case MotionEvent.ACTION_POINTER_DOWN:
+//                    case MotionEvent.ACTION_POINTER_UP:
+//                        break;
+//                    case MotionEvent.ACTION_MOVE:
+//
+//                }
+//                return false;
+//            }});
 
         return view;
     }

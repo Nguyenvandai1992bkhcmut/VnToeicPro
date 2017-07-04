@@ -14,6 +14,14 @@
         android:supportsRtl="true"
 
         android:theme="@style/AppTheme.NoActionBar">
+
+        <!--<activity android:name="part6.Part6Activity">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,13 +41,18 @@
 
         </activity>
 
-        <activity android:name="part5.Part5PractiseAcitvity"
+        <activity android:name="supportview.PartPractiseAcitvity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize">
 
         </activity>
 
-        <activity android:name="part5.Part5ReviewActivity"
+        <activity android:name="supportview.PartReviewActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize">
+
+        </activity>
+        <activity android:name="part6.Part6Activity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize">
 

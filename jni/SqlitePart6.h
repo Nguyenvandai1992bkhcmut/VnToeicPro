@@ -25,5 +25,6 @@ public:
        vector<Part6*>randomPart6(int number);
        vector<Part6*>randomPart6Subject(int subject,int number);
        vector<Part6*>searchPart6Favorite();
+            vector<Part6*>searchPart6Check();
 };
 #endif //VNTOEICPRO_SQLITEPART6_H

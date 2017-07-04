@@ -58,6 +58,37 @@ SqliteControlPart::SqliteControlPart(){
                   return result;
    }
 
+
+    vector<ModelCheckPart>SqliteControlPart::searchAllCheckPartId(int part, int question){
+
+           vector<ModelCheckPart>result;
+                    stringstream ss2;
+                    ss2 << part;
+                    string idpart = ss2.str();
+
+                    stringstream ss3;
+                                        ss3 << question;
+                                        string idquestion = ss3.str();
+                    string sql ="select * from part"+idpart+"_checked where id ="+idquestion ;
+
+                     if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
+                          const char * er = sqlite3_errmsg(db);
+                          return result;
+                     }
+                     while (sqlite3_step(stmt) == SQLITE_ROW) {
+                           int id = sqlite3_column_int(stmt,0);
+                           int re = sqlite3_column_int(stmt,2);
+                           const char * time1 = (const char *)sqlite3_column_text(stmt,1);
+                           char * time = new char[strlen(time1)+1];
+                           for(int i =0;i<strlen(time1)+1;i++){
+                               time[i]=time1[i];
+                           }
+                           ModelCheckPart model(id,time,re);
+                           result.push_back(model);
+                     }
+                     return result;
+      }
+
 bool SqliteControlPart::checkPartFavorite(int part1, int id1){
     stringstream ss2;
       ss2 << part1;

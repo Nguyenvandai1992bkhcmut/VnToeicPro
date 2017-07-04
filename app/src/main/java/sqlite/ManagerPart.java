@@ -16,6 +16,8 @@ public  class ManagerPart {
 
     public native ModelPartCheck [] searchAllCheckedPart(int part);
 
+    public native ModelPartCheck []searchAllCheckPartId(int part, int id);
+
     public native boolean checkPartFavorite(int part, int id);
 
     public native  void insertPartFavorite(ModelPartFavorite model);

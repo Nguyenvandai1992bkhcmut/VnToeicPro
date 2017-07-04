@@ -40,6 +40,7 @@ import dictionary.*;
 import model.Content;
 import model.Dictionary;
 import part5.Part5Activity;
+import part6.Part6Activity;
 import sqlite.SqliteDictionary;
 
 /**
@@ -179,14 +180,21 @@ public class FragmentAppBarMain extends Fragment{
                 switch (v.getId()){
                     case R.id.relate_dictionary:
                         runDictionaryActivity();
+                        break;
                     case R.id.relate_part5:
                         runPart5Dictionary();
+                        break;
+                    case R.id.relate_part6:
+                        runPart6Dictionary();
+                        break;
+
                 }
 
 
             }
         };
         ((RelativeLayout)view.findViewById(R.id.relate_part5)).setOnClickListener(onClickListener);
+        ((RelativeLayout)view.findViewById(R.id.relate_part6)).setOnClickListener(onClickListener);
 
 
     }
@@ -220,6 +228,12 @@ public class FragmentAppBarMain extends Fragment{
         ((MainActivity)getContext()).overridePendingTransition(R.anim.left_to_right_in , R.anim.left_to_right);
 
 
+    }
+
+    public void runPart6Dictionary(){
+        Intent intent = new Intent(getContext(), Part6Activity.class);
+        startActivity(intent);
+        ((MainActivity)getContext()).overridePendingTransition(R.anim.left_to_right_in , R.anim.left_to_right);
     }
 
     public void setContentRecycle(RecyclerView recycle, String key){

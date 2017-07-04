@@ -3,8 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     android:background="@drawable/rect_part">
-<LinearLayout
+    <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -32,7 +33,6 @@
         <TextView android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:visibility="gone"
             android:padding="5dp"
             android:textColor="@android:color/white"
             android:id="@+id/text_explan"/>
@@ -70,5 +70,16 @@
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
-</LinearLayout>
+        <TextView android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:paddingTop="50dp"
+            android:paddingBottom="70dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:text="Sorry! Not infomation of this Question"
+            android:visibility="gone"
+            android:id="@+id/text_notify"/>
+
+    </LinearLayout>
 </ScrollView>

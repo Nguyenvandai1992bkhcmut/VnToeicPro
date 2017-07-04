@@ -23,6 +23,7 @@ public:
 
     vector<ModelFavoritePart>searchAllFavoritePart(int part);
     vector<ModelCheckPart>searchAllCheckedPard(int part);
+        vector<ModelCheckPart>searchAllCheckPartId(int part, int question);
 
     bool checkPartFavorite(int part, int id);
 

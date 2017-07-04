@@ -29,6 +29,8 @@ import java.util.Set;
 import model.ModelPartResult;
 import supportview.AdapterPart;
 import sqlite.SqlitePart5;
+import supportview.PartPractiseAcitvity;
+import supportview.PartReviewActivity;
 
 import static android.R.attr.defaultValue;
 
@@ -89,11 +91,13 @@ public class Part5Activity extends AppCompatActivity implements AdapterPart.ICal
 
     @Override
     public void funCallActivity(int idsubject, String title) {
-        final Intent intent = new Intent(this,Part5PractiseAcitvity.class);
-        Intent intent1 = new Intent(this,Part5ReviewActivity.class);
+        final Intent intent = new Intent(this, PartPractiseAcitvity.class);
+        Intent intent1 = new Intent(this, PartReviewActivity.class);
         final Bundle bundle = new Bundle();
         switch (idsubject){
+
             case -4:
+                bundle.putInt("part",5);
                 bundle.putInt("mode",1);
                 bundle.putInt("key",0);
                 bundle.putString("title",title);
@@ -103,66 +107,69 @@ public class Part5Activity extends AppCompatActivity implements AdapterPart.ICal
                 params.height=WindowManager.LayoutParams.WRAP_CONTENT;
                 dialog.setContentView(R.layout.dialog_time_part5);
                 dialog.getWindow().setWindowAnimations(R.style.PauseDialogAnimation);
+                if(!dialog.isShowing()) {
+                    dialog.show();
+                    dialog.getWindow().setAttributes(params);
+                    CheckReference();
 
-                dialog.show();
-                dialog.getWindow().setAttributes(params);
-                CheckReference();
-
-                final SeekBar seekBar = (SeekBar)dialog.findViewById(R.id.seekbar_time);
-                seekBar.setMax(20);
-                seekBar.setProgress(40);
-                final TextView text_continue = (TextView)dialog.findViewById(R.id.text_continue);
-                if(flag==1){
-                    text_continue.setVisibility(View.VISIBLE);
-                    text_continue.setOnClickListener(new View.OnClickListener() {
+                    final SeekBar seekBar = (SeekBar) dialog.findViewById(R.id.seekbar_time);
+                    seekBar.setMax(20);
+                    seekBar.setProgress(20);
+                    final TextView text_continue = (TextView) dialog.findViewById(R.id.text_continue);
+                    if (flag == 1) {
+                        text_continue.setVisibility(View.VISIBLE);
+                        text_continue.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                bundle.putInt("key", 1);
+                                bundle.putInt("begin", begin);
+                                bundle.putInt("time", time);
+                                bundle.putStringArrayList("question", question);
+                                bundle.putStringArrayList("choose", choosen);
+                                intent.putExtras(bundle);
+                                dialog.dismiss();
+                                clearReference();
+                                startActivityForResult(intent, 99);
+                            }
+                        });
+                    }
+                    final TextView textTime = (TextView) dialog.findViewById(R.id.text_time);
+                    TextView textStart = (TextView) dialog.findViewById(R.id.text_start);
+                    textTime.setText("Time: " + String.valueOf(40) + " minutes");
+                    seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                         @Override
-                        public void onClick(View v) {
-                            bundle.putInt("key",1);
-                            bundle.putInt("begin",begin);
-                            bundle.putInt("time",time);
-                            bundle.putStringArrayList("question",question);
-                            bundle.putStringArrayList("choose",choosen);
-                            intent.putExtras(bundle);
-                            dialog.dismiss();
-                            clearReference();
-                            startActivityForResult(intent,99);
+                        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                            textTime.setText("Time: " + String.valueOf(20 + progress) + " minutes");
+
+                        }
+
+                        @Override
+                        public void onStartTrackingTouch(SeekBar seekBar) {
+
+                        }
+
+                        @Override
+                        public void onStopTrackingTouch(SeekBar seekBar) {
+
                         }
                     });
+                    textStart.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                            bundle.putInt("time", 20 + seekBar.getProgress());
+                            intent.putExtras(bundle);
+                            clearReference();
+                            startActivityForResult(intent, 99);
+                        }
+                    });
+
                 }
-                final TextView textTime = (TextView)dialog.findViewById(R.id.text_time);
-                TextView textStart= (TextView)dialog.findViewById(R.id.text_start);
-                seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-                    @Override
-                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-                        textTime.setText("Time: " + String.valueOf(20+progress) + " minutes");
-
-                    }
-
-                    @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {
-
-                    }
-
-                    @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {
-
-                    }
-                });
-                textStart.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                        bundle.putInt("Time",20+seekBar.getProgress());
-                        intent.putExtras(bundle);
-                        clearReference();
-                        startActivityForResult(intent,99);
-                    }
-                });
-
 
                 break;
             case -3:
+                bundle.putInt("part",5);
                 bundle.putInt("mode",0);
                 bundle.putInt("key",0);
                 bundle.putString("title",title);
@@ -173,7 +180,9 @@ public class Part5Activity extends AppCompatActivity implements AdapterPart.ICal
                /*
                Activity favorite
                 */
-                bundle.putInt("mode",0);
+                bundle.putInt("part",5);
+                bundle.putInt("mode",3);
+                bundle.putInt("part",5);
                 intent1.putExtras(bundle);
                 startActivity(intent1);
                 break;
@@ -181,11 +190,14 @@ public class Part5Activity extends AppCompatActivity implements AdapterPart.ICal
                /*
                Activty History
                 */
-                bundle.putInt("mode",1);
+                bundle.putInt("part",5);
+                bundle.putInt("mode",4);
+                bundle.putInt("part",5);
                 intent1.putExtras(bundle);
                 startActivity(intent1);
                 break;
             default:
+                bundle.putInt("part",5);
                 bundle.putInt("mode",2);
                 bundle.putInt("key",0);
                 bundle.putInt("subject",idsubject);
@@ -202,7 +214,7 @@ public class Part5Activity extends AppCompatActivity implements AdapterPart.ICal
     {
         super.onActivityResult(requestCode, resultCode, data);
         // check if the request code is same as what is passed  here it is 2
-        if(requestCode==99)
+        if(requestCode==99 && data!=null)
         {
             clearReference();
             Bundle bundle = data.getExtras();
@@ -216,17 +228,17 @@ public class Part5Activity extends AppCompatActivity implements AdapterPart.ICal
     public void clearReference(){
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.clear().commit();
+        editor.putInt("flag5",0).commit();
 
     }
 
     public void CheckReference(){
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
-        flag = sharedPref.getInt("flag",0);
+        flag = sharedPref.getInt("flag5",0);
         if(flag==1){
-            time = sharedPref.getInt("time",1);
-            String Squestion = sharedPref.getString("question","");
-            String Schoose = sharedPref.getString("choose","");
+            time = sharedPref.getInt("time5",1);
+            String Squestion = sharedPref.getString("question5","");
+            String Schoose = sharedPref.getString("choose5","");
             String arr[] = Squestion.split("!");
             String arr1[]= Schoose.split("!");
             question = new ArrayList<>();
@@ -238,16 +250,16 @@ public class Part5Activity extends AppCompatActivity implements AdapterPart.ICal
                 }
             }
 
-            begin = sharedPref.getInt("begin",0);
+            begin = sharedPref.getInt("begin5",0);
         }
     }
     public  void saveTest(int timesave , ArrayList<Integer>question , ArrayList<String>choose, int begin){
 
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("flag",1);
-        editor.putInt("time",timesave);
-        editor.putInt("begin",begin);
+        editor.putInt("flag5",1);
+        editor.putInt("time5",timesave);
+        editor.putInt("begin5",begin);
         String Squestion ="";
         String Schoose= "";
         for(int i=0;i<question.size();i++){
@@ -260,8 +272,8 @@ public class Part5Activity extends AppCompatActivity implements AdapterPart.ICal
                 Schoose+="!"+choose.get(i);
             }
         }
-        editor.putString("question",Squestion);
-        editor.putString("choose",Schoose);
+        editor.putString("question5",Squestion);
+        editor.putString("choose5",Schoose);
         editor.commit();
 
     }

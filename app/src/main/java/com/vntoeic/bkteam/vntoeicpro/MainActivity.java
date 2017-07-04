@@ -69,42 +69,48 @@ public class MainActivity extends AppCompatActivity implements AdapterWordSearch
         setContentView(R.layout.activity_main);
 
         checkDatabase();
-        SqliteDictionary sqliteDictionary = new SqliteDictionary();
-        Boolean b = sqliteDictionary.checkFavorite(100);
-        SqliteDictionary sqlite = new SqliteDictionary();
-        DictionaryFavorite favorite = sqlite.searchFavoriteDictionary(100);
-
-        SqlitePart6  sqlitePart6 = new SqlitePart6();
-        ModelPart6 kk[]=  sqlitePart6.randomPart6(10);
-        sqlitePart6.insertPartFavorite(new ModelPartFavorite(6,100,"time"));
-        sqlitePart6.insertPartFavorite(new ModelPartFavorite(6,99,"time"));
-        sqlitePart6.insertPartFavorite(new ModelPartFavorite(6,98,"tiime"));
-        kk = sqlitePart6.searchPart6Favorite();
-
-        SqlitePart4 sqlitePart4 = new SqlitePart4();
-        ModelPart4 ll[] = sqlitePart4.randomPart4(10);
-        sqlitePart4.insertPartFavorite(new ModelPartFavorite(4,99,"time"));
-        sqlitePart4.insertPartFavorite(new ModelPartFavorite(4,98,"time"));
-        sqlitePart4.insertPartFavorite(new ModelPartFavorite(4,97,"time"));
+//        SqliteDictionary sqliteDictionary = new SqliteDictionary();
+//        Boolean b = sqliteDictionary.checkFavorite(100);
+//        SqliteDictionary sqlite = new SqliteDictionary();
+//        DictionaryFavorite favorite = sqlite.searchFavoriteDictionary(100);
+//
+//        SqlitePart6  sqlitePart6 = new SqlitePart6();
+//        sqlitePart6.insertPartCheck(new ModelPartCheck(6,1,"time",0));
+//        sqlitePart6.insertPartCheck(new ModelPartCheck(6,1,"time",1));
+//        sqlitePart6.insertPartCheck(new ModelPartCheck(6,1,"time",1));
+//        ModelPart6 da[] = sqlitePart6.searchPart6Check();
+       /// ModelPart6 kk[]=  sqlitePart6.randomPart6(10);
 
 
-
-        ll = sqlitePart4.searchPart4Favorite();
-        ModelPart4 l = sqlitePart4.searchPart4Id(99);
-
-        SqlitePart3  sqlitePart3 = new SqlitePart3();
-        ModelPart3 ddd[]= sqlitePart3.randomPart3(10);
-       // SqlitePart2 ss = new SqlitePart2();
-      //  ModelPart2 d[] = ss.randomPart2(10);
-       // ModelPart2 a = ss.searchPart2Id(1);
-//        d  = ss.searchPart2Favorite();
-//        d=ss.randomPart2Subject(1,10);
-
-
-        ModelPart3 mm = sqlitePart3.searchPart3Id(10);
-        sqlitePart3.insertPartFavorite(new ModelPartFavorite(3,99,"time"));
-        ModelPartCheck mmmm[]=sqlitePart3.searchAllCheckedPart(3);
-        ddd = sqlitePart3.searchPart3Favorite();
+//        sqlitePart6.insertPartFavorite(new ModelPartFavorite(6,100,"time"));
+//        sqlitePart6.insertPartFavorite(new ModelPartFavorite(6,99,"time"));
+//        sqlitePart6.insertPartFavorite(new ModelPartFavorite(6,98,"tiime"));
+//        kk = sqlitePart6.searchPart6Favorite();
+//
+//        SqlitePart4 sqlitePart4 = new SqlitePart4();
+//        ModelPart4 ll[] = sqlitePart4.randomPart4(10);
+//        sqlitePart4.insertPartFavorite(new ModelPartFavorite(4,99,"time"));
+//        sqlitePart4.insertPartFavorite(new ModelPartFavorite(4,98,"time"));
+//        sqlitePart4.insertPartFavorite(new ModelPartFavorite(4,97,"time"));
+//
+//
+//
+//        ll = sqlitePart4.searchPart4Favorite();
+//        ModelPart4 l = sqlitePart4.searchPart4Id(99);
+//
+//        SqlitePart3  sqlitePart3 = new SqlitePart3();
+//        ModelPart3 ddd[]= sqlitePart3.randomPart3(10);
+//       // SqlitePart2 ss = new SqlitePart2();
+//      //  ModelPart2 d[] = ss.randomPart2(10);
+//       // ModelPart2 a = ss.searchPart2Id(1);
+////        d  = ss.searchPart2Favorite();
+////        d=ss.randomPart2Subject(1,10);
+//
+//
+//        ModelPart3 mm = sqlitePart3.searchPart3Id(10);
+//        sqlitePart3.insertPartFavorite(new ModelPartFavorite(3,99,"time"));
+//        ModelPartCheck mmmm[]=sqlitePart3.searchAllCheckedPart(3);
+//        ddd = sqlitePart3.searchPart3Favorite();
 
 //        Dictionary re1 = st.searchId(10);
 //        DictionaryFavorite df = new DictionaryFavorite(100,"dai dep trai","best");
@@ -216,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements AdapterWordSearch
 
 
             OutputStream outputStream = new FileOutputStream(outputString);
-            byte[]arr = new byte[10240];
+            byte[]arr = new byte[1024];
             int length =0;
             while ((length =inputStream.read(arr))>0){
                 outputStream.write(arr,0,length);

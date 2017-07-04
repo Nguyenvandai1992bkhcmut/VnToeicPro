@@ -191,7 +191,8 @@ vector<Section> SqliteWord::searchAllSection(){
               stringstream ss2;
               ss2 << idlesson;
               string id = ss2.str();
-              string sql = "select * from lesson_tag,word, meaning where (word.word_id =  meaning.word_id and lesson_tag.lesson_tag_id="+id+")";
+              string sql="select * from lesson_tag,word, meaning where (word.word_id =  meaning.word_id and lesson_tag.lesson_tag_id="+id+" and word.word_id in (select word_id from word_lesson where  word_lesson.lesson_tag_id="+id+"))";
+           //   string sql = "select * from lesson_tag,word, meaning where (word.word_id =  meaning.word_id and lesson_tag.lesson_tag_id="+id+")";
                 vector<WordLesson> result;
                if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
                   return result;

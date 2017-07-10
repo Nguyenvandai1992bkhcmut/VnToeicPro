@@ -33,4 +33,8 @@
         <item name="android:windowEnterAnimation">@anim/top_bot</item>
         <item name="android:windowExitAnimation">@anim/top_bot_out</item>
     </style>
+
+    <declare-styleable name="StatableViewGroup">
+        <attr name="state_pressed" format="boolean"/>
+    </declare-styleable>
 </resources>

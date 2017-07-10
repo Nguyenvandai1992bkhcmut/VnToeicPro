@@ -2,14 +2,9 @@ package com.vntoeic.bkteam.vntoeicpro;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -17,27 +12,19 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.OvershootInterpolator;
-import android.view.animation.ScaleAnimation;
-import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-import dictionary.*;
-import model.Content;
+
+import vocabulary.activity.VocabularyActivity;
 import model.Dictionary;
 import part5.Part5Activity;
 import sqlite.SqliteDictionary;
@@ -179,16 +166,28 @@ public class FragmentAppBarMain extends Fragment{
                 switch (v.getId()){
                     case R.id.relate_dictionary:
                         runDictionaryActivity();
+                        break;
                     case R.id.relate_part5:
                         runPart5Dictionary();
+                        break;
+                    case R.id.vocabulary :
+                        runVocabulary();
+                        break;
                 }
 
 
             }
         };
         ((RelativeLayout)view.findViewById(R.id.relate_part5)).setOnClickListener(onClickListener);
+        ((RelativeLayout)view.findViewById(R.id.vocabulary)).setOnClickListener(onClickListener);
 
 
+
+    }
+
+    private void runVocabulary() {
+        Intent intent = new Intent(getContext(), VocabularyActivity.class);
+        startActivity(intent);
     }
 
     public void showEdit(){

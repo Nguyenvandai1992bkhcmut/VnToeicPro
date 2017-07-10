@@ -1,10 +1,14 @@
 package model;
 
+import android.support.annotation.NonNull;
+
+import java.io.Serializable;
+
 /**
  * Created by dainguyen on 5/26/17.
  */
 
-public class ModelWord {
+public class ModelWord implements Serializable{
     private int mId;
     private String mWord;
     private String mPronounce;
@@ -87,5 +91,12 @@ public class ModelWord {
 
     public void setmExplanations(String[] mExplanations) {
         this.mExplanations = mExplanations;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof ModelWord &&
+                ((ModelWord) obj).getmWord().equals(mWord)
+                && ((ModelWord) obj).getmId() == mId;
     }
 }

@@ -29,7 +29,6 @@ import vocabulary.fragment.WordDetailFragment;
 public class LearningActivity extends AppCompatActivity implements GameInterface{
 
     public static final String WORDS = "words";
-    public static final int WORDS_IN_PACK = 4;
     private static final long TIME_DELAY = 2000;
     public static final int T = 5;
 
@@ -38,7 +37,7 @@ public class LearningActivity extends AppCompatActivity implements GameInterface
     private ProgressBar mProgressBar;
     private RelativeLayout mGotIt;
     private int mCount = 0;
-    private ModelWordGame[] mCurrentPack = new ModelWordGame[WORDS_IN_PACK];
+    private ModelWordGame[] mCurrentPack;
     private ModelWordGame mCurrentWord;
     private int mControlReviewFragment = T;
     private ModelWordGame[] mReviewPack;
@@ -69,7 +68,6 @@ public class LearningActivity extends AppCompatActivity implements GameInterface
 
     private void bindView() {
         this.mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-
         this.mGotIt = (RelativeLayout) findViewById(R.id.layoutGotIt);
 
     }

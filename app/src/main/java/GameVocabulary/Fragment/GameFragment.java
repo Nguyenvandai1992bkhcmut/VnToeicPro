@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -37,6 +38,8 @@ public abstract class GameFragment extends Fragment {
     protected ArrayList<String> mAnswer;
     protected CountDownTimer mCountDownTimer;
     private static boolean CountDownTimerIsRunning;
+    protected LinearLayout mRecyclerLayout;
+    protected TextView mAnswerTxt;
 
     public interface OnShowBackgroundResult {
         void onShowBackgroundResult();
@@ -128,6 +131,8 @@ public abstract class GameFragment extends Fragment {
         mQuestionTxt = (TextView) view.findViewById(R.id.text_ques);
         mProgressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        mRecyclerLayout = (LinearLayout) view.findViewById(R.id.recycler_layout);
+        mAnswerTxt = (TextView) view.findViewById(R.id.text_ans);
     }
 
     public static boolean timerIsRunning() {

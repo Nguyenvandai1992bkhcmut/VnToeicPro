@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.vntoeic.bkteam.vntoeicpro.R;
 
 import GameVocabulary.Activity.LearningActivity;
+import GameVocabulary.Activity.PracticeActivity;
 import dictionary.FragmentDictionary;
 import model.Dictionary;
 import model.ModelAbstractWord;
@@ -88,7 +89,7 @@ public class VocabularyActivity extends AppCompatActivity implements PinnedSecti
     }
 
     public void onOpenLearningActivity(int lessonId) {
-        Intent intent = new Intent(this, LearningActivity.class);
+        Intent intent = new Intent(this, PracticeActivity.class);
         SqliteVocabulary sqliteVocabulary = new SqliteVocabulary();
         ModelWordLesson[] wordLessons = sqliteVocabulary.searchWordLesson(lessonId);
 

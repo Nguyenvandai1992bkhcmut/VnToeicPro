@@ -45,6 +45,7 @@
             android:windowSoftInputMode="adjustResize">
 
         </activity>
+        <activity android:name="GameVocabulary.Activity.PracticeActivity"/>
         <activity android:name="GameVocabulary.Activity.LearningActivity"/>
 
     </application>

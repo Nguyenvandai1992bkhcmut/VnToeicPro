@@ -55,7 +55,7 @@ public class GameViEngAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         final GameViEngItemViewHolder viewHolder = (GameViEngItemViewHolder) holder;
-        mShowBackgroundResults.add(viewHolder);
+        if (mShowBackgroundResults.size() <= position) mShowBackgroundResults.add(viewHolder);
         viewHolder.mTextView.setText(mAnswers.get(position));
 
         if (mQuestion.getmWord().equals(viewHolder.mTextView.getText().toString())) viewHolder.setResult(true);

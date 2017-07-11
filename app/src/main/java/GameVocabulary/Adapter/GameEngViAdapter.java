@@ -56,7 +56,7 @@ public class GameEngViAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         final GameEngViItemViewHolder viewHolder = (GameEngViItemViewHolder) holder;
-        mShowBackgroundResults.add(viewHolder);
+        if (mShowBackgroundResults.size() <= position) mShowBackgroundResults.add(viewHolder);
         viewHolder.mTextView.setText(mAnswer.get(position));
 
         for (int i = 0; i < mQuestion.getmMeanings().length; i++) {

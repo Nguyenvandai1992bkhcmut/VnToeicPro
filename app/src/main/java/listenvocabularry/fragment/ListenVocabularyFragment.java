@@ -61,7 +61,6 @@ public class ListenVocabularyFragment extends Fragment implements View.OnClickLi
     public static ListenVocabularyFragment newInstance(String[] words) {
         ListenVocabularyFragment fragment = new ListenVocabularyFragment();
 
-
         Bundle bundle = new Bundle();
         bundle.putSerializable(LIST_WORDS, words);
         fragment.setArguments(bundle);
@@ -81,7 +80,6 @@ public class ListenVocabularyFragment extends Fragment implements View.OnClickLi
         super.onCreate(savedInstanceState);
 
         mSpeakerImgs = getResources().obtainTypedArray(R.array.locale_icon);
-//        mSpeakerImgs.recycle();
 
         mSpeakerTxts = getResources().getStringArray(R.array.locale_name);
 
@@ -94,7 +92,7 @@ public class ListenVocabularyFragment extends Fragment implements View.OnClickLi
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_listen_vocabulary, container, false);
 
-        mDecFormat = new DecimalFormat("#.##");
+        mDecFormat = new DecimalFormat("####0.00");
 
         bindView(view);
         bindData();

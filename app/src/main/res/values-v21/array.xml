@@ -17,9 +17,19 @@
         <item>@drawable/adv</item>
         <item>@drawable/adv</item>
         <item>@drawable/adv</item>
+    </array>
 
-
-
-
+    <string-array name="locale_name">
+        <item>English</item>
+        <item>English(US)</item>
+        <item>English(UK)</item>
+    </string-array>
+    <array name="locale_icon">
+        <item>@mipmap/ic_womanspeaker</item>
+        <item>@mipmap/ic_womanspeaker</item>
+        <item>@mipmap/ic_womanspeaker</item>
+    </array>
+    <array name="locale">
+        <item></item>
     </array>
 </resources>

@@ -14,6 +14,7 @@ import com.vntoeic.bkteam.vntoeicpro.R;
 import GameVocabulary.Activity.LearningActivity;
 import GameVocabulary.Activity.PracticeActivity;
 import dictionary.FragmentDictionary;
+import listenvocabularry.ListenActivity;
 import model.Dictionary;
 import model.ModelAbstractWord;
 import model.ModelWord;
@@ -66,13 +67,23 @@ public class VocabularyActivity extends AppCompatActivity implements PinnedSecti
         SqliteVocabulary sqliteVocabulary = new SqliteVocabulary();
         ModelWordLesson[] wordLessons = sqliteVocabulary.searchWordLesson(lessonId);
 
-        WordDetailMainFragment fragment = WordDetailMainFragment.newInstance(wordLessons, wordId);
+//        WordDetailMainFragment fragment = WordDetailMainFragment.newInstance(wordLessons, wordId);
+//
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//        fragmentTransaction
+//                .replace(R.id.contentLayout, fragment)
+//                .addToBackStack(null)
+//                .commit();
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction
-                .replace(R.id.contentLayout, fragment)
-                .addToBackStack(null)
-                .commit();
+
+        /**
+         * Test Listen Fragment
+         */
+
+        Intent intent = new Intent(this, ListenActivity.class);
+        intent.putExtra(ListenActivity.ID_LESSON, lessonId);
+        startActivity(intent);
+
     }
 
     public void onOpenWordDetailFragment(int lessonId, int wordId){
@@ -89,20 +100,28 @@ public class VocabularyActivity extends AppCompatActivity implements PinnedSecti
     }
 
     public void onOpenLearningActivity(int lessonId) {
-        Intent intent = new Intent(this, PracticeActivity.class);
-        SqliteVocabulary sqliteVocabulary = new SqliteVocabulary();
-        ModelWordLesson[] wordLessons = sqliteVocabulary.searchWordLesson(lessonId);
+//        Intent intent = new Intent(this, PracticeActivity.class);
+//        SqliteVocabulary sqliteVocabulary = new SqliteVocabulary();
+//        ModelWordLesson[] wordLessons = sqliteVocabulary.searchWordLesson(lessonId);
+//
+//        ModelWord[] words = new ModelWord[wordLessons.length];
+//        int i = 0;
+//        for (ModelWordLesson wordLesson :
+//                wordLessons) {
+//            words[i] = wordLesson.getmWord();
+//            i++;
+//        }
+//        Bundle bundle =  new Bundle();
+//        bundle.putSerializable(LearningActivity.WORDS, words);
+//        intent.putExtras(bundle);
+//        startActivity(intent);
 
-        ModelWord[] words = new ModelWord[wordLessons.length];
-        int i = 0;
-        for (ModelWordLesson wordLesson :
-                wordLessons) {
-            words[i] = wordLesson.getmWord();
-            i++;
-        }
-        Bundle bundle =  new Bundle();
-        bundle.putSerializable(LearningActivity.WORDS, words);
-        intent.putExtras(bundle);
+        /**
+         * Test listen activity
+         */
+
+        Intent intent = new Intent(this, ListenActivity.class);
+        intent.putExtra(ListenActivity.ID_LESSON, lessonId);
         startActivity(intent);
     }
 }

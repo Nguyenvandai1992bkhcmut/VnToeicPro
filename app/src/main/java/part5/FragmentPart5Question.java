@@ -55,7 +55,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.ModelPart5;
+import supportview.IContentQuestion;
 
+import static com.vntoeic.bkteam.vntoeicpro.R.id.icon;
 import static com.vntoeic.bkteam.vntoeicpro.R.id.textView;
 import static java.lang.Float.valueOf;
 
@@ -78,11 +80,12 @@ public class FragmentPart5Question extends Fragment {
 
     private String select = "Not choose";
     private int question;
-    private IPart5Manager iAddResult;
+    private IContentQuestion iContentQuestion;
     private int issubmit = 0;
     private RecyclerView recyclerView;
     private  AdapterQuestion adapter;
     private int mode;
+    private int isfigure =0;
 
     public ArrayList<AdapterQuestion.Myhoder> arrHolder = new ArrayList<>();
     int orgX;
@@ -97,6 +100,7 @@ public class FragmentPart5Question extends Fragment {
         question = bundle.getInt("question");
         select = bundle.getString("select");
         issubmit = bundle.getInt("submit");
+        isfigure = bundle.getInt("figure");
     }
 
 
@@ -132,9 +136,10 @@ on
                         orgX = (int) event.getX();
                         return true;
                     case MotionEvent.ACTION_UP:
+                        v.setScaleX(1);
                         offsetX = (int) (event.getX() - orgX);
-                        if (offsetX < -150) iAddResult.nextQues();
-                        else if (offsetX > 150) iAddResult.backQues();
+                        if (offsetX < -150) iContentQuestion.nextContent();
+                        else if (offsetX > 150) iContentQuestion.backContent();
                         return true;
                     case MotionEvent.ACTION_POINTER_DOWN:
                     case MotionEvent.ACTION_POINTER_UP:
@@ -145,8 +150,11 @@ on
                 return false;
             }
         };
-        recyclerView.setOnTouchListener(onTouchListener);
-        text_question.setOnTouchListener(onTouchListener);
+        view.setOnTouchListener(onTouchListener);
+       // recyclerView.setOnTouchListener(onTouchListener);
+        //text_question.setOnTouchListener(onTouchListener);
+
+        if(isfigure==1)showFigure();
 
     }
 
@@ -160,18 +168,10 @@ on
         return true;
     }
 
-    public interface IPart5Manager {
 
-        public void addResult( String select);
 
-        public void nextQues();
-
-        public void backQues();
-
-    }
-
-    public void setIPart5Manager(IPart5Manager iAddResult) {
-        this.iAddResult = iAddResult;
+    public void setiContentQuestion(IContentQuestion iContentQuestion) {
+        this.iContentQuestion = iContentQuestion;
     }
 
     public class AdapterQuestion extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -215,25 +215,36 @@ on
                 public boolean onTouch(View v, MotionEvent event) {
                     switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
-                            if (issubmit == 0) {
-                                for (int i = 0; i < arrHolder.size(); i++) {
-                                    if (i != position)
-                                        arrHolder.get(i).img_check.setBackgroundResource(R.mipmap.icon_notchecked);
-                                    else
-                                        arrHolder.get(i).img_check.setBackgroundResource(R.mipmap.icon_checked);
+                            orgX = (int) event.getX();
+                            return true;
+                        case MotionEvent.ACTION_MOVE:
+                            offsetX = (int) (event.getX() - orgX);
+                            if (offsetX < -200) iContentQuestion.nextContent();
+                            else if (offsetX > 200) iContentQuestion.backContent();
+                            return true;
+                        case MotionEvent.ACTION_UP:
 
-                                }
-                                if (position == 0) select = "a";
-                                else if (position == 1) select = "b";
-                                else if (position == 2) select = "c";
-                                else select = "d";
+                            if (Math.abs(offsetX) < 100){
+                                if (issubmit == 0) {
+                                    for (int i = 0; i < arrHolder.size(); i++) {
+                                        if (i != position)
+                                            arrHolder.get(i).img_check.setBackgroundResource(R.mipmap.icon_notchecked);
+                                        else
+                                            arrHolder.get(i).img_check.setBackgroundResource(R.mipmap.icon_checked);
 
-                                if (mode != 1) {
-                                    showResultQuestion();
-                                    issubmit=1;
-                                    iAddResult.addResult(select);
-                                } else {
-                                    iAddResult.addResult(select);
+                                    }
+                                    if (position == 0) select = "a";
+                                    else if (position == 1) select = "b";
+                                    else if (position == 2) select = "c";
+                                    else select = "d";
+
+                                    if (mode != 1) {
+                                        showResultQuestion();
+                                        issubmit = 1;
+                                        iContentQuestion.addChoose(0,select);
+                                    } else {
+                                        iContentQuestion.addChoose(0,select);
+                                    }
                                 }
                             }
                             break;
@@ -252,14 +263,17 @@ on
 
         @Override
         public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
-            int position = holder.getLayoutPosition();
-            if (position == 0 || position == 2) {
-                Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.right_left_in);
-                holder.itemView.startAnimation(animation);
-            } else {
-                Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.left_to_right_in);
-                holder.itemView.startAnimation(animation);
-            }
+//            int position = holder.getLayoutPosition();
+//            if (position == 0 || position == 2) {
+//                Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.right_left_in);
+//                holder.itemView.startAnimation(animation);
+//            } else {
+//                Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.left_to_right_in);
+//                holder.itemView.startAnimation(animation);
+//            }
+            Animation animation = AnimationUtils.loadAnimation(getContext(),R.anim.scale_question_in);
+            animation.setStartOffset(holder.getLayoutPosition()*150);
+            holder.itemView.startAnimation(animation);
             super.onViewAttachedToWindow(holder);
         }
 

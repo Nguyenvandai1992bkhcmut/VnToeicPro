@@ -511,16 +511,22 @@ class Part2 {
         int id;
         const char * token;
         const char * script;
+        const char * a;
+        const char * b;
+        const char * c;
         const char * sol;
         int level ;
         int time;
     public :
-        Part2(int id, const char * token, const char * script , const char * sol , int level , int time){
+        Part2(int id, const char * token, const char * script ,const char * a, const char* b, const char *c, const char * sol , int level , int time){
         this->id =id ;
         this->token = token ;
         this->script = script;
         this->sol = sol;
         this->level = level;
+        this->a =a;
+        this->b= b;
+        this->c=c;
         this->time = time;
     }
 
@@ -529,12 +535,25 @@ class Part2 {
         return this->id ;
     }
 
+
     const char * getToken(){
         return this->token;
     }
 
     const char *getScript(){
         return this->script;
+    }
+
+    const char * getA(){
+        return this->a;
+    }
+
+    const char * getB(){
+        return this->b;
+    }
+
+    const char *getC(){
+        return this->c;
     }
 
     const char * getSol(){
@@ -1102,6 +1121,153 @@ class Part6{
                             return this->time;
                         }
 };
+//
+class Passage{
+    private :
+        int id;
+         int istext;
+         const char * token;
+         const char * content;
+     public:
+        Passage(int id, int istext , const char * token , const char * content){
+            this->id = id;
+            this->istext = istext;
+            this->token = token;
+            this->content=content;
+        }
+
+        //get
+
+        int getId(){
+            return this->id;
+        }
+
+        int getIsText(){
+            return this->istext;
+
+        }
+
+        const char * getToken(){
+            return this->token;
+        }
+
+        const char * getContent(){
+            return this->content;
+        }
+
+};
+
+class QuestionPart7{
+    private:
+        int id;
+        const char * question;
+        const char * a;
+        const char * b;
+        const char * c;
+        const char * d;
+        const char * sol;
+    public :
+        QuestionPart7(int id , const char * question, const char * a , const char *b , const char * c, const char * d , const char *sol){
+            this ->id = id ;
+            this->question = question;
+            this->a = a;
+            this->b = b;
+            this->c = c;
+            this->d = d;
+            this->sol = sol;
+        }
+
+        int getId(){
+            return this->id;
+        }
+
+        const char * getQuestion(){
+            return this->question;
+        }
+
+        const char * getA(){
+            return this->a;
+        }
+
+        const char * getB(){
+            return this->b;
+        }
+
+        const char * getC(){
+            return this->c;
+        }
+
+        const char * getD(){
+            return this->d;
+        }
+
+        const char * getSol(){
+            return this->sol;
+        }
+
+};
+
+class Part7{
+    private:
+        int id;
+        const char * explan;
+        int level ;
+        int time;
+        int countQuestion;
+        vector<Passage> passages;
+        vector<QuestionPart7>questions;
+
+    public :
+    Part7(int id , const char * explan , int level , int time ,int countQuestion, vector<Passage>passages , vector<QuestionPart7>questions){
+        this->id = id;
+        this->explan = explan;
+        this->level = level;
+        this->time= time;
+        this->passages = passages;
+        this->questions = questions;
+        this->countQuestion = countQuestion;
+    }
+
+    //get
+    int getId(){
+        return this->id;
+    }
+
+    const char * getExplan(){
+        return this->explan;
+    }
+
+    int getLevel(){
+        return this->level;
+    }
+
+    int getTime(){
+        return this->time;
+    }
+
+    int getCountQuestion(){
+        return this->countQuestion;
+    }
+
+    vector<Passage> getPassage(){
+        return this->passages;
+    }
+
+    vector<QuestionPart7>getQuestions(){
+        return this->questions;
+    }
+
+    //set
+    void setPassages(vector<Passage>passages){
+        this->passages = passages;
+    }
+
+    void setQuestions(vector<QuestionPart7>questions){
+        this->questions = questions;
+    }
+
+};
+
 //
 
 

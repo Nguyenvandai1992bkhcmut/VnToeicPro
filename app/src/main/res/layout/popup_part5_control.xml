@@ -2,58 +2,120 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <RelativeLayout android:layout_width="match_parent"
+    <TableLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/rect_card_top"
+        android:padding="10dp"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:id="@+id/relate_top">
-        </RelativeLayout>
+        <TableRow>
+            <ImageView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_part5_detach"
+                android:layout_weight="1"
+                android:id="@+id/part5"/>
+            <ImageView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_part6_detach"
+                android:layout_weight="1"
+                android:id="@+id/part6"/>
+            <ImageView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_part7_detach"
+                android:layout_weight="1"
+                android:id="@+id/part7"/>
+        </TableRow>
+    </TableLayout>
 
-
-    <RelativeLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Part5Popup"
-        android:background="@color/header_bar"
+    <TableLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/rect_card_bottom"
         android:padding="5dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:id="@+id/relate_bottom">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@mipmap/icon_heart"
-            android:padding="10dp"
-            android:id="@+id/img_check"/>
-        <LinearLayout android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:orientation="vertical"
-            android:id="@+id/line_submit">
-            <TextView android:layout_width="wrap_content"
+        <TableRow>
+            <LinearLayout android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Submit"/>
-            <ImageView
-                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:id="@+id/line_back">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:text="  Back "/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@mipmap/icon_backbutton"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@mipmap/icon_learned"/>
+                android:gravity="center"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:id="@+id/line_submit">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:text="Submit"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@mipmap/icon_submit"/>
             </LinearLayout>
 
-        <LinearLayout android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
-            android:layout_alignParentRight="true"
-            android:id="@+id/line_summary"
-            android:orientation="vertical">
-            <TextView android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Summary"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:background="@mipmap/icon_learned"/>
-        </LinearLayout>
-        </RelativeLayout>
+                android:src="@mipmap/icon_heart"
+                android:padding="10dp"
+                android:id="@+id/img_check"/>
+
+
+            <LinearLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:id="@+id/line_summary"
+                android:orientation="vertical">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+
+                    android:text="Summary"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@mipmap/icon_summary"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:id="@+id/line_feedback">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:text="FeedBack"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@mipmap/icon_feedback"/>
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+
+
     <FrameLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/frame_summary"

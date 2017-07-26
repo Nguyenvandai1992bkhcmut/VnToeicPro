@@ -18,6 +18,8 @@ import com.vntoeic.bkteam.vntoeicpro.R;
 
 import java.util.ArrayList;
 
+import supportview.ISummaryPart;
+
 /**
  * Created by dainguyen on 6/3/17.
  */
@@ -26,7 +28,7 @@ public class FragmentSummary extends Fragment {
     private ArrayList<Integer>question ;
     private ArrayList<String>choose;
     private ArrayList<String>result;
-    private IClickItemSubm iClickItemSubm;
+    private ISummaryPart iSummaryPart;
 
     private int mode =0;
     private int issubmit=0;
@@ -92,7 +94,7 @@ public class FragmentSummary extends Fragment {
             myholder.view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    iClickItemSubm.funIteamClick(position);
+                    iSummaryPart.funItemClick(0,position);
                 }
             });
 
@@ -128,10 +130,8 @@ public class FragmentSummary extends Fragment {
             }
         }
     }
-    public void setItemClick(IClickItemSubm itemClick){
-        this.iClickItemSubm = itemClick;
+    public void setItemClick(ISummaryPart itemClick){
+        this.iSummaryPart = itemClick;
     }
-    public interface  IClickItemSubm{
-        public void funIteamClick(int question);
-    }
+
 }

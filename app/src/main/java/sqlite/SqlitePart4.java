@@ -19,4 +19,6 @@ public class SqlitePart4 extends ManagerPart {
     public native ModelPart4[]randomPart4Subject(int subject , int number);
 
     public native ModelPart4[]searchPart4Favorite();
+
+    public native ModelPart4[]searchPart4Check();
 }

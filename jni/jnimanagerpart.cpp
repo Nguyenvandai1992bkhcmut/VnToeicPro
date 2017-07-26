@@ -197,6 +197,21 @@ Java_sqlite_ManagerPart_deletePartFavorite(JNIEnv * env , jobject object, jint p
 }
 }
 
+extern "C" {
+JNIEXPORT void JNICALL
+Java_sqlite_ManagerPart_deletePartFavoriteIdTime(JNIEnv * env , jobject object, jint part1, jint id1, jstring time1){
+
+    SqliteControlPart sqlite;
+
+        int part = (int)part1;
+        int id = (int)id1;
+         const char *time = env->GetStringUTFChars(time1, 0);
+        sqlite.deletePartFavoriteIdTime(part, id,time);
+
+}
+}
+
+
 
 extern "C" {
 JNIEXPORT void JNICALL
@@ -206,6 +221,18 @@ Java_sqlite_ManagerPart_deletePartCheck(JNIEnv * env , jobject object, jint part
         int part = (int)part1;
         int id = (int)id1;
         sqlite.deletePartCheck(part, id);
+}
+}
+
+extern "C" {
+JNIEXPORT void JNICALL
+Java_sqlite_ManagerPart_deletePartCheckIdTime(JNIEnv * env , jobject object, jint part1, jint id1,jstring time1){
+    SqliteControlPart sqlite;
+
+        int part = (int)part1;
+        int id = (int)id1;
+        const char *time = env->GetStringUTFChars(time1, 0);
+        sqlite.deletePartCheckIdTime(part, id,time);
 }
 }
 

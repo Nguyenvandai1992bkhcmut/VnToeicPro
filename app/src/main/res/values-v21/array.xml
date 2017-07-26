@@ -22,4 +22,51 @@
         <item>@mipmap/icon_heart_while</item>
         <item>@drawable/adv</item>
     </array>
+
+    <string-array name="feedback_part5">
+        <item>Sai cau Hoi1</item>
+        <item>Sai cau Hoi2</item>
+        <item>Sai cau Hoi3</item>
+        <item>Sai cau Hoi4</item>
+        <item>Sai cau Hoi5</item>
+        <item>Sai cau Hoi6</item>
+        <item>Sai cau Hoi7</item>
+        <item>Sai cau Hoi8</item>
+        <item>Sai cau Hoi9</item>
+        <item>Sai cau Hoi10</item>
+        <item>Sai cau Hoi11</item>
+        <item>Sai cau Hoi12</item>
+        <item>Sai cau Hoi13</item>
+        <item>Sai cau Hoi14</item>
+        <item>Sai cau Hoi15</item>
+    </string-array>
+
+    <string-array name="feedback_part5_default_content">
+        <item>Content default feedback1</item>
+        <item>Content default feedback2</item>
+        <item>Content default feedback3</item>
+        <item>Content default feedback4</item>
+        <item>Content default feedback5</item>
+
+        <item>Content default feedback6</item>
+
+        <item>Content default feedback7</item>
+
+        <item>Content default feedback8</item>
+
+        <item>Content default feedback9</item>
+
+        <item>Content default feedback10</item>
+
+        <item>Content default feedback11</item>
+
+        <item>Content default feedback12</item>
+
+        <item>Content default feedback13</item>
+
+        <item>Content default feedback14</item>
+
+        <item>Content default feedback15</item>
+
+    </string-array>
 </resources>

@@ -5,10 +5,9 @@
     <TextView android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Passage 1"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/holo_orange_dark"
         android:padding="10dp"
-        android:id="@+id/text_header"
-        android:background="@color/text_bar"/>
+        android:id="@+id/text_header" />
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

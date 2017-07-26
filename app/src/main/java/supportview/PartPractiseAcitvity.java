@@ -7,16 +7,24 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.vntoeic.bkteam.vntoeicpro.R;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.TimerTask;
 
 import part5.Fragment5Manager;
-import part6.Fragment6Manager;
+
+import part7.Fragment7Manager;
 import supportview.IManagerPart;
+import testreading.FragmentTestReadManager;
 
 /**
  * Created by dainguyen on 6/2/17.
@@ -35,6 +43,7 @@ public class PartPractiseAcitvity extends AppCompatActivity{
     private int timesave=0;
     private int part=0;
     private IManagerPart manager;
+    private InterstitialAd interstitialAd;
     @Override
     public void onBackPressed() {
         if(timer!=null)timer.cancel();
@@ -57,17 +66,26 @@ public class PartPractiseAcitvity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_part5_practise);
+
+        MobileAds.initialize(this, "ca-app-pub-8931491699276169~6897306733");
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+
         getData();
         setUpLayout();
         if(mode==1)setTime();
     }
 
     private void setTime() {
-        int count =1*60*1000;
+        int count =3*60*1000;
         if(key==1 & mode==1){
             count= getIntent().getExtras().getInt("time");
         }
-       timer= new CountDownTimer(count, 1000) {
+        createTime(count);
+    }
+
+    public void createTime(int count){
+        timer= new CountDownTimer(count, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 int min = (int) (millisUntilFinished/60000);
@@ -103,10 +121,14 @@ public class PartPractiseAcitvity extends AppCompatActivity{
         text_correct = (TextView)findViewById(R.id.text_correct);
         text_title = (TextView)findViewById(R.id.text_title);
         text_title.setText(title);
+        //8 full test reading
 
         if(part==5)manager = new Fragment5Manager();
-        else if(part==6)manager = new Fragment6Manager();
-        manager.setBundle(getIntent().getExtras());
+        else if(part==6)manager = new Fragment7Manager();
+        else if(part==7)manager = new Fragment7Manager();
+        else if(part==8)manager = new FragmentTestReadManager();
+        Bundle bundle = getIntent().getExtras();
+        manager.setBundle(bundle);
         getSupportFragmentManager().beginTransaction().add(R.id.frame,(Fragment) manager).commit();
 
     }
@@ -130,6 +152,49 @@ public class PartPractiseAcitvity extends AppCompatActivity{
             part=  b.getInt("part");
         }
     }
+
+    public void showAds(){
+       // interstitialAd.loadAd(new AdRequest.Builder().build());
+        //interstitialAd.show();;
+
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+                Log.i("Ads", "onAdLoaded");
+
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+                Log.i("Ads", "onAdFailedToLoad");
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when the ad is displayed.
+                if(mode==1)timer.cancel();
+                Log.i("Ads", "onAdOpened");
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+                Log.i("Ads", "onAdLeftApplication");
+
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when when the interstitial ad is closed.
+                if(mode==1)createTime(timesave);
+                interstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+        });
+    }
+
+
 
 
 

@@ -82,4 +82,5 @@
             android:id="@+id/text_notify"/>
 
     </LinearLayout>
+
 </ScrollView>

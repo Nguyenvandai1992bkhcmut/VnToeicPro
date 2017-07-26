@@ -27,7 +27,7 @@ public:
     vector<Part1*>randomPart1(int number);
     vector<Part1*>randomPart1Subject(int subject,int number);
     vector<Part1*>searchPart1Favorite();
-
+    vector<Part1*>searchPart1Check();
 
 
 };

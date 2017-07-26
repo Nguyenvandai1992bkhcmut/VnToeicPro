@@ -19,4 +19,6 @@ public class SqlitePart3 extends ManagerPart {
 
     public native ModelPart3[]searchPart3Favorite();
 
+    public native ModelPart3[]searchPart3Check();
+
 }

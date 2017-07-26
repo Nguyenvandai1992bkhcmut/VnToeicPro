@@ -18,7 +18,7 @@ funConvert(JNIEnv* env , jobject object , Part2 * part ){
     if(part==NULL)return NULL;
 
     jclass  cl = env -> FindClass("model/ModelPart2");
-    jmethodID methodId = env -> GetMethodID(cl,"<init>", "(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;II)V");
+    jmethodID methodId = env -> GetMethodID(cl,"<init>", "(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;II)V");
 
     jclass clcv = env -> FindClass("model/Convert");
     jmethodID methodId1 = env -> GetStaticMethodID(clcv, "convertCStringToJniSafeString","([B)Ljava/lang/String;");
@@ -34,6 +34,23 @@ funConvert(JNIEnv* env , jobject object , Part2 * part ){
      jstring script = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arrayA);
      env->DeleteLocalRef(arrayA);
 
+     jbyteArray arrayAA = env->NewByteArray(strlen(part->getA()));
+          env->SetByteArrayRegion(arrayAA,0,strlen(part->getA()),(jbyte*)part->getA());
+          jstring a = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arrayAA);
+          env->DeleteLocalRef(arrayAA);
+
+
+
+     jbyteArray arrayB = env->NewByteArray(strlen(part->getB()));
+          env->SetByteArrayRegion(arrayB,0,strlen(part->getB()),(jbyte*)part->getB());
+          jstring b = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arrayB);
+          env->DeleteLocalRef(arrayB);
+
+
+     jbyteArray arrayC = env->NewByteArray(strlen(part->getC()));
+          env->SetByteArrayRegion(arrayC,0,strlen(part->getC()),(jbyte*)part->getC());
+          jstring c = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arrayC);
+          env->DeleteLocalRef(arrayC);
 
     jbyteArray arraysol = env->NewByteArray(strlen(part->getSol()));
     env->SetByteArrayRegion(arraysol,0,strlen(part->getSol()),(jbyte*)part->getSol());
@@ -41,10 +58,13 @@ funConvert(JNIEnv* env , jobject object , Part2 * part ){
     env->DeleteLocalRef(arraysol);
 
 
-    jobject ob = env->NewObject(cl, methodId,part->getId(),token,script,sol,part->getLevel(),part->getTime());
+    jobject ob = env->NewObject(cl, methodId,part->getId(),token,script,a,b,c,sol,part->getLevel(),part->getTime());
     env->DeleteLocalRef(token);
     env->DeleteLocalRef(script);
     env->DeleteLocalRef(sol);
+       env->DeleteLocalRef(a);
+           env->DeleteLocalRef(b);
+               env->DeleteLocalRef(c);
 
 
     return ob;
@@ -111,6 +131,26 @@ Java_sqlite_SqlitePart2_searchPart2Favorite(JNIEnv * env , jobject object){
     SqlitePart2 sqlite;
 
     vector<Part2*>result =sqlite.searchPart2Favorite();
+     jclass  cl = env -> FindClass("model/ModelPart2");
+
+     jobjectArray arr = env->NewObjectArray((int)result.size(), cl, NULL);
+     for(int i=0;i<result.size();i++){
+        jobject ob = funConvert(env,object,result.at(i));
+        env->SetObjectArrayElement(arr, i, ob);
+     }
+    return arr;
+
+}
+}
+
+
+extern "C"{
+JNIEXPORT jobjectArray JNICALL
+Java_sqlite_SqlitePart2_searchPart2Check(JNIEnv * env , jobject object){
+
+    SqlitePart2 sqlite;
+
+    vector<Part2*>result =sqlite.searchPart2Check();
      jclass  cl = env -> FindClass("model/ModelPart2");
 
      jobjectArray arr = env->NewObjectArray((int)result.size(), cl, NULL);

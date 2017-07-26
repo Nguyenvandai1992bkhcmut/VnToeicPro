@@ -25,5 +25,6 @@ public:
     vector<Part4*>randomPart4(int number);
     vector<Part4*>randomPart4Subject(int subject,int number);
     vector<Part4*>searchPart4Favorite();
+    vector<Part4*>searchPart4Check();
 };
 #endif //VNTOEICPRO_SQLITEPART4_H

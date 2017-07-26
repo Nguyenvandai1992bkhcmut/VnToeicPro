@@ -21,7 +21,10 @@ public class SendAsynTask extends AsyncTask<String,Void,Void> {
     protected Void doInBackground(String... params) {
         try {
             URL url= null;
-            if(params.length==3) {
+            if(params.length==2){
+                url= new URL(params[0]);
+            }
+            else if(params.length==3) {
                 url = new URL(params[0]+params[1]); //Enter URL here
             }else if(params.length==4){
                 url = new URL(params[0]+params[1]+"/"+params[2]);
@@ -34,7 +37,8 @@ public class SendAsynTask extends AsyncTask<String,Void,Void> {
             httpURLConnection.connect();
 
             JSONObject jsonObject = new JSONObject();
-            if(params.length==3)jsonObject.put("chosen", params[2]);
+            if(params.length==2)jsonObject.put("chosen",params[1]);
+            else if(params.length==3)jsonObject.put("chosen", params[2]);
             else jsonObject.put("chosen",params[3]);
 
             DataOutputStream wr = new DataOutputStream(httpURLConnection.getOutputStream());

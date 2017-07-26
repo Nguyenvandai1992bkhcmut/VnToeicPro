@@ -30,7 +30,10 @@ public:
     void insertPartFavorite(int part, ModelFavoritePart * data);
     void insertPartCheck(int part, ModelCheckPart * data);
     void deletePartFavorite(int part, int id);
+    void deletePartFavoriteIdTime(int part, int id,const char * time);
      void  deletePartCheck(int part, int id);
+
+          void  deletePartCheckIdTime(int part, int id,const char * time);
 
     vector<Word*>funSeachWord();
      vector<Word *> searchWordPart(int part, int idpart);

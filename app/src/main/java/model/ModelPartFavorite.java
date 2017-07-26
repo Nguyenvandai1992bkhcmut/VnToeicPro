@@ -1,10 +1,12 @@
 package model;
 
+import sqlite.ManagerPart;
+
 /**
  * Created by dainguyen on 5/28/17.
  */
 
-public class ModelPartFavorite {
+public class ModelPartFavorite implements IPartManager{
     private int type;
     private int id;
     private String time;
@@ -14,15 +16,20 @@ public class ModelPartFavorite {
         this.id = id;
         this.time = time;
     }
-
+    @Override
     public int getId() {
         return id;
+    }
+
+    @Override
+    public int getResult() {
+        return -1;
     }
 
     public void setId(int id) {
         this.id = id;
     }
-
+    @Override
     public String getTime() {
         return time;
     }

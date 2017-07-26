@@ -167,6 +167,24 @@ void SqliteControlPart::deletePartFavorite(int part1, int id1){
      sqlite3_step(stmt);
 }
 
+void SqliteControlPart::deletePartFavoriteIdTime(int part1, int id1,const char * time1){
+      stringstream ss2;
+      ss2 << part1;
+      string part = ss2.str();
+
+      stringstream ss3;
+      ss3 << id1;
+       string id = ss3.str();
+
+       string time =(string)time1;
+
+       string sql = "delete from part"+part+"_favorite  where id=" + id +" and time ='"+time+"'";
+     if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
+            return ;
+      }
+     sqlite3_step(stmt);
+}
+
 void SqliteControlPart::deletePartCheck(int part1, int id1){
       stringstream ss2;
       ss2 << part1;
@@ -182,6 +200,23 @@ void SqliteControlPart::deletePartCheck(int part1, int id1){
       }
      sqlite3_step(stmt);
 }
+
+void SqliteControlPart::deletePartCheckIdTime(int part1, int id1 , const char * time1){
+      stringstream ss2;
+      ss2 << part1;
+      string part = ss2.str();
+
+      stringstream ss3;
+      ss3 << id1;
+      string id = ss3.str();
+       string time =(string)time1;
+       string sql = "delete from part"+part+"_checked  where id=" + id +" and time ='"+time+"'";
+     if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
+            return ;
+      }
+     sqlite3_step(stmt);
+}
+
 
 vector<Word*>SqliteControlPart::funSeachWord(){
     vector<Word*>result;

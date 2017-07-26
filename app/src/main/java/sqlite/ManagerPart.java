@@ -25,8 +25,10 @@ public  class ManagerPart {
     public native void insertPartCheck(ModelPartCheck model);
 
     public native void deletePartFavorite(int part, int id);
+    public native void deletePartFavoriteIdTime(int part, int id,String time);
 
     public native void deletePartCheck(int part, int id);
+    public native void deletePartCheckIdTime(int part, int id,String time);
 
     public native ModelWord[]searchWordPart(int part, int id);
 

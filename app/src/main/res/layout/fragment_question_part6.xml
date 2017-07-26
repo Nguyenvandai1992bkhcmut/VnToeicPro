@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/rect_card"
     android:paddingTop="20dp">
     <!--texta-->
@@ -17,13 +17,13 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:padding="5dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:overScrollMode="never"
         android:paddingBottom="30dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:isScrollContainer="false"
         android:id="@+id/recycle_ques_part6">
-
     </android.support.v7.widget.RecyclerView>
 </LinearLayout>

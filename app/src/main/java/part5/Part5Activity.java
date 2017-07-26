@@ -43,13 +43,14 @@ public class Part5Activity extends AppCompatActivity implements AdapterPart.ICal
     public ModelPartResult[]data;
     private RecyclerView recyclerView ;
     private TextView text_part;
-    private ImageView img_back;
 
     private int flag =0;
     public  int time =0;
     private ArrayList<String> question;
     private ArrayList<String> choosen;
     private int begin=0;
+    private Dialog dialog;
+    WindowManager.LayoutParams params;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,19 +74,13 @@ public class Part5Activity extends AppCompatActivity implements AdapterPart.ICal
     public void setUpLayout(){
         text_part = (TextView)findViewById(R.id.text_part);
         text_part.setTypeface(MainActivity.typeface);
-        img_back= (ImageView)findViewById(R.id.img_back);
+
         recyclerView = (RecyclerView)findViewById(R.id.recycle);
         LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager);
         AdapterPart adapterPart = new AdapterPart(this,data);
         recyclerView.setAdapter(adapterPart);
-        img_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-                Part5Activity.this.overridePendingTransition(R.anim.right_left_in , R.anim.right_left_out);
-            }
-        });
+
 
     }
 
@@ -101,12 +96,15 @@ public class Part5Activity extends AppCompatActivity implements AdapterPart.ICal
                 bundle.putInt("mode",1);
                 bundle.putInt("key",0);
                 bundle.putString("title",title);
-                final Dialog dialog = new Dialog(Part5Activity.this,R.style.ActivityDialog);
-                WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
-                params.width=WindowManager.LayoutParams.WRAP_CONTENT;
-                params.height=WindowManager.LayoutParams.WRAP_CONTENT;
-                dialog.setContentView(R.layout.dialog_time_part5);
-                dialog.getWindow().setWindowAnimations(R.style.PauseDialogAnimation);
+                if(dialog==null) {
+                    dialog = new Dialog(Part5Activity.this, R.style.ActivityDialog);
+                    params = dialog.getWindow().getAttributes();
+                    int width = (int) (Part5Activity.this.getApplicationContext().getResources().getDisplayMetrics().widthPixels * 0.8);
+                    params.width = width;
+                    params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                    dialog.setContentView(R.layout.dialog_time_part5);
+                    dialog.getWindow().setWindowAnimations(R.style.PauseDialogAnimation);
+                }
                 if(!dialog.isShowing()) {
                     dialog.show();
                     dialog.getWindow().setAttributes(params);
@@ -192,7 +190,6 @@ public class Part5Activity extends AppCompatActivity implements AdapterPart.ICal
                 */
                 bundle.putInt("part",5);
                 bundle.putInt("mode",4);
-                bundle.putInt("part",5);
                 intent1.putExtras(bundle);
                 startActivity(intent1);
                 break;

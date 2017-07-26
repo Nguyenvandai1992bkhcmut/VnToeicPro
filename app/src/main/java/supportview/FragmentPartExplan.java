@@ -8,7 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.vntoeic.bkteam.vntoeicpro.MainActivity;
@@ -40,6 +42,7 @@ public class FragmentPartExplan extends Fragment {
 
     private TextView textNofy;
     private int issubmit =0;
+    private int part =0;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class FragmentPartExplan extends Fragment {
         if(bundle!=null){
             data = (IDataPart) bundle.getSerializable("data");
             issubmit = bundle.getInt("submit");
+            part= bundle.getInt("part");
         }
     }
 
@@ -59,7 +63,14 @@ public class FragmentPartExplan extends Fragment {
         return view;
     }
 
-    public void setUpLayout(View view){
+    public void setUpLayout(final View view){
+        final int maxheight = getContext().getResources().getDisplayMetrics().heightPixels;
+
+//        if(part==6||part==7){
+//           view.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, maxheight/2));
+//        }else if(part==3 || part==4 ||){
+            view.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+//        }
         line_explan = (LinearLayout)view.findViewById(R.id.img_explan);
         line_aware = (LinearLayout)view.findViewById(R.id.img_aware);
         text_explan = (TextView)view.findViewById(R.id.text_explan);

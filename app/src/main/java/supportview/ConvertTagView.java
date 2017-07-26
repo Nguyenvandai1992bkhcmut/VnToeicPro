@@ -4,11 +4,13 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextPaint;
+import android.text.style.AlignmentSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
@@ -65,40 +67,59 @@ public class ConvertTagView {
     public void setSpanTag(String tag, int begin, int end){
         switch (tag){
             case ConstantTag.ACTAG:
+                spannableString.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), begin, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
             case ConstantTag.ALTAG:
+                spannableString.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), begin, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
             case ConstantTag.ARTAG:
+                spannableString.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE), begin, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
             case ConstantTag.BITAG:
+                spannableString.setSpan(new StyleSpan(Typeface.ITALIC),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                spannableString.setSpan(new StyleSpan(Typeface.BOLD),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
             case ConstantTag.BTAG:
                 spannableString.setSpan(new StyleSpan(Typeface.BOLD),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
             case ConstantTag.HBITAG:
+                spannableString.setSpan(new RelativeSizeSpan(2f),begin,end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                spannableString.setSpan(new StyleSpan(Typeface.BOLD_ITALIC),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
             case ConstantTag.HTAG:
+                spannableString.setSpan(new RelativeSizeSpan(2f),begin,end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
             case ConstantTag.HBTAG:
+                spannableString.setSpan(new RelativeSizeSpan(2f),begin,end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                spannableString.setSpan(new StyleSpan(Typeface.BOLD),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
             case ConstantTag.HSITAG:
                 Typeface font = Typeface.createFromAsset(context.getAssets(), "fonts/fontls.ttf");
                 spannableString.setSpan(new CustomTypefaceSpan("",font),begin,end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                spannableString.setSpan(new RelativeSizeSpan(3f),begin,end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                spannableString.setSpan(new RelativeSizeSpan(2f),begin,end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 spannableString.setSpan(new StyleSpan(Typeface.BOLD),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
-
             case ConstantTag.ITAG:
+                spannableString.setSpan(new StyleSpan(Typeface.ITALIC),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
             case ConstantTag.LITAG:
+                spannableString.setSpan(new StyleSpan(Typeface.ITALIC),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                spannableString.setSpan(new RelativeSizeSpan(1.5f),begin,end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
             case ConstantTag.LTAG:
+                spannableString.setSpan(new RelativeSizeSpan(1.f),begin,end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
             case ConstantTag.LBTAG:
+                spannableString.setSpan(new RelativeSizeSpan(1.5f),begin,end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                spannableString.setSpan(new StyleSpan(Typeface.BOLD),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
             case ConstantTag.LBITAG:
+                spannableString.setSpan(new RelativeSizeSpan(1.5f),begin,end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                spannableString.setSpan(new StyleSpan(Typeface.BOLD_ITALIC),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
             case ConstantTag.HITAG:
+                spannableString.setSpan(new RelativeSizeSpan(2f),begin,end,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                spannableString.setSpan(new StyleSpan(Typeface.ITALIC),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
             case ConstantTag.LSITAG:
                 Typeface font1 = Typeface.createFromAsset(context.getAssets(), "fonts/fontls.ttf");
@@ -107,8 +128,12 @@ public class ConvertTagView {
                 spannableString.setSpan(new StyleSpan(Typeface.BOLD),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
             case ConstantTag.UTAG:
+                spannableString.setSpan(new StyleSpan(Typeface.ITALIC),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
             case ConstantTag.CRITAG:
+                spannableString.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), begin, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                spannableString.setSpan(new StyleSpan(Typeface.ITALIC),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                spannableString.setSpan(new ForegroundColorSpan(Color.RED),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
             default:
 

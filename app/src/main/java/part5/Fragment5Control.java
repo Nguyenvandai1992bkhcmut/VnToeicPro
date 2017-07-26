@@ -12,25 +12,32 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 
 import com.vntoeic.bkteam.vntoeicpro.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Handler;
+import java.util.Calendar;
+
 
 import model.ModelPartFavorite;
 import sqlite.SqlitePart5;
+import supportview.ISummaryPart;
 
 /**
  * Created by dainguyen on 6/29/17.
  */
 
-public class Fragment5Control extends Fragment implements FragmentSummary.IClickItemSubm{
+public class Fragment5Control extends Fragment implements ISummaryPart{
     ImageView img_check;
     LinearLayout line_submit;
     LinearLayout line_summary;
+    LinearLayout line_back;
+    LinearLayout line_feedback;
     FrameLayout frameLayout;
-    RelativeLayout relate_bottom;
+    TableLayout relate_bottom;
 
     private int idQuestion=0;
     private ArrayList<Integer>question;
@@ -76,8 +83,10 @@ public class Fragment5Control extends Fragment implements FragmentSummary.IClick
         img_check = (ImageView)view.findViewById(R.id.img_check);
         line_submit =(LinearLayout)view.findViewById(R.id.line_submit);
         line_summary= (LinearLayout)view.findViewById(R.id.line_summary);
+        line_back =(LinearLayout)view.findViewById(R.id.line_back);
+        line_feedback= (LinearLayout)view.findViewById(R.id.line_feedback);
         frameLayout = (FrameLayout)view.findViewById(R.id.frame_summary);
-        relate_bottom = (RelativeLayout)view.findViewById(R.id.relate_bottom);
+        relate_bottom = (TableLayout) view.findViewById(R.id.relate_bottom);
 
         if(issumit==1){
             line_submit.setEnabled(false);
@@ -85,18 +94,20 @@ public class Fragment5Control extends Fragment implements FragmentSummary.IClick
         }
 
         final SqlitePart5 sqlitePart5= new SqlitePart5();
-        if(!sqlitePart5.checkPartFavorite(5,idQuestion))img_check.setBackgroundResource(R.mipmap.icon_heart_while);
-        else img_check.setBackgroundResource(R.mipmap.icon_heart);
+        if(!sqlitePart5.checkPartFavorite(5,idQuestion))img_check.setImageResource(R.mipmap.icon_heart_while);
+        else img_check.setImageResource(R.mipmap.icon_heart);
 
         img_check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!sqlitePart5.checkPartFavorite(5,idQuestion)){
-                    sqlitePart5.insertPartFavorite(new ModelPartFavorite(5,idQuestion,"time"));
-                    img_check.setBackgroundResource(R.mipmap.icon_heart);
+                    DateFormat df = new SimpleDateFormat("EEE d MMM yyyy, HH:mm:ss");
+                    String date = df.format(Calendar.getInstance().getTime());
+                    sqlitePart5.insertPartFavorite(new ModelPartFavorite(5,idQuestion,date));
+                    img_check.setImageResource(R.mipmap.icon_heart);
                 }else{
                     sqlitePart5.deletePartFavorite(5,idQuestion);
-                    img_check.setBackgroundResource(R.mipmap.icon_heart_while);
+                    img_check.setImageResource(R.mipmap.icon_heart_while);
                 }
             }
         });
@@ -106,14 +117,23 @@ public class Fragment5Control extends Fragment implements FragmentSummary.IClick
                 if(frameLayout.getChildCount()==0){
                     Animation animation = AnimationUtils.loadAnimation(getContext(),R.anim.scale_popup_part5_out);
                     relate_bottom.startAnimation(animation);
-                    android.os.Handler handler = new android.os.Handler();
-                    handler.postDelayed(new Runnable() {
+                    animation.setAnimationListener(new Animation.AnimationListener() {
                         @Override
-                        public void run() {
-                            iPart5Control.removeFragmentControl();
-                        }
-                    },300);
+                        public void onAnimationStart(Animation animation) {
 
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            iPart5Control.removeFragmentControl();
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });
                 }
             }
         });
@@ -146,6 +166,20 @@ public class Fragment5Control extends Fragment implements FragmentSummary.IClick
             }
         });
 
+        line_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iPart5Control.back();
+            }
+        });
+
+        line_feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iPart5Control.showFeedback();
+            }
+        });
+
     }
 
     public void setIPart5Control(IPart5Control iPart5Control){
@@ -153,14 +187,17 @@ public class Fragment5Control extends Fragment implements FragmentSummary.IClick
     }
 
     @Override
-    public void funIteamClick(int question) {
+    public void funItemClick(int passage ,int question) {
         iPart5Control.changeQuestion(question);
     }
+
 
     public interface IPart5Control{
         public void removeFragmentControl();
         public void changeQuestion(int index);
         public void notfySubmit();
+        public void back();
+        public void showFeedback();
 
     }
 }

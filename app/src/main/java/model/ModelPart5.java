@@ -1,5 +1,11 @@
 package model;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import java.io.Serializable;
 
 import sqlite.SqlitePart5;
@@ -106,6 +112,14 @@ public class ModelPart5   implements Serializable,IDataPart {
         return id;
     }
 
+    @Override
+    public View getViewContent(Context context) {
+        TextView textView = new TextView(context);
+        textView.setTextColor(Color.WHITE);
+        textView.setText(question);
+        return textView;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -123,6 +137,6 @@ public class ModelPart5   implements Serializable,IDataPart {
 
     @Override
     public String getContent() {
-        return question;
+        return null;
     }
 }

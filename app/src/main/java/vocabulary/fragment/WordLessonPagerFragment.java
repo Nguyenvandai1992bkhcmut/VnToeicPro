@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.vntoeic.bkteam.vntoeicpro.R;
 
@@ -30,6 +32,8 @@ public class WordLessonPagerFragment extends Fragment {
     public static final String WORD = "word";
     private Context mContext;
     private int mTagId;
+    private PinnedSectionListView mListView;
+    private PinnedSectionAdapter mAdapter;
 
     public static WordLessonPagerFragment create(int tagId) {
 
@@ -59,11 +63,19 @@ public class WordLessonPagerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_word_lesson_pager, container, false);
-        PinnedSectionListView listView = (PinnedSectionListView) view.findViewById(R.id.listview);
-        PinnedSectionAdapter adapter = new PinnedSectionAdapter(mContext, mTagId, (PinnedSectionAdapter.OnItemClickListener) mContext);
-        listView.setAdapter(adapter);
+        mListView = (PinnedSectionListView) view.findViewById(R.id.listview);
+        mAdapter = new PinnedSectionAdapter(mContext, mTagId, (PinnedSectionAdapter.OnItemClickListener) mContext);
+        mListView.setAdapter(mAdapter);
         return view;
     }
 
 
+    public void scrollTo(final int position) {
+        mListView.post(new Runnable() {
+            @Override
+            public void run() {
+                mListView.smoothScrollToPositionFromTop(mAdapter.getSection(position), 40);
+            }
+        });
+    }
 }

@@ -40,4 +40,13 @@
     <color name="primary_9">#3f51b5</color>
     <color name="primary_10">#2e3b84</color>
     <color name="blue">#4E92DF</color>
+
+
+
+    <color name="circle_red">#FC3D39</color>
+    <color name="circle_orange">#FD9426</color>
+    <color name="circle_yellow">#FECB2F</color>
+    <color name="circle_green">#53D769</color>
+    <color name="circle_blue">#157EFB</color>
+    <color name="circle_purple">#CB77DF</color>
 </resources>

@@ -1,30 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<LinearLayout
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <android.support.design.widget.AppBarLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
-        <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:id="@+id/toolbar"
-            android:fitsSystemWindows="true"
-            android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:layout_scrollFlags="enterAlways">
+        android:layout_height="60dp"
+        android:padding="8dp"
+        android:background="@color/primary_8"
+        android:gravity="center_vertical">
 
-        </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="40dp"
+                android:id="@+id/left_icon"
+                android:layout_height="40dp"
+                android:src="@mipmap/icon_back"/>
+            <ImageView
+                android:layout_width="40dp"
+                android:id="@+id/cancel_icon"
+                android:layout_height="40dp"
+                android:visibility="gone"
+                android:src="@mipmap/icon_cancel"/>
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:id="@+id/right_icon"
+                android:src="@mipmap/right_icon"/>
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:visibility="gone"
+                android:id="@+id/done_icon"
+                android:src="@mipmap/icon_done"/>
+        </FrameLayout>
+        <LinearLayout
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/textView"
+                android:layout_height="wrap_content"
+                android:text="600 Essential Words"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:paddingTop="3dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/dotLayout"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:id="@+id/firstDot"
+                    android:layout_marginRight="3dp"
+                    android:src="@drawable/circle"/>
+                <ImageView
+                    android:src="@drawable/circle"
+                    android:layout_width="8dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_height="8dp"
+                    android:layout_toRightOf="@id/firstDot"
+                    android:id="@+id/secondDot"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
 
     <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:id="@+id/viewPager">
+        android:layout_height="match_parent">
     </android.support.v4.view.ViewPager>
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

@@ -3,6 +3,9 @@ package listenvocabularry.fragment;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.support.animation.DynamicAnimation;
+import android.support.animation.SpringAnimation;
+import android.support.animation.SpringForce;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -36,8 +38,6 @@ public class ListenVocabularyFragment extends Fragment implements View.OnClickLi
     private SeekBar mSeekBar;
     private ImageView mNextSpeaker;
     private ImageView mPreviousSpeaker;
-    private ImageView mNextLesson;
-    private ImageView mPreviousLesson;
     private String[] mWords;
     private Context mContext;
     private ImageView mPlay;
@@ -135,6 +135,7 @@ public class ListenVocabularyFragment extends Fragment implements View.OnClickLi
         mNextSpeaker.setOnClickListener(this);
 
         mSpeakerImg = (ImageView) view.findViewById(R.id.speaker_img);
+
         mSpeakerTxt = (TextView) view.findViewById(R.id.speaker_txt);
 
         mPlay = (ImageView) view.findViewById(R.id.play);

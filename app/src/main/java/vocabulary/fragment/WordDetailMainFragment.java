@@ -32,7 +32,6 @@ public class WordDetailMainFragment extends Fragment {
     private static final String POSITION = "position";
     private ViewPager mViewPager;
     private TextView mTitle;
-    private ImageView mCircleImage;
     private Context mContext;
     private ModelWordLesson[] mWords;
     private int mPos;
@@ -76,41 +75,7 @@ public class WordDetailMainFragment extends Fragment {
     }
 
     private void bindData() {
-        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, final float positionOffset, int positionOffsetPixels) {
-                new Timer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        ((VocabularyActivity)mContext).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if(positionOffset >=0.9)mCircleImage.setImageResource(R.mipmap.iconcricle0);
-                                else  if(positionOffset >0.8f)mCircleImage.setImageResource(R.mipmap.iconcricle0);
-                                else  if(positionOffset >.7f )mCircleImage.setImageResource(R.mipmap.iconcricle1);
-                                else  if(positionOffset >0.6f )mCircleImage.setImageResource(R.mipmap.iconcricle2);
-                                else  if(positionOffset >0.5f )mCircleImage.setImageResource(R.mipmap.iconcricle3);
-                                else  if(positionOffset >0.4f )mCircleImage.setImageResource(R.mipmap.iconcricle4);
-                                else  if(positionOffset >0.3f )mCircleImage.setImageResource(R.mipmap.iconcricle5);
-                                else  if(positionOffset >0.3f )mCircleImage.setImageResource(R.mipmap.iconcricle6);
-                                else  if(positionOffset >0.1f )mCircleImage.setImageResource(R.mipmap.iconcricle7);
-                                else mCircleImage.setImageResource(R.mipmap.iconcricle8);
-                            }
-                        });
-                    }
-                }, 50);
-            }
 
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
 
         WordPagerAdapter pagerAdapter = new WordPagerAdapter(getChildFragmentManager(), mWords, mPos);
         mViewPager.setAdapter(pagerAdapter);
@@ -119,6 +84,5 @@ public class WordDetailMainFragment extends Fragment {
     private void bindView(View view) {
         this.mViewPager = (ViewPager) view.findViewById(R.id.viewPager);
         this.mTitle = (TextView) view.findViewById(R.id.lessonName);
-        this.mCircleImage = (ImageView) view.findViewById(R.id.circleImg);
     }
 }

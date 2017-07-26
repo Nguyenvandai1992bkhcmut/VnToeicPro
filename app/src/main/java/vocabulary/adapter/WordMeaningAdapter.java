@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.vntoeic.bkteam.vntoeicpro.R;
 
@@ -17,11 +18,13 @@ public class WordMeaningAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private final Context mContext;
     private final String[] mMeanings;
     private final String[] mTypes;
+    private final View.OnClickListener mOnClickListener;
 
-    public WordMeaningAdapter(Context context, String[] types, String[] meanings){
+    public WordMeaningAdapter(Context context, String[] types, String[] meanings, View.OnClickListener onClickListener){
         this.mContext = context;
         this.mTypes = types;
         this.mMeanings = meanings;
+        this.mOnClickListener = onClickListener;
     }
 
     @Override
@@ -43,11 +46,13 @@ public class WordMeaningAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         return mMeanings.length;
     }
 
-    class ItemMeaningViewHolder extends RecyclerView.ViewHolder {
+    class ItemMeaningViewHolder extends RecyclerView.ViewHolder{
         public TextView mTextView;
         public ItemMeaningViewHolder(View itemView) {
             super(itemView);
             mTextView = (TextView) itemView.findViewById(R.id.textView);
+            itemView.setOnClickListener(mOnClickListener);
         }
+
     }
 }

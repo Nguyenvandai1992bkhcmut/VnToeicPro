@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.vntoeic.bkteam.vntoeicpro">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.vntoeic.bkteam.vntoeicpro">
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA"></uses-permission>
     <uses-feature android:name="android.hardware.camera" />
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-sdk tools:overrideLibrary="android.support.dynamicanimation" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

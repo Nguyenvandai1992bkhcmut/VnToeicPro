@@ -19,6 +19,11 @@
         <item>@drawable/adv</item>
     </array>
 
+    <integer-array name="dotColor">
+        <item>@color/primary_3</item>
+        <item>@color/primary_10</item>
+    </integer-array>
+
     <string-array name="locale_name">
         <item>English</item>
         <item>English(US)</item>
@@ -31,5 +36,14 @@
     </array>
     <array name="locale">
         <item></item>
+    </array>
+    <array name="favorite_color">
+        <item>@mipmap/un_favorite</item>
+        <item>@mipmap/circle_red</item>
+        <item>@mipmap/circle_orrange</item>
+        <item>@mipmap/circle_yellow</item>
+        <item>@mipmap/circle_green</item>
+        <item>@mipmap/circle_blue</item>
+        <item>@mipmap/circle_purple</item>
     </array>
 </resources>

@@ -17,6 +17,7 @@ import java.util.Locale;
 
 import listenvocabularry.fragment.ListenVocabularyFragment;
 import listenvocabularry.service.PlayService;
+import model.ModelWord;
 import model.ModelWordLesson;
 import sqlite.SqliteVocabulary;
 
@@ -67,9 +68,7 @@ public class ListenActivity extends AppCompatActivity {
 
         }
     };
-    private String[] mWords = {
-            "abide by", "agreement", "assurance", "cancellation", "determine", "engagement", "establish", "obligate", "party", "provision", "resolve", "specific"
-    };
+    private String[] mWords;
     private ListenVocabularyFragment mFragment;
 
     @Override
@@ -77,19 +76,12 @@ public class ListenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listen_vocabularry);
 
-        int idLesson = getIntent().getIntExtra(ID_LESSON, 0);
+        ModelWord[] words = (ModelWord[]) getIntent().getSerializableExtra(LIST_WORDS);
 
-
-        SqliteVocabulary sqliteVocabulary = new SqliteVocabulary();
-        ModelWordLesson[] words = sqliteVocabulary.searchWordLesson(idLesson);
-
-//        this.mWords = new String[words.length];
-//        for (int i = 0; i < mWords.length; i++) {
-//            mWords[i] = words[i].getmWord().getmWord();
-//        }
-        /**
-         * Testing
-         */
+        this.mWords = new String[words.length];
+        for (int i = 0; i < mWords.length; i++) {
+            mWords[i] = words[i].getmWord();
+        }
 
 
         mFragment = ListenVocabularyFragment.newInstance(mWords);

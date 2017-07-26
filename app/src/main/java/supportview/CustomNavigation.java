@@ -133,6 +133,7 @@ public class CustomNavigation extends FrameLayout {
 
         typedArray.recycle();
 
+
     }
 
     @Override

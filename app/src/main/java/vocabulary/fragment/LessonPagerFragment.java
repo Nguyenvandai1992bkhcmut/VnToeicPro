@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import model.ModelLesson;
 import model.ModelStatableLesson;
 import sqlite.SqliteVocabulary;
 import vocabulary.adapter.LessonAdapter;
+import vocabulary.adapter.TagPagerAdapter;
 
 /**
  * Created by giang on 6/27/17.
@@ -29,8 +31,11 @@ public class LessonPagerFragment extends Fragment{
     private static LessonPagerFragment mInstance;
     private RecyclerView mRecyclerView;
     private Context mContext;
+    private TagPagerAdapter mPagerAdapter;
+    private boolean mSingleMode = true;
+    public LessonAdapter mAdapter;
 
-    public static Fragment create(int tagId) {
+    public static LessonPagerFragment create(int tagId) {
         if (mInstance == null) {
             mInstance = new LessonPagerFragment();
         }
@@ -41,15 +46,33 @@ public class LessonPagerFragment extends Fragment{
         return mInstance;
     }
 
+    public void setSingleMode(boolean singleMode) {
+        mSingleMode = singleMode;
+        mAdapter.changeMode(mSingleMode);
+    }
+
+    public interface LessonInterface{
+        void changeToWordLessonFragment(int position);
+    }
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         this.mContext  = context;
     }
 
+    @Override
+    public void onResume() {
+        mAdapter.notifyDataSetChanged();
+
+        super.onResume();
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ViewPager viewPager = (ViewPager) container;
+        mPagerAdapter = (TagPagerAdapter) viewPager.getAdapter();
         mTagId = getArguments().getInt(TAG_ID);
 
         View root = inflater.inflate(R.layout.fragment_lesson_page, container, false);
@@ -61,8 +84,8 @@ public class LessonPagerFragment extends Fragment{
         for (int i = 0; i < statableLessons.length; i++){
             statableLessons[i] = new ModelStatableLesson(mLessons[i]);
         }
-        LessonAdapter adapter = new LessonAdapter(mContext, statableLessons);
-        mRecyclerView.setAdapter(adapter);
+        mAdapter = new LessonAdapter(mContext, statableLessons, mPagerAdapter);
+        mRecyclerView.setAdapter(mAdapter);
 
         setUpContent();
         return root;
@@ -70,5 +93,16 @@ public class LessonPagerFragment extends Fragment{
 
     private void setUpContent() {
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }

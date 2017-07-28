@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomNavigation">
+        <attr name="isTop" format="boolean"/>
+        <attr name="textColor" format="color"/>
+        <attr name="imageSize" format="dimension"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="duration" format="integer"/>
+        <attr name="titles" format="reference"/>
+        <attr name="icons" format="reference"/>
+    </declare-styleable>
+</resources>

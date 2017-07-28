@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="header">#344960</color>
+    <color name="text_icon">#39AC54</color>
+    <color name="header_bar">#969EB6</color>
+    <color name="text_bar">#92cdf7</color>
+    <color name="backgroundcardmain">#969EB6</color>
+    <color name="background">#272727</color>
+    <color name="bgmenudiction">#7fadae</color>
+    <color name="text_example">#10fa47</color>
+    <color name="gray_green">#36495F</color>
+
+    <color name="transparent_1">#00ffffff</color>
+    <color name="transparent_2">#11ffffff</color>
+    <color name="transparent_3">#22ffffff</color>
+    <color name="transparent_4">#33ffffff</color>
+    <color name="transparent_5">#44ffffff</color>
+    <color name="transparent_6">#55ffffff</color>
+    <color name="transparent_7">#66ffffff</color>
+    <color name="transparent_8">#77ffffff</color>
+    <color name="none">#00ffffff</color>
+    <color name="bg_diaglog">#536b84</color>
+    <color name="bg_listem">#1D1D1D</color>
+    <color name="bg_content">#4E6580</color>
+</resources>

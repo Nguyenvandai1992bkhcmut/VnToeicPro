@@ -15,6 +15,7 @@ import android.widget.ImageView;
 
 import com.vntoeic.bkteam.vntoeicpro.R;
 
+import vocabulary.ScrollableFragmentInterface;
 import vocabulary.adapter.TagPagerAdapter;
 
 /**
@@ -22,12 +23,11 @@ import vocabulary.adapter.TagPagerAdapter;
  */
 
 public class TagVocabularyFragment extends Fragment implements LessonPagerFragment.LessonInterface, View.OnClickListener{
-
     private static final String TAG_ID = "tag id";
     private int mTagId;
     public ViewPager mViewPager;
     private FragmentManager mFragmentManager ;
-    private WordLessonPagerFragment mWordLessonPagerFragment;
+    private ScrollableFragmentInterface mWordLessonPagerFragment;
     private LessonPagerFragment mLessonPagerFragment;
     private ImageView mFirstDot, mSecondDot;
     private ImageView mLeftIcon, mRightIcon;
@@ -65,10 +65,21 @@ public class TagVocabularyFragment extends Fragment implements LessonPagerFragme
         bindView(view);
 
         TagPagerAdapter adapter = new TagPagerAdapter(mFragmentManager, this);
-        if (mLessonPagerFragment == null) mLessonPagerFragment = LessonPagerFragment.create(mTagId);
-        if (mWordLessonPagerFragment == null) mWordLessonPagerFragment = WordLessonPagerFragment.create(mTagId);
+        if (mTagId == 16) {
+            /**
+             * Favorite fragment
+             */
+            if (mLessonPagerFragment == null) mLessonPagerFragment = LessonPagerFragment.create(mTagId);
+            if (mWordLessonPagerFragment == null) mWordLessonPagerFragment = new FavoriteFragment();
+
+        } else {
+            if (mLessonPagerFragment == null) mLessonPagerFragment = LessonPagerFragment.create(mTagId);
+            if (mWordLessonPagerFragment == null) mWordLessonPagerFragment = WordLessonPagerFragment.create(mTagId);
+
+        }
+
         adapter.addFragment(mLessonPagerFragment);
-        adapter.addFragment(mWordLessonPagerFragment);
+        adapter.addFragment((Fragment) mWordLessonPagerFragment);
 
         mViewPager.setAdapter(adapter);
         mViewPager.setOnPageChangeListener(mOnPageChangeListener);
@@ -211,57 +222,103 @@ public class TagVocabularyFragment extends Fragment implements LessonPagerFragme
 
     @Override
     public void onClick(View v) {
+
+        Animator.AnimatorListener cancelListener = new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mCancelIcon.setVisibility(View.GONE);
+                showIcon(mLeftIcon);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        };
+        Animator.AnimatorListener doneListener = new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mDoneIcon.setVisibility(View.GONE);
+                showIcon(mRightIcon);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        };
+        Animator.AnimatorListener rightListener = new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mRightIcon.setVisibility(View.GONE);
+                showIcon(mDoneIcon);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        };
+        Animator.AnimatorListener leftListener = new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mLeftIcon.setVisibility(View.GONE);
+                showIcon(mCancelIcon);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        };
+
         switch (v.getId()) {
             case R.id.right_icon:
                 this.isSingleMode = !this.isSingleMode;
                 this.mLessonPagerFragment.setSingleMode(isSingleMode);
-                Animator.AnimatorListener listenerRight = new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
 
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        mRightIcon.setVisibility(View.GONE);
-                        showIcon(mDoneIcon);
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
-
-                    }
-                };
-
-                Animator.AnimatorListener listenerLeft = new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        mLeftIcon.setVisibility(View.GONE);
-                        showIcon(mCancelIcon);
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
-
-                    }
-                };
-                hideIcon(mLeftIcon, listenerLeft);
-                hideIcon(mRightIcon, listenerRight);
+                hideIcon(mLeftIcon, leftListener);
+                hideIcon(mRightIcon, rightListener);
                 break;
             case R.id.left_icon:
 
@@ -272,55 +329,12 @@ public class TagVocabularyFragment extends Fragment implements LessonPagerFragme
 
                 boolean createDialogSuccess = mLessonPagerFragment.mAdapter.createDialog();
                 if (createDialogSuccess) {
-                    mDoneIcon.setVisibility(View.GONE);
-                    mCancelIcon.setVisibility(View.GONE);
+                    hideIcon(mDoneIcon, doneListener);
+                    hideIcon(mCancelIcon, cancelListener);
                 } else {
                     mLessonPagerFragment.mAdapter.changeMode(true);
                     this.isSingleMode = true;
-                    Animator.AnimatorListener cancelListener = new Animator.AnimatorListener() {
-                        @Override
-                        public void onAnimationStart(Animator animation) {
 
-                        }
-
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            mCancelIcon.setVisibility(View.GONE);
-                            showIcon(mLeftIcon);
-                        }
-
-                        @Override
-                        public void onAnimationCancel(Animator animation) {
-
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animator animation) {
-
-                        }
-                    };
-                    Animator.AnimatorListener doneListener = new Animator.AnimatorListener() {
-                        @Override
-                        public void onAnimationStart(Animator animation) {
-
-                        }
-
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            mDoneIcon.setVisibility(View.GONE);
-                            showIcon(mRightIcon);
-                        }
-
-                        @Override
-                        public void onAnimationCancel(Animator animation) {
-
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animator animation) {
-
-                        }
-                    };
                     hideIcon(mCancelIcon, cancelListener);
                     hideIcon(mDoneIcon, doneListener);
                 }
@@ -329,50 +343,7 @@ public class TagVocabularyFragment extends Fragment implements LessonPagerFragme
             case R.id.cancel_icon:
                 mLessonPagerFragment.mAdapter.changeMode(true);
                 this.isSingleMode = true;
-                Animator.AnimatorListener cancelListener = new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
 
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        mCancelIcon.setVisibility(View.GONE);
-                        showIcon(mLeftIcon);
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
-
-                    }
-                };
-                Animator.AnimatorListener doneListener = new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        mDoneIcon.setVisibility(View.GONE);
-                        showIcon(mRightIcon);
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
-
-                    }
-                };
                 hideIcon(mCancelIcon, cancelListener);
                 hideIcon(mDoneIcon, doneListener);
                 break;

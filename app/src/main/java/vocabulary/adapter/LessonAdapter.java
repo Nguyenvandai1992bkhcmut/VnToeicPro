@@ -91,15 +91,15 @@ public class LessonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 mPagerAdapter.changeToWordLessonFragment(mCurrentItemClicked);
                 break;
             case 2:
-                if (isSingleMode) mListLessonId.add(mLessons[mCurrentItemClicked].mLesson.getmLessonId());
+//                if (isSingleMode) mListLessonId.add(mLessons[mCurrentItemClicked].mLesson.getmLessonId());
                 ((VocabularyActivity)mContext).onOpenLearningActivity(mListLessonId);
                 break;
             case 3:
-                if (isSingleMode) mListLessonId.add(mLessons[mCurrentItemClicked].mLesson.getmLessonId());
+//                if (isSingleMode) mListLessonId.add(mLessons[mCurrentItemClicked].mLesson.getmLessonId());
                 ((VocabularyActivity)mContext).onOpenPractingActivity(mListLessonId);
                 break;
             case 4:
-                if (isSingleMode) mListLessonId.add(mLessons[mCurrentItemClicked].mLesson.getmLessonId());
+//                if (isSingleMode) mListLessonId.add(mLessons[mCurrentItemClicked].mLesson.getmLessonId());
                 ((VocabularyActivity)mContext).onOpenListenActivity(mListLessonId);
                 break;
         }

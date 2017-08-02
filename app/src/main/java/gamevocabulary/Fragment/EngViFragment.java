@@ -1,11 +1,10 @@
-package GameVocabulary.Fragment;
+package gamevocabulary.Fragment;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
 
-import GameVocabulary.Adapter.GameEngViAdapter;
+import gamevocabulary.Adapter.GameEngViAdapter;
 import model.ModelWord;
 
 /**

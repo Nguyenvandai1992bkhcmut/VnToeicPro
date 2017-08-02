@@ -1,4 +1,4 @@
-package GameVocabulary;
+package gamevocabulary;
 
 import java.util.Arrays;
 

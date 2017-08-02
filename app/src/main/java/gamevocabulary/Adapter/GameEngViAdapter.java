@@ -1,4 +1,4 @@
-package GameVocabulary.Adapter;
+package gamevocabulary.Adapter;
 
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
@@ -15,9 +15,9 @@ import com.vntoeic.bkteam.vntoeicpro.R;
 
 import java.util.ArrayList;
 
-import GameVocabulary.Fragment.GameFragment;
-import GameVocabulary.Fragment.ViEngFragment;
-import GameVocabulary.GameInterface;
+import gamevocabulary.Fragment.EngViFragment;
+import gamevocabulary.Fragment.GameFragment;
+import gamevocabulary.GameInterface;
 import model.ModelWord;
 import model.ModelWordGame;
 
@@ -25,20 +25,21 @@ import model.ModelWordGame;
  * Created by giang on 7/3/17.
  */
 
-public class GameViEngAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class GameEngViAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final Context mContext;
-    private final ViEngFragment mFragment;
     private final ModelWord mQuestion;
-    private final ArrayList<String> mAnswers;
+    private final ArrayList<String> mAnswer;
     public ArrayList<GameFragment.OnShowBackgroundResult> mShowBackgroundResults = new ArrayList<>();
+    private EngViFragment mFragmentEngVi;
     private GameInterface mListener;
 
-    public GameViEngAdapter(Context context, ViEngFragment fragment, ModelWord question, ArrayList<String> answers){
+
+    public GameEngViAdapter(Context context, EngViFragment fragmentEngVi, ModelWord question, ArrayList<String> answer){
         this.mContext = context;
-        this.mFragment = fragment;
+        this.mFragmentEngVi = fragmentEngVi;
         this.mQuestion = question;
-        this.mAnswers = answers;
+        this.mAnswer = answer;
 
         if (context instanceof GameInterface) mListener = (GameInterface) context;
         else throw new ClassCastException("this context must implement GameInterface");
@@ -46,25 +47,30 @@ public class GameViEngAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_game_vieng, parent, false);
-        return new GameViEngItemViewHolder(view);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_game_engvi, parent, false);
 
+        return new GameEngViItemViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        final GameViEngItemViewHolder viewHolder = (GameViEngItemViewHolder) holder;
+        final GameEngViItemViewHolder viewHolder = (GameEngViItemViewHolder) holder;
         if (mShowBackgroundResults.size() <= position) mShowBackgroundResults.add(viewHolder);
-        viewHolder.mTextView.setText(mAnswers.get(position));
+        viewHolder.mTextView.setText(mAnswer.get(position));
 
-        if (mQuestion.getmWord().equals(viewHolder.mTextView.getText().toString())) viewHolder.setResult(true);
+        for (int i = 0; i < mQuestion.getmMeanings().length; i++) {
+            if (mQuestion.getmMeanings()[i].equals(viewHolder.mTextView.getText().toString())){
+                viewHolder.setResult(true);
+                break;
+            }
+        }
 
         viewHolder.mTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (GameFragment.timerIsRunning()){
-                    mFragment.cancelTimer();
+                if (GameFragment.timerIsRunning()) {
+                    mFragmentEngVi.cancelTimer();
                     viewHolder.onShowBackgroundResult();
                     showTrueAnswer();
 
@@ -72,11 +78,12 @@ public class GameViEngAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 }
             }
         });
+
     }
 
     private void showTrueAnswer() {
-        for (int i = 0; i < mAnswers.size(); i++) {
-            GameViEngItemViewHolder item = (GameViEngItemViewHolder) mShowBackgroundResults.get(i);
+        for (int i = 0; i < mAnswer.size(); i++) {
+            GameEngViItemViewHolder item = (GameEngViItemViewHolder) mShowBackgroundResults.get(i);
             if (item.isTrue) item.onShowBackgroundResult();
             item.mTextView.setEnabled(false);
         }
@@ -84,35 +91,33 @@ public class GameViEngAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemCount() {
-        return mAnswers.size();
+        return mAnswer.size();
     }
 
-    private class GameViEngItemViewHolder extends RecyclerView.ViewHolder implements GameFragment.OnShowBackgroundResult{
-        private final TextView mTextView;
-        private boolean isTrue;
-
-        public GameViEngItemViewHolder(View view) {
+    private class GameEngViItemViewHolder extends RecyclerView.ViewHolder implements GameFragment.OnShowBackgroundResult{
+        private TextView mTextView;
+        private boolean isTrue = false;
+        public GameEngViItemViewHolder(View view) {
             super(view);
-            this.mTextView = (TextView) view.findViewById(R.id.text_answer);
+            this.mTextView = (TextView) view.findViewById(R.id.rectangle_engvi);
 
             DisplayMetrics displayMetrics = mContext.getResources().getDisplayMetrics();
-            int width = (int) (displayMetrics.widthPixels * 0.9);
-            int height = (int) (displayMetrics.heightPixels * 0.5);
-
-            int d = width < height ? width/2 : height/2;
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(d, d);
+            int width = (int) (displayMetrics.widthPixels * 0.9 - 60);
+            int height = (int) (displayMetrics.heightPixels * 0.1);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
             params.setMargins(30, 0, 30, 30);
             this.mTextView.setLayoutParams(params);
+
         }
 
-        public void setResult(boolean isTrue) {
+        public void setResult(boolean isTrue){
             this.isTrue = isTrue;
         }
 
         @Override
         public void onShowBackgroundResult() {
-            if (isTrue) mTextView.setBackgroundResource(R.drawable.circle_vieng_true);
-            else mTextView.setBackgroundResource(R.drawable.circle_vieng_false);
+            if (isTrue)mTextView.setBackgroundResource(R.drawable.rectangle_engvi_true);
+            else mTextView.setBackgroundResource(R.drawable.rectangle_engvi_false);
 
             AnimatorSet animatorSet = (AnimatorSet) AnimatorInflater.loadAnimator(mContext, R.animator.bubble);
             animatorSet.setTarget(mTextView);

@@ -1,17 +1,14 @@
-package GameVocabulary.Fragment;
+package gamevocabulary.Fragment;
 
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
-import GameVocabulary.Adapter.GameTypingAdapter;
-import GameVocabulary.GameInterface;
+import gamevocabulary.Adapter.GameTypingAdapter;
 import model.ModelWord;
 import model.ModelWordGame;
 

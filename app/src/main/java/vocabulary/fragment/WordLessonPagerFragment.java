@@ -19,6 +19,7 @@ import model.Dictionary;
 import model.ModelLesson;
 import sqlite.SqliteDictionary;
 import sqlite.SqliteVocabulary;
+import vocabulary.ScrollableFragmentInterface;
 import vocabulary.adapter.PinnedSectionAdapter;
 import vocabulary.adapter.WordMeaningAdapter;
 
@@ -26,7 +27,7 @@ import vocabulary.adapter.WordMeaningAdapter;
  * Created by giang on 6/27/17.
  */
 
-public class WordLessonPagerFragment extends Fragment {
+public class WordLessonPagerFragment extends Fragment implements ScrollableFragmentInterface {
 
     private static final String TAG_ID = "tag id";
     public static final String WORD = "word";
@@ -70,6 +71,7 @@ public class WordLessonPagerFragment extends Fragment {
     }
 
 
+    @Override
     public void scrollTo(final int position) {
         mListView.post(new Runnable() {
             @Override

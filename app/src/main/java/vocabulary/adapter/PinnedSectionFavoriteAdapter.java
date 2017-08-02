@@ -1,8 +1,6 @@
 package vocabulary.adapter;
 
-import android.animation.AnimatorSet;
 import android.content.Context;
-import android.icu.util.ValueIterator;
 import android.support.animation.DynamicAnimation;
 import android.support.animation.SpringAnimation;
 import android.support.animation.SpringForce;
@@ -10,126 +8,225 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.WindowManager;
-import android.view.animation.AnimationSet;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.vntoeic.bkteam.vntoeicpro.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import animation.SpringAnimationUtils;
+import customview.CustomPinnedSectionListview;
 import de.halfbit.pinnedsection.PinnedSectionListView;
+import model.ModelAbstractFavoriteWord;
 import model.ModelAbstractWord;
+import model.ModelColorFavorite;
 import model.ModelLesson;
 import model.ModelWord;
 import model.ModelWordLesson;
+import sqlite.SqliteFavoriteVocabulary;
 import sqlite.SqliteVocabulary;
 import vocabulary.ColorConstant;
 
 /**
- * Created by giang on 6/30/17.
+ * Created by giang on 7/29/17.
  */
 
-public class PinnedSectionAdapter extends ArrayAdapter<ModelAbstractWord> implements PinnedSectionListView.PinnedSectionListAdapter{
-    private final int mTagId;
-    private ModelLesson[] mSections;
-    private ArrayList<Boolean> mListVisible = new ArrayList<>();
-    private Context mContext;
-    private SqliteVocabulary mSqliteVocabulary;
-    private OnItemClickListener mListener;
+public class PinnedSectionFavoriteAdapter extends ArrayAdapter<ModelAbstractFavoriteWord> implements PinnedSectionListView.PinnedSectionListAdapter{
+
+    private final Context mContext;
+    private final CustomPinnedSectionListview mListview;
     private float[] colorPosition = new float[ColorConstant.colorArr.length];
     private float mCenterX = (float) 0.0;
     private int mCircleWidth;
-    private ArrayList<ModelAbstractWord> mSectionsList = new ArrayList<>();
+    private ArrayList<Boolean> mListVisible = new ArrayList<>();
+    SqliteFavoriteVocabulary mSqlite = new SqliteFavoriteVocabulary();
+    private ModelColorFavorite[] mFavoriteTables;
+    private PinnedSectionAdapter.OnItemClickListener mListener;
+    private HashMap<ModelAbstractFavoriteWord, Integer> mIdMap = new HashMap<>();
+    private int mCounter;
+    private List<ModelAbstractFavoriteWord> mData = new ArrayList<>();
+    private ArrayList<ModelAbstractFavoriteWord> mSectionList = new ArrayList<>();
 
-    public int getSection(int position) {
-        return mSectionsList.get(position).listPosition;
-    }
-
-
-    public interface OnItemClickListener {
-        void onItemClick(int lessonId, int position);
-    }
-
-    public PinnedSectionAdapter(@NonNull Context context,int tagId, OnItemClickListener listener) {
-
+    public PinnedSectionFavoriteAdapter(Context context, PinnedSectionAdapter.OnItemClickListener listener, CustomPinnedSectionListview listview) {
         super(context, 0);
+        this.mListview = listview;
         this.mContext = context;
-        this.mTagId = tagId;
         this.mListener = listener;
-        this.mSqliteVocabulary = new SqliteVocabulary();
-        prepareList();
-    }
+//        prepareList();
+        /**
+         * Just for Test ...
+         */
 
-    private void prepareList() {
         SqliteVocabulary sqliteVocabulary = new SqliteVocabulary();
-        mSections = sqliteVocabulary.searchLessonTag(mTagId);
+        ModelLesson[] sectionsData = sqliteVocabulary.searchLessonTag(15);
+
         int sectionPosition = 0, listPosition = 0;
-        for (int i = 0; i < mSections.length; i++) {
-            ModelAbstractWord section = new ModelAbstractWord(
-                    ModelAbstractWord.SECTION,
-                    mSections[i].getmLessonTitle(),
-                    mSections[i].getmLessonId(),
+        for (int i = 0; i < ColorConstant.colorArr.length - 1; i++) {
+            ModelAbstractFavoriteWord section = new ModelAbstractFavoriteWord(
+                    ModelAbstractFavoriteWord.SECTION,
+                    new ModelColorFavorite(i),
                     null
             );
-            section.sectionPosition = sectionPosition;
-            section.listPosition = listPosition ++;
-            add(section);
-            mSectionsList.add(section);
+            section.mSectionPosition = sectionPosition;
+            section.mListPosition = listPosition ++;
+            mData.add(section);
+            mSectionList.add(section);
             mListVisible.add(false);
 
-            ModelWordLesson[] wordLessons = sqliteVocabulary.searchWordLesson(mSections[i].getmLessonId());
+            ModelWordLesson[] wordLessons = sqliteVocabulary.searchWordLesson(sectionsData[i].getmLessonId());
             for (int j = 0; j < wordLessons.length; j++) {
-                ModelAbstractWord item = new ModelAbstractWord(
-                        ModelAbstractWord.ITEM,
-                        null,
-                        -1,
+                ModelAbstractFavoriteWord item = new ModelAbstractFavoriteWord(
+                        ModelAbstractFavoriteWord.ITEM,
+                        new ModelColorFavorite(i),
                         wordLessons[j]
                 );
-                item.sectionPosition = sectionPosition;
-                item.listPosition = listPosition++;
-                add(item);
+                item.mSectionPosition = sectionPosition;
+                item.mListPosition = listPosition++;
+                mData.add(item);
                 mListVisible.add(false);
             }
             sectionPosition++;
         }
+
+
+        /*********************************************************************/
+        updateStableIds();
+    }
+
+    public int getSection(int position) {
+        return mSectionList.get(position).mListPosition;
+    }
+
+    private void updateStableIds() {
+        mIdMap.clear();
+        mCounter = 0;
+        for (int i = 0; i < mData.size(); i++) {
+            mIdMap.put(mData.get(i), mCounter ++);
+        }
+    }
+
+    public long getItemId(int position) {
+        ModelAbstractFavoriteWord item = getItem(position);
+        if (mIdMap.containsKey(item)) return mIdMap.get(item);
+        return -1;
+    }
+
+    public void addStableIdForDataAtPosition(int position) {
+        mIdMap.put(mData.get(position), ++ mCounter);
+    }
+
+    public void removeStableIdForDataAtPosition(int position) {
+        mIdMap.remove(mData.get(position));
+    }
+
+    private void prepareList() {
+        SqliteFavoriteVocabulary sqlite = new SqliteFavoriteVocabulary();
+        mFavoriteTables = sqlite.searchAllFavoriteTable();
+        int sectionPosition = 0, listPosition = 0;
+
+        for (int i = 0; i < mFavoriteTables.length; i++) {
+            ModelAbstractFavoriteWord section = new ModelAbstractFavoriteWord(
+                    ModelAbstractFavoriteWord.SECTION,
+                    mFavoriteTables[i],
+                    null
+            );
+
+            section.mSectionPosition = sectionPosition;
+            section.mListPosition = listPosition ++;
+            mSectionList.add(section);
+            mData.add(section);
+
+            ModelWordLesson[] words = sqlite.searchAllWordInFavoriteTable(mFavoriteTables[i].mIndex);
+            for (int j = 0; j < words.length; j++) {
+                ModelAbstractFavoriteWord item = new ModelAbstractFavoriteWord(
+                        ModelAbstractFavoriteWord.ITEM,
+                        null,
+                        words[j]
+                );
+                item.mSectionPosition = sectionPosition;
+                item.mListPosition = listPosition ++;
+                mData.add(item);
+            }
+
+            sectionPosition ++;
+        }
+
     }
 
 
+    @Override
+    public int getCount() {
+        return mData.size();
+    }
+
+    public void updateIndex(int from, int value) {
+        for (int i = from; i < mData.size(); i ++) {
+            ModelAbstractFavoriteWord abstractFavoriteWord = mData.get(i);
+            if (abstractFavoriteWord.mType == ModelAbstractFavoriteWord.ITEM) {
+                abstractFavoriteWord.mListPosition += value;
+            }
+        }
+    }
+
+    @Override
+    public boolean hasStableIds() {
+        return true;
+    }
+
+
+
+    @Override
+    public boolean isItemViewTypePinned(int viewType) {
+        return viewType == ModelAbstractFavoriteWord.SECTION;
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return 2;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return mData.get(position).mType;
+    }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        if (getItem(position).isSection()) {
-            SectionViewHolder sectionViewHolder = null;
+        if (mData.get(position).isSection()) {
+
+            SectionViewholder sectionViewholder = null;
             if (convertView == null) {
-                convertView = LayoutInflater.from(mContext).inflate(R.layout.item_section, parent, false);
-                sectionViewHolder = new SectionViewHolder(convertView);
-                convertView.setTag(sectionViewHolder);
+                convertView = LayoutInflater.from(mContext).inflate(R.layout.item_favorite_section, parent, false);
+                sectionViewholder = new SectionViewholder(convertView);
+                convertView.setTag(sectionViewholder);
 
             } else {
-                sectionViewHolder = (SectionViewHolder) convertView.getTag();
+                sectionViewholder = (SectionViewholder) convertView.getTag();
             }
-            sectionViewHolder.mTextView.setText(getItem(position).mText);
 
+            sectionViewholder.mTextView.setText(mData.get(position).mModelColorFavorite.toString());
+            int favoriteTableIndex = mSqlite.checkIfAlreadyInFavorite(mData.get(position).mModelWordLesson.getmWord().getmId());
+            if (favoriteTableIndex != -1) {
+                sectionViewholder.mImageView.setImageResource(ColorConstant.colorArr[favoriteTableIndex]);
+            }
 
         } else {
+
             WordViewHolder itemViewHolder = null;
+
             if (convertView == null) {
                 convertView = LayoutInflater.from(mContext)
                         .inflate(R.layout.item_word_fragment, parent, false);
@@ -139,12 +236,12 @@ public class PinnedSectionAdapter extends ArrayAdapter<ModelAbstractWord> implem
                 itemViewHolder = (WordViewHolder) convertView.getTag();
             }
 
-            final ModelWord word = getItem(position).mWord.getmWord();
-            itemViewHolder.setData(word);
+            final ModelWordLesson wordLesson = mData.get(position).mModelWordLesson;
+            itemViewHolder.setData(wordLesson, position);
 
-            if(getItem(position).isSection() == false) {
-                itemViewHolder.bind(mSections[getItem(position).sectionPosition].getmLessonId(),
-                        position - getItem(getItem(position).sectionPosition).listPosition,
+            if(!mData.get(position).isSection()) {
+                itemViewHolder.bind(wordLesson.getmLessonId(),
+                        position - mData.get(mData.get(position).mSectionPosition).mListPosition,
                         mListener);
             }
 
@@ -159,54 +256,39 @@ public class PinnedSectionAdapter extends ArrayAdapter<ModelAbstractWord> implem
                 itemViewHolder.mFavorateLayout.setVisibility(View.GONE);
             }
             itemViewHolder.mFavorateLayout.setVisibility(mListVisible.get(position)? View.VISIBLE : View.GONE);
-
-
         }
+
         return convertView;
     }
 
 
 
-
-    @Override
-    public int getViewTypeCount() {
-        return 2;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return getItem(position).mType;
-    }
-
-    @Override
-    public boolean isItemViewTypePinned(int viewType) {
-        return viewType == ModelAbstractWord.SECTION;
-    }
-
-    class SectionViewHolder {
+    /* ======================== ViewHolder ===========================*/
+    class SectionViewholder {
         public TextView mTextView;
-        public SectionViewHolder(View view) {
+        public ImageView mImageView;
+
+        public SectionViewholder(View view) {
             mTextView = (TextView) view.findViewById(R.id.textView);
+            mImageView = (ImageView) view.findViewById(R.id.imageView);
         }
     }
 
 
-
-
-    public class WordViewHolder {
+    class WordViewHolder {
         public TextView mWordTxt;
         public Button mBtn;
         public RecyclerView mRecyclerView;
         public RelativeLayout mFavorateLayout;
         public View mView;
         public ImageView mRed, mOrange, mYellow, mGreen, mBlue, mPurple, mUnFavorite;
-        private ModelWord mWord;
-        public int mCurrentColor;
+        private ModelWordLesson mWord;
 
         private float mXCircle;
-        private OnItemClickListener mListener;
+        private PinnedSectionAdapter.OnItemClickListener mListener;
         private int mLessonId;
         private int mPos;
+        private int mListviewPosition;
 
 
         public void setOpenedPosition() {
@@ -337,7 +419,6 @@ public class PinnedSectionAdapter extends ArrayAdapter<ModelAbstractWord> implem
 
 
         public WordViewHolder(View view) {
-            this.mCurrentColor = ColorConstant.NONE;
             view.setOnClickListener(mOnClickListener);
 
             mBtn = (Button) view.findViewById(R.id.btn_favorite);
@@ -366,93 +447,85 @@ public class PinnedSectionAdapter extends ArrayAdapter<ModelAbstractWord> implem
             mUnFavorite.setOnClickListener(mOnClickListener);
         }
 
-        public void setData(ModelWord word) {
+        public void setData(ModelWordLesson word, int listviewPosition) {
             this.mWord = word;
+            this.mListviewPosition = listviewPosition;
         }
 
         public void bindData() {
-            mWordTxt.setText(mWord.getmWord());
-            WordMeaningAdapter adapter = new WordMeaningAdapter(mContext, mWord.getmTypes(), mWord.getmMeanings(), mOnClickListener);
+            mWordTxt.setText(mWord.getmWord().getmWord());
+            WordMeaningAdapter adapter = new WordMeaningAdapter(mContext, mWord.getmWord().getmTypes(), mWord.getmWord().getmMeanings(), mOnClickListener);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
             mRecyclerView.setAdapter(adapter);
 
         }
 
-        public void bind(final int lessonId, final int position, final OnItemClickListener listener){
+        public void bind(final int lessonId, final int position, final PinnedSectionAdapter.OnItemClickListener listener){
             this.mListener = listener;
             this.mPos = position - 1;
             mLessonId = lessonId;
         }
 
+
         private View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                int currentColor = -1;
+
                 if(mFavorateLayout.getVisibility() == View.VISIBLE) {
-                    int colorChosen;
-                    switch (v.getId()){
+                    if (v.getId() == R.id.btn_un_favorite) {
+                        removeFromFavoriteTableTo(
+                                mWord.getmWord().getmId(),
+                                mFavoriteTables[mData.get(mListviewPosition).mSectionPosition].mIndex,
+                                -1,
+                                mListviewPosition,
+                                -1
+                        );
 
-                        case R.id.btn_red:
-                            removeFromFavoriteTable(mWord.getmId(), mCurrentColor);
-                            mCurrentColor = ColorConstant.RED;
-                            colorChosen = ColorConstant.colorArr[mCurrentColor];
-                            setBackgroundBtn(mBtn, mWord.getmId(), colorChosen);
-                            insertIntoFavoriteTable(mWord.getmId(), mCurrentColor);
-                            hideFavoriteLayout();
-                            break;
-                        case R.id.btn_orrange:
-                            removeFromFavoriteTable(mWord.getmId(), mCurrentColor);
-                            mCurrentColor = ColorConstant.ORANGE;
-                            colorChosen = ColorConstant.colorArr[mCurrentColor];
-                            setBackgroundBtn(mBtn, mWord.getmId(), colorChosen);
-                            insertIntoFavoriteTable(mWord.getmId(), mCurrentColor);
-                            hideFavoriteLayout();
-                            break;
-                        case R.id.btn_yellow:
-                            removeFromFavoriteTable(mWord.getmId(), mCurrentColor);
-                            mCurrentColor = ColorConstant.YELLOW;
-                            colorChosen = ColorConstant.colorArr[mCurrentColor];
-                            setBackgroundBtn(mBtn, mWord.getmId(), colorChosen);
-                            insertIntoFavoriteTable(mWord.getmId(), mCurrentColor);
-                            hideFavoriteLayout();
-                            break;
+                        setBackgroundBtn(mBtn, mWord.getmWord().getmId(), -1);
+                        hideFavoriteLayout();
+                    } else {
+                        int colorChosen;
+                        switch (v.getId()){
 
-                        case R.id.btn_green:
-                            removeFromFavoriteTable(mWord.getmId(), mCurrentColor);
-                            mCurrentColor = ColorConstant.GREEN;
-                            colorChosen = ColorConstant.colorArr[mCurrentColor];
-                            setBackgroundBtn(mBtn, mWord.getmId(), colorChosen);
-                            insertIntoFavoriteTable(mWord.getmId(), mCurrentColor);
-                            hideFavoriteLayout();
-                            break;
-                        case R.id.btn_blue:
-                            removeFromFavoriteTable(mWord.getmId(), mCurrentColor);
-                            mCurrentColor = ColorConstant.BLUE;
-                            colorChosen = ColorConstant.colorArr[mCurrentColor];
-                            setBackgroundBtn(mBtn, mWord.getmId(), colorChosen);
-                            insertIntoFavoriteTable(mWord.getmId(), mCurrentColor);
-                            hideFavoriteLayout();
-                            break;
-                        case R.id.btn_purple:
-                            removeFromFavoriteTable(mWord.getmId(), mCurrentColor);
-                            mCurrentColor = ColorConstant.BLUE;
-                            colorChosen = ColorConstant.colorArr[mCurrentColor];
-                            insertIntoFavoriteTable(mWord.getmId(), colorChosen);
-                            setBackgroundBtn(mBtn, mWord.getmId(), colorChosen);
-                            insertIntoFavoriteTable(mWord.getmId(), mCurrentColor);
-                            hideFavoriteLayout();
-                            break;
-                        case R.id.btn_un_favorite:
-                            removeFromFavoriteTable(mWord.getmId(), mCurrentColor);
+                            case R.id.btn_red:
+                                currentColor = ColorConstant.RED;
+                                break;
+                            case R.id.btn_orrange:
+                                currentColor = ColorConstant.ORANGE;
+                                break;
+                            case R.id.btn_yellow:
+                                currentColor = ColorConstant.YELLOW;
+                                break;
 
-                            mCurrentColor = ColorConstant.NONE;
-                            colorChosen = ColorConstant.colorArr[mCurrentColor];
-                            setBackgroundBtn(mBtn, mWord.getmId(), colorChosen);
-                            hideFavoriteLayout();
-                            break;
+                            case R.id.btn_green:
+                                currentColor = ColorConstant.GREEN;
+                                break;
+                            case R.id.btn_blue:
+                                currentColor = ColorConstant.BLUE;
+                                break;
+                            case R.id.btn_purple:
+                                currentColor = ColorConstant.BLUE;
+                                break;
+                        }
 
+                        removeFromFavoriteTableTo(
+                                mWord.getmWord().getmId(),
+                                mFavoriteTables[mData.get(mListviewPosition).mSectionPosition].mIndex,
+                                currentColor,
+                                mListviewPosition,
+                                mSectionList.get(currentColor).mListPosition + 1
+                        );
+
+                        colorChosen = ColorConstant.colorArr[currentColor];
+                        setBackgroundBtn(mBtn, mWord.getmWord().getmId(), colorChosen);
+                        hideFavoriteLayout();
+
+                        setClosedPosition();
+                        notifyDataSetChanged();
                     }
 
-                    setClosedPosition();
                 } else {
                     switch (v.getId()){
                         case R.id.btn_favorite:
@@ -464,6 +537,21 @@ public class PinnedSectionAdapter extends ArrayAdapter<ModelAbstractWord> implem
             }
         };
 
+        private void removeFromFavoriteTableTo(int wordId, int oldColorIndex, int newColorIndex, int oldPosition, int newPosition) {
+            removeFromFavoriteTable(wordId, oldColorIndex);
+            updateIndex(oldPosition, -1);
+            insertIntoFavoriteTable(wordId, newColorIndex);
+            updateIndex(newPosition, 1);
+
+            mListview.removeRow(
+                    new ModelAbstractFavoriteWord(ModelAbstractFavoriteWord.ITEM, new ModelColorFavorite(oldColorIndex), mWord),
+                    oldPosition,
+                    newPosition
+            );
+
+        }
+
+
         private void hideFavoriteLayout() {
             /**
              * add animation
@@ -471,7 +559,6 @@ public class PinnedSectionAdapter extends ArrayAdapter<ModelAbstractWord> implem
             this.mFavorateLayout.setVisibility(View.GONE);
             int position = (int) this.mBtn.getTag();
             mListVisible.set(position, false);
-
         }
 
         private void showFavoriteLayout() {
@@ -488,25 +575,22 @@ public class PinnedSectionAdapter extends ArrayAdapter<ModelAbstractWord> implem
 
         private void removeFromFavoriteTable(int wordId, int oldColorIndex){
 
-            if(oldColorIndex == ColorConstant.NONE) {
-                /**
-                 * not in favorite table yet
-                 */
-                return;
-            }
             /**
              * todo.......
              */
+            mSqlite.removeFromFavorite(wordId, oldColorIndex);
         }
 
         private void insertIntoFavoriteTable(int wordId, int newColorIndex) {
 
+            mSqlite.insertIntoFavorite(wordId, newColorIndex);
+            notifyDataSetChanged();
         }
 
         private void setBackgroundBtn(Button btn, int wordId, int colorChosen) {
-            if (!mSqliteVocabulary.checkFavoriteWord(wordId)) {
-                btn.setBackgroundResource(R.mipmap.icon_heart_while);
-            } else btn.setBackgroundResource(R.mipmap.icon_heart);
+//            if (!mSqlite.checkFavoriteWord(wordId)) {
+//                btn.setBackgroundResource(R.mipmap.icon_heart_while);
+//            } else btn.setBackgroundResource(R.mipmap.icon_heart);
         }
     }
 

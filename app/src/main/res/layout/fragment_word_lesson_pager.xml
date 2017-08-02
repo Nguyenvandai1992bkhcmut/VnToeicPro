@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<de.halfbit.pinnedsection.PinnedSectionListView
+<customview.CustomPinnedSectionListview
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/listview"

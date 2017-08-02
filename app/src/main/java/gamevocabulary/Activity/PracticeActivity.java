@@ -1,4 +1,4 @@
-package GameVocabulary.Activity;
+package gamevocabulary.Activity;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,11 +15,11 @@ import com.vntoeic.bkteam.vntoeicpro.R;
 
 import java.util.ArrayList;
 
-import GameVocabulary.Fragment.EngViFragment;
-import GameVocabulary.Fragment.TypingFragment;
-import GameVocabulary.Fragment.ViEngFragment;
-import GameVocabulary.GameInterface;
-import GameVocabulary.RandomHelper;
+import gamevocabulary.Fragment.EngViFragment;
+import gamevocabulary.Fragment.TypingFragment;
+import gamevocabulary.Fragment.ViEngFragment;
+import gamevocabulary.GameInterface;
+import gamevocabulary.RandomHelper;
 import model.ModelWord;
 import model.ModelWordGame;
 import vocabulary.fragment.WordDetailFragment;

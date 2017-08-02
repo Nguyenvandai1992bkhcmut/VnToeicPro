@@ -1,4 +1,4 @@
-package GameVocabulary.Adapter;
+package gamevocabulary.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,10 +11,9 @@ import com.vntoeic.bkteam.vntoeicpro.R;
 
 import java.util.ArrayList;
 
-import GameVocabulary.Fragment.GameFragment;
-import GameVocabulary.Fragment.TypingFragment;
-import GameVocabulary.GameInterface;
-import model.ModelWord;
+import gamevocabulary.Fragment.GameFragment;
+import gamevocabulary.Fragment.TypingFragment;
+import gamevocabulary.GameInterface;
 
 /**
  * Created by giang on 7/11/17.

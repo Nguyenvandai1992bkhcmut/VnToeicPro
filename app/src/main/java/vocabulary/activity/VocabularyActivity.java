@@ -4,26 +4,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
-import android.view.ViewGroup;
 
 import com.vntoeic.bkteam.vntoeicpro.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import GameVocabulary.Activity.LearningActivity;
-import GameVocabulary.Activity.PracticeActivity;
-import dictionary.FragmentDictionary;
+import gamevocabulary.Activity.LearningActivity;
+import gamevocabulary.Activity.PracticeActivity;
 import listenvocabularry.ListenActivity;
-import model.Dictionary;
-import model.ModelAbstractWord;
 import model.ModelWord;
 import model.ModelWordLesson;
-import sqlite.SqliteDictionary;
 import sqlite.SqliteVocabulary;
 import vocabulary.adapter.PinnedSectionAdapter;
 import vocabulary.fragment.TagVocabularyFragment;

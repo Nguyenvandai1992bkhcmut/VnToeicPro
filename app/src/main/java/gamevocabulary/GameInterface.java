@@ -1,8 +1,7 @@
-package GameVocabulary;
+package gamevocabulary;
 
 import android.support.v4.app.Fragment;
 
-import model.ModelWord;
 import model.ModelWordGame;
 
 /**

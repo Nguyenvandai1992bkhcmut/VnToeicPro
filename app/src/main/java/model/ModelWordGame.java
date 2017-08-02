@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 
-import GameVocabulary.Queue;
+import gamevocabulary.Queue;
 
 /**
  * Created by giang on 7/7/17.

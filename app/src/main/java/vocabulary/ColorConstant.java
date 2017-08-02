@@ -38,6 +38,20 @@ public class ColorConstant {
             R.mipmap.un_favorite
     };
 
+    public static String getColorName(int index) {
+        switch (index) {
+            case 0: return "Red";
+            case 1: return "Orange";
+            case 2: return "Yellow";
+            case 3: return "Green";
+            case 4: return "Blue";
+            case 5: return "Purple";
+
+            default:return "";
+        }
+
+    }
+
     public static int getColorIndex(int color){
         switch (color){
             case R.color.circle_red: return RED;

@@ -1,4 +1,4 @@
-package GameVocabulary.Fragment;
+package gamevocabulary.Fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -17,7 +17,7 @@ import com.vntoeic.bkteam.vntoeicpro.R;
 
 import java.util.ArrayList;
 
-import GameVocabulary.GameInterface;
+import gamevocabulary.GameInterface;
 import model.ModelWord;
 import model.ModelWordGame;
 

@@ -1,8 +1,7 @@
-package GameVocabulary;
+package gamevocabulary;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 import model.ModelMeaning;
 import model.ModelWord;

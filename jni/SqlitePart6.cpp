@@ -205,3 +205,15 @@ vector<Part6*>SqlitePart6::searchPart6Favorite(){
         return funsearchPart();
 }
 
+<<<<<<< HEAD
+=======
+
+vector<Part6*>SqlitePart6::searchPart6Check(){
+         string sql = "select * from part6 where part6_id in (select id from part6_checked)";
+         if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
+             vector<Part6*>re;
+             return re;
+         }
+        return funsearchPart();
+}
+>>>>>>> master

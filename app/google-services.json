@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "250446074415",
+    "firebase_url": "https://vntoeic-849bd.firebaseio.com",
+    "project_id": "vntoeic-849bd",
+    "storage_bucket": "vntoeic-849bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:250446074415:android:58f538dc6a89e433",
+        "android_client_info": {
+          "package_name": "com.vntoeic.bkteam.vntoeicpro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "250446074415-mtb27n06orqhu396i1pfdhtti1ptrair.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmmnNOOIoB3HzLoemS9NyhVo8OqVnzDK8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

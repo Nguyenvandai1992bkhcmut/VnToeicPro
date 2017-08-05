@@ -55,7 +55,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.ModelPart5;
+import supportview.IContentQuestion;
 
+import static com.vntoeic.bkteam.vntoeicpro.R.id.icon;
 import static com.vntoeic.bkteam.vntoeicpro.R.id.textView;
 import static java.lang.Float.valueOf;
 
@@ -63,17 +65,25 @@ import static java.lang.Float.valueOf;
  * Created by dainguyen on 6/2/17.
  */
 
+/*
+mode = 0 select Dap an
+    => show Solution
+    => Gui ve Class Manager
+    => Khong thay doi dc dap an da~ chon
+mode =1 select 1 Dap an
+    => gui ve Class Manager
+ */
 public class FragmentPart5Question extends Fragment {
     private ModelPart5 data;
 
-
     private String select = "Not choose";
-    int question;
-    private IAddResult iAddResult;
+    private int question;
+    private IContentQuestion iContentQuestion;
     private int issubmit = 0;
     private RecyclerView recyclerView;
     private  AdapterQuestion adapter;
     private int mode;
+    private int isfigure =0;
 
     public ArrayList<AdapterQuestion.Myhoder> arrHolder = new ArrayList<>();
     int orgX;
@@ -88,7 +98,9 @@ public class FragmentPart5Question extends Fragment {
         question = bundle.getInt("question");
         select = bundle.getString("select");
         issubmit = bundle.getInt("submit");
+        isfigure = bundle.getInt("figure");
     }
+
 
     @Nullable
     @Override
@@ -98,10 +110,9 @@ public class FragmentPart5Question extends Fragment {
         return view;
     }
 
-
     public void setUpLayout(View view) {
         TextView text_question = (TextView) view.findViewById(R.id.text_question);
-        text_question.setText(data.getQuestion());
+        text_question.setText(String.valueOf(question+1)+". "+data.getQuestion());
         recyclerView = (RecyclerView) view.findViewById(R.id.recycle_ques);
         adapter = new AdapterQuestion();
         GridLayoutManager gridLayoutManager;
@@ -115,7 +126,7 @@ public class FragmentPart5Question extends Fragment {
 /*
 on
  */
-        recyclerView.setOnTouchListener(new View.OnTouchListener() {
+        View.OnTouchListener onTouchListener = new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
@@ -123,9 +134,10 @@ on
                         orgX = (int) event.getX();
                         return true;
                     case MotionEvent.ACTION_UP:
+                        v.setScaleX(1);
                         offsetX = (int) (event.getX() - orgX);
-                        if (offsetX < -150) iAddResult.next();
-                        else if (offsetX > 150) iAddResult.back();
+                        if (offsetX < -150) iContentQuestion.nextContent();
+                        else if (offsetX > 150) iContentQuestion.backContent();
                         return true;
                     case MotionEvent.ACTION_POINTER_DOWN:
                     case MotionEvent.ACTION_POINTER_UP:
@@ -135,8 +147,12 @@ on
                 }
                 return false;
             }
-        });
+        };
+        view.setOnTouchListener(onTouchListener);
+        // recyclerView.setOnTouchListener(onTouchListener);
+        //text_question.setOnTouchListener(onTouchListener);
 
+        if(isfigure==1)showFigure();
 
     }
 
@@ -151,17 +167,9 @@ on
     }
 
 
-    public interface IAddResult {
-        public void addResult(int question, String select);
 
-        public void next();
-
-        public void back();
-
-    }
-
-    public void setiAddResult(IAddResult iAddResult) {
-        this.iAddResult = iAddResult;
+    public void setiContentQuestion(IContentQuestion iContentQuestion) {
+        this.iContentQuestion = iContentQuestion;
     }
 
     public class AdapterQuestion extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -178,48 +186,64 @@ on
         @Override
         public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
             Myhoder myhoder = (Myhoder) holder;
-
-            if (position == 0) {
-                myhoder.text_ques.animateText(data.getA());
-                if (select.equals("a"))
-                    myhoder.img_check.setBackgroundResource(R.mipmap.icon_checked);
-            } else if (position == 1) {
-                myhoder.text_ques.animateText(data.getB());
-                if (select.equals("b"))
-                    myhoder.img_check.setBackgroundResource(R.mipmap.icon_checked);
-            } else if (position == 2) {
-                myhoder.text_ques.animateText(data.getC());
-                if (select.equals("c"))
-                    myhoder.img_check.setBackgroundResource(R.mipmap.icon_checked);
-            } else {
-                myhoder.text_ques.animateText(data.getD());
-                if (select.equals("d"))
-                    myhoder.img_check.setBackgroundResource(R.mipmap.icon_checked);
+            if( issubmit==1 && position==3){
+                myhoder.text_ques.setText(data.getD());
+                showResultQuestion();
+            }else {
+                if (position == 0) {
+                    myhoder.text_ques.setText(data.getA());
+                    if (select.equals("a"))
+                        myhoder.img_check.setBackgroundResource(R.mipmap.icon_checked);
+                } else if (position == 1) {
+                    myhoder.text_ques.setText(data.getB());
+                    if (select.equals("b"))
+                        myhoder.img_check.setBackgroundResource(R.mipmap.icon_checked);
+                } else if (position == 2) {
+                    myhoder.text_ques.setText(data.getC());
+                    if (select.equals("c"))
+                        myhoder.img_check.setBackgroundResource(R.mipmap.icon_checked);
+                } else {
+                    myhoder.text_ques.setText(data.getD());
+                    if (select.equals("d"))
+                        myhoder.img_check.setBackgroundResource(R.mipmap.icon_checked);
+                }
             }
             myhoder.itemView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
-                            if (mode != -1 && issubmit == 0) {
-                                for (int i = 0; i < arrHolder.size(); i++) {
-                                    if (i != position)
-                                        arrHolder.get(i).img_check.setBackgroundResource(R.mipmap.icon_notchecked);
-                                    else
-                                        arrHolder.get(i).img_check.setBackgroundResource(R.mipmap.icon_checked);
+                            orgX = (int) event.getX();
+                            return true;
+                        case MotionEvent.ACTION_MOVE:
+                            offsetX = (int) (event.getX() - orgX);
+                            if (offsetX < -200) iContentQuestion.nextContent();
+                            else if (offsetX > 200) iContentQuestion.backContent();
+                            return true;
+                        case MotionEvent.ACTION_UP:
 
+                            if (Math.abs(offsetX) < 100){
+                                if (issubmit == 0) {
+                                    for (int i = 0; i < arrHolder.size(); i++) {
+                                        if (i != position)
+                                            arrHolder.get(i).img_check.setBackgroundResource(R.mipmap.icon_notchecked);
+                                        else
+                                            arrHolder.get(i).img_check.setBackgroundResource(R.mipmap.icon_checked);
+
+                                    }
+                                    if (position == 0) select = "a";
+                                    else if (position == 1) select = "b";
+                                    else if (position == 2) select = "c";
+                                    else select = "d";
+
+                                    if (mode != 1) {
+                                        showResultQuestion();
+                                        issubmit = 1;
+                                        iContentQuestion.addChoose(0,select);
+                                    } else {
+                                        iContentQuestion.addChoose(0,select);
+                                    }
                                 }
-                                if (position == 0) select = "a";
-                                else if (position == 1) select = "b";
-                                else if (position == 2) select = "c";
-                                else select = "d";
-                            }
-                            if (mode == 0) {
-                                showResultQuestion();
-                                mode = -1;
-                                iAddResult.addResult(question, select);
-                            } else if (mode == 1) {
-                                iAddResult.addResult(question, select);
                             }
                             break;
                     }
@@ -237,64 +261,68 @@ on
 
         @Override
         public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
-            int position = holder.getLayoutPosition();
-            if (position == 0 || position == 2) {
-                Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.right_left_in);
-                holder.itemView.startAnimation(animation);
-            } else {
-                Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.left_to_right_in);
-                holder.itemView.startAnimation(animation);
-            }
+//            int position = holder.getLayoutPosition();
+//            if (position == 0 || position == 2) {
+//                Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.right_left_in);
+//                holder.itemView.startAnimation(animation);
+//            } else {
+//                Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.left_to_right_in);
+//                holder.itemView.startAnimation(animation);
+//            }
+            Animation animation = AnimationUtils.loadAnimation(getContext(),R.anim.scale_question_in);
+            animation.setStartOffset(holder.getLayoutPosition()*150);
+            holder.itemView.startAnimation(animation);
             super.onViewAttachedToWindow(holder);
         }
 
         public void showResultQuestion() {
             String sol = data.getResult();
             if (!select.equals("Not choose")) {
-                for (int i = 0; i < arrHolder.size(); i++) {
-                    if (select.equals("a")) {
-                        arrHolder.get(0).img_check.setBackgroundResource(R.mipmap.icon_false);
-                        arrHolder.get(0).idImage = R.mipmap.icon_false;
-                    } else if (select.equals("b")) {
-                        arrHolder.get(1).img_check.setBackgroundResource(R.mipmap.icon_false);
-                        arrHolder.get(1).idImage = R.mipmap.icon_false;
-                     }
-                    else if (select.equals("c")) {
-                        arrHolder.get(2).img_check.setBackgroundResource(R.mipmap.icon_false);
-                        arrHolder.get(2).idImage = R.mipmap.icon_false;
-                    }
-                    else if (select.equals("d")) {
-                        arrHolder.get(3).img_check.setBackgroundResource(R.mipmap.icon_false);
-                        arrHolder.get(3).idImage = R.mipmap.icon_false;
-                    }
-
-
-                    if (sol.equals("a")) {
-                        arrHolder.get(0).img_check.setBackgroundResource(R.mipmap.icon_true);
-                        arrHolder.get(0).idImage = R.mipmap.icon_true;
-                    }
-                    else if (sol.equals("b")) {
-                        arrHolder.get(1).img_check.setBackgroundResource(R.mipmap.icon_true);
-                        arrHolder.get(1).idImage = R.mipmap.icon_true;
-                    }
-                    else if (sol.equals("c")) {
-                        arrHolder.get(2).img_check.setBackgroundResource(R.mipmap.icon_true);
-                        arrHolder.get(2).idImage = R.mipmap.icon_true;
-                    }
-                    else if (sol.equals("d")) {
-                        arrHolder.get(3).img_check.setBackgroundResource(R.mipmap.icon_true);
-                        arrHolder.get(3).idImage = R.mipmap.icon_true;
-                    }
-
+                if (select.equals("a")) {
+                    arrHolder.get(0).img_check.setBackgroundResource(R.mipmap.icon_false);
+                    arrHolder.get(0).idImage = R.mipmap.icon_false;
+                } else if (select.equals("b")) {
+                    arrHolder.get(1).img_check.setBackgroundResource(R.mipmap.icon_false);
+                    arrHolder.get(1).idImage = R.mipmap.icon_false;
+                } else if (select.equals("c")) {
+                    arrHolder.get(2).img_check.setBackgroundResource(R.mipmap.icon_false);
+                    arrHolder.get(2).idImage = R.mipmap.icon_false;
+                } else if (select.equals("d")) {
+                    arrHolder.get(3).img_check.setBackgroundResource(R.mipmap.icon_false);
+                    arrHolder.get(3).idImage = R.mipmap.icon_false;
+                }
+            }else{
+                for(int i=0;i<arrHolder.size();i++){
+                    arrHolder.get(i).img_check.setBackgroundResource(R.mipmap.icon_false);
+                    arrHolder.get(i).idImage = R.mipmap.icon_false;
                 }
             }
+
+
+            if (sol.equals("a")) {
+                arrHolder.get(0).img_check.setBackgroundResource(R.mipmap.icon_true);
+                arrHolder.get(0).idImage = R.mipmap.icon_true;
+            }
+            else if (sol.equals("b")) {
+                arrHolder.get(1).img_check.setBackgroundResource(R.mipmap.icon_true);
+                arrHolder.get(1).idImage = R.mipmap.icon_true;
+            }
+            else if (sol.equals("c")) {
+                arrHolder.get(2).img_check.setBackgroundResource(R.mipmap.icon_true);
+                arrHolder.get(2).idImage = R.mipmap.icon_true;
+            }
+            else if (sol.equals("d")) {
+                arrHolder.get(3).img_check.setBackgroundResource(R.mipmap.icon_true);
+                arrHolder.get(3).idImage = R.mipmap.icon_true;
+            }
+
 
         }
 
 
         public class Myhoder extends RecyclerView.ViewHolder {
             public ImageView img_check;
-            public HTextView text_ques;
+            public TextView text_ques;
             public TextView text_pro;
             public LinearLayout line;
             public ImageView img;
@@ -302,8 +330,7 @@ on
             public Myhoder(View itemView) {
                 super(itemView);
                 img_check = (ImageView) itemView.findViewById(R.id.checkbox);
-                text_ques = (HTextView) itemView.findViewById(R.id.text_ques);
-                text_ques.setAnimateType(HTextViewType.SCALE);
+                text_ques = (TextView) itemView.findViewById(R.id.text_ques);
                 text_pro = (TextView)itemView.findViewById(R.id.text_pro);
                 line = (LinearLayout)itemView.findViewById(R.id.line);
                 img = (ImageView)itemView.findViewById(R.id.img);
@@ -311,12 +338,11 @@ on
         }
     }
 
-    public void showFigure(String url) {
+    public void showFigure() {
+        String url = "Http://vntoeic.com/api/v1/part5/result/"+String.valueOf(data.getId());
         MyAsynTask myAsynTask = new MyAsynTask();
         myAsynTask.execute(url);
     }
-
-
 
     public class MyAsynTask extends AsyncTask<String , Void ,ArrayList<String>>{
         int count =0;
@@ -371,10 +397,10 @@ on
                 arrHolder.get(i).text_pro.setVisibility(View.VISIBLE);
                 arrHolder.get(i).img.setVisibility(View.VISIBLE);
                 arrHolder.get(i).line.setGravity(Gravity.CENTER);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int)(300*value/100),30);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int)(700*value/100),30);
                 params.gravity =Gravity.CENTER;
                 arrHolder.get(i).img.setLayoutParams(params);
-                ValueAnimator valueAnimator = new ValueAnimator().ofFloat(300*value/100);
+                ValueAnimator valueAnimator = new ValueAnimator().ofFloat(700*value/100);
 
                 final int finalI = i;
 
@@ -433,8 +459,5 @@ on
             super.onProgressUpdate(values);
         }
     }
-
-
-
 
 }

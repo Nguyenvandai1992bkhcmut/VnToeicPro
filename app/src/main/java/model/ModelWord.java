@@ -7,7 +7,6 @@ import java.io.Serializable;
 /**
  * Created by dainguyen on 5/26/17.
  */
-
 public class ModelWord implements Serializable{
     private int mId;
     private String mWord;

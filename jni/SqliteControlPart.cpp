@@ -58,6 +58,40 @@ SqliteControlPart::SqliteControlPart(){
                   return result;
    }
 
+<<<<<<< HEAD
+=======
+
+    vector<ModelCheckPart>SqliteControlPart::searchAllCheckPartId(int part, int question){
+
+           vector<ModelCheckPart>result;
+                    stringstream ss2;
+                    ss2 << part;
+                    string idpart = ss2.str();
+
+                    stringstream ss3;
+                                        ss3 << question;
+                                        string idquestion = ss3.str();
+                    string sql ="select * from part"+idpart+"_checked where id ="+idquestion ;
+
+                     if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
+                          const char * er = sqlite3_errmsg(db);
+                          return result;
+                     }
+                     while (sqlite3_step(stmt) == SQLITE_ROW) {
+                           int id = sqlite3_column_int(stmt,0);
+                           int re = sqlite3_column_int(stmt,2);
+                           const char * time1 = (const char *)sqlite3_column_text(stmt,1);
+                           char * time = new char[strlen(time1)+1];
+                           for(int i =0;i<strlen(time1)+1;i++){
+                               time[i]=time1[i];
+                           }
+                           ModelCheckPart model(id,time,re);
+                           result.push_back(model);
+                     }
+                     return result;
+      }
+
+>>>>>>> master
 bool SqliteControlPart::checkPartFavorite(int part1, int id1){
     stringstream ss2;
       ss2 << part1;
@@ -136,6 +170,27 @@ void SqliteControlPart::deletePartFavorite(int part1, int id1){
      sqlite3_step(stmt);
 }
 
+<<<<<<< HEAD
+=======
+void SqliteControlPart::deletePartFavoriteIdTime(int part1, int id1,const char * time1){
+      stringstream ss2;
+      ss2 << part1;
+      string part = ss2.str();
+
+      stringstream ss3;
+      ss3 << id1;
+       string id = ss3.str();
+
+       string time =(string)time1;
+
+       string sql = "delete from part"+part+"_favorite  where id=" + id +" and time ='"+time+"'";
+     if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
+            return ;
+      }
+     sqlite3_step(stmt);
+}
+
+>>>>>>> master
 void SqliteControlPart::deletePartCheck(int part1, int id1){
       stringstream ss2;
       ss2 << part1;
@@ -152,6 +207,26 @@ void SqliteControlPart::deletePartCheck(int part1, int id1){
      sqlite3_step(stmt);
 }
 
+<<<<<<< HEAD
+=======
+void SqliteControlPart::deletePartCheckIdTime(int part1, int id1 , const char * time1){
+      stringstream ss2;
+      ss2 << part1;
+      string part = ss2.str();
+
+      stringstream ss3;
+      ss3 << id1;
+      string id = ss3.str();
+       string time =(string)time1;
+       string sql = "delete from part"+part+"_checked  where id=" + id +" and time ='"+time+"'";
+     if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
+            return ;
+      }
+     sqlite3_step(stmt);
+}
+
+
+>>>>>>> master
 vector<Word*>SqliteControlPart::funSeachWord(){
     vector<Word*>result;
     while (sqlite3_step(stmt) == SQLITE_ROW) {

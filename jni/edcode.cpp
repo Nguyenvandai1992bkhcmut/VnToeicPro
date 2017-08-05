@@ -27,7 +27,11 @@ char * decode(const void * in){
         n+=16;
     }
     out[y]='\0';
+<<<<<<< HEAD
     while(y>0){
+=======
+   while(y>0){
+>>>>>>> master
         if (out[y]=='\200'){
             out[y]='\0';
             break;

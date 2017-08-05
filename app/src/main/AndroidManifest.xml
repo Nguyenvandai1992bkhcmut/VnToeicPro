@@ -9,6 +9,11 @@
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-sdk tools:overrideLibrary="android.support.dynamicanimation" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,6 +29,7 @@
             </intent-filter>
         </activity>
         <activity android:name="vocabulary.activity.VocabularyActivity"/>
+
         <activity android:name="dictionary.DictionaryActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize">
@@ -36,13 +42,31 @@
 
         </activity>
 
-        <activity android:name="part5.Part5PractiseAcitvity"
+        <activity android:name="part5.Part5PractiseAcitvity"/>
+        <activity android:name="supportview.PartPractiseAcitvity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize">
 
         </activity>
 
-        <activity android:name="part5.Part5ReviewActivity"
+        <activity android:name="supportview.PartReviewActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize">
+
+        </activity>
+
+        <activity android:name="part7.Part67Activity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize">
+
+        </activity>
+        <activity android:name="part3.ListeningActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize">
+
+        </activity>
+        <activity android:name="part5.Part5ReviewActivity"/>
+        <activity android:name="supportview.ListenPraticseActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize">
 
@@ -52,6 +76,7 @@
         <activity android:name="listenvocabularry.ListenActivity"/>
 
         <service android:name="listenvocabularry.service.PlayService"/>
+
     </application>
 
 </manifest>

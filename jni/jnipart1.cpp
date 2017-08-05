@@ -141,3 +141,26 @@ Java_sqlite_SqlitePart1_searchPart1Favorite(JNIEnv * env , jobject object){
 }
 }
 
+<<<<<<< HEAD
+=======
+
+extern "C"{
+JNIEXPORT jobjectArray JNICALL
+Java_sqlite_SqlitePart1_searchPart1Check(JNIEnv * env , jobject object){
+
+    SqlitePart1 sqlite;
+
+    vector<Part1*>result =sqlite.searchPart1Check();
+     jclass  cl = env -> FindClass("model/ModelPart1");
+
+     jobjectArray arr = env->NewObjectArray((int)result.size(), cl, NULL);
+     for(int i=0;i<result.size();i++){
+        jobject ob = funConvert(env,object,result.at(i));
+        env->SetObjectArrayElement(arr, i, ob);
+     }
+    return arr;
+
+}
+}
+
+>>>>>>> master

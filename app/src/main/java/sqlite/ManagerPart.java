@@ -16,6 +16,8 @@ public  class ManagerPart {
 
     public native ModelPartCheck [] searchAllCheckedPart(int part);
 
+    public native ModelPartCheck []searchAllCheckPartId(int part, int id);
+
     public native boolean checkPartFavorite(int part, int id);
 
     public native  void insertPartFavorite(ModelPartFavorite model);
@@ -23,8 +25,10 @@ public  class ManagerPart {
     public native void insertPartCheck(ModelPartCheck model);
 
     public native void deletePartFavorite(int part, int id);
+    public native void deletePartFavoriteIdTime(int part, int id,String time);
 
     public native void deletePartCheck(int part, int id);
+    public native void deletePartCheckIdTime(int part, int id,String time);
 
     public native ModelWord[]searchWordPart(int part, int id);
 
@@ -32,7 +36,6 @@ public  class ManagerPart {
     is_aware = 0 -> chua thuoc word
     is_aware =1  -> da thuoc tu
     part =[1-7] <=> part1 -> part7
-
     tim kiem nhung tu trong part filter part isware , id,
     */
 

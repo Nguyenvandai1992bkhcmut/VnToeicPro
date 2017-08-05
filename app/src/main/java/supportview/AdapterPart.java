@@ -43,21 +43,21 @@ public class AdapterPart extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if(position<4){
-           Myhoder1 myhoder1 = (Myhoder1)holder;
+            Myhoder1 myhoder1 = (Myhoder1)holder;
             if(position==0){
-                myhoder1.imageView.setBackgroundResource(R.mipmap.essentialwordsicon);
+                myhoder1.imageView.setBackgroundResource(R.mipmap.icon_test_part);
                 myhoder1.textView.setText("Test");
             }
             else if(position==1){
-                myhoder1.imageView.setBackgroundResource(R.mipmap.essentialwordsicon);
+                myhoder1.imageView.setBackgroundResource(R.mipmap.icon_practise_part);
                 myhoder1.textView.setText("Unlimited Question");
             }
             else if(position==2){
-                myhoder1.imageView.setBackgroundResource(R.mipmap.essentialwordsicon);
+                myhoder1.imageView.setBackgroundResource(R.mipmap.icon_favorite_part);
                 myhoder1.textView.setText("Favorite Question");
             }
             else if(position==3){
-                myhoder1.imageView.setBackgroundResource(R.mipmap.essentialwordsicon);
+                myhoder1.imageView.setBackgroundResource(R.mipmap.icon_history_part);
                 myhoder1.textView.setText("History");
             }
             myhoder1.view.setOnClickListener(new View.OnClickListener() {

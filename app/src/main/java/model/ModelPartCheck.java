@@ -4,7 +4,7 @@ package model;
  * Created by dainguyen on 5/28/17.
  */
 
-public class ModelPartCheck {
+public class ModelPartCheck implements IPartManager {
     private int type;
     private int id;
     private String time;
@@ -17,6 +17,7 @@ public class ModelPartCheck {
         this.result = result;
     }
 
+    @Override
     public int getId() {
         return id;
     }
@@ -25,7 +26,9 @@ public class ModelPartCheck {
         this.id = id;
     }
 
-    public int getResult() {
+    @Override
+    public int getResult()
+    {
         return result;
     }
 
@@ -33,6 +36,7 @@ public class ModelPartCheck {
         this.result = result;
     }
 
+    @Override
     public String getTime() {
         return time;
     }

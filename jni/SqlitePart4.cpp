@@ -224,3 +224,26 @@ vector<Part4*>SqlitePart4::searchPart4Favorite(){
         return funsearchPart();
 }
 
+<<<<<<< HEAD
+=======
+vector<Part4*>SqlitePart4::searchPart4Check(){
+
+
+         string sql = "select * from part4 where part4_id  in (select id from part4_checked)";
+         if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
+             vector<Part4*>re;
+             /*
+             const char * xx = sqlite3_errmsg(this->db);
+             char * x = new char[strlen(xx)+1];
+             for(int i=0 ; i<strlen(xx)+1;i++){
+                x[i]=xx[i];
+             }
+             Part1 * p = new Part1(1,x,(const char *)" ",(const char *)" ",(const char *)" ",(const char *)" ",(const char *)" ",0,0);
+             re.push_back(p);
+             */
+             return re;
+         }
+        return funsearchPart();
+}
+
+>>>>>>> master

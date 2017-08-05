@@ -49,4 +49,6 @@
     <color name="circle_green">#53D769</color>
     <color name="circle_blue">#157EFB</color>
     <color name="circle_purple">#CB77DF</color>
+    <color name="bg_listem">#1D1D1D</color>
+    <color name="bg_content">#4E6580</color>
 </resources>

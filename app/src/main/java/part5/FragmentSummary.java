@@ -18,6 +18,8 @@ import com.vntoeic.bkteam.vntoeicpro.R;
 
 import java.util.ArrayList;
 
+import supportview.ISummaryPart;
+
 /**
  * Created by dainguyen on 6/3/17.
  */
@@ -26,9 +28,10 @@ public class FragmentSummary extends Fragment {
     private ArrayList<Integer>question ;
     private ArrayList<String>choose;
     private ArrayList<String>result;
-    private IClickItemSubm iClickItemSubm;
+    private ISummaryPart iSummaryPart;
 
     private int mode =0;
+    private int issubmit=0;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public class FragmentSummary extends Fragment {
             choose = bundle.getStringArrayList("choose");
             result = bundle.getStringArrayList("result");
             mode =  bundle.getInt("mode");
+            issubmit = bundle.getInt("issubmit");
         }
     }
 
@@ -72,15 +76,16 @@ public class FragmentSummary extends Fragment {
             Myholder myholder = (Myholder)holder;
             myholder.text_question.setText("Question "+ String.valueOf(position+1));
             myholder.text_choose.setText(choose.get(position));
-            if(mode==1) {
-                if (!choose.get(position).equals("Not choose")) {
-                    if (choose.get(position).equals(result.get(position))) {
-                        myholder.text_result.setText("True  ");
-                        myholder.text_result.setTextColor(getResources().getColor(R.color.text_example));
-                    } else {
-                        myholder.text_result.setText("False");
-                        myholder.text_result.setTextColor(Color.RED);
-                    }
+            if(mode!=1){
+                if(choose.get(position).equals("Not choose")){
+                    myholder.text_result.setText("........");
+                    myholder.text_result.setTextColor(Color.GRAY);
+                }else{
+                    showTextResult(myholder,position);
+                }
+            }else  if(mode==1) {
+                if (issubmit==1) {
+                    showTextResult(myholder,position);
                 } else {
                     myholder.text_result.setText("........");
                     myholder.text_result.setTextColor(Color.GRAY);
@@ -89,10 +94,20 @@ public class FragmentSummary extends Fragment {
             myholder.view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    iClickItemSubm.funIteamClick(question.get(position));
+                    iSummaryPart.funItemClick(0,position);
                 }
             });
 
+        }
+
+        public void showTextResult(Myholder myholder, int position){
+            if (choose.get(position).equals(result.get(position))) {
+                myholder.text_result.setText("True  ");
+                myholder.text_result.setTextColor(getResources().getColor(R.color.text_example));
+            } else {
+                myholder.text_result.setText("Wrong("+result.get(position)+") ");
+                myholder.text_result.setTextColor(Color.RED);
+            }
         }
 
         @Override
@@ -115,10 +130,8 @@ public class FragmentSummary extends Fragment {
             }
         }
     }
-    public void setItemClick(IClickItemSubm itemClick){
-        this.iClickItemSubm = itemClick;
+    public void setItemClick(ISummaryPart itemClick){
+        this.iSummaryPart = itemClick;
     }
-    public interface  IClickItemSubm{
-        public void funIteamClick(int question);
-    }
+
 }

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@drawable/rect_submit">
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/line_1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/text_bar"
+            android:text="From:"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:id="@+id/text_name"/>
+        </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/line_1"
+        android:id="@+id/line_2"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/text_bar"
+            android:text="Title:"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:id="@+id/text_title"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:id="@+id/line_3"
+        android:weightSum="2">
+        <Button android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_card"
+            android:textColor="@android:color/white"
+            android:layout_weight="1"
+            android:id="@+id/bt_cancel"
+            android:text="Cancel"/>
+        <Button android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_card"
+            android:layout_weight="1"
+            android:id="@+id/bt_send"
+            android:textColor="@android:color/white"
+            android:text="Send"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/line_2"
+        android:layout_above="@id/line_3"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/text_bar"
+            android:text="Content:"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="15sp"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:maxHeight="200dp"
+            android:focusableInTouchMode="true"
+            android:background="@drawable/rect_card"
+            android:text="aaaaadkjfldjflajdfljalkfjlkajflkjlf"
+            android:textColor="@android:color/white"
+            android:id="@+id/text_content"/>
+    </LinearLayout>
+</RelativeLayout>

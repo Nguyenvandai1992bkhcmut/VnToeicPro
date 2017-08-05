@@ -22,6 +22,10 @@ public class SqlitePart1 extends ManagerPart {
     public native ModelPart1[]randomPart1Subject(int subject ,int number);
 
     public native ModelPart1[]searchPart1Favorite();
+//
+   // chua viet
+    public native ModelPart1[]searchPart1Check();
+
 
 
 }

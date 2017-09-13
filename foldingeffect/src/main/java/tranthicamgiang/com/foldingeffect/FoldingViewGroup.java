@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
@@ -26,7 +27,7 @@ public class FoldingViewGroup extends FrameLayout implements FoldingLayout.FoldL
     private boolean isNotStartScroll = false;
     private GestureDetectorCompat mGestureDetector;
     private float mTranslation = -1f;
-    private float mFactor = 0f;
+    private float mFactor = 1f;
     private int mTouchSlop;
     private boolean isNewGesture = false;
 
@@ -42,6 +43,45 @@ public class FoldingViewGroup extends FrameLayout implements FoldingLayout.FoldL
     private void init(Context context) {
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
         mGestureDetector = new GestureDetectorCompat(context, new ScrollGestureDetecture());
+    }
+
+
+    public float getFoldFactor() {
+        return mFactor;
+    }
+
+    public void closeNav() {
+
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, -mFoldingView.getWidth());
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                mTranslation = (float) valueAnimator.getAnimatedValue();
+                mFactor = Math.abs(mTranslation) / mFoldingView.getWidth();
+                mFoldingView.setFoldFactor(mFactor);
+            }
+        });
+
+        valueAnimator.setDuration(300);
+        valueAnimator.setInterpolator(new LinearInterpolator());
+        valueAnimator.start();
+    }
+
+    public void openNav() {
+
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(-mFoldingView.getWidth(), 0);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                mTranslation = (float) valueAnimator.getAnimatedValue();
+                mFactor = Math.abs(mTranslation) / mFoldingView.getWidth();
+                mFoldingView.setFoldFactor(mFactor);
+            }
+        });
+
+        valueAnimator.setDuration(300);
+        valueAnimator.setInterpolator(new LinearInterpolator());
+        valueAnimator.start();
     }
 
     @Override
@@ -164,6 +204,7 @@ public class FoldingViewGroup extends FrameLayout implements FoldingLayout.FoldL
 
     public void setView(View foldingView, View translationView) {
         this.mFoldingView = (FoldingLayout) foldingView;
+        mFactor = mFoldingView.getFoldFactor();
         this.mTranslationView = translationView;
     }
 }

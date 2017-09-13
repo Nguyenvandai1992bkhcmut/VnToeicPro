@@ -35,6 +35,8 @@ import tranthicamgiang.com.foldingeffect.FoldingViewGroup;
 public abstract class BaseActivity extends AppCompatActivity {
 
 
+    private FoldingViewGroup mRoot;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,11 +49,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     private void setUpDrawerLayout() {
-        FoldingViewGroup root = (FoldingViewGroup) findViewById(R.id.foldingViewgroup);
+        mRoot = (FoldingViewGroup) findViewById(R.id.foldingViewgroup);
         FoldingLayout foldingLayout = (FoldingLayout) findViewById(R.id.folding_layout);
         View rightFrame = findViewById(R.id.right_frame);
-        foldingLayout.setFoldListener(root);
-        root.setView(foldingLayout, rightFrame);
+        foldingLayout.setFoldListener(mRoot);
+        mRoot.setView(foldingLayout, rightFrame);
 
         NavigationFragment fragment = new NavigationFragment();
         getSupportFragmentManager().beginTransaction()
@@ -61,6 +63,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
+    public void onClickMenu(){
+        if (mRoot.getFoldFactor() == 1) {
+            mRoot.openNav();
+        } else mRoot.closeNav();
+    }
 
 
 //    protected abstract void cancelLoginFacebook();

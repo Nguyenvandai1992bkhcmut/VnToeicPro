@@ -94,10 +94,14 @@ public class FragmentAppBarMain extends Fragment implements DowloadTask.IDowload
     private int clickPart7=0;
 
     private Boolean checkInternet;
+    private MainActivity mContext;
+
     @Override
-    public void onAttach(Context context1) {
-        context = context1;
-        super.onAttach(context);
+    public void onAttach(Context context) {
+        if (context instanceof MainActivity) {
+            mContext = (MainActivity) context;
+            super.onAttach(context);
+        } else throw new ClassCastException("context must extend BaseActivity");
 
     }
 
@@ -122,6 +126,12 @@ public class FragmentAppBarMain extends Fragment implements DowloadTask.IDowload
         img_icon = (TextView) view.findViewById(R.id.img_icon);
         img_icon.setTypeface(MainActivity.typeface);
         img_menu = (ImageView) view.findViewById(R.id.img_menu);
+        img_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mContext.onClickMenu();
+            }
+        });
         final View view_result = LayoutInflater.from(getContext()).inflate(R.layout.popup_search, null);
         editText = (EditText) view.findViewById(R.id.edit_search);
         editText.setTypeface(MainActivity.typeface);

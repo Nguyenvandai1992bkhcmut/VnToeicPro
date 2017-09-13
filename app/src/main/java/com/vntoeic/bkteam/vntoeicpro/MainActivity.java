@@ -242,6 +242,7 @@ public class MainActivity extends BaseActivity implements AdapterWordSearch.onCl
     }
 
 
+
     public void checkDatabase() {
         File data = getDatabasePath("Database.db");
 

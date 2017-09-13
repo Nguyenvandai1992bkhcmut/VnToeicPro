@@ -3,16 +3,19 @@ package com.vntoeic.bkteam.vntoeicpro;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -30,34 +33,29 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
-import com.vntoeic.bkteam.vntoeicpro.BaseActivity;
-import com.vntoeic.bkteam.vntoeicpro.R;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 import utils.Config;
+import utils.ImageHelper;
 import utils.LoginUtils;
 
 /**
  * Created by giang on 8/9/17.
  */
 
-public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWithServer{
+public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWithServer, ImageHelper.DownloadImageListener{
     private ImageView mLoginGoogle, mLoginFacebook;
-    private BaseActivity mBaseActivity;
+    private BaseActivity mContext;
     private CallbackManager mCallbackManager;
     private LoginManager mLoginManager;
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser mUser;
+    private View mLoginLayout, mUserLayout;
+    private ImageView mUserImg;
+    private TextView mUserName;
 
 
     @Override
@@ -68,7 +66,7 @@ public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWi
 
     @Override
     public void onAttach(Context context) {
-        if (context instanceof BaseActivity) this.mBaseActivity = (BaseActivity) context;
+        if (context instanceof BaseActivity) this.mContext = (BaseActivity) context;
         else throw new ClassCastException("context must be extends BaseActivity");
         super.onAttach(context);
     }
@@ -79,17 +77,22 @@ public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWi
         View view = inflater.inflate(R.layout.fragment_navigation, container, false);
         bindView(view);
 
-
         return view;
     }
 
     private void bindView(View view) {
+        mLoginLayout = view.findViewById(R.id.login_layout);
+        mUserLayout = view.findViewById(R.id.user_login_layout);
+        mUserImg = (ImageView) view.findViewById(R.id.user_img);
+        mUserName = (TextView) view.findViewById(R.id.username);
         mLoginFacebook = (ImageView) view.findViewById(R.id.loginWithFB);
         mLoginFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 loginWithFacebook();
+                mContext.onClickMenu();
+
             }
         });
 
@@ -132,7 +135,7 @@ public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWi
     private void handleFacebookAccessToken(final AccessToken accessToken) {
         AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
         mFirebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener(mBaseActivity, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(mContext, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
@@ -146,11 +149,11 @@ public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWi
                                             loginToServer(mUser, idToken);
                                         }
                                     });
-//                            updateUI(mUser);
+                            updateUI(mUser);
 
                         } else {
 
-//                            updateUI(null);
+                            updateUI(null);
                         }
                     }
                 });
@@ -179,9 +182,29 @@ public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWi
 
     public void updateUI(FirebaseUser user) {
         if (user == null) {
-            Toast.makeText(mBaseActivity, "Authentication failed.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Authentication failed.", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(mBaseActivity, "Authentication success", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Authentication success", Toast.LENGTH_SHORT).show();
+            mLoginLayout.setVisibility(View.GONE);
+            mUserLayout.setVisibility(View.VISIBLE);
+
+            setUserInfo(user);
         }
+    }
+
+    private void setUserInfo(FirebaseUser user) {
+
+        String name = user.getDisplayName();
+        Uri photoUrl = user.getPhotoUrl();
+        mUserName.setText(name);
+
+        ImageHelper.DownloadImage downloadImage = new ImageHelper.DownloadImage(this);
+        assert photoUrl != null;
+        downloadImage.execute(photoUrl.toString());
+    }
+
+    @Override
+    public void onDownloadSuccess(Bitmap bitmap) {
+        if (bitmap != null) mUserImg.setImageBitmap(bitmap);
     }
 }

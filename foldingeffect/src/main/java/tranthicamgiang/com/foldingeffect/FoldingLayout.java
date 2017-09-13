@@ -66,6 +66,10 @@ public class FoldingLayout extends ViewGroup{
         updateFold();
     }
 
+    public float getFoldFactor() {
+        return mFoldFactor;
+    }
+
     public void setFoldListener(FoldListener foldListener) {
         mFoldListener = foldListener;
     }

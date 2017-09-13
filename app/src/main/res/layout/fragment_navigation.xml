@@ -4,7 +4,6 @@
     android:paddingBottom="20dp"
     android:layout_width="320dp"
     android:orientation="vertical"
-    android:background="@color/text_yellow"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,6 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/login_layout"
+            android:visibility="visible"
             android:orientation="vertical"
             android:gravity="center_horizontal">
             <ImageView
@@ -46,6 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_centerVertical="true"
+                android:id="@+id/username"
                 android:text="USE NAME"
                 android:layout_toRightOf="@id/user_img"/>
         </RelativeLayout>
@@ -266,6 +267,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/logout"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:gravity="center_vertical">

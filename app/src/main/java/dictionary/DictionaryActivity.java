@@ -268,6 +268,7 @@ public class DictionaryActivity extends AppCompatActivity implements AdapterWord
         ( (TextView)findViewById(R.id.text_history)).setAlpha(0.6f);
     }
 
+
     @Override
     public void funClickRemove(Dictionary dictionary, int position) {
         SqliteDictionary sqliteDictionary = new SqliteDictionary();

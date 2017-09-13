@@ -14,13 +14,27 @@
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-
         android:theme="@style/AppTheme.NoActionBar">
+
+        <!--===========Facebook login===========================-->
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+                   android:value="@string/facebook_app_id"/>
+
+        <activity android:name="com.facebook.FacebookActivity"
+                  android:configChanges=
+                      "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+                  android:label="@string/app_name">
+        </activity>
+
+        <!--====================================================-->
+
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +42,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
         <activity android:name="vocabulary.activity.VocabularyActivity"/>
 
         <activity android:name="dictionary.DictionaryActivity"
@@ -42,10 +58,9 @@
 
         </activity>
 
-        <activity android:name="part5.Part5PractiseAcitvity"/>
         <activity android:name="supportview.PartPractiseAcitvity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize">
+                  android:theme="@style/AppTheme.NoActionBar"
+                  android:windowSoftInputMode="adjustResize">
 
         </activity>
 
@@ -65,10 +80,9 @@
             android:windowSoftInputMode="adjustResize">
 
         </activity>
-        <activity android:name="part5.Part5ReviewActivity"/>
         <activity android:name="supportview.ListenPraticseActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize">
+                  android:theme="@style/AppTheme.NoActionBar"
+                  android:windowSoftInputMode="adjustResize">
 
         </activity>
         <activity android:name="gamevocabulary.Activity.PracticeActivity"/>
@@ -76,6 +90,29 @@
         <activity android:name="listenvocabularry.ListenActivity"/>
 
         <service android:name="listenvocabularry.service.PlayService"/>
+
+        <!--================Firebase Cloud Message service==============-->
+        <service
+            android:name=".MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_womanspeaker" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+        <!--============================================================-->
 
     </application>
 

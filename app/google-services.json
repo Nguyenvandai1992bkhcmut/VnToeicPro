@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "250446074415-mrnbh8hmrumk2mu6flo3acb8j9nibmtm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vntoeic.bkteam.vntoeicpro",
+            "certificate_hash": "4d2d79b011e6b68d580d0cc01ba85dfb6f93a706"
+          }
+        },
+        {
+          "client_id": "250446074415-0cturb6n95rveaeth9fn4ji1oum7731i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vntoeic.bkteam.vntoeicpro",
+            "certificate_hash": "885f39649fb1cc26865f71c1564af94783bfc386"
+          }
+        },
+        {
           "client_id": "250446074415-mtb27n06orqhu396i1pfdhtti1ptrair.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +45,20 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "250446074415-mtb27n06orqhu396i1pfdhtti1ptrair.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "250446074415-79a75ibpdavo9mlobif4dogs07hru64q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nghia.vnToeic"
+              }
+            }
+          ]
         },
         "ads_service": {
           "status": 2

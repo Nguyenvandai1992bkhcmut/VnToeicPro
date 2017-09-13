@@ -23,6 +23,21 @@
         <item>@drawable/adv</item>
     </array>
 
+    <string-array name="locale_name">
+        <item>English</item>
+        <item>English(US)</item>
+        <item>English(UK)</item>
+    </string-array>
+    <array name="locale_icon">
+        <item>@mipmap/ic_womanspeaker</item>
+        <item>@mipmap/ic_womanspeaker</item>
+        <item>@mipmap/ic_womanspeaker</item>
+    </array>
+    <integer-array name="dotColor">
+        <item>@color/primary_3</item>
+        <item>@color/primary_10</item>
+    </integer-array>
+
     <string-array name="feedback_part5">
         <item>Sai cau Hoi1</item>
         <item>Sai cau Hoi2</item>
@@ -47,7 +62,6 @@
         <item>Content default feedback3</item>
         <item>Content default feedback4</item>
         <item>Content default feedback5</item>
-
         <item>Content default feedback6</item>
 
         <item>Content default feedback7</item>

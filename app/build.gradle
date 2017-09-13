@@ -20,11 +20,13 @@ android {
 }
 
 dependencies {
+    compile project(':foldingeffect'), project(':indicatorlayout')
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.google.android.gms:play-services-ads:10.2.4'
+    compile 'com.facebook.android:facebook-android-sdk:4.6.0'
 
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
@@ -38,8 +40,23 @@ dependencies {
     compile 'com.android.support:support-dynamic-animation:25.3.1'
 
     compile 'com.google.firebase:firebase-auth:10.2.4'
+    compile 'com.google.firebase:firebase-messaging:10.2.4'
     compile 'com.google.android.gms:play-services-auth:10.2.4'
 
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
+
+
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '25.3.0'
+            }
+        }
+    }
 }
 
 apply plugin: 'com.google.gms.google-services'

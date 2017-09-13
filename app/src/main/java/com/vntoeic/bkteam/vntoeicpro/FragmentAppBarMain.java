@@ -58,6 +58,7 @@ import sqlite.SqliteDictionary;
 import sqlite.SqlitePart7;
 import supportview.DowloadTask;
 import supportview.PartPractiseAcitvity;
+import vocabulary.activity.VocabularyActivity;
 
 /**
  * Created by dainguyen on 5/29/17.
@@ -205,6 +206,10 @@ public class FragmentAppBarMain extends Fragment implements DowloadTask.IDowload
             @Override
             public void onClick(View v) {
                 switch (v.getId()){
+                    case R.id.relate_vocabulary:
+                        runVocabulary();
+                        break;
+
                     case R.id.relate_dictionary:
                         runDictionaryActivity();
                         break;
@@ -244,6 +249,7 @@ public class FragmentAppBarMain extends Fragment implements DowloadTask.IDowload
 
             }
         };
+        ((RelativeLayout)view.findViewById(R.id.relate_vocabulary)).setOnClickListener(onClickListener);
         ((RelativeLayout)view.findViewById(R.id.relate_part5)).setOnClickListener(onClickListener);
         ((RelativeLayout)view.findViewById(R.id.relate_part6)).setOnClickListener(onClickListener);
         ((RelativeLayout)view.findViewById(R.id.relate_part7)).setOnClickListener(onClickListener);
@@ -254,6 +260,11 @@ public class FragmentAppBarMain extends Fragment implements DowloadTask.IDowload
         ((RelativeLayout)view.findViewById(R.id.relate_part2)).setOnClickListener(onClickListener);
 
 
+    }
+
+    private void runVocabulary() {
+        Intent intent = new Intent(getContext(), VocabularyActivity.class);
+        startActivity(intent);
     }
 
     public Boolean prepareDataPart7() {

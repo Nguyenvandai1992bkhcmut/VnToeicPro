@@ -2,4 +2,5 @@
     <string name="app_name">VnToeicPro</string>
     <string name="facebook_app_id">122080661751156</string>
     <string name="fb_login_protocol_scheme">fb122080661751156</string>
+    <string name="client_id">250446074415-mtb27n06orqhu396i1pfdhtti1ptrair.apps.googleusercontent.com</string>
 </resources>

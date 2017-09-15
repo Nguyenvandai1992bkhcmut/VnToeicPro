@@ -25,6 +25,12 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -33,9 +39,8 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
+import com.google.firebase.auth.GoogleAuthProvider;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Arrays;
 
 import utils.Config;
@@ -46,7 +51,8 @@ import utils.LoginUtils;
  * Created by giang on 8/9/17.
  */
 
-public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWithServer, ImageHelper.DownloadImageListener{
+public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWithServer, ImageHelper.DownloadImageListener, GoogleApiClient.OnConnectionFailedListener{
+    private static final int RC_SIGN_IN = 1;
     private ImageView mLoginGoogle, mLoginFacebook;
     private BaseActivity mContext;
     private CallbackManager mCallbackManager;
@@ -56,12 +62,18 @@ public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWi
     private View mLoginLayout, mUserLayout;
     private ImageView mUserImg;
     private TextView mUserName;
+    private View mLogoutLayout;
+    private GoogleSignInOptions gso;
+    private GoogleApiClient mGoogleApiClient;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getActivity());
+
+
+
     }
 
     @Override
@@ -69,6 +81,8 @@ public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWi
         if (context instanceof BaseActivity) this.mContext = (BaseActivity) context;
         else throw new ClassCastException("context must be extends BaseActivity");
         super.onAttach(context);
+
+
     }
 
     @Nullable
@@ -76,6 +90,16 @@ public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWi
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_navigation, container, false);
         bindView(view);
+
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        mGoogleApiClient = new GoogleApiClient.Builder(mContext)
+                .enableAutoManage(getActivity(), this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API)
+                .build();
 
         return view;
     }
@@ -86,6 +110,7 @@ public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWi
         mUserImg = (ImageView) view.findViewById(R.id.user_img);
         mUserName = (TextView) view.findViewById(R.id.username);
         mLoginFacebook = (ImageView) view.findViewById(R.id.loginWithFB);
+        mLogoutLayout = view.findViewById(R.id.logout);
         mLoginFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,10 +126,16 @@ public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWi
             @Override
             public void onClick(View v) {
 
+                loginWithGoogle();
+                mContext.onClickMenu();
             }
         });
+    }
 
+    private void loginWithGoogle() {
 
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     public void loginWithFacebook() {
@@ -134,6 +165,11 @@ public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWi
 
     private void handleFacebookAccessToken(final AccessToken accessToken) {
         AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
+        firebaseAuthWithCredential(credential);
+
+    }
+
+    private void firebaseAuthWithCredential(AuthCredential credential) {
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(mContext, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -152,12 +188,10 @@ public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWi
                             updateUI(mUser);
 
                         } else {
-
                             updateUI(null);
                         }
                     }
                 });
-
     }
 
     private void loginToServer(FirebaseUser user, String userToken) {
@@ -176,17 +210,36 @@ public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWi
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleGoogleSignInResult(result);
+        }
+        else mCallbackManager.onActivityResult(requestCode, resultCode, data);
 
+    }
+
+    private void handleGoogleSignInResult(GoogleSignInResult result) {
+        if (result.isSuccess()){
+            GoogleSignInAccount account = result.getSignInAccount();
+            AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+            firebaseAuthWithCredential(credential);
+        } else {
+
+            updateUI(null);
+        }
     }
 
     public void updateUI(FirebaseUser user) {
         if (user == null) {
+            mLoginLayout.setVisibility(View.VISIBLE);
+            mUserLayout.setVisibility(View.GONE);
+            mLogoutLayout.setVisibility(View.GONE);
             Toast.makeText(mContext, "Authentication failed.", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(mContext, "Authentication success", Toast.LENGTH_SHORT).show();
             mLoginLayout.setVisibility(View.GONE);
             mUserLayout.setVisibility(View.VISIBLE);
+            mLogoutLayout.setVisibility(View.VISIBLE);
 
             setUserInfo(user);
         }
@@ -205,6 +258,11 @@ public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWi
 
     @Override
     public void onDownloadSuccess(Bitmap bitmap) {
-        if (bitmap != null) mUserImg.setImageBitmap(bitmap);
+        if (bitmap != null) mUserImg.setImageDrawable(new ImageHelper.RoundImage(bitmap, mUserImg));
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 }

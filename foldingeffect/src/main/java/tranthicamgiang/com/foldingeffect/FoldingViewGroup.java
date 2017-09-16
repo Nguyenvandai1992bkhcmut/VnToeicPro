@@ -199,7 +199,48 @@ public class FoldingViewGroup extends FrameLayout implements FoldingLayout.FoldL
             return true;
         }
 
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 
+            isNotStartScroll = false;
+            if (velocityX < 0) {
+                ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, mFoldingView.getCurrentWidth());
+                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        mFactor = Math.abs((float)mTranslation/(float)mFoldingView.getWidth());
+                        float value = (float) valueAnimator.getAnimatedValue();
+                        mTranslation -= value;
+                        if (mTranslation < -mFoldingView.getWidth()) mTranslation = -mFoldingView.getWidth();
+
+                        mFoldingView.setFoldFactor(mFactor);
+                    }
+                });
+
+                valueAnimator.setInterpolator(new DecelerateInterpolator());
+                valueAnimator.setDuration(1000);
+                valueAnimator.start();
+            } else {
+
+                ValueAnimator valueAnimator = ValueAnimator.ofFloat(0,mFoldingView.getWidth() - mFoldingView.getCurrentWidth());
+                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        mFactor = Math.abs((float)mTranslation/(float)mFoldingView.getWidth());
+                        float value = (float) valueAnimator.getAnimatedValue();
+                        mTranslation += value;
+                        if (mTranslation > 0) mTranslation = 0;
+
+                        mFoldingView.setFoldFactor(mFactor);
+                    }
+                });
+
+                valueAnimator.setInterpolator(new DecelerateInterpolator());
+                valueAnimator.setDuration(1000);
+                valueAnimator.start();
+            }
+            return true;
+        }
     }
 
     public void setView(View foldingView, View translationView) {

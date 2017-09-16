@@ -31,6 +31,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -63,8 +65,8 @@ public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWi
     private ImageView mUserImg;
     private TextView mUserName;
     private View mLogoutLayout;
-    private GoogleSignInOptions gso;
     private GoogleApiClient mGoogleApiClient;
+    private boolean signInWithGoogle = false;
 
 
     @Override
@@ -89,17 +91,17 @@ public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWi
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_navigation, container, false);
-        bindView(view);
 
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("250446074415-mtb27n06orqhu396i1pfdhtti1ptrair.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
 
         mGoogleApiClient = new GoogleApiClient.Builder(mContext)
                 .enableAutoManage(getActivity(), this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
+        bindView(view);
 
         return view;
     }
@@ -111,6 +113,12 @@ public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWi
         mUserName = (TextView) view.findViewById(R.id.username);
         mLoginFacebook = (ImageView) view.findViewById(R.id.loginWithFB);
         mLogoutLayout = view.findViewById(R.id.logout);
+        mLogoutLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signOut();
+            }
+        });
         mLoginFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,7 +140,21 @@ public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWi
         });
     }
 
+    private void signOut() {
+        mFirebaseAuth.signOut();
+        if (signInWithGoogle) Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+        else {
+            LoginManager.getInstance().logOut();
+
+        }
+        updateUI(null);
+    }
+
+
+
+
     private void loginWithGoogle() {
+
 
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -221,6 +243,8 @@ public class NavigationFragment extends Fragment implements LoginUtils.OnLoginWi
     private void handleGoogleSignInResult(GoogleSignInResult result) {
         if (result.isSuccess()){
             GoogleSignInAccount account = result.getSignInAccount();
+            if (account.getAccount() == null) return;
+            signInWithGoogle = true;
             AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
             firebaseAuthWithCredential(credential);
         } else {

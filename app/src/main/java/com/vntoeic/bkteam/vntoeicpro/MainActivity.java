@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements AdapterWordSearch
             voca.deleteWordFavorite(134,2);
             aaa = voca.searchFavoriteWord(134);
             //return null
-            System.out.println("----");
+            System.out.println("---");
 
     //        Thread thread = new Thread(){
     //            @Override

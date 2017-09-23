@@ -23,21 +23,21 @@ public class SqliteVocabulary {
 
     public native ModelWordLesson[] searchWordLesson(int id_lesson);
 
-    public native ModelFavoriteWord[]searchFavoriteWord();
+    public native ModelFavoriteWord[]searchFavoriteWord(int lesson_color_tag);
 
-    public native void insertFavoriteWord(ModelFavoriteWord modelFavoriteWord);
+    public native void insertFavoriteWord(int lesson_tag,ModelFavoriteWord modelFavoriteWord);
 
     public native ModelWordChecked[]searchWordChecked();
 
     public native ModelWordChecked[]searchWordCheckedId(int id);
 
-    public native boolean checkFavoriteWord(int id);
+    public native int checkFavoriteWord(int id);
 
     public native boolean checkWordChecked(int id);
 
     public native void insertWordChecked(ModelWordChecked checked);
 
-    public native void deleteWordFavorite(int id);
+    public native void deleteWordFavorite(int lesson_tag,int id);
 
     public native void deleteWordChecked(int id);
 }

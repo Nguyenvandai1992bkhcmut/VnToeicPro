@@ -300,19 +300,23 @@ vector<Section> SqliteWord::searchAllSection(){
                 return result;
  }
 
- vector<ModelFavoriteWord>SqliteWord::searchFavoriteWord(){
-    string sql = "select * from word_favorite";
+ vector<ModelFavoriteWord>SqliteWord::searchFavoriteWord(int lesson1){
+    stringstream ss2;
+            ss2 << lesson1;
+             string lesson = ss2.str();
+    string sql = "select * from word_lesson where word_lesson.lesson_tag_id="+ lesson;
     vector<ModelFavoriteWord> result;
     if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
             return result;
      }
      while (sqlite3_step(stmt) == SQLITE_ROW) {
         int id = sqlite3_column_int(stmt,0);
-        char * date_ = (char *)sqlite3_column_text(stmt,1);
-        char * date = new char[strlen(date_)+1];
-        for(int i=0;i<strlen(date_)+1;i++){
-            date[i]=date_[i];
-        }
+
+         char * date_ = (char *)sqlite3_column_text(stmt,2);
+                    char * date = new char[strlen(date_)+1];
+                    for(int i=0;i<strlen(date_)+1;i++){
+                        date[i]=date_[i];
+                    }
 
         ModelFavoriteWord re(id,date);
         result.push_back(re);
@@ -321,8 +325,25 @@ vector<Section> SqliteWord::searchAllSection(){
  }
 
 
-void SqliteWord::insertFavoriteWord(ModelFavoriteWord favoriteWord){
+void SqliteWord::insertFavoriteWord(int color,ModelFavoriteWord favoriteWord){
+    string sql = "insert into word_lesson values(?,?,?)";
+    if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
+                    return ;
+                }
+    if(sqlite3_bind_int(stmt, 2, color) != SQLITE_OK){
+               return;
+     }
 
+     if(sqlite3_bind_int(stmt, 1, favoriteWord.getId()) != SQLITE_OK){
+                    return;
+      }
+       if(sqlite3_bind_text(stmt, 3,favoriteWord.getDate(),-1,SQLITE_STATIC)!= SQLITE_OK){
+                       return;
+                   }
+            sqlite3_step(stmt);
+
+
+/*
     string sql = "insert into word_favorite values(?,?)";
             if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
                 return ;
@@ -337,6 +358,7 @@ void SqliteWord::insertFavoriteWord(ModelFavoriteWord favoriteWord){
             }
 
             sqlite3_step(stmt);
+            */
 
 }
 
@@ -392,29 +414,33 @@ void SqliteWord::insertWordChecked(ModelWordChecked wchecked){
                 sqlite3_step(stmt);
 }
 // check favoriteword
-bool SqliteWord::checkFavotiteWord(int id1){
+int SqliteWord::checkFavotiteWord(int id1){
     stringstream ss2;
     ss2 << id1;
     string id = ss2.str();
-    string sql = "select count(*)from word_favorite where word_favorite.id ="+ id;
+    string sql = "select lesson_tag_id from word_lesson where word_lesson.word_id ="+ id;
     if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
           return false;
     }
-    int count =0;
+    int count =-1;
     while (sqlite3_step(stmt) == SQLITE_ROW) {
          count = sqlite3_column_int(this->stmt,0);
     }
-    if(count == 0)return false;
-    else return true;
+    return count;
 
 }
 
 // check favoriteword
-void SqliteWord::deleteWordFavorite(int id1){
+void SqliteWord::deleteWordFavorite(int lesson,int id1){
     stringstream ss2;
     ss2 << id1;
     string id = ss2.str();
-    string sql = "delete from word_favorite where word_favorite.id="+ id;
+
+    stringstream ss3;
+       ss3 << lesson;
+       string lesson1 = ss3.str();
+
+    string sql = "delete from word_lesson where (word_lesson.word_id="+ id +" and word_lesson.lesson_tag_id ="+ lesson1+" )";
     if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
           return;
     }

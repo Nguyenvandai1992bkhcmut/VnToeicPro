@@ -30,16 +30,16 @@ public:
 
     vector<WordLesson>searchWordLesson(int idlesson);
 
-    vector<ModelFavoriteWord>searchFavoriteWord();
+    vector<ModelFavoriteWord>searchFavoriteWord(int leesson);
 
-    void insertFavoriteWord(ModelFavoriteWord favoriteWord);
+    void insertFavoriteWord(int color,ModelFavoriteWord favoriteWord);
     vector<ModelWordChecked>searchWordChecked(int flag , int id);
 
     void insertWordChecked(ModelWordChecked checked);
 
-    bool checkFavotiteWord(int id);
+    int checkFavotiteWord(int id);
 
-    void deleteWordFavorite(int id);
+    void deleteWordFavorite(int lesson,int id);
 
     void deleteWordChecked(int id);
 

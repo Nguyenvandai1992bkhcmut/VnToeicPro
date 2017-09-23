@@ -298,10 +298,10 @@ Java_sqlite_SqliteVocabulary_searchWordLesson(JNIEnv * env , jobject object , ji
 // search All FavoriteWord
 extern "C"{
     JNIEXPORT jobjectArray JNICALL
-    Java_sqlite_SqliteVocabulary_searchFavoriteWord(JNIEnv * env , jobject object ){
+    Java_sqlite_SqliteVocabulary_searchFavoriteWord(JNIEnv * env , jobject object,jint lesson_tag ){
          SqliteWord sqlite;
 
-          vector<ModelFavoriteWord>result =sqlite.searchFavoriteWord();
+          vector<ModelFavoriteWord>result =sqlite.searchFavoriteWord((int)lesson_tag);
           jclass clcv = env -> FindClass("model/Convert");
           jmethodID methodId1 = env -> GetStaticMethodID(clcv, "convertCStringToJniSafeString",  "([B)Ljava/lang/String;");
 
@@ -330,7 +330,7 @@ extern "C"{
 // insert favoviteWord
 extern "C"{
 JNIEXPORT void JNICALL
-Java_sqlite_SqliteVocabulary_insertFavoriteWord(JNIEnv * env, jobject object , jobject data){
+Java_sqlite_SqliteVocabulary_insertFavoriteWord(JNIEnv * env, jobject object , jint color,jobject data){
         jclass cl =  env-> FindClass("model/ModelFavoriteWord");
 
         jmethodID getid = env->GetMethodID(cl,"getmWordId","()I");
@@ -344,7 +344,7 @@ Java_sqlite_SqliteVocabulary_insertFavoriteWord(JNIEnv * env, jobject object , j
 
         ModelFavoriteWord favorite(id,time);
         SqliteWord sqlite;
-        sqlite.insertFavoriteWord(favorite);
+        sqlite.insertFavoriteWord((int)color,favorite);
 
 }
 
@@ -426,21 +426,22 @@ Java_sqlite_SqliteVocabulary_insertWordChecked(JNIEnv * env, jobject object , jo
 
 
 extern "C"{
-JNIEXPORT jboolean JNICALL
+JNIEXPORT jint JNICALL
 Java_sqlite_SqliteVocabulary_checkFavoriteWord(JNIEnv * env, jobject object , jint idword){
         SqliteWord sqlite;
         int id = (int)idword;
-        bool check = sqlite.checkFavotiteWord( id);
-        return (jboolean)check;
+        int check = sqlite.checkFavotiteWord( id);
+        return (jint)check;
 }
 }
 
 extern "C"{
 JNIEXPORT void JNICALL
-Java_sqlite_SqliteVocabulary_deleteWordFavorite(JNIEnv * env, jobject object , jint idword){
+Java_sqlite_SqliteVocabulary_deleteWordFavorite(JNIEnv * env, jobject object , int lesson_tag,jint idword){
         SqliteWord sqlite;
         int id = (int)idword;
-        sqlite.deleteWordFavorite( id);
+        int lesson =(int)lesson_tag;
+        sqlite.deleteWordFavorite( lesson,id);
 }
 }
 

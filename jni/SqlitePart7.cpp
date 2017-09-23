@@ -13,21 +13,23 @@ vector<Part7*>SqlitePart7::funsearchPart(){
      vector<Part7*>result;
         while (sqlite3_step(stmt) == SQLITE_ROW){
                 int id = sqlite3_column_int(stmt,0);
-                const void * explan = sqlite3_column_blob(stmt,1);
+
+                    const void * token_ = sqlite3_column_blob(stmt,1);
+
+
+                                char * token = decode(token_);
+
+                const void * explan = sqlite3_column_blob(stmt,2);
                 char * explan1 = decode(explan);
-
-
                 //
                 //quesiton 1
                 //
-                int level = sqlite3_column_int(stmt,2);
-                int time = sqlite3_column_int(stmt,3);
-                int count_question = sqlite3_column_int(stmt,4);
-                int idpas= sqlite3_column_int(stmt,6);
-                int istext = sqlite3_column_int(stmt,7);
+                int level = sqlite3_column_int(stmt,3);
+                int time = sqlite3_column_int(stmt,4);
+                int count_question = sqlite3_column_int(stmt,5);
+                int idpas= sqlite3_column_int(stmt,7);
+                int istext = sqlite3_column_int(stmt,8);
 
-                const void * token = sqlite3_column_blob(stmt,8);
-                char * token1 = decode(token);
 
                 const void * content = sqlite3_column_blob(stmt,9);
                 char * content1 = decode(content);
@@ -106,21 +108,21 @@ vector<Part7*>SqlitePart7::funsearchPart(){
                 }
                  if(check0 == 0){
                                     vector<Passage>passages;
-                                    Passage passage(idpas,istext,token1,content1);
+                                    Passage passage(idpas,istext,content1);
                                     passages.push_back(passage);
 
                                    vector<QuestionPart7>questions;
                                      QuestionPart7 question(idquestion,contentQuestion,a1,b1,c1,d1,sol1);
                                     questions.push_back(question);
 
-                                    Part7 *part =new Part7(id,explan1,level,time,count_question,passages, questions);
+                                    Part7 *part =new Part7(id,token,explan1,level,time,count_question,passages, questions);
                                     result.push_back(part);
                                     continue;
 
                                 }
 
                 if(check1==0){
-                    Passage passage(idpas,istext,token1,content1);
+                    Passage passage(idpas,istext,content1);
                     vector<Passage>passages = result.at(index)->getPassage();
                     passages.push_back(passage);
                     result.at(index)->setPassages(passages);
@@ -192,14 +194,14 @@ vector<Part7*>SqlitePart7::randomPart7(int number1){
         return funsearchPart();
 }
 
-vector< char *>SqlitePart7::searchAllImagePart7(){
-          vector<char *>result;
+vector< TokenPart7 *>SqlitePart7::searchAllImagePart7(){
+          vector<TokenPart7 *>result;
          if(db==NULL){
 
           return result;
          }
 
-         string sql ="select part7_passage_token from part7_passage where part7_passage.is_text=0";
+         string sql ="select part7.part7_id,part7.token,part7_passage.part7_passage_id from part7,part7_passage where part7_passage.part7_id = part7.part7_id and part7_passage.is_text=0";
 
 
          if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
@@ -207,9 +209,13 @@ vector< char *>SqlitePart7::searchAllImagePart7(){
              return result;
          }
           while (sqlite3_step(stmt) == SQLITE_ROW){
-                  const void * content = sqlite3_column_blob(stmt,0);
+                   int idpart= sqlite3_column_int(stmt,0);
+                  const void * content = sqlite3_column_blob(stmt,1);
                   char * content1 = decode(content);
-                   result.push_back(content1);
+                                     int idpassage = sqlite3_column_int(stmt,2);
+
+                    TokenPart7 * token = new TokenPart7(idpart,idpassage,content1);
+                   result.push_back(token);
           }
         return result;
 }

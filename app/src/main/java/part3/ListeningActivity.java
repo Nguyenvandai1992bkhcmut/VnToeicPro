@@ -337,11 +337,16 @@ public class ListeningActivity extends AppCompatActivity implements AdapterPart.
     public void notifySuccess(int numbertask, boolean b,String url,String file) {
         arrDowload.set(numbertask,b);
         if(b==false){
-            Toast.makeText(getApplicationContext(),"Dowload failure. Please check your internet!",Toast.LENGTH_LONG).show();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    dialog_dowload.dismiss();
+                    Toast.makeText(getApplicationContext(),"Dowload failure. Please check your internet!",Toast.LENGTH_LONG).show();
+                    return;
+                }
+            });
             return;
-        }
-        if(!arrDowload.contains(false)){
-
+        }else if(!arrDowload.contains(false)){
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {

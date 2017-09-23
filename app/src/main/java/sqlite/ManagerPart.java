@@ -58,4 +58,8 @@ public  class ManagerPart {
 
 
     public native boolean updateTimePart(int part, int id);
+
+    public native boolean updatePostTagUse(int id);
+
+    public native PostTag[] searchAllPostTag();
 }

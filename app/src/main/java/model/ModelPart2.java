@@ -29,7 +29,10 @@ public class ModelPart2 implements Serializable,IListenPart,IDataPart {
     private String a;
     private String b;
     private String c;
-    private final String LINKAUDIO="http://vntoeic.com/api/v1/part2/sound/";
+
+    private final String LINKBASIC ="http://vntoeic.xyz/api/v1/part2s/";
+    private final String LINKSRC="/data/user/0/com.vntoeic.bkteam.vntoeicpro/part2/";
+
 
     public ModelPart2(int id, String token, String script,String a, String b, String c, String sol, int level, int time) {
         this.id = id;
@@ -107,6 +110,10 @@ public class ModelPart2 implements Serializable,IListenPart,IDataPart {
         return id;
     }
 
+    @Override
+    public int getPart() {
+        return 2;
+    }
 
 
     @Override
@@ -119,13 +126,13 @@ public class ModelPart2 implements Serializable,IListenPart,IDataPart {
 
     @Override
     public String getSrcFile() {
-        return "/data/user/0/com.vntoeic.bkteam.vntoeicpro/part2/audio/"+token+".mp3";
+        return LINKSRC+token+".mp3";
 
     }
 
     @Override
     public String getLinkDowload() {
-        return LINKAUDIO+token;
+        return LINKBASIC+String.valueOf(id)+"/sound";
     }
 
     @Override
@@ -135,7 +142,7 @@ public class ModelPart2 implements Serializable,IListenPart,IDataPart {
 
     @Override
     public String getLinkFigure(int numberQuestion) {
-        return "Http://vntoeic.com/api/v1/part2/result/"+String.valueOf(getId());
+        return LINKBASIC+String.valueOf(id)+"/result";
     }
 
     @Override

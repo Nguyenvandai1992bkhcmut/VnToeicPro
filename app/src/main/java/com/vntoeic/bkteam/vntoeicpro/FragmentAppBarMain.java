@@ -48,9 +48,11 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import dictionary.*;
+import feeds.ActivityFeed;
 import model.Content;
 import model.Dictionary;
 import model.ModelPart7;
+import model.ModelTokenPart7;
 import part3.ListeningActivity;
 import part5.Part5Activity;
 import part7.Part67Activity;
@@ -205,6 +207,11 @@ public class FragmentAppBarMain extends Fragment implements DowloadTask.IDowload
             @Override
             public void onClick(View v) {
                 switch (v.getId()){
+                    case R.id.relate_feed:
+                        Intent intent  =new Intent(getContext(), ActivityFeed.class);
+                        startActivity(intent);
+                    break;
+
                     case R.id.relate_dictionary:
                         runDictionaryActivity();
                         break;
@@ -252,21 +259,24 @@ public class FragmentAppBarMain extends Fragment implements DowloadTask.IDowload
         ((RelativeLayout)view.findViewById(R.id.relate_part4)).setOnClickListener(onClickListener);
         ((RelativeLayout)view.findViewById(R.id.relate_part1)).setOnClickListener(onClickListener);
         ((RelativeLayout)view.findViewById(R.id.relate_part2)).setOnClickListener(onClickListener);
+        ((RelativeLayout)view.findViewById(R.id.relate_feed)).setOnClickListener(onClickListener);
 
 
     }
 
     public Boolean prepareDataPart7() {
+        //
+
         arrdowload = new ArrayList<>();
         SqlitePart7 sqlitePart7 = new SqlitePart7();
-        String datapart7[] = sqlitePart7.searchAllImagePart7();
+        ModelTokenPart7 datapart7[] = sqlitePart7.searchAllImagePart7();
         for (int i = 0; i < datapart7.length; i++) {
-            File file = new File(ModelPart7.LINKSRC + datapart7[i] + ".png");
+            File file = new File(ModelPart7.LINKSRC + datapart7[i].getNameFile());
             if (!file.exists()) {
                     arrdowload.add(false);
                     DowloadTask dowloadTask = new DowloadTask();
                     dowloadTask.setiDowload(this);
-                    dowloadTask.execute(String.valueOf(i), ModelPart7.LINKIMAGE + datapart7[i], ModelPart7.LINKSRC + datapart7[i] + ".png");
+                    dowloadTask.execute(String.valueOf(i), ModelPart7.LINKBASIC + datapart7[i].getPart7_id()+"/passages/"+datapart7[i].getPassage_id()+"/image",ModelPart7.LINKSRC +datapart7[i].getNameFile(),datapart7[i].getToken());
 
             }else arrdowload.add(true);
         }
@@ -310,31 +320,6 @@ public class FragmentAppBarMain extends Fragment implements DowloadTask.IDowload
         dialog_dowload.getWindow().setAttributes(params);
     }
 
-    public class AsynTaskCheckInternet extends AsyncTask<Void,Void,Void>{
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            if(isInternetAvailable()){
-                checkInternet = true;
-            }else{
-                checkInternet = false;
-            }
-            return null;
-        }
-
-        public boolean isInternetAvailable() {
-            Runtime runtime = Runtime.getRuntime();
-            try {
-                Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
-                int     exitValue = ipProcess.waitFor();
-                return (exitValue == 0);
-            }
-            catch (IOException e)          { e.printStackTrace(); }
-            catch (InterruptedException e) { e.printStackTrace(); }
-
-            return false;
-        }
-    }
 
 
 

@@ -61,6 +61,7 @@ import model.ModelTag;
 import model.ModelWord;
 import model.ModelWordChecked;
 import model.ModelWordLesson;
+import sqlite.ManagerPart;
 import sqlite.SqliteDictionary;
 import sqlite.SqlitePart1;
 import sqlite.SqlitePart2;
@@ -168,27 +169,33 @@ public class MainActivity extends AppCompatActivity implements AdapterWordSearch
 //        st.insertFavorite(df);
 //        DictionaryFavorite[]re2 = st.searchFavorite();
 //
-//        SqliteVocabulary vc = new SqliteVocabulary();
-//        ModelSection[]arr = vc.searchAllSection();
-//        ModelTag[]arr1 = vc.searchTaginSection(0);
-//        arr1= vc.searchTaginSection(1);
-//
-//        ModelLesson []arr11 = vc.searchLessonTag(1);
-//        arr11= vc.searchLessonTag(3);
-//        arr11= vc.searchLessonTag(2);
-//        arr11= vc.searchLessonTag(4);
-//
-//        ModelWord modelWord = vc.searchWordId(10);
-//        ModelWordLesson md[] = vc.searchWordLesson(1);
-//
-//        ModelFavoriteWord mm[] = vc.searchFavoriteWord();
-//        ModelFavoriteWord m = new ModelFavoriteWord(1,"nguyenvandai_time");
-//        ModelFavoriteWord m1 = new ModelFavoriteWord(1,"nguyenvandai_time");
-//        ModelFavoriteWord m2 = new ModelFavoriteWord(1,"nguyenvandai_time");
-//        vc.insertFavoriteWord(m);
-//        vc.insertFavoriteWord(m1);
-//        vc.insertFavoriteWord(m2);
-//        mm = vc.searchFavoriteWord();
+
+        ManagerPart managerPart = new ManagerPart();
+        ModelWord[]md55= managerPart.searchWordPart(5,1);
+
+
+        SqliteVocabulary vc = new SqliteVocabulary();
+        ModelSection[]arr = vc.searchAllSection();
+        ModelTag[]arr1 = vc.searchTaginSection(0);
+        arr1= vc.searchTaginSection(1);
+
+        ModelLesson []arr11 = vc.searchLessonTag(1);
+        ModelWord w = vc.searchWordId(10);
+        arr11= vc.searchLessonTag(3);
+        arr11= vc.searchLessonTag(2);
+        arr11= vc.searchLessonTag(4);
+
+        ModelWord modelWord = vc.searchWordId(10);
+        ModelWordLesson md[] = vc.searchWordLesson(1);
+
+        ModelFavoriteWord mm[] = vc.searchFavoriteWord();
+        ModelFavoriteWord m = new ModelFavoriteWord(1,"nguyenvandai_time");
+        ModelFavoriteWord m1 = new ModelFavoriteWord(1,"nguyenvandai_time");
+        ModelFavoriteWord m2 = new ModelFavoriteWord(1,"nguyenvandai_time");
+        vc.insertFavoriteWord(m);
+        vc.insertFavoriteWord(m1);
+        vc.insertFavoriteWord(m2);
+        mm = vc.searchFavoriteWord();
 //
 //        ModelWordChecked checked[]=vc.searchWordCheckedId(1);
 //        ModelWordChecked modelWordChecked = new ModelWordChecked(29,0,1,"time_check_insert");
@@ -203,13 +210,13 @@ public class MainActivity extends AppCompatActivity implements AdapterWordSearch
 //        vc.deleteWordFavorite(1);
 //        b= vc.checkFavoriteWord(1);
 //
-//
+
 //       SqlitePart1 sqlite = new SqlitePart1();
 //        ModelPart1 p1 = sqlite.searchPart1Id(10);
 //        ModelPart1 p2[] = sqlite.randomPart1(10);
 //        ModelPart1 p3[] = sqlite.randomPart1Subject(1,20);
 //        ModelPart1 p4[] = sqlite.searchPart1Favorite();
-//         b = sqlite.checkPartFavorite(1,1);
+//       Boolean  b = sqlite.checkPartFavorite(1,1);
 //        b = sqlite.checkPartFavorite(1,10);
 //        ModelPartFavorite md1 = new ModelPartFavorite(1,100,"test insert");
 //        sqlite.insertPartFavorite(md1);
@@ -237,6 +244,7 @@ public class MainActivity extends AppCompatActivity implements AdapterWordSearch
 ////
 //        ModelGrammar grammar[] = sqlite.searchAllGrammar();
 //        ModelGrammar grammar1 = sqlite.searchGrammarId(1);
+
 //        SqlitePart5 sqlite22 = new SqlitePart5();
 //        ModelPart5 []md5 = sqlite22.randomPart5(10);
 //        md5 = sqlite22.randomPart5Subject(1,20);
@@ -244,7 +252,11 @@ public class MainActivity extends AppCompatActivity implements AdapterWordSearch
 //        sqlite22.insertPartFavorite(ma);
 //        md5 = sqlite22.searchPart5Favorite();
 
+        SqlitePart6  sqlitePart6 = new SqlitePart6();
+        ModelPart6 []md6= sqlitePart6.randomPart6(10);
 
+        SqlitePart7 sqlitePart7 = new SqlitePart7();
+        ModelPart7[]md7= sqlitePart7.randomPart7(1);
         setUplayout();
     }
     public static String getIPAddress(boolean useIPv4) {
@@ -286,6 +298,12 @@ public class MainActivity extends AppCompatActivity implements AdapterWordSearch
 
     public void checkDatabase() {
         File data = getDatabasePath("Database.db");
+
+        File feed = new File(getApplicationContext().getApplicationInfo().dataDir+"/feed/");
+        feed.mkdirs();
+        File audio = new File(getApplicationContext().getApplicationInfo().dataDir+"/feed/audio");
+        audio.mkdirs();
+
 
         File datapart7 = new File(getApplicationContext().getApplicationInfo().dataDir+"/part7/");
         Boolean b  =datapart7.mkdirs();

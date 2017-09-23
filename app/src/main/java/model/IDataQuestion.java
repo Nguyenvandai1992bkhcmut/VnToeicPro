@@ -18,6 +18,8 @@ public interface IDataQuestion {
 
     public String getD();
 
+    public String getToken();
+
     public int getColorTextQuestion();
 
     public String getLinkFigure();

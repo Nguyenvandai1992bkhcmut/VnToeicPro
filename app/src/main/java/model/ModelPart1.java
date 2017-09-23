@@ -38,8 +38,9 @@ public class ModelPart1 implements Serializable,IListenPart,IDataPart {
     private String sol;
     private int level;
     private int time;
-    private final String LINKAUDIO="http://vntoeic.com/api/v1/part1/sound/";
-    private final String LINKIMAGE="http://vntoeic.com/api/v1/part1/image/";
+    private final String LINKBASIC ="http://vntoeic.xyz/api/v1/part1s/";
+    private final String LINKSRC="/data/user/0/com.vntoeic.bkteam.vntoeicpro/part1/";
+
 
     public ModelPart1(int id, String token, String aScript, String bScript, String cScript, String dScript, String sol, int level, int time) {
         this.id = id;
@@ -155,6 +156,10 @@ public class ModelPart1 implements Serializable,IListenPart,IDataPart {
         return id;
     }
 
+    @Override
+    public int getPart() {
+        return 1;
+    }
 
 
     @Override
@@ -168,8 +173,8 @@ public class ModelPart1 implements Serializable,IListenPart,IDataPart {
         imageView.setLayoutParams(params);
         linearLayout.addView(imageView);
 
-        TaskDowloadImage  taskDowloadImage = new TaskDowloadImage(context,imageView,1);
-        taskDowloadImage.execute();
+       // TaskDowloadImage  taskDowloadImage = new TaskDowloadImage(context,imageView,1);
+       // taskDowloadImage.execute();
 
         ImageView imageView1 = new ImageView(context);
         imageView1.setImageResource(R.mipmap.icon_part1_play);
@@ -179,36 +184,50 @@ public class ModelPart1 implements Serializable,IListenPart,IDataPart {
     }
 
     public void getImage(Context context,ImageView imageView){
-        TaskDowloadImage taskDowloadImage = new TaskDowloadImage(context,imageView,0);
-        taskDowloadImage.execute();
+        Bitmap bitmap =null;
+        Bitmap bitmap1= null;
+        File data = new File(getSrcFileImage());
+        try {
+            InputStream inputStream =new FileInputStream(data);
+            bitmap = BitmapFactory.decodeStream(inputStream);
+            if(bitmap!=null) {
+                float W = context.getResources().getDisplayMetrics().widthPixels * 0.95f;
+                float heso = W / (float) bitmap.getWidth();
+                float h = (float) (heso * bitmap.getHeight());
+                bitmap1 = Bitmap.createScaledBitmap(bitmap, (int) W, (int) h, false);
+                imageView.setImageBitmap(bitmap1);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
 
     @Override
     public String getSrcFile() {
-        return "/data/user/0/com.vntoeic.bkteam.vntoeicpro/part1/audio/"+token+".mp3";
+        return LINKSRC+"audio/"+token+".mp3";
     }
 
     @Override
     public String getLinkDowload() {
-        return LINKAUDIO+token;
+        return LINKBASIC+String.valueOf(id)+"/sound";
     }
 
     @Override
     public String getLinkDowloadImage() {
-        return LINKIMAGE+token;
+        return LINKBASIC+String.valueOf(id)+"/image";
     }
 
     @Override
     public String getLinkFigure(int numberQuestion) {
-        return "Http://vntoeic.com/api/v1/part1/result/"+String.valueOf(getId());
+        return LINKBASIC+String.valueOf(id)+"/result";
 
     }
 
     @Override
     public String getSrcFileImage() {
-        return "/data/user/0/com.vntoeic.bkteam.vntoeicpro/part1/image/"+token+".png";
+        return LINKSRC+"image/"+token+".png";
     }
 
     @Override
@@ -242,76 +261,5 @@ public class ModelPart1 implements Serializable,IListenPart,IDataPart {
 
     public void setToken(String token) {
         this.token = token;
-    }
-
-
-    public class TaskDowloadImage extends AsyncTask<String,Void,Bitmap> {
-        private ImageView imageView;
-        private int type =0;
-        private Context context;
-        public TaskDowloadImage(Context context,ImageView imageView,int type){
-            this.imageView = imageView;
-            this.context= context;
-            this.type = type;
-        }
-        @Override
-        protected  Bitmap doInBackground(String... params) {
-            Bitmap bitmap= null;
-            File dataimage = new File(getSrcFileImage());
-            if(dataimage.exists()){
-                bitmap= getBitmap(dataimage);
-            }else {
-               // bitmap = getBitmapFromURL();
-            }
-            return bitmap;
-        }
-
-        public Bitmap getBitmap(File data){
-            Bitmap bitmap =null;
-            try {
-                InputStream inputStream =new FileInputStream(data);
-                bitmap = BitmapFactory.decodeStream(inputStream);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return bitmap;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            if(bitmap==null)imageView.setImageBitmap(null);
-            Bitmap bitmap1;
-            if(type==0) {
-                float W = context.getResources().getDisplayMetrics().widthPixels * 0.95f;
-                float heso = W / (float) bitmap.getWidth();
-                float h = (float) (heso * bitmap.getHeight());
-                bitmap1= Bitmap.createScaledBitmap(bitmap, (int) W, (int) h, false);
-            }else{
-                float W = context.getResources().getDisplayMetrics().density*100;
-                float heso = W / (float) bitmap.getWidth();
-                float h = (float) (heso * bitmap.getHeight());
-                bitmap1= Bitmap.createScaledBitmap(bitmap,(int)W,(int)h,false);
-            }
-            if(bitmap!=null) {
-                imageView.setImageBitmap(bitmap1);
-            }
-        }
-
-        public Bitmap getBitmapFromURL() {
-            try {
-                URL url = new URL(getLinkDowloadImage());
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setDoInput(true);
-                connection.connect();
-                InputStream input = connection.getInputStream();
-                Bitmap bitmap = BitmapFactory.decodeStream(input);
-                return bitmap;
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
     }
 }

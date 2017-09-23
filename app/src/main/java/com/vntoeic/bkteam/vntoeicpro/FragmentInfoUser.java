@@ -2,6 +2,9 @@ package com.vntoeic.bkteam.vntoeicpro;
 
 import android.accounts.Account;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
@@ -13,10 +16,12 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +30,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.credentials.CredentialPickerConfig;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -38,6 +50,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -49,6 +62,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by dainguyen on 5/29/17.
@@ -64,6 +79,7 @@ public class FragmentInfoUser extends Fragment {
     private TextView text_name;
     private int isSign=1;
 
+    CallbackManager mCallbackManager;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,6 +89,20 @@ public class FragmentInfoUser extends Fragment {
         signInButton = (SignInButton) view.findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
 
+
+
+        try {
+            PackageInfo info =getContext().getPackageManager().getPackageInfo("com.vntoeic.bkteam.vntoeicpro",PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
 
         if(isSign==0)signInButton.setEnabled(false);
         updateUI(user);
@@ -85,7 +115,62 @@ public class FragmentInfoUser extends Fragment {
                 startActivityForResult(signInIntent, 99);
             }
         });
+
+
+        mCallbackManager = CallbackManager.Factory.create();
+        LoginButton loginButton = (LoginButton)view.findViewById(R.id.login_button);
+        loginButton.setFragment(this);
+        loginButton.setReadPermissions("email", "public_profile");
+        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+               // Log.d(TAG, "facebook:onSuccess:" + loginResult);
+                handleFacebookAccessToken(loginResult.getAccessToken());
+
+            }
+
+            @Override
+            public void onCancel() {
+               // Log.d(TAG, "facebook:onCancel");
+                Toast.makeText(getContext(),"fail",Toast.LENGTH_LONG).show();
+                // ...
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                //Log.d(TAG, "facebook:onError", error);
+                Toast.makeText(getContext(),"fail",Toast.LENGTH_LONG).show();
+                // ...
+            }
+        });
+
+
         return view;
+    }
+    private void handleFacebookAccessToken(AccessToken token) {
+        //Log.d(TAG, "handleFacebookAccessToken:" + token);
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                          //  Log.d(TAG, "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                          //  Log.w(TAG, "signInWithCredential:failure", task.getException());
+                          //  Toast.makeText(FacebookLoginActivity.this, "Authentication failed.",Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+
+                        // ...
+                    }
+                });
     }
 
     @Override
@@ -118,6 +203,8 @@ public class FragmentInfoUser extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == 99) {

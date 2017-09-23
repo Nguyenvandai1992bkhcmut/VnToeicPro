@@ -21,25 +21,18 @@ public class SendAsynTask extends AsyncTask<String,Void,Void> {
     protected Void doInBackground(String... params) {
         try {
             URL url= null;
-            if(params.length==2){
-                url= new URL(params[0]);
-            }
-            else if(params.length==3) {
-                url = new URL(params[0]+params[1]); //Enter URL here
-            }else if(params.length==4){
-                url = new URL(params[0]+params[1]+"/"+params[2]);
-            }
+            url= new URL(params[0]);
 
             HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
             httpURLConnection.setDoOutput(true);
             httpURLConnection.setRequestMethod("POST"); // here you are telling that it is a POST request, which can be changed into "PUT", "GET", "DELETE" etc.
             httpURLConnection.setRequestProperty("Content-Type", "application/json"); // here you are setting the `Content-Type` for the data you are sending which is `application/json`
+            httpURLConnection.setRequestProperty("content-token",params[2]);
+            //httpURLConnection.setRequestProperty("user-token",params[2]);
             httpURLConnection.connect();
 
             JSONObject jsonObject = new JSONObject();
-            if(params.length==2)jsonObject.put("chosen",params[1]);
-            else if(params.length==3)jsonObject.put("chosen", params[2]);
-            else jsonObject.put("chosen",params[3]);
+            jsonObject.put("chosen",params[1]);
 
             DataOutputStream wr = new DataOutputStream(httpURLConnection.getOutputStream());
             wr.writeBytes(jsonObject.toString());

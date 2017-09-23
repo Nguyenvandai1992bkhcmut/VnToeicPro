@@ -17,6 +17,7 @@ public interface IDataPart {
     public String getContent();
     public int getId();
 
+    public int getPart();
     public View getViewContent(Context context);
 
 }

@@ -18,6 +18,7 @@ public class ModelPart5   implements Serializable,IDataPart {
 
 
     private int id;
+    private String token;
     private String question;
     private String a ;
     private String b;
@@ -28,7 +29,7 @@ public class ModelPart5   implements Serializable,IDataPart {
     private int level;
     private int time;
 
-    public ModelPart5(int id, String question, String a, String b, String c, String d,  String result, String explain, int level, int time) {
+    public ModelPart5(int id,String token,String question, String a, String b, String c, String d,  String result, String explain, int level, int time) {
 
         this.id = id;
         this.a = a;
@@ -40,6 +41,7 @@ public class ModelPart5   implements Serializable,IDataPart {
         this.explain = explain;
         this.question = question;
         this.time = time;
+        this.token = token;
     }
 
     public String getA() {
@@ -110,6 +112,11 @@ public class ModelPart5   implements Serializable,IDataPart {
     @Override
     public int getId() {
         return id;
+    }
+
+    @Override
+    public int getPart() {
+        return 5;
     }
 
     @Override

@@ -9,44 +9,49 @@ vector<Part6*>SqlitePart6::funsearchPart(){
      vector<Part6*>result;
         while (sqlite3_step(stmt) == SQLITE_ROW){
                 int id = sqlite3_column_int(stmt,0);
-                const void * content = sqlite3_column_blob(stmt,1);
 
 
-                char * content1 = decode(content);
+              const void * token_ = sqlite3_column_blob(stmt,1);
 
 
+                char * token = decode(token_);
+
+                    const void * content = sqlite3_column_blob(stmt,2);
+
+
+                                char * content1 = decode(content);
                 //
                 //quesiton 1
                 //
 
 
 
-                                 const char *tg1 =(const char*) sqlite3_column_text(stmt,2);
+                                 const char *tg1 =(const char*) sqlite3_column_text(stmt,3);
                                   char * a1= new char[strlen(tg1)+1];
                                   for(int i=0;i<strlen(tg1)+1;i++){
                                         a1[i]=tg1[i];
                                    }
 
 
-                                 const char * tg2 =(const char*) sqlite3_column_text(stmt,3);
+                                 const char * tg2 =(const char*) sqlite3_column_text(stmt,4);
                                  char * b1= new char[strlen(tg2)+1];
                                  for(int i=0;i<strlen(tg2)+1;i++){
                                         b1[i]=tg2[i];
                                  }
 
-                                const char *tg3 =(const char*) sqlite3_column_text(stmt,4);
+                                const char *tg3 =(const char*) sqlite3_column_text(stmt,5);
                                  char * c1= new char[strlen(tg3)+1];
                                  for(int i=0;i<strlen(tg3)+1;i++){
                                         c1[i]=tg3[i];
                                  }
 
-                                const char *tg4 =(const char*) sqlite3_column_text(stmt,5);
+                                const char *tg4 =(const char*) sqlite3_column_text(stmt,6);
                                  char * d1= new char[strlen(tg4)+1];
                                  for(int i=0;i<strlen(tg4)+1;i++){
                                         d1[i]=tg4[i];
                                  }
 
-                                const char * tg5 =(const char*) sqlite3_column_text(stmt,6);
+                                const char * tg5 =(const char*) sqlite3_column_text(stmt,7);
                                  char * sol1= new char[strlen(tg5)+1];
                                  for(int i=0;i<strlen(tg5)+1;i++){
                                         sol1[i]=tg5[i];
@@ -55,29 +60,29 @@ vector<Part6*>SqlitePart6::funsearchPart(){
                                 //question 2
                                 //
 
-                               const char * tg7 =(const char*) sqlite3_column_text(stmt,7);
+                               const char * tg7 =(const char*) sqlite3_column_text(stmt,8);
                                  char * a2= new char[strlen(tg7)+1];
                                  for(int i=0;i<strlen(tg7)+1;i++){
                                         a2[i]=tg7[i];
                                  }
-                                 const char *tg8 =(const char*) sqlite3_column_text(stmt,8);
+                                 const char *tg8 =(const char*) sqlite3_column_text(stmt,9);
                                  char * b2= new char[strlen(tg8)+1];
                                  for(int i=0;i<strlen(tg8)+1;i++){
                                         b2[i]=tg8[i];
                                  }
-                                  const char * tg9 =(const char*) sqlite3_column_text(stmt,9);
+                                  const char * tg9 =(const char*) sqlite3_column_text(stmt,10);
                                  char * c2= new char[strlen(tg9)+1];
                                  for(int i=0;i<strlen(tg9)+1;i++){
                                         c2[i]=tg9[i];
                                  }
 
-                                const char *tg10 =(const char*) sqlite3_column_text(stmt,10);
+                                const char *tg10 =(const char*) sqlite3_column_text(stmt,11);
                                  char * d2= new char[strlen(tg10)+1];
                                  for(int i=0;i<strlen(tg10)+1;i++){
                                         d2[i]=tg10[i];
                                  }
 
-                                const char *tg11 =(const char*) sqlite3_column_text(stmt,11);
+                                const char *tg11 =(const char*) sqlite3_column_text(stmt,12);
                                  char * sol2= new char[strlen(tg11)+1];
                                  for(int i=0;i<strlen(tg11)+1;i++){
                                         sol2[i]=tg11[i];
@@ -87,44 +92,44 @@ vector<Part6*>SqlitePart6::funsearchPart(){
                                  // question 3
 
 
-                                const char *tg13 =(const char*) sqlite3_column_text(stmt,12);
+                                const char *tg13 =(const char*) sqlite3_column_text(stmt,13);
                                  char * a3= new char[strlen(tg13)+1];
                                  for(int i=0;i<strlen(tg13)+1;i++){
                                         a3[i]=tg13[i];
                                  }
 
-                                  const char * tg14 =(const char*) sqlite3_column_text(stmt,13);
+                                  const char * tg14 =(const char*) sqlite3_column_text(stmt,14);
                                  char * b3= new char[strlen(tg14)+1];
                                  for(int i=0;i<strlen(tg14)+1;i++){
                                         b3[i]=tg14[i];
                                  }
 
-                                const char *tg15 =(const char*) sqlite3_column_text(stmt,14);
+                                const char *tg15 =(const char*) sqlite3_column_text(stmt,15);
                                  char * c3= new char[strlen(tg15)+1];
                                  for(int i=0;i<strlen(tg15)+1;i++){
                                         c3[i]=tg15[i];
                                  }
 
-                                const char *tg16 =(const char*) sqlite3_column_text(stmt,15);
+                                const char *tg16 =(const char*) sqlite3_column_text(stmt,16);
                                  char * d3= new char[strlen(tg16)+1];
                                  for(int i=0;i<strlen(tg16)+1;i++){
                                         d3[i]=tg16[i];
                                  }
 
-                                const char *tg17 =(const char*) sqlite3_column_text(stmt,16);
+                                const char *tg17 =(const char*) sqlite3_column_text(stmt,17);
                                  char * sol3= new char[strlen(tg17)+1];
                                  for(int i=0;i<strlen(tg17)+1;i++){
                                         sol3[i]=tg17[i];
                                  }
 
-                  const char *tg18 =(const char*) sqlite3_column_blob(stmt,17);
+                  const char *tg18 =(const char*) sqlite3_column_blob(stmt,18);
                    char * explan= decode(tg18);
 
 
 
-                int level = sqlite3_column_int(stmt,18);
-                int time = sqlite3_column_int(stmt,19);
-                Part6 *part6= new Part6(id,content1,a1,b1,c1,d1,sol1,a2,b2,c2,d2,sol2,a3,b3,c3,d3,sol3,explan,level,time);
+                int level = sqlite3_column_int(stmt,19);
+                int time = sqlite3_column_int(stmt,20);
+                Part6 *part6= new Part6(id,token,content1,a1,b1,c1,d1,sol1,a2,b2,c2,d2,sol2,a3,b3,c3,d3,sol3,explan,level,time);
                 result.push_back(part6);
          }
         return result;

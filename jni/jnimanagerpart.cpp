@@ -246,7 +246,7 @@ funconvertWord(JNIEnv * env , jobject object, Word * word){
 
     jclass javastring = env->FindClass("java/lang/String");
 
-      jmethodID methodId = env -> GetMethodID(cl,"<init>", "(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;)V");
+      jmethodID methodId = env -> GetMethodID(cl,"<init>", "(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;)V");
 
     jobjectArray arrmeaning = env->NewObjectArray((int)(word->getMeaning().size()), javastring, NULL);
       jobjectArray arrtype = env->NewObjectArray((int)(word->getType().size()), javastring, NULL);
@@ -303,8 +303,12 @@ funconvertWord(JNIEnv * env , jobject object, Word * word){
          jstring exam= (jstring)env->CallStaticObjectMethod(clcv, methodId1, array5);
           env->DeleteLocalRef(array5);
 
+            jbyteArray array6 = env->NewByteArray(strlen(word->getToken()));
+            env->SetByteArrayRegion(array6,0,strlen(word->getToken()),(jbyte*)word->getToken());
+             jstring token= (jstring)env->CallStaticObjectMethod(clcv, methodId1, array6);
+                       env->DeleteLocalRef(array6);
 
-           jobject re = env->NewObject(cl,methodId,word->getId(),wordname,pro,exam,arrmeaning,arrtype,arrexplan,arrsimilar);
+           jobject re = env->NewObject(cl,methodId,word->getId(),token,wordname,pro,exam,arrmeaning,arrtype,arrexplan,arrsimilar);
 
 
                              env->DeleteLocalRef(wordname);
@@ -314,6 +318,7 @@ funconvertWord(JNIEnv * env , jobject object, Word * word){
                             env->DeleteLocalRef(arrtype);
                             env->DeleteLocalRef(arrexplan);
                             env->DeleteLocalRef(arrsimilar);
+                                                        env->DeleteLocalRef(token);
                             return re;
 
 }
@@ -520,6 +525,52 @@ Java_sqlite_ManagerPart_updateTimePart(JNIEnv* env , jobject object , jint idpar
     SqliteControlPart sqlite;
 
    bool b =sqlite.updateTimePart((int)idpart, (int)id);
+
+    return jboolean(b);
+
+}
+}
+
+//tag
+
+
+extern "C"{
+JNIEXPORT jobjectArray JNICALL
+Java_sqlite_ManagerPart_searchAllPostTag(JNIEnv* env , jobject object ){
+
+    SqliteControlPart sqlite;
+
+    vector<PostTag> result = sqlite.searchAllPostTag();
+     jclass  cl = env -> FindClass("model/PostTag");
+     jmethodID methodId = env -> GetMethodID(cl,"<init>", "(ILjava/lang/String;I)V");
+
+         jclass clcv = env -> FindClass("model/Convert");
+         jmethodID methodId1 = env -> GetStaticMethodID(clcv, "convertCStringToJniSafeString","([B)Ljava/lang/String;");
+
+        jobjectArray arr = env->NewObjectArray((int)result.size(), cl, NULL);
+        for(int i =0;i<result.size() ;i++){
+            PostTag part = result.at(i);
+             jbyteArray arraycontent = env->NewByteArray(strlen(part.getTitle()));
+             env->SetByteArrayRegion(arraycontent,0,strlen(part.getTitle()),(jbyte*)part.getTitle());
+             jstring content = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arraycontent);
+             env->DeleteLocalRef(arraycontent);
+
+             jobject ob = env->NewObject(cl, methodId,part.getId(),content, part.getIsused());
+             env->SetObjectArrayElement(arr, i, ob);
+        }
+        return arr;
+}
+}
+
+
+
+extern "C"{
+JNIEXPORT jboolean JNICALL
+Java_sqlite_ManagerPart_updatePostTagUse(JNIEnv* env , jobject object , jint id ){
+
+    SqliteControlPart sqlite;
+
+   bool b =sqlite.updatePostTagUse((int)id);
 
     return jboolean(b);
 

@@ -10,6 +10,7 @@ import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextPaint;
+import android.text.TextUtils;
 import android.text.style.AlignmentSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
@@ -79,6 +80,10 @@ public class ConvertTagView {
                 spannableString.setSpan(new StyleSpan(Typeface.ITALIC),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 spannableString.setSpan(new StyleSpan(Typeface.BOLD),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
+            case ConstantTag.DBTAG:
+                spannableString.setSpan(new StyleSpan(Typeface.ITALIC),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                spannableString.setSpan(new StyleSpan(Typeface.BOLD),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                break;
             case ConstantTag.BTAG:
                 spannableString.setSpan(new StyleSpan(Typeface.BOLD),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
@@ -135,12 +140,14 @@ public class ConvertTagView {
                 spannableString.setSpan(new StyleSpan(Typeface.ITALIC),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 spannableString.setSpan(new ForegroundColorSpan(Color.RED),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
+
             default:
 
         }
     }
 
     public String stringNotTag(String s){
+
         return s.replaceAll("<[a-z]*>","");
     }
 
@@ -188,6 +195,7 @@ public class ConvertTagView {
         public static  final String ITAG="<i>";
 
         public static  final String BTAG="<b>";
+        public static  final String DBTAG="<db>";
 
         public static  final String BITAG="<bi>";
 
@@ -212,6 +220,8 @@ public class ConvertTagView {
         public static  final String HSITAG="<hs>";
 
         public static  final String CRITAG="<cr>";
+
+
 
 
     }

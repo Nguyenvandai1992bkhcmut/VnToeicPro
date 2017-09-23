@@ -34,4 +34,7 @@ public interface IListenPart {
 
     public int getCountAnswer();
 
+
+    public String getToken();
+
 }

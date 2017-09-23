@@ -35,17 +35,18 @@ public class ModelPart7 implements Serializable,IDataPart,IListenPart {
 
 
     private int id ;
+    private String token;
     private String explan;
     private int level;
     private int time;
     private ArrayList<Passage>passages;
     private ArrayList<Question>questions;
     private int index ;
-    public final static String LINKIMAGE="http://vntoeic.com/api/v1/part7/image/";
-    public final static  String LINKSRC="/data/user/0/com.vntoeic.bkteam.vntoeicpro/part7/image/";
-
-    public ModelPart7(int id , String explan , int level  , int time){
+    public final static String LINKBASIC ="http://vntoeic.xyz/api/v1/part7s/";
+    public final static String LINKSRC="/data/user/0/com.vntoeic.bkteam.vntoeicpro/part7/";
+    public ModelPart7(int id ,String token, String explan , int level  , int time){
         this.id = id ;
+        this.token = token;
         this.explan = explan;
         this.level = level;
         this.time = time;
@@ -55,8 +56,8 @@ public class ModelPart7 implements Serializable,IDataPart,IListenPart {
 
     }
 
-    public void addPassage(int id , int istext , String token , String content){
-        Passage passage = new Passage(id,istext,token,content);
+    public void addPassage(int id , int istext , String content){
+        Passage passage = new Passage(id,istext,content);
         this.passages.add(passage);
     }
     public void addQuestion(int id,  String question , String a , String b , String c, String d , String sol){
@@ -126,6 +127,11 @@ public class ModelPart7 implements Serializable,IDataPart,IListenPart {
     }
 
     @Override
+    public int getPart() {
+        return 7;
+    }
+
+    @Override
     public String getSrcFile() {
         return "";
     }
@@ -137,17 +143,17 @@ public class ModelPart7 implements Serializable,IDataPart,IListenPart {
 
     @Override
     public String getLinkDowloadImage() {
-        return LINKIMAGE;
+         return LINKBASIC+String.valueOf(id)+"/passages/";
     }
 
     @Override
     public String getLinkFigure(int numberQuestion) {
-        return "Http://vntoeic.com/api/v1/part7/result/"+String.valueOf(id)+"/"+String.valueOf(numberQuestion);
+        return LINKBASIC+String.valueOf(id)+"/results/"+String.valueOf(numberQuestion);
     }
 
     @Override
     public String getSrcFileImage() {
-        return LINKSRC;
+        return LINKSRC +String.valueOf(id);
     }
 
     @Override
@@ -163,7 +169,6 @@ public class ModelPart7 implements Serializable,IDataPart,IListenPart {
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 textView.setLayoutParams(params);
                 textView.setTextColor(Color.WHITE);
-
                 textView.setText(convertTagView.getSpannableString());
                 linearLayout.addView(textView, i);
             } else {
@@ -176,7 +181,7 @@ public class ModelPart7 implements Serializable,IDataPart,IListenPart {
                 imageView.setScaleType(ImageView.ScaleType.CENTER);
 
                 linearLayout.addView(imageView, i);
-                File file = new File(LINKSRC+this.getPassages().get(i).getToken()+".png");
+                File file = new File(getSrcFileImage()+String.valueOf(this.getPassages().get(i).getId())+getToken()+".png");
                 imageView.setImageBitmap(getBitmap(context,file));
 
             }
@@ -229,17 +234,24 @@ public class ModelPart7 implements Serializable,IDataPart,IListenPart {
         this.questions = questions;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     public class Passage implements Serializable{
         private int id ;
         private int istext;
-        private String token ;
         private String content;
 
 
-        public Passage(int id, int istext, String token, String content) {
+        public Passage(int id, int istext, String content) {
             this.id = id;
             this.istext = istext;
-            this.token = token;
+
             this.content = content;
         }
 
@@ -249,14 +261,6 @@ public class ModelPart7 implements Serializable,IDataPart,IListenPart {
 
         public void setIstext(int istext) {
             this.istext = istext;
-        }
-
-        public String getToken() {
-            return token;
-        }
-
-        public void setToken(String token) {
-            this.token = token;
         }
 
         public int getId() {
@@ -330,13 +334,18 @@ public class ModelPart7 implements Serializable,IDataPart,IListenPart {
         }
 
         @Override
+        public String getToken() {
+            return ModelPart7.this.getToken();
+        }
+
+        @Override
         public int getColorTextQuestion() {
             return Color.YELLOW;
         }
 
         @Override
         public String getLinkFigure() {
-            return  "Http://vntoeic.com/api/v1/part7/result/"+String.valueOf(ModelPart7.this.getId())+"/"+String.valueOf(index);
+            return LINKBASIC+String.valueOf(ModelPart7.this.getId())+"/results/"+String.valueOf(index);
         }
 
         public void setD(String d) {

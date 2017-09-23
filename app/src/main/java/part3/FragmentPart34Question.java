@@ -231,7 +231,7 @@ public class FragmentPart34Question extends Fragment {
 
             public void showFiugre(){
                 MyAsynTask myAsynTask = new MyAsynTask();
-                myAsynTask.execute(data.getLinkFigure(indexQues+1));
+                myAsynTask.execute(data.getLinkFigure(indexQues+1),data.getToken());
             }
             public void hideFigure(){
                 for(int i=0;i<arrayHoder.size();i++){
@@ -297,6 +297,8 @@ public class FragmentPart34Question extends Fragment {
                     try {
                         url = new URL(params[0]);
                         urlConnection = (HttpURLConnection) url.openConnection();
+                        urlConnection.setRequestProperty("content-token",params[1]);
+
 
                         InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                         BufferedReader br = new BufferedReader(new InputStreamReader(in));

@@ -15,9 +15,9 @@ public class ModelWordLesson {
         this.mWord = mWord;
     }
 
-    public ModelWordLesson(int mLessonId, int mId, String mWord, String mPronounce, String mExamples, String[] mMeanings, String[] mTypes, String[] mExplanations, String[] mSimilars) {
+    public ModelWordLesson(int mLessonId, int mId, String mtoken,String mWord, String mPronounce, String mExamples, String[] mMeanings, String[] mTypes, String[] mExplanations, String[] mSimilars) {
         this.mLessonId = mLessonId;
-        ModelWord mword = new ModelWord(mId,mWord,mPronounce,mExamples,mMeanings,mTypes,mExplanations,mSimilars);
+        ModelWord mword = new ModelWord(mId,mtoken,mWord,mPronounce,mExamples,mMeanings,mTypes,mExplanations,mSimilars);
         this.mWord = mword;
     }
 

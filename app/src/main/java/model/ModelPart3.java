@@ -22,7 +22,8 @@ public class ModelPart3 implements Serializable,IListenPart,IDataPart {
     private ArrayList<Part3Question>arrQuestion;
     private int level;
     private int time;
-    private final String LINKAUDIO="http://vntoeic.com/api/v1/part3/sound/";
+    private final String LINKBASIC ="http://vntoeic.xyz/api/v1/part3s/";
+    private final String LINKSRC="/data/user/0/com.vntoeic.bkteam.vntoeicpro/part3/";
 
 
     public ModelPart3(int id , String token , String script ,
@@ -90,6 +91,11 @@ public class ModelPart3 implements Serializable,IListenPart,IDataPart {
     }
 
     @Override
+    public int getPart() {
+        return 3;
+    }
+
+    @Override
     public String getExplan() {
         return this.script;
     }
@@ -117,12 +123,12 @@ public class ModelPart3 implements Serializable,IListenPart,IDataPart {
 
     @Override
     public String getSrcFile() {
-        return "/data/user/0/com.vntoeic.bkteam.vntoeicpro/part3/audio/"+token+".mp3";
+        return LINKSRC+token+".mp3";
     }
 
     @Override
     public String getLinkDowload() {
-        return LINKAUDIO+token;
+        return LINKBASIC+String.valueOf(id)+"/sound";
     }
 
     @Override
@@ -132,7 +138,7 @@ public class ModelPart3 implements Serializable,IListenPart,IDataPart {
 
     @Override
     public String getLinkFigure(int numberQuetion) {
-        return "Http://vntoeic.com/api/v1/part3/result/"+String.valueOf(getId())+"/"+String.valueOf(numberQuetion);
+        return LINKBASIC+String.valueOf(id)+"/results/"+String.valueOf(numberQuetion);
     }
 
     @Override

@@ -21,19 +21,22 @@ funConvert(JNIEnv* env , jobject object , Part6 * part ){
     if(part==NULL)return NULL;
 
     jclass  cl = env -> FindClass("model/ModelPart6");
-    jmethodID methodId = env -> GetMethodID(cl,"<init>", "(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;II)V");
+    jmethodID methodId = env -> GetMethodID(cl,"<init>", "(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;II)V");
 
     jclass clcv = env -> FindClass("model/Convert");
     jmethodID methodId1 = env -> GetStaticMethodID(clcv, "convertCStringToJniSafeString","([B)Ljava/lang/String;");
 
 
-    jbyteArray arraytoken = env->NewByteArray(strlen(part->getContent()));
-    env->SetByteArrayRegion(arraytoken,0,strlen(part->getContent()),(jbyte*)part->getContent());
-    jstring content = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arraytoken);
+    jbyteArray arraycontent = env->NewByteArray(strlen(part->getContent()));
+    env->SetByteArrayRegion(arraycontent,0,strlen(part->getContent()),(jbyte*)part->getContent());
+    jstring content = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arraycontent);
+     env->DeleteLocalRef(arraycontent);
+
+
+    jbyteArray arraytoken = env->NewByteArray(strlen(part->getToken()));
+    env->SetByteArrayRegion(arraytoken,0,strlen(part->getToken()),(jbyte*)part->getToken());
+    jstring token = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arraytoken);
      env->DeleteLocalRef(arraytoken);
-
-
-
 //question 1
 
 
@@ -133,7 +136,7 @@ jbyteArray arrexplan = env->NewByteArray(strlen(part->getExplan()));
         jstring explan = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arrexplan);
         env->DeleteLocalRef(arrexplan);
 
-    jobject ob = env->NewObject(cl, methodId,part->getId(),content,a1,b1,c1,d1,sol1,a2,b2,c2,d2,sol2,a3,b3,c3,d3,sol3,explan,part->getLevel(),part->getTime());
+    jobject ob = env->NewObject(cl, methodId,part->getId(),token,content,a1,b1,c1,d1,sol1,a2,b2,c2,d2,sol2,a3,b3,c3,d3,sol3,explan,part->getLevel(),part->getTime());
     env->DeleteLocalRef(content);
     env->DeleteLocalRef(explan);
 

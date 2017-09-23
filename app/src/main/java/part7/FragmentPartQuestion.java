@@ -161,7 +161,7 @@ public class FragmentPartQuestion extends Fragment {
             isfigure=1;
             String url = dataquestion.getLinkFigure();
             MyAsynTask myAsynTask = new MyAsynTask();
-            myAsynTask.execute(url);
+            myAsynTask.execute(url,dataquestion.getToken());
         }
 
         @Override
@@ -256,6 +256,7 @@ public class FragmentPartQuestion extends Fragment {
                 try {
                     url = new URL(params[0]);
                     urlConnection = (HttpURLConnection) url.openConnection();
+                    urlConnection.setRequestProperty("content-token",params[1]);
 
                     InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                     BufferedReader br = new BufferedReader(new InputStreamReader(in));

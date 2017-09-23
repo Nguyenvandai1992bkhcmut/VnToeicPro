@@ -18,6 +18,7 @@ import supportview.ConvertTagView;
 
 public class ModelPart6   implements Serializable,IDataPart,IListenPart {
     private int id;
+    private String token;
     private String content;
     private ArrayList<Part6Question>arrQuestion;
     private String explan;
@@ -25,12 +26,13 @@ public class ModelPart6   implements Serializable,IDataPart,IListenPart {
     private int time;
     private final String LINKFIGURE ="Http://vntoeic.com/api/v1/part6/result/";
 
-    public ModelPart6(int id , String content ,
+    public ModelPart6(int id ,String token, String content ,
                        String a1 , String b1 , String c1 , String d1 , String sol1,
                        String a2 , String b2 , String c2 , String d2 , String sol2,
                        String a3 , String b3 , String c3 , String d3 , String sol3,
                       String explan,int level, int time){
         this.id = id ;
+        this.token = token;
         this.content = content;
         arrQuestion = new ArrayList<>();
         arrQuestion.add(new Part6Question(1,a1,b1,c1,d1,sol1));
@@ -90,6 +92,11 @@ public class ModelPart6   implements Serializable,IDataPart,IListenPart {
     }
 
     @Override
+    public int getPart() {
+        return 6;
+    }
+
+    @Override
     public String getSrcFile() {
         return null;
     }
@@ -117,6 +124,11 @@ public class ModelPart6   implements Serializable,IDataPart,IListenPart {
     @Override
     public int getCountAnswer() {
         return 4;
+    }
+
+    @Override
+    public String getToken() {
+        return token;
     }
 
     @Override
@@ -222,6 +234,11 @@ public class ModelPart6   implements Serializable,IDataPart,IListenPart {
         @Override
         public String getD() {
             return d;
+        }
+
+        @Override
+        public String getToken() {
+            return ModelPart6.this.getToken();
         }
 
         @Override

@@ -170,6 +170,7 @@ class LessonTag{
 class Word{
     private :
         int id;
+        const char * token;
         const char * word;
         const char * pronounce;
         const char * example;
@@ -179,8 +180,9 @@ class Word{
         vector<const char *>similar;
 
     public:
-        Word(int id, const char * word, const char * pro , const char * example , vector<const char * >meaning , vector<const char *>type , vector<const char *>explan,vector<const char *>similar){
+        Word(int id,const char *token, const char * word, const char * pro , const char * example , vector<const char * >meaning , vector<const char *>type , vector<const char *>explan,vector<const char *>similar){
                this->id = id;
+               this->token = token;
                 this->word = word;
                 this->pronounce = pro;
                 this->example = example;
@@ -195,6 +197,9 @@ class Word{
             return this->id;
          }
 
+         const char *getToken(){
+            return this->token;
+         }
          const char *getWord(){
             return this->word;
          }
@@ -887,6 +892,7 @@ class Part4{
 class Part5{
     private:
         int id;
+        const char * token;
         const char * question;
         const char * a;
         const char * b;
@@ -897,8 +903,9 @@ class Part5{
         int level;
         int time;
     public :
-        Part5(int id, const char * question, const char * a, const char * b,const char * c, const char *d, const char * sol, const char * explan , int level , int time){
+        Part5(int id,const char * token,const char * question, const char * a, const char * b,const char * c, const char *d, const char * sol, const char * explan , int level , int time){
             this ->id = id;
+            this->token = token;
             this ->question = question;
             this->a = a;
             this->b = b;
@@ -913,6 +920,9 @@ class Part5{
         //get
         int getId(){
             return this ->id;
+        }
+        const char * getToken(){
+        return this->token;
         }
         const char * getQuestion(){
             return this->question;
@@ -972,6 +982,7 @@ class ModelFavoritePart{
 class Part6{
     private:
         int id;
+        const char * token;
         const char * content;
 
         const char * a1;
@@ -999,7 +1010,7 @@ class Part6{
         int time;
 
      public:
-        Part6(int id , const char * content ,
+        Part6(int id ,const char * token, const char * content ,
           const char * a1 , const char * b1, const char * c1, const char *d1 , const char * sol1 ,
           const char * a2, const char * b2, const char * c2, const char *d2, const char * sol2 ,
           const char * a3, const char * b3, const char * c3, const char * d3, const char * sol3 ,
@@ -1007,6 +1018,7 @@ class Part6{
 
 
             this->id = id;
+            this->token = token;
             this->content = content;
             this->explan = explan;
 
@@ -1038,6 +1050,9 @@ class Part6{
 
         int getId(){
             return this->id;
+        }
+        const char * getToken(){
+        return this->token;
         }
 
         const char * getContent(){
@@ -1126,13 +1141,12 @@ class Passage{
     private :
         int id;
          int istext;
-         const char * token;
+
          const char * content;
      public:
-        Passage(int id, int istext , const char * token , const char * content){
+        Passage(int id, int istext , const char * content){
             this->id = id;
             this->istext = istext;
-            this->token = token;
             this->content=content;
         }
 
@@ -1146,11 +1160,6 @@ class Passage{
             return this->istext;
 
         }
-
-        const char * getToken(){
-            return this->token;
-        }
-
         const char * getContent(){
             return this->content;
         }
@@ -1210,6 +1219,7 @@ class QuestionPart7{
 class Part7{
     private:
         int id;
+        const char* token;
         const char * explan;
         int level ;
         int time;
@@ -1218,8 +1228,9 @@ class Part7{
         vector<QuestionPart7>questions;
 
     public :
-    Part7(int id , const char * explan , int level , int time ,int countQuestion, vector<Passage>passages , vector<QuestionPart7>questions){
+    Part7(int id ,const char * token, const char * explan , int level , int time ,int countQuestion, vector<Passage>passages , vector<QuestionPart7>questions){
         this->id = id;
+        this->token = token;
         this->explan = explan;
         this->level = level;
         this->time= time;
@@ -1233,6 +1244,9 @@ class Part7{
         return this->id;
     }
 
+const char *getToken(){
+    return this->token;
+}
     const char * getExplan(){
         return this->explan;
     }
@@ -1411,6 +1425,60 @@ class PartSubjectResult{
      }
 
 };
+
+class TokenPart7{
+    private:
+        int part7_id;
+        int passage_id;
+        const char * token;
+
+    public:
+
+         TokenPart7(int p , int p1 , const char * token){
+            this->part7_id= p;
+            this->passage_id= p1;
+            this->token = token;
+         }
+
+         int getIdPart7(){
+            return this->part7_id;
+         }
+
+         int getIdPassage(){
+            return this->passage_id;
+         }
+
+         const char * getToken(){
+            return this->token;
+         }
+
+};
+class PostTag{
+    private:
+        int id;
+        const char * title;
+        int isused;
+    public :
+        PostTag(int id, const char * title, int is){
+            this->id = id;
+               this->title = title;
+               this->isused= is;
+        }
+
+        //get
+         int getId(){
+            return this->id;
+         }
+
+         int getIsused(){
+            return this->isused;
+         }
+
+         const char * getTitle(){
+            return this->title;
+         }
+}
+;
 
 #endif /* model_hpp */
 

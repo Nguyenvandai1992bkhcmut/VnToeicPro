@@ -66,11 +66,19 @@ public class FragmentPartExplan extends Fragment {
     public void setUpLayout(final View view){
         final int maxheight = getContext().getResources().getDisplayMetrics().heightPixels;
 
+<<<<<<< HEAD
 //        if(part==6||part==7){
 //           view.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, maxheight/2));
 //        }else if(part==3 || part==4 ||){
             view.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
 //        }
+=======
+        if(part==6||part==7){
+           view.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, maxheight/2));
+        }else{
+            view.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+       }
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         line_explan = (LinearLayout)view.findViewById(R.id.img_explan);
         line_aware = (LinearLayout)view.findViewById(R.id.img_aware);
         text_explan = (TextView)view.findViewById(R.id.text_explan);

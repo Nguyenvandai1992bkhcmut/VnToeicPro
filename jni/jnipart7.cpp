@@ -21,40 +21,67 @@ funConvert(JNIEnv* env , jobject object , Part7 * part ){
     if(part==NULL)return NULL;
 
     jclass  cl = env -> FindClass("model/ModelPart7");
+<<<<<<< HEAD
     jmethodID methodId = env -> GetMethodID(cl,"<init>", "(ILjava/lang/String;II)V");
     jmethodID methodAdd = env -> GetMethodID(cl,"addPassage","(IILjava/lang/String;Ljava/lang/String;)V");
+=======
+    jmethodID methodId = env -> GetMethodID(cl,"<init>", "(ILjava/lang/String;Ljava/lang/String;II)V");
+    jmethodID methodAdd = env -> GetMethodID(cl,"addPassage","(IILjava/lang/String;)V");
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     jmethodID methodAddQuestion = env -> GetMethodID(cl,"addQuestion","(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
 
 
     jclass clcv = env -> FindClass("model/Convert");
     jmethodID methodId1 = env -> GetStaticMethodID(clcv, "convertCStringToJniSafeString","([B)Ljava/lang/String;");
 
+<<<<<<< HEAD
+=======
+   jbyteArray arraytoken = env->NewByteArray(strlen(part->getToken()));
+    env->SetByteArrayRegion(arraytoken,0,strlen(part->getToken()),(jbyte*)part->getToken());
+    jstring token = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arraytoken);
+     env->DeleteLocalRef(arraytoken);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 
     jbyteArray arrayexplan = env->NewByteArray(strlen(part->getExplan()));
     env->SetByteArrayRegion(arrayexplan,0,strlen(part->getExplan()),(jbyte*)part->getExplan());
     jstring explan = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arrayexplan);
     env->DeleteLocalRef(arrayexplan);
 
+<<<<<<< HEAD
    jobject ob = env->NewObject(cl, methodId,part->getId(),explan,part->getLevel(),part->getTime());
     env->DeleteLocalRef(explan);
+=======
+   jobject ob = env->NewObject(cl, methodId,part->getId(),token,explan,part->getLevel(),part->getTime());
+    env->DeleteLocalRef(explan);
+    env->DeleteLocalRef(token);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 
     vector<Passage> arrpassage = part->getPassage();
     vector<QuestionPart7>arrquestion = part->getQuestions();
 
     for(int i =0;i<arrpassage.size();i++){
         Passage passage = arrpassage.at(i);
+<<<<<<< HEAD
          jbyteArray arrToken = env->NewByteArray(strlen(passage.getToken()));
             env->SetByteArrayRegion(arrToken,0,strlen(passage.getToken()),(jbyte*)passage.getToken());
             jstring token = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arrToken);
             env->DeleteLocalRef(arrToken);
+=======
+
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 
              jbyteArray arrContent = env->NewByteArray(strlen(passage.getContent()));
                         env->SetByteArrayRegion(arrContent,0,strlen(passage.getContent()),(jbyte*)passage.getContent());
                         jstring content = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arrContent);
                         env->DeleteLocalRef(arrContent);
 
+<<<<<<< HEAD
               env->CallVoidMethod(ob,methodAdd,passage.getId(), passage.getIsText(), token,content);
                         env->DeleteLocalRef(token);
+=======
+              env->CallVoidMethod(ob,methodAdd,passage.getId(), passage.getIsText(),content);
+
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
                         env->DeleteLocalRef(content);
     }
 
@@ -165,15 +192,24 @@ Java_sqlite_SqlitePart7_searchAllImagePart7(JNIEnv * env , jobject object ){
 
     SqlitePart7 sqlite;
 
+<<<<<<< HEAD
     vector<char*>result =sqlite.searchAllImagePart7();
 
      jclass cl = env->FindClass("java/lang/String");
+=======
+    vector<TokenPart7*>result =sqlite.searchAllImagePart7();
+
+     jclass cl = env->FindClass("model/ModelTokenPart7");
+       jmethodID methodId = env -> GetMethodID(cl,"<init>", "(IILjava/lang/String;)V");
+
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
      jclass clcv = env -> FindClass("model/Convert");
      jmethodID methodId1 = env -> GetStaticMethodID(clcv, "convertCStringToJniSafeString","([B)Ljava/lang/String;");
 
 
 
      jobjectArray arr = env->NewObjectArray((int)result.size(), cl, NULL);
+<<<<<<< HEAD
      for(int i=0;i<result.size();i++){
           jbyteArray arrA = env->NewByteArray(strlen(result.at(i)));
           env->SetByteArrayRegion(arrA,0,strlen(result.at(i)),(jbyte*)result.at(i));
@@ -181,6 +217,19 @@ Java_sqlite_SqlitePart7_searchAllImagePart7(JNIEnv * env , jobject object ){
             env->DeleteLocalRef(arrA);
         env->SetObjectArrayElement(arr, i,a);
                     env->DeleteLocalRef(a);
+=======
+
+     for(int i=0;i<result.size();i++){
+          jbyteArray arrA = env->NewByteArray(strlen(result.at(i)->getToken()));
+          env->SetByteArrayRegion(arrA,0,strlen(result.at(i)->getToken()),(jbyte*)result.at(i)->getToken());
+            jstring a = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arrA);
+
+            jobject ob = env->NewObject(cl, methodId,result.at(i)->getIdPart7(),result.at(i)->getIdPassage(),a);
+              env->SetObjectArrayElement(arr, i, ob);
+
+            env->DeleteLocalRef(arrA);
+            env->DeleteLocalRef(a);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
      }
     return arr;
 

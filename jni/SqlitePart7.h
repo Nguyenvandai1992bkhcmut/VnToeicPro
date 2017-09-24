@@ -23,7 +23,11 @@ public:
        vector<Part7*>funsearchPart();
        Part7 *searchPart7Id(int id);
        vector<Part7*>randomPart7(int number);
+<<<<<<< HEAD
        vector< char*>searchAllImagePart7();
+=======
+       vector< TokenPart7*>searchAllImagePart7();
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
        vector<Part7*>randomPart7CountQuestion(int number, int countQuestion);
        vector<Part7*>searchAllPartImage();
        vector<Part7*>randomPart7Subject(int subject,int number);

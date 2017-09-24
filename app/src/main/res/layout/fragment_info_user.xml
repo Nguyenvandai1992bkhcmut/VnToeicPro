@@ -67,6 +67,14 @@
             android:id="@+id/sign_in_button">
         </com.google.android.gms.common.SignInButton>
 
+<<<<<<< HEAD
+=======
+        <com.facebook.login.widget.LoginButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_button"/>
+
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     </LinearLayout>
 
 </LinearLayout>

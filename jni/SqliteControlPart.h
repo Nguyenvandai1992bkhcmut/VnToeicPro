@@ -43,9 +43,18 @@ public:
      vector<Grammar>searchAllGrammar();
     Grammar* searchGrammarId(int idgrammar);
     void updateWordAware(int idword, int aware);
+<<<<<<< HEAD
 vector<PartSubjectResult>searhPartSubjectResult(int part);
 
   bool  updateTimePart(int part , int id);
+=======
+    vector<PartSubjectResult>searhPartSubjectResult(int part);
+
+     bool  updateTimePart(int part , int id);
+
+     vector<PostTag>searchAllPostTag();
+     bool updatePostTagUse(int id);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 };
 
 #endif //VNTOEICPRO_SQLITECONTROLPART_H

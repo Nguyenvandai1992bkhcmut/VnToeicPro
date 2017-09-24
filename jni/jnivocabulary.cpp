@@ -120,7 +120,11 @@ Java_sqlite_SqliteVocabulary_searchWordId(JNIEnv * env , jobject object , jint i
         if(word==NULL)return NULL;
         jclass javastring = env->FindClass("java/lang/String");
         jclass  cl = env -> FindClass("model/ModelWord");
+<<<<<<< HEAD
         jmethodID methodId = env -> GetMethodID(cl,"<init>", "(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;)V");
+=======
+        jmethodID methodId = env -> GetMethodID(cl,"<init>", "(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;)V");
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 
         jclass clcv = env -> FindClass("model/Convert");
         jmethodID methodId1 = env -> GetStaticMethodID(clcv, "convertCStringToJniSafeString",  "([B)Ljava/lang/String;");
@@ -166,19 +170,43 @@ Java_sqlite_SqliteVocabulary_searchWordId(JNIEnv * env , jobject object , jint i
             jbyteArray array3 = env->NewByteArray(strlen(word->getWord()));
             env->SetByteArrayRegion(array3,0,strlen(word->getWord()),(jbyte*)word->getWord());
              jstring wordname= (jstring)env->CallStaticObjectMethod(clcv, methodId1, array3);
+<<<<<<< HEAD
+=======
+                       env->DeleteLocalRef(array3);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 
                jbyteArray array4 = env->NewByteArray(strlen(word->getPronounce()));
                env->SetByteArrayRegion(array4,0,strlen(word->getPronounce()),(jbyte*)word->getPronounce());
                 jstring pro= (jstring)env->CallStaticObjectMethod(clcv, methodId1, array4);
+<<<<<<< HEAD
+=======
+                          env->DeleteLocalRef(array4);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 
              jbyteArray array5 = env->NewByteArray(strlen(word->getExample()));
               env->SetByteArrayRegion(array5,0,strlen(word->getExample()),(jbyte*)word->getExample());
              jstring exam= (jstring)env->CallStaticObjectMethod(clcv, methodId1, array5);
+<<<<<<< HEAD
 
 
             jobject ob = env->NewObject(cl, methodId,word->getId(),wordname,pro,exam,arrmeaning,arrtype,arrexplan,arrsimilar);
 
 
+=======
+                       env->DeleteLocalRef(array5);
+
+            jbyteArray array6 = env->NewByteArray(strlen(word->getToken()));
+            env->SetByteArrayRegion(array6,0,strlen(word->getToken()),(jbyte*)word->getToken());
+             jstring token= (jstring)env->CallStaticObjectMethod(clcv, methodId1, array6);
+                       env->DeleteLocalRef(array6);
+
+            jobject ob = env->NewObject(cl, methodId,word->getId(),token,wordname,pro,exam,arrmeaning,arrtype,arrexplan,arrsimilar);
+
+          env->DeleteLocalRef(token);
+                    env->DeleteLocalRef(exam);
+                              env->DeleteLocalRef(pro);
+                                        env->DeleteLocalRef(wordname);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         return ob;
 }
 }
@@ -192,10 +220,17 @@ Java_sqlite_SqliteVocabulary_searchWordLesson(JNIEnv * env , jobject object , ji
         vector<WordLesson>result =sqlite.searchWordLesson(id1);
 
         jclass  clwordles = env -> FindClass("model/ModelWordLesson");
+<<<<<<< HEAD
         jmethodID methodId_wordles = env -> GetMethodID(clwordles,"<init>", "(IILjava/lang/String;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;)V");
 
         jclass  cl = env -> FindClass("model/ModelWord");
         jmethodID methodId = env -> GetMethodID(cl,"<init>", "(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;)V");
+=======
+        jmethodID methodId_wordles = env -> GetMethodID(clwordles,"<init>", "(IILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;)V");
+
+        jclass  cl = env -> FindClass("model/ModelWord");
+        jmethodID methodId = env -> GetMethodID(cl,"<init>", "(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;[Ljava/lang/String;)V");
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 
         jclass javastring = env->FindClass("java/lang/String");
 
@@ -261,8 +296,19 @@ Java_sqlite_SqliteVocabulary_searchWordLesson(JNIEnv * env , jobject object , ji
                   jstring exam= (jstring)env->CallStaticObjectMethod(clcv, methodId1, array5);
                    env->DeleteLocalRef(array5);
 
+<<<<<<< HEAD
 
             jobject re = env->NewObject(clwordles,methodId_wordles, result.at(ii).getLessonId(),word->getId(),wordname,pro,exam,arrmeaning,arrtype,arrexplan,arrsimilar);
+=======
+                   jbyteArray array6 = env->NewByteArray(strlen(word->getToken()));
+                               env->SetByteArrayRegion(array6,0,strlen(word->getToken()),(jbyte*)word->getToken());
+                                jstring token= (jstring)env->CallStaticObjectMethod(clcv, methodId1, array6);
+                                                   env->DeleteLocalRef(array6);
+
+
+
+            jobject re = env->NewObject(clwordles,methodId_wordles, result.at(ii).getLessonId(),word->getId(),token,wordname,pro,exam,arrmeaning,arrtype,arrexplan,arrsimilar);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
             env->SetObjectArrayElement(arr, ii, re);
 
             env->DeleteLocalRef(wordname);
@@ -282,10 +328,17 @@ Java_sqlite_SqliteVocabulary_searchWordLesson(JNIEnv * env , jobject object , ji
 // search All FavoriteWord
 extern "C"{
     JNIEXPORT jobjectArray JNICALL
+<<<<<<< HEAD
     Java_sqlite_SqliteVocabulary_searchFavoriteWord(JNIEnv * env , jobject object ){
          SqliteWord sqlite;
 
           vector<ModelFavoriteWord>result =sqlite.searchFavoriteWord();
+=======
+    Java_sqlite_SqliteVocabulary_searchFavoriteWord(JNIEnv * env , jobject object,jint lesson_tag ){
+         SqliteWord sqlite;
+
+          vector<ModelFavoriteWord>result =sqlite.searchFavoriteWord((int)lesson_tag);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
           jclass clcv = env -> FindClass("model/Convert");
           jmethodID methodId1 = env -> GetStaticMethodID(clcv, "convertCStringToJniSafeString",  "([B)Ljava/lang/String;");
 
@@ -314,7 +367,11 @@ extern "C"{
 // insert favoviteWord
 extern "C"{
 JNIEXPORT void JNICALL
+<<<<<<< HEAD
 Java_sqlite_SqliteVocabulary_insertFavoriteWord(JNIEnv * env, jobject object , jobject data){
+=======
+Java_sqlite_SqliteVocabulary_insertFavoriteWord(JNIEnv * env, jobject object , jint color,jobject data){
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         jclass cl =  env-> FindClass("model/ModelFavoriteWord");
 
         jmethodID getid = env->GetMethodID(cl,"getmWordId","()I");
@@ -328,7 +385,11 @@ Java_sqlite_SqliteVocabulary_insertFavoriteWord(JNIEnv * env, jobject object , j
 
         ModelFavoriteWord favorite(id,time);
         SqliteWord sqlite;
+<<<<<<< HEAD
         sqlite.insertFavoriteWord(favorite);
+=======
+        sqlite.insertFavoriteWord((int)color,favorite);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 
 }
 
@@ -401,9 +462,12 @@ Java_sqlite_SqliteVocabulary_insertWordChecked(JNIEnv * env, jobject object , jo
          int result =(int)result_;
 
         const char *time = env->GetStringUTFChars(time_, 0);
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         ModelWordChecked checked(id,0,result,time);
         SqliteWord sqlite;
         sqlite.insertWordChecked(checked);
@@ -413,21 +477,38 @@ Java_sqlite_SqliteVocabulary_insertWordChecked(JNIEnv * env, jobject object , jo
 
 
 extern "C"{
+<<<<<<< HEAD
 JNIEXPORT jboolean JNICALL
 Java_sqlite_SqliteVocabulary_checkFavoriteWord(JNIEnv * env, jobject object , jint idword){
         SqliteWord sqlite;
         int id = (int)idword;
         bool check = sqlite.checkFavotiteWord( id);
         return (jboolean)check;
+=======
+JNIEXPORT jint JNICALL
+Java_sqlite_SqliteVocabulary_checkFavoriteWord(JNIEnv * env, jobject object , jint idword){
+        SqliteWord sqlite;
+        int id = (int)idword;
+        int check = sqlite.checkFavotiteWord( id);
+        return (jint)check;
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 }
 }
 
 extern "C"{
 JNIEXPORT void JNICALL
+<<<<<<< HEAD
 Java_sqlite_SqliteVocabulary_deleteWordFavorite(JNIEnv * env, jobject object , jint idword){
         SqliteWord sqlite;
         int id = (int)idword;
         sqlite.deleteWordFavorite( id);
+=======
+Java_sqlite_SqliteVocabulary_deleteWordFavorite(JNIEnv * env, jobject object , int lesson_tag,jint idword){
+        SqliteWord sqlite;
+        int id = (int)idword;
+        int lesson =(int)lesson_tag;
+        sqlite.deleteWordFavorite( lesson,id);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 }
 }
 

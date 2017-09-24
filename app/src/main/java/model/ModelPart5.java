@@ -18,6 +18,10 @@ public class ModelPart5   implements Serializable,IDataPart {
 
 
     private int id;
+<<<<<<< HEAD
+=======
+    private String token;
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     private String question;
     private String a ;
     private String b;
@@ -28,7 +32,11 @@ public class ModelPart5   implements Serializable,IDataPart {
     private int level;
     private int time;
 
+<<<<<<< HEAD
     public ModelPart5(int id, String question, String a, String b, String c, String d,  String result, String explain, int level, int time) {
+=======
+    public ModelPart5(int id,String token,String question, String a, String b, String c, String d,  String result, String explain, int level, int time) {
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 
         this.id = id;
         this.a = a;
@@ -40,6 +48,10 @@ public class ModelPart5   implements Serializable,IDataPart {
         this.explain = explain;
         this.question = question;
         this.time = time;
+<<<<<<< HEAD
+=======
+        this.token = token;
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     }
 
     public String getA() {
@@ -113,6 +125,14 @@ public class ModelPart5   implements Serializable,IDataPart {
     }
 
     @Override
+<<<<<<< HEAD
+=======
+    public int getPart() {
+        return 5;
+    }
+
+    @Override
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     public View getViewContent(Context context) {
         TextView textView = new TextView(context);
         textView.setTextColor(Color.WHITE);

@@ -12,6 +12,7 @@ vector<Part5*>SqlitePart5::funsearchPart(){
     vector<Part5*>result;
     while (sqlite3_step(stmt) == SQLITE_ROW){
             int id = sqlite3_column_int(stmt,0);
+<<<<<<< HEAD
             const void * question1 = sqlite3_column_blob(stmt,1);
             const void * a1 = sqlite3_column_blob(stmt,2);
             const void * b1 = sqlite3_column_blob(stmt,3);
@@ -21,6 +22,19 @@ vector<Part5*>SqlitePart5::funsearchPart(){
             const void * explan1 = sqlite3_column_blob(stmt,7);
             int level = sqlite3_column_int(stmt,7);
             int time = sqlite3_column_int(stmt,8);
+=======
+                       const void * token_ = sqlite3_column_blob(stmt,1);
+                        char * token =decode(token_);
+            const void * question1 = sqlite3_column_blob(stmt,2);
+            const void * a1 = sqlite3_column_blob(stmt,3);
+            const void * b1 = sqlite3_column_blob(stmt,4);
+            const void * c1=   sqlite3_column_blob(stmt,5);
+            const void * d1 = sqlite3_column_blob(stmt,6);
+            const char * sol =(const char*) sqlite3_column_text(stmt,7);
+            const void * explan1 = sqlite3_column_blob(stmt,8);
+            int level = sqlite3_column_int(stmt,9);
+            int time = sqlite3_column_int(stmt,10);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 
             char * question = decode(question1);
             char * a= decode(a1);
@@ -33,7 +47,11 @@ vector<Part5*>SqlitePart5::funsearchPart(){
             for(int i=0;i<strlen(sol)+1;i++){
                 sol1[i]=sol[i];
             }
+<<<<<<< HEAD
             Part5 *part5= new Part5(id,question,a,b,c,d,sol1,explan,level,time);
+=======
+            Part5 *part5= new Part5(id,token,question,a,b,c,d,sol1,explan,level,time);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
             result.push_back(part5);
      }
      return result;
@@ -51,7 +69,11 @@ vector<Part5*>SqlitePart5::randomPart5(int number1){
                           for(int i=0 ; i<strlen(xx)+1;i++){
                              x[i]=xx[i];
                           }
+<<<<<<< HEAD
              Part5 *part5= new Part5(1,x,"","","","","","",0,0);
+=======
+             Part5 *part5= new Part5(1,x,"","","","","","","",0,0);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
              re.push_back(part5);
              return re;
          }

@@ -124,8 +124,11 @@ public class ListenPraticseActivity extends AppCompatActivity implements  IPartC
 
     private ArrayList<Integer> arrSubmit = new ArrayList<>();
 
+<<<<<<< HEAD
     private Dialog dialog_load;
     private WindowManager.LayoutParams params;
+=======
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     private ArrayList<Boolean>arrdowload;
 
 
@@ -250,6 +253,13 @@ public class ListenPraticseActivity extends AppCompatActivity implements  IPartC
     }
 
     public void setTextCorrect(){
+<<<<<<< HEAD
+=======
+        total=0;
+        for(int i =0;i<=index;i++){
+            total+=data.get(i).getCountQuestion();
+        }
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         text_correct.setText("Correct "+String.valueOf(correct)+"/"+String.valueOf(total));
     }
 
@@ -280,6 +290,12 @@ public class ListenPraticseActivity extends AppCompatActivity implements  IPartC
             public void onClick(View v) {
                 if(isFigure==0){
                     fragmentViewPagerListen.showFigure();
+<<<<<<< HEAD
+=======
+                    if(part==2){
+                        changeAds(1);
+                    }
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
                     isFigure=1;
                     isQuestion=0;
                     isComment=0;
@@ -353,7 +369,11 @@ public class ListenPraticseActivity extends AppCompatActivity implements  IPartC
             for(int i=0;i<arrChoose.get(index).size();i++) {
                 int ch = 0;
                 SendAsynTask sendAsynTask = new SendAsynTask();
+<<<<<<< HEAD
                 sendAsynTask.execute(data.get(index).getLinkFigure(i+1),arrChoose.get(index).get(i));
+=======
+                sendAsynTask.execute(data.get(index).getLinkFigure(i+1),arrChoose.get(index).get(i),data.get(index).getToken());
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
                 if (arrChoose.get(index).get(i).equals(arrResult.get(index).get(i))) {
                     ch = 1;
                     correct++;
@@ -511,8 +531,11 @@ public class ListenPraticseActivity extends AppCompatActivity implements  IPartC
             if(key==0){
                 SqlitePart1 sqlitePart1 = new SqlitePart1();
                 ModelPart1 datapart1[] = sqlitePart1.randomPart1(10);
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
                 for (int i = 0; i < 10; i++) {
                     data.add(datapart1[i]);
                     ArrayList<String> ch = new ArrayList<>();
@@ -935,12 +958,21 @@ public class ListenPraticseActivity extends AppCompatActivity implements  IPartC
     }
 
     public void nextQuestionAfterPrepare(){
+<<<<<<< HEAD
         fragmentViewPagerListen.reLoadContent();
         fragmentViewPagerListen.reLoadSummary();
         fragmentControlListening.setDefault();
         setUpControlAudio();
         setTextCorrect();
         setUpData();
+=======
+        setUpControlAudio();
+        setTextCorrect();
+        setUpData();
+        fragmentViewPagerListen.reLoadContent();
+        fragmentViewPagerListen.reLoadSummary();
+        fragmentControlListening.setDefault();
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         isPrepareData=0;
         prepareDowload(index+1);
     }
@@ -952,7 +984,11 @@ public class ListenPraticseActivity extends AppCompatActivity implements  IPartC
             arrdowload.add(false);
             DowloadTask dowloadTask = new DowloadTask();
             dowloadTask.setiDowload(this);
+<<<<<<< HEAD
             dowloadTask.execute(String.valueOf(0),data.get(index).getLinkDowload(),data.get(index).getSrcFile());
+=======
+            dowloadTask.execute(String.valueOf(0),data.get(index).getLinkDowload(),data.get(index).getSrcFile(),data.get(index).getToken());
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         }else arrdowload.add(true);
 
         if(part==1) {
@@ -961,16 +997,25 @@ public class ListenPraticseActivity extends AppCompatActivity implements  IPartC
                 arrdowload.add(false);
                 DowloadTask dowloadTask = new DowloadTask();
                 dowloadTask.setiDowload(this);
+<<<<<<< HEAD
                 dowloadTask.execute(String.valueOf(1), data.get(index).getLinkDowloadImage(), data.get(index).getSrcFileImage());
+=======
+                dowloadTask.execute(String.valueOf(1), data.get(index).getLinkDowloadImage(), data.get(index).getSrcFileImage(),data.get(index).getToken());
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
             } else arrdowload.add(true);
         }
 
         if(arrdowload.contains(false)){
+<<<<<<< HEAD
             //showDialogDowload();
+=======
+
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
             isPrepareData=0;
         }else isPrepareData=1;
     }
 
+<<<<<<< HEAD
     public void showDialogDowload(){
 
         if(dialog_load==null) {
@@ -985,6 +1030,8 @@ public class ListenPraticseActivity extends AppCompatActivity implements  IPartC
         dialog_load.show();;
         dialog_load.getWindow().setAttributes(params);
     }
+=======
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     @Override
     public void notifySuccess(int numbertask, boolean b, String url, String file) {
         arrdowload.set(numbertask,b);
@@ -1051,6 +1098,11 @@ public class ListenPraticseActivity extends AppCompatActivity implements  IPartC
             mediaPlayer.release();
             mediaPlayer = null;
             fragmentControlListening.setDefault();
+<<<<<<< HEAD
+=======
+            isFinishAudio=0;
+            seekBar_audio.setProgress(0);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         }
     }
 
@@ -1065,6 +1117,7 @@ public class ListenPraticseActivity extends AppCompatActivity implements  IPartC
             }
         });
         if (dataAudio.exists()) {
+<<<<<<< HEAD
 //            try {
 //
 //                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -1075,6 +1128,8 @@ public class ListenPraticseActivity extends AppCompatActivity implements  IPartC
 //                e.printStackTrace();
 //            }
 //        } else {
+=======
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
             try {
                 mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                 mediaPlayer.setDataSource(data.get(index).getSrcFile());
@@ -1083,7 +1138,10 @@ public class ListenPraticseActivity extends AppCompatActivity implements  IPartC
             } catch (IOException e) {
                 e.printStackTrace();
             }
+<<<<<<< HEAD
 //        }
+=======
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
             seekBar_audio.setMax((mediaPlayer.getDuration()) / 100);
             Timer timer = new Timer();
             MyTimerTask timerTask = new MyTimerTask();

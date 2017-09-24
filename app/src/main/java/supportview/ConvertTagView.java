@@ -10,6 +10,10 @@ import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextPaint;
+<<<<<<< HEAD
+=======
+import android.text.TextUtils;
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 import android.text.style.AlignmentSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
@@ -79,6 +83,13 @@ public class ConvertTagView {
                 spannableString.setSpan(new StyleSpan(Typeface.ITALIC),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 spannableString.setSpan(new StyleSpan(Typeface.BOLD),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
+<<<<<<< HEAD
+=======
+            case ConstantTag.DBTAG:
+                spannableString.setSpan(new StyleSpan(Typeface.ITALIC),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                spannableString.setSpan(new StyleSpan(Typeface.BOLD),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                break;
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
             case ConstantTag.BTAG:
                 spannableString.setSpan(new StyleSpan(Typeface.BOLD),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
@@ -135,12 +146,20 @@ public class ConvertTagView {
                 spannableString.setSpan(new StyleSpan(Typeface.ITALIC),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 spannableString.setSpan(new ForegroundColorSpan(Color.RED),begin,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
             default:
 
         }
     }
 
     public String stringNotTag(String s){
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         return s.replaceAll("<[a-z]*>","");
     }
 
@@ -188,6 +207,10 @@ public class ConvertTagView {
         public static  final String ITAG="<i>";
 
         public static  final String BTAG="<b>";
+<<<<<<< HEAD
+=======
+        public static  final String DBTAG="<db>";
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 
         public static  final String BITAG="<bi>";
 
@@ -214,6 +237,11 @@ public class ConvertTagView {
         public static  final String CRITAG="<cr>";
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     }
 
 

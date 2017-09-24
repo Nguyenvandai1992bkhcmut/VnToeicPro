@@ -226,6 +226,7 @@ vector<Word*>SqliteControlPart::funSeachWord(){
                            char * word=(char *)"";
                            char * pronouce =(char *)"";
                            char * example=(char *)"";
+<<<<<<< HEAD
 
                            idword = sqlite3_column_int(stmt, 0);
 
@@ -234,12 +235,30 @@ vector<Word*>SqliteControlPart::funSeachWord(){
                           word = decode(word_);
                                //prono
                          const void * pro_ = sqlite3_column_blob(stmt, 2);
+=======
+                           char * token =(char *)"";
+
+                           idword = sqlite3_column_int(stmt, 0);
+
+                           const void* token_ = sqlite3_column_blob(stmt,1);
+                           token= decode(token_);
+
+                              //word
+                          const void * word_ = sqlite3_column_blob(stmt, 2);
+                          word = decode(word_);
+                               //prono
+                         const void * pro_ = sqlite3_column_blob(stmt, 3);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
                           if(pro_!=NULL){
                                 pronouce = decode(pro_);
                            }
                                 //
 
+<<<<<<< HEAD
                           const void * exam_ = sqlite3_column_blob(stmt, 3);
+=======
+                          const void * exam_ = sqlite3_column_blob(stmt, 4);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
                            if(exam_!=NULL){
                                 example = decode(exam_);
                            }
@@ -247,7 +266,11 @@ vector<Word*>SqliteControlPart::funSeachWord(){
 
                            //meaning
                            char * meaning1 =(char *)"";
+<<<<<<< HEAD
                             const void * meaning_ = sqlite3_column_blob(stmt, 7);
+=======
+                            const void * meaning_ = sqlite3_column_blob(stmt, 8);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
                             if(meaning_ !=NULL){
                                 meaning1 = decode(meaning_);
                             }
@@ -255,14 +278,22 @@ vector<Word*>SqliteControlPart::funSeachWord(){
 
                              //type
                              char * type1 =(char *)"";
+<<<<<<< HEAD
                             const void * type_ = sqlite3_column_blob(stmt, 8);
+=======
+                            const void * type_ = sqlite3_column_blob(stmt, 9);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
                             if(type_!=NULL){
                                 type1 = decode(type_);
                             }
 
 
                              //explan
+<<<<<<< HEAD
                             const void * explan_ = sqlite3_column_blob(stmt, 9);
+=======
+                            const void * explan_ = sqlite3_column_blob(stmt, 10);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
                             char *explan1=(char *)"";
                             if(explan_!=NULL){
                                 explan1 = decode(explan_);
@@ -270,7 +301,11 @@ vector<Word*>SqliteControlPart::funSeachWord(){
 
 
                              //similar
+<<<<<<< HEAD
                             const void * similar_ = sqlite3_column_blob(stmt, 10);
+=======
+                            const void * similar_ = sqlite3_column_blob(stmt, 11);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
                             char *similar1 = (char *)"";
                             if(similar_!=NULL){
                                 similar1 = decode(similar_);
@@ -310,7 +345,11 @@ vector<Word*>SqliteControlPart::funSeachWord(){
                                 type.push_back(type1);
                                 explan.push_back(explan1);
                                 similar.push_back(similar1);
+<<<<<<< HEAD
                                 Word* w= new Word(idword,word,pronouce,example,meaning,type,explan,similar);
+=======
+                                Word* w= new Word(idword,token,word,pronouce,example,meaning,type,explan,similar);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
                                 result.push_back(w);
                             }
                         }
@@ -514,3 +553,52 @@ bool SqliteControlPart::updateTimePart(int part1 , int id1){
        sqlite3_close(db);
      return true;
   }
+<<<<<<< HEAD
+=======
+
+  vector<PostTag>SqliteControlPart::searchAllPostTag(){
+       string sql ="select * from post_tag";
+       vector<PostTag>result;
+       if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
+                             const char * er = sqlite3_errmsg(db);
+                             return result;
+                        }
+                        while (sqlite3_step(stmt) == SQLITE_ROW) {
+                              int id = sqlite3_column_int(stmt,0);
+                              int re = sqlite3_column_int(stmt,2);
+                              const char * time1 = (const char *)sqlite3_column_text(stmt,1);
+                              char * time = new char[strlen(time1)+1];
+                              for(int i =0;i<strlen(time1)+1;i++){
+                                  time[i]=time1[i];
+                              }
+
+
+                              PostTag model(id,time,re);
+                              result.push_back(model);
+                        }
+                        return result;
+
+  }
+     bool SqliteControlPart::updatePostTagUse(int id1){
+         stringstream ss2;
+         ss2<<id1;
+         string id = ss2.str();
+       string sql ="update post_tag set is_useed=1 where tag_id="+id;
+         if(sqlite3_prepare_v2((this->db),sql.c_str(), -1, &(this->stmt), NULL) != SQLITE_OK){
+
+                return false;
+
+          }
+             const char* data = "Callback function called";
+        char *zErrMsg = 0;
+
+          int rc= sqlite3_exec(db, sql.c_str(), NULL, NULL, NULL);
+         if( rc != SQLITE_OK ){
+                 return false;
+          }else{
+                 return true;
+          }
+            sqlite3_close(db);
+          return true;
+     }
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce

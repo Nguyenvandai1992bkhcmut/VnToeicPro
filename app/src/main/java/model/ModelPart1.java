@@ -38,8 +38,14 @@ public class ModelPart1 implements Serializable,IListenPart,IDataPart {
     private String sol;
     private int level;
     private int time;
+<<<<<<< HEAD
     private final String LINKAUDIO="http://vntoeic.com/api/v1/part1/sound/";
     private final String LINKIMAGE="http://vntoeic.com/api/v1/part1/image/";
+=======
+    private final String LINKBASIC ="http://vntoeic.xyz/api/v1/part1s/";
+    private final String LINKSRC="/data/user/0/com.vntoeic.bkteam.vntoeicpro/part1/";
+
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 
     public ModelPart1(int id, String token, String aScript, String bScript, String cScript, String dScript, String sol, int level, int time) {
         this.id = id;
@@ -155,6 +161,13 @@ public class ModelPart1 implements Serializable,IListenPart,IDataPart {
         return id;
     }
 
+<<<<<<< HEAD
+=======
+    @Override
+    public int getPart() {
+        return 1;
+    }
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 
 
     @Override
@@ -168,8 +181,13 @@ public class ModelPart1 implements Serializable,IListenPart,IDataPart {
         imageView.setLayoutParams(params);
         linearLayout.addView(imageView);
 
+<<<<<<< HEAD
         TaskDowloadImage  taskDowloadImage = new TaskDowloadImage(context,imageView,1);
         taskDowloadImage.execute();
+=======
+       // TaskDowloadImage  taskDowloadImage = new TaskDowloadImage(context,imageView,1);
+       // taskDowloadImage.execute();
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 
         ImageView imageView1 = new ImageView(context);
         imageView1.setImageResource(R.mipmap.icon_part1_play);
@@ -179,36 +197,75 @@ public class ModelPart1 implements Serializable,IListenPart,IDataPart {
     }
 
     public void getImage(Context context,ImageView imageView){
+<<<<<<< HEAD
         TaskDowloadImage taskDowloadImage = new TaskDowloadImage(context,imageView,0);
         taskDowloadImage.execute();
+=======
+        Bitmap bitmap =null;
+        Bitmap bitmap1= null;
+        File data = new File(getSrcFileImage());
+        try {
+            InputStream inputStream =new FileInputStream(data);
+            bitmap = BitmapFactory.decodeStream(inputStream);
+            if(bitmap!=null) {
+                float W = context.getResources().getDisplayMetrics().widthPixels * 0.95f;
+                float heso = W / (float) bitmap.getWidth();
+                float h = (float) (heso * bitmap.getHeight());
+                bitmap1 = Bitmap.createScaledBitmap(bitmap, (int) W, (int) h, false);
+                imageView.setImageBitmap(bitmap1);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     }
 
 
 
     @Override
     public String getSrcFile() {
+<<<<<<< HEAD
         return "/data/user/0/com.vntoeic.bkteam.vntoeicpro/part1/audio/"+token+".mp3";
+=======
+        return LINKSRC+"audio/"+token+".mp3";
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     }
 
     @Override
     public String getLinkDowload() {
+<<<<<<< HEAD
         return LINKAUDIO+token;
+=======
+        return LINKBASIC+String.valueOf(id)+"/sound";
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     }
 
     @Override
     public String getLinkDowloadImage() {
+<<<<<<< HEAD
         return LINKIMAGE+token;
+=======
+        return LINKBASIC+String.valueOf(id)+"/image";
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     }
 
     @Override
     public String getLinkFigure(int numberQuestion) {
+<<<<<<< HEAD
         return "Http://vntoeic.com/api/v1/part1/result/"+String.valueOf(getId());
+=======
+        return LINKBASIC+String.valueOf(id)+"/result";
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 
     }
 
     @Override
     public String getSrcFileImage() {
+<<<<<<< HEAD
         return "/data/user/0/com.vntoeic.bkteam.vntoeicpro/part1/image/"+token+".png";
+=======
+        return LINKSRC+"image/"+token+".png";
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     }
 
     @Override
@@ -243,6 +300,7 @@ public class ModelPart1 implements Serializable,IListenPart,IDataPart {
     public void setToken(String token) {
         this.token = token;
     }
+<<<<<<< HEAD
 
 
     public class TaskDowloadImage extends AsyncTask<String,Void,Bitmap> {
@@ -314,4 +372,6 @@ public class ModelPart1 implements Serializable,IListenPart,IDataPart {
             return null;
         }
     }
+=======
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 }

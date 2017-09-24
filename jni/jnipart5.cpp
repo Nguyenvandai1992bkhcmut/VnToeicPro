@@ -17,12 +17,26 @@ funConvert(JNIEnv* env , jobject object , Part5 * part ){
     if(part==NULL)return NULL;
 
     jclass  cl = env -> FindClass("model/ModelPart5");
+<<<<<<< HEAD
     jmethodID methodId = env -> GetMethodID(cl,"<init>", "(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;II)V");
+=======
+    jmethodID methodId = env -> GetMethodID(cl,"<init>", "(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;II)V");
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 
     jclass clcv = env -> FindClass("model/Convert");
     jmethodID methodId1 = env -> GetStaticMethodID(clcv, "convertCStringToJniSafeString","([B)Ljava/lang/String;");
 
 
+<<<<<<< HEAD
+=======
+
+ jbyteArray arraytoken = env->NewByteArray(strlen(part->getToken()));
+    env->SetByteArrayRegion(arraytoken,0,strlen(part->getToken()),(jbyte*)part->getToken());
+    jstring token = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arraytoken);
+     env->DeleteLocalRef(arraytoken);
+
+
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     jbyteArray arrayquestion = env->NewByteArray(strlen(part->getQuestion()));
     env->SetByteArrayRegion(arrayquestion,0,strlen(part->getQuestion()),(jbyte*)part->getQuestion());
     jstring question = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arrayquestion);
@@ -59,7 +73,11 @@ funConvert(JNIEnv* env , jobject object , Part5 * part ){
     jstring explan = (jstring)env->CallStaticObjectMethod(clcv, methodId1, arrayexplan);
     env->DeleteLocalRef(arrayexplan);
 
+<<<<<<< HEAD
     jobject ob = env->NewObject(cl, methodId,part->getId(),question,a,b,c,d,sol,explan,part->getLevel(),part->getTime());
+=======
+    jobject ob = env->NewObject(cl, methodId,part->getId(),token,question,a,b,c,d,sol,explan,part->getLevel(),part->getTime());
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
              env->DeleteLocalRef(question);
              env->DeleteLocalRef(a);
             env->DeleteLocalRef(b);
@@ -67,7 +85,11 @@ funConvert(JNIEnv* env , jobject object , Part5 * part ){
             env->DeleteLocalRef(d);
             env->DeleteLocalRef(sol);
             env->DeleteLocalRef(explan);
+<<<<<<< HEAD
 
+=======
+                        env->DeleteLocalRef(token);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 
     return ob;
 }

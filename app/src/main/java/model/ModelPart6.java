@@ -18,6 +18,10 @@ import supportview.ConvertTagView;
 
 public class ModelPart6   implements Serializable,IDataPart,IListenPart {
     private int id;
+<<<<<<< HEAD
+=======
+    private String token;
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     private String content;
     private ArrayList<Part6Question>arrQuestion;
     private String explan;
@@ -25,12 +29,20 @@ public class ModelPart6   implements Serializable,IDataPart,IListenPart {
     private int time;
     private final String LINKFIGURE ="Http://vntoeic.com/api/v1/part6/result/";
 
+<<<<<<< HEAD
     public ModelPart6(int id , String content ,
+=======
+    public ModelPart6(int id ,String token, String content ,
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
                        String a1 , String b1 , String c1 , String d1 , String sol1,
                        String a2 , String b2 , String c2 , String d2 , String sol2,
                        String a3 , String b3 , String c3 , String d3 , String sol3,
                       String explan,int level, int time){
         this.id = id ;
+<<<<<<< HEAD
+=======
+        this.token = token;
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         this.content = content;
         arrQuestion = new ArrayList<>();
         arrQuestion.add(new Part6Question(1,a1,b1,c1,d1,sol1));
@@ -90,6 +102,14 @@ public class ModelPart6   implements Serializable,IDataPart,IListenPart {
     }
 
     @Override
+<<<<<<< HEAD
+=======
+    public int getPart() {
+        return 6;
+    }
+
+    @Override
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     public String getSrcFile() {
         return null;
     }
@@ -120,6 +140,14 @@ public class ModelPart6   implements Serializable,IDataPart,IListenPart {
     }
 
     @Override
+<<<<<<< HEAD
+=======
+    public String getToken() {
+        return token;
+    }
+
+    @Override
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     public View getViewContent(Context context) {
         TextView textView = new TextView(context);
         textView.setTextColor(Color.WHITE);
@@ -225,6 +253,14 @@ public class ModelPart6   implements Serializable,IDataPart,IListenPart {
         }
 
         @Override
+<<<<<<< HEAD
+=======
+        public String getToken() {
+            return ModelPart6.this.getToken();
+        }
+
+        @Override
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         public int getColorTextQuestion() {
             return Color.YELLOW;
         }

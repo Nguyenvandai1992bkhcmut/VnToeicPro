@@ -26,6 +26,11 @@ public class DowloadTask extends AsyncTask<String,Void,Void> {
         try {
             URL url = new URL(params[1]);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+<<<<<<< HEAD
+=======
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("content-token",params[3]);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
             connection.setDoInput(true);
             connection.connect();
             String ss= connection.getHeaderField("Content-Length");

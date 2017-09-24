@@ -12,6 +12,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+<<<<<<< HEAD
+=======
+import android.widget.RelativeLayout;
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +50,10 @@ import supportview.SendAsynTask;
  */
 
 public class Fragment7Manager extends Fragment implements IManagerPart, IContentQuestion, IPartControl {
+<<<<<<< HEAD
+=======
+    private RelativeLayout relative_parent;
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     public FrameLayout frame_question;
     public FrameLayout frame_explan;
     public FrameLayout frame_blur;
@@ -56,6 +64,10 @@ public class Fragment7Manager extends Fragment implements IManagerPart, IContent
     public ImageView img_question;
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     public ArrayList<Integer> arrQuestion = new ArrayList<>();
     public ArrayList<ArrayList<String>>arrchoose = new ArrayList<>();
     public ArrayList<ArrayList<String>>arrresult = new ArrayList<>();
@@ -116,6 +128,18 @@ private int part=0;
 
             SqlitePart6 sqlitePart6 = new SqlitePart6();
             ModelPart6 data[] = sqlitePart6.randomPart6(1);
+<<<<<<< HEAD
+=======
+                   /*
+
+             */
+            ManagerPart managerPart = new ManagerPart();
+            managerPart.updateTimePart(part, data[0].getId());
+
+            /*
+
+             */
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
             arrData.add(data[0]);
             arrQuestion.add(data[0].getId());
             ArrayList<String> arr = new ArrayList<>();
@@ -129,6 +153,10 @@ private int part=0;
             arrresult.add(arr);
             totalQuestion+=data[0].getArrQuestion().size();
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         }else if (mode==1){
             if (key == 0) {
                 SqlitePart6 sqlitePart6 = new SqlitePart6();
@@ -234,6 +262,19 @@ private int part=0;
 
             SqlitePart7 sqlitePart7 = new SqlitePart7();
             ModelPart7 data[] = sqlitePart7.randomPart7(1);
+<<<<<<< HEAD
+=======
+
+                   /*
+
+             */
+            ManagerPart managerPart = new ManagerPart();
+            managerPart.updateTimePart(part, data[0].getId());
+
+            /*
+
+             */
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
             arrData.add(data[0]);
             arrQuestion.add(data[0].getId());
             ArrayList<String> arr = new ArrayList<>();
@@ -319,6 +360,10 @@ private int part=0;
     }
 
     public void setUpLayout(View view){
+<<<<<<< HEAD
+=======
+        relative_parent =(RelativeLayout)view.findViewById(R.id.relate_parent);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         frame_question = (FrameLayout)view.findViewById(R.id.frame_part6_question);
         frame_explan = (FrameLayout)view.findViewById(R.id.frame_part6_explan);
         frame_blur = (FrameLayout)view.findViewById(R.id.frame_blur);
@@ -327,6 +372,10 @@ private int part=0;
         img_explan = (ImageView)view.findViewById(R.id.img_explan);
         img_commment = (ImageView)view.findViewById(R.id.img_comment);
         img_question =(ImageView)view.findViewById(R.id.img_question);
+<<<<<<< HEAD
+=======
+        changeLayoutFrame();
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         setUpEventImageFloat();
         setContent();
         setContentQuestion();
@@ -473,8 +522,20 @@ private int part=0;
                 getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null).setCustomAnimations(R.anim.scale_content_in,R.anim.scale_content_out).add(frame_question.getId(), fragment7Content).commit();
 
         }
+<<<<<<< HEAD
     }
 
+=======
+
+
+
+    }
+
+    /*
+    add subject part 6 7
+     */
+
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     public void setContentQuestion(){
         //Bundle Question
 
@@ -493,6 +554,11 @@ private int part=0;
         }
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     }
     /*
     begin Interface Imanager Part
@@ -548,7 +614,11 @@ private int part=0;
     @Override
     public void sendResultToSever(String... arr) {
         SendAsynTask sendAsynTask = new SendAsynTask();
+<<<<<<< HEAD
         sendAsynTask.execute(arr[0],arr[1]);
+=======
+        sendAsynTask.execute(arr[0],arr[1],arr[2]);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     }
 
 
@@ -734,6 +804,7 @@ private int part=0;
     @Override
     public void nextContent() {
         if(mode==0 || mode==2){
+<<<<<<< HEAD
             if((index== arrQuestion.size()-1) && arrSubmit.get(index)==0){
                 Toast.makeText(getContext(),"You need Submit before change quesiton!",Toast.LENGTH_LONG).show();
 
@@ -747,6 +818,24 @@ private int part=0;
                 setContent();
                 setContentQuestion();
             }
+=======
+//            if((index== arrQuestion.size()-1) && arrSubmit.get(index)==0){
+//                Toast.makeText(getContext(),"You need submit before change quesiton!",Toast.LENGTH_LONG).show();
+//
+//            }else {
+            index = arrQuestion.size() - 1;
+//                if (arrSubmit.get(index) == 1) {
+//                    getData();
+//                    index++;
+//                }
+
+            getData();
+            index++;
+                setNewQuestion();
+                setContent();
+                setContentQuestion();
+        //}
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 
         }else if (mode==1){
             if(index!=arrQuestion.size()-1){
@@ -777,13 +866,18 @@ private int part=0;
     public void setNewQuestion(){
         pos_question=0;
         showControl=0;
+<<<<<<< HEAD
         index = arrData.size()-1;
+=======
+        //index = arrData.size()-1;
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         isfigure=0;
         hideImage();
     }
 
     @Override
     public void backContent() {
+<<<<<<< HEAD
         if(mode==0 || mode==2)return;
         else if(index!=0){
             index--;
@@ -798,6 +892,28 @@ private int part=0;
             setContent();
             setContentQuestion();
         }
+=======
+        if(index!=0) {
+            index--;
+            setNewQuestion();
+            setContent();
+            setContentQuestion();
+        }
+//        if(mode==0 || mode==2)return;
+//        else if(index!=0){
+//            index--;
+//            isfigure=0;
+//            pos_question=0;
+//            if(mode==3 || mode==4){
+//                defaultImage();
+//                if(arrchoose.get(index).contains("Not choose"))showControl=0;
+//                else showControl=1;
+//
+//            }
+//            setContent();
+//            setContentQuestion();
+//        }
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     }
 
     @Override
@@ -825,7 +941,11 @@ private int part=0;
             String date = df.format(Calendar.getInstance().getTime());
             //send to sever
             for (int i = 0; i < ((IListenPart)(arrData.get(index))).getCountQuestion(); i++) {
+<<<<<<< HEAD
                 sendResultToSever(String.valueOf(((IListenPart)arrData.get(index)).getLinkFigure(i+1)), arrchoose.get(index).get(i));
+=======
+                sendResultToSever(String.valueOf(((IListenPart)arrData.get(index)).getLinkFigure(i+1)), arrchoose.get(index).get(i),((IListenPart)arrData.get(index)).getToken());
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 
                 if (arrchoose.get(index).get(i).equals(arrresult.get(index).get(i))) {
                     PartPractiseAcitvity.updateTextCorrect(true, totalQuestion);
@@ -848,7 +968,11 @@ private int part=0;
 
                 for (int i = 0; i < ((IListenPart)(arrData.get(index))).getCountQuestion(); i++) {
 
+<<<<<<< HEAD
                     sendResultToSever(String.valueOf(((IListenPart)arrData.get(index)).getLinkFigure(i+1)), arrchoose.get(j).get(i));
+=======
+                    sendResultToSever(String.valueOf(((IListenPart)arrData.get(index)).getLinkFigure(i+1)), arrchoose.get(j).get(i),((IListenPart)arrData.get(index)).getToken());
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
                     if (arrchoose.get(j).get(i).equals(arrresult.get(j).get(i))) {
                         managerPart.insertPartCheck(new ModelPartCheck(part, arrQuestion.get(j), date, 1));
                     } else {
@@ -859,6 +983,43 @@ private int part=0;
         }
     }
 
+<<<<<<< HEAD
+=======
+    public void changeLayoutFrame(){
+
+        relative_parent.removeView(frame_question);
+        relative_parent.removeView(frame_explan);
+        frame_question.setId(R.id.frame_part6_question);
+        frame_explan.setId(R.id.frame_part6_explan);
+        if(part==5){
+
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+
+            relative_parent.addView(frame_question,0,params);
+
+            RelativeLayout.LayoutParams params1 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            params1.addRule(RelativeLayout.BELOW,R.id.frame_part6_question);
+
+            // params1.addRule(RelativeLayout.BELOW,R.id.frame_part6_question);
+
+            relative_parent.addView(frame_explan,1,params1);
+        }else{
+
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM,RelativeLayout.TRUE);
+
+            relative_parent.addView(frame_explan,0,params);
+
+            RelativeLayout.LayoutParams params1 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            params1.addRule(RelativeLayout.ABOVE,R.id.frame_part6_explan);
+
+            relative_parent.addView(frame_question,1,params1);
+        }
+    }
+
+
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     /*
     end
      */

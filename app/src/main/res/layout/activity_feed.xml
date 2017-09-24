@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:touchscreenBlocksFocus="true"
+    android:id="@+id/line_parent">
+
+
+    <TextView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="Feeds"
+        android:background="@color/header"
+        android:layout_alignParentTop="true"
+        android:padding="5dp"
+        android:gravity="center"
+        android:textColor="@color/text_bar"
+        android:id="@+id/text_part"/>
+
+    <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_part"
+            android:id="@+id/recycle">
+        </android.support.v7.widget.RecyclerView>
+
+
+    <TextView android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_below="@id/text_part"
+        android:text="Not connect to sever.Please Check your intenet!"
+        android:id="@+id/text_notify"
+        android:visibility="gone"/>
+
+
+</RelativeLayout>

@@ -85,6 +85,32 @@
         android:padding="30dp"
         android:orientation="vertical">
 
+<<<<<<< HEAD
+=======
+        <RelativeLayout android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rect_card"
+            android:padding="5dp"
+            android:weightSum="1"
+            android:id="@+id/relate_feed">
+
+            <ImageView android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@mipmap/essentialwordsicon"
+                />
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:text="Feeds"/>
+
+        </RelativeLayout>
+
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 
         <RelativeLayout android:layout_width="match_parent"
                 android:layout_height="match_parent"

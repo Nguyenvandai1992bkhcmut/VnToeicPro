@@ -6,6 +6,10 @@ package model;
 
 public class ModelWord {
     private int mId;
+<<<<<<< HEAD
+=======
+    private String mtoken;
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     private String mWord;
     private String mPronounce;
     private String mExamples;
@@ -14,8 +18,14 @@ public class ModelWord {
     private String []mExplanations;
     private String []mSimilars;
 
+<<<<<<< HEAD
     public ModelWord(int mId, String mWord, String mPronounce, String mExamples, String[] mMeanings, String[] mTypes, String[] mExplanations, String[] mSimilars) {
         this.mId = mId;
+=======
+    public ModelWord(int mId, String token,String mWord, String mPronounce, String mExamples, String[] mMeanings, String[] mTypes, String[] mExplanations, String[] mSimilars) {
+        this.mId = mId;
+        this.mtoken= token;
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         this.mWord = mWord;
         this.mPronounce = mPronounce;
         this.mExamples = mExamples;
@@ -88,4 +98,15 @@ public class ModelWord {
     public void setmExplanations(String[] mExplanations) {
         this.mExplanations = mExplanations;
     }
+<<<<<<< HEAD
+=======
+
+    public String getToken() {
+        return mtoken;
+    }
+
+    public void setToken(String token) {
+        this.mtoken = token;
+    }
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 }

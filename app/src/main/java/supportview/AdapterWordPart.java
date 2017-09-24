@@ -80,7 +80,11 @@ public class AdapterWordPart extends RecyclerView.Adapter<RecyclerView.ViewHolde
         final Myhoder myhoder =(Myhoder)holder;
         myhoder.text_word.setText(dataWord.get(position).getmWord());
         final SqliteVocabulary sqlite = new SqliteVocabulary();
+<<<<<<< HEAD
         boolean b  =sqlite.checkFavoriteWord(dataWord.get(position).getmId());
+=======
+        boolean b  =sqlite.checkFavoriteWord(dataWord.get(position).getmId())==1;
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         if(b){
             myhoder.img_check.setBackgroundResource(R.mipmap.icon_heart);
             myhoder.flag=1;
@@ -103,12 +107,20 @@ public class AdapterWordPart extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     myhoder.view.setBackgroundResource(R.color.header_bar);
                     DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
                     String date = df.format(Calendar.getInstance().getTime());
+<<<<<<< HEAD
                     sqlite.insertFavoriteWord(new ModelFavoriteWord(dataWord.get(position).getmId(),date));
+=======
+                    //sqlite.insertFavoriteWord(new ModelFavoriteWord(dataWord.get(position).getmId(),date));
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
                 }else{
                     myhoder.flag=0;
                     myhoder.img_check.setBackgroundResource(R.mipmap.icon_heart_while);
                     myhoder.view.setBackgroundResource(R.color.none);
+<<<<<<< HEAD
                     sqlite.deleteWordFavorite(dataWord.get(position).getmId());
+=======
+                   // sqlite.deleteWordFavorite(dataWord.get(position).getmId());
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
 
                 }
             }

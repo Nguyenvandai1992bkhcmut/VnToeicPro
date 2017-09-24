@@ -35,17 +35,29 @@ public class ModelPart7 implements Serializable,IDataPart,IListenPart {
 
 
     private int id ;
+<<<<<<< HEAD
+=======
+    private String token;
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     private String explan;
     private int level;
     private int time;
     private ArrayList<Passage>passages;
     private ArrayList<Question>questions;
     private int index ;
+<<<<<<< HEAD
     public final static String LINKIMAGE="http://vntoeic.com/api/v1/part7/image/";
     public final static  String LINKSRC="/data/user/0/com.vntoeic.bkteam.vntoeicpro/part7/image/";
 
     public ModelPart7(int id , String explan , int level  , int time){
         this.id = id ;
+=======
+    public final static String LINKBASIC ="http://vntoeic.xyz/api/v1/part7s/";
+    public final static String LINKSRC="/data/user/0/com.vntoeic.bkteam.vntoeicpro/part7/";
+    public ModelPart7(int id ,String token, String explan , int level  , int time){
+        this.id = id ;
+        this.token = token;
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         this.explan = explan;
         this.level = level;
         this.time = time;
@@ -55,8 +67,13 @@ public class ModelPart7 implements Serializable,IDataPart,IListenPart {
 
     }
 
+<<<<<<< HEAD
     public void addPassage(int id , int istext , String token , String content){
         Passage passage = new Passage(id,istext,token,content);
+=======
+    public void addPassage(int id , int istext , String content){
+        Passage passage = new Passage(id,istext,content);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         this.passages.add(passage);
     }
     public void addQuestion(int id,  String question , String a , String b , String c, String d , String sol){
@@ -126,6 +143,14 @@ public class ModelPart7 implements Serializable,IDataPart,IListenPart {
     }
 
     @Override
+<<<<<<< HEAD
+=======
+    public int getPart() {
+        return 7;
+    }
+
+    @Override
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     public String getSrcFile() {
         return "";
     }
@@ -137,17 +162,29 @@ public class ModelPart7 implements Serializable,IDataPart,IListenPart {
 
     @Override
     public String getLinkDowloadImage() {
+<<<<<<< HEAD
         return LINKIMAGE;
+=======
+         return LINKBASIC+String.valueOf(id)+"/passages/";
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     }
 
     @Override
     public String getLinkFigure(int numberQuestion) {
+<<<<<<< HEAD
         return "Http://vntoeic.com/api/v1/part7/result/"+String.valueOf(id)+"/"+String.valueOf(numberQuestion);
+=======
+        return LINKBASIC+String.valueOf(id)+"/results/"+String.valueOf(numberQuestion);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     }
 
     @Override
     public String getSrcFileImage() {
+<<<<<<< HEAD
         return LINKSRC;
+=======
+        return LINKSRC +String.valueOf(id);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
     }
 
     @Override
@@ -163,7 +200,10 @@ public class ModelPart7 implements Serializable,IDataPart,IListenPart {
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 textView.setLayoutParams(params);
                 textView.setTextColor(Color.WHITE);
+<<<<<<< HEAD
 
+=======
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
                 textView.setText(convertTagView.getSpannableString());
                 linearLayout.addView(textView, i);
             } else {
@@ -176,7 +216,11 @@ public class ModelPart7 implements Serializable,IDataPart,IListenPart {
                 imageView.setScaleType(ImageView.ScaleType.CENTER);
 
                 linearLayout.addView(imageView, i);
+<<<<<<< HEAD
                 File file = new File(LINKSRC+this.getPassages().get(i).getToken()+".png");
+=======
+                File file = new File(getSrcFileImage()+String.valueOf(this.getPassages().get(i).getId())+getToken()+".png");
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
                 imageView.setImageBitmap(getBitmap(context,file));
 
             }
@@ -229,6 +273,7 @@ public class ModelPart7 implements Serializable,IDataPart,IListenPart {
         this.questions = questions;
     }
 
+<<<<<<< HEAD
     public class Passage implements Serializable{
         private int id ;
         private int istext;
@@ -240,6 +285,26 @@ public class ModelPart7 implements Serializable,IDataPart,IListenPart {
             this.id = id;
             this.istext = istext;
             this.token = token;
+=======
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public class Passage implements Serializable{
+        private int id ;
+        private int istext;
+        private String content;
+
+
+        public Passage(int id, int istext, String content) {
+            this.id = id;
+            this.istext = istext;
+
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
             this.content = content;
         }
 
@@ -251,6 +316,7 @@ public class ModelPart7 implements Serializable,IDataPart,IListenPart {
             this.istext = istext;
         }
 
+<<<<<<< HEAD
         public String getToken() {
             return token;
         }
@@ -259,6 +325,8 @@ public class ModelPart7 implements Serializable,IDataPart,IListenPart {
             this.token = token;
         }
 
+=======
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         public int getId() {
             return id;
         }
@@ -330,13 +398,25 @@ public class ModelPart7 implements Serializable,IDataPart,IListenPart {
         }
 
         @Override
+<<<<<<< HEAD
+=======
+        public String getToken() {
+            return ModelPart7.this.getToken();
+        }
+
+        @Override
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         public int getColorTextQuestion() {
             return Color.YELLOW;
         }
 
         @Override
         public String getLinkFigure() {
+<<<<<<< HEAD
             return  "Http://vntoeic.com/api/v1/part7/result/"+String.valueOf(ModelPart7.this.getId())+"/"+String.valueOf(index);
+=======
+            return LINKBASIC+String.valueOf(ModelPart7.this.getId())+"/results/"+String.valueOf(index);
+>>>>>>> bf1972332b0100bf96a643964d543bf1f6f7fbce
         }
 
         public void setD(String d) {

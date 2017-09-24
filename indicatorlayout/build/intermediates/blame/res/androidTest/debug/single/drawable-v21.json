@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Volumes/Data/VnToeic/VnToeicPro-master/indicatorlayout/build/intermediates/res/merged/androidTest/debug/drawable-v21/abc_action_bar_item_background_material.xml",
+        "source": "/Volumes/Data/VnToeic/VnToeicPro-master/indicatorlayout/build/intermediates/exploded-aar/com.android.support/appcompat-v7/26.0.0-alpha1/res/drawable-v21/abc_action_bar_item_background_material.xml"
+    },
+    {
+        "merged": "/Volumes/Data/VnToeic/VnToeicPro-master/indicatorlayout/build/intermediates/res/merged/androidTest/debug/drawable-v21/notification_action_background.xml",
+        "source": "/Volumes/Data/VnToeic/VnToeicPro-master/indicatorlayout/build/intermediates/exploded-aar/com.android.support/appcompat-v7/26.0.0-alpha1/res/drawable-v21/notification_action_background.xml"
+    },
+    {
+        "merged": "/Volumes/Data/VnToeic/VnToeicPro-master/indicatorlayout/build/intermediates/res/merged/androidTest/debug/drawable-v21/abc_edit_text_material.xml",
+        "source": "/Volumes/Data/VnToeic/VnToeicPro-master/indicatorlayout/build/intermediates/exploded-aar/com.android.support/appcompat-v7/26.0.0-alpha1/res/drawable-v21/abc_edit_text_material.xml"
+    },
+    {
+        "merged": "/Volumes/Data/VnToeic/VnToeicPro-master/indicatorlayout/build/intermediates/res/merged/androidTest/debug/drawable-v21/abc_btn_colored_material.xml",
+        "source": "/Volumes/Data/VnToeic/VnToeicPro-master/indicatorlayout/build/intermediates/exploded-aar/com.android.support/appcompat-v7/26.0.0-alpha1/res/drawable-v21/abc_btn_colored_material.xml"
+    }
+]

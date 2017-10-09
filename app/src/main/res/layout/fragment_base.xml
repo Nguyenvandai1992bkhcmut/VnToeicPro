@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/frame_layout">
+    </FrameLayout>
+
+
+
+    <supportview.CustomNavigation
+        android:layout_width="match_parent"
+        android:id="@+id/customNavigation"
+        android:layout_height="wrap_content"
+        app:titles="@array/title_menu2"
+        app:imageSize="20dp"
+        app:textSize="12sp"
+        app:isTop="true"
+        android:visibility="invisible"
+        app:duration="300"
+        app:textColor="@android:color/white">
+
+    </supportview.CustomNavigation>>
+
+    <supportview.CustomNavigation
+        android:layout_width="match_parent"
+        android:id="@+id/customNavigation2"
+        android:layout_gravity="bottom"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:titles="@array/title_menu2"
+        android:visibility="invisible"
+        app:imageSize="50dp"
+        app:textSize="15sp"
+        app:isTop="false"
+        app:duration="300"
+        app:textColor="@android:color/white">
+
+    </supportview.CustomNavigation>>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent_3"
+        android:visibility="gone"
+        android:layout_below="@id/customNavigation"
+        android:layout_above="@id/customNavigation2"
+        android:id="@+id/blur_effect">
+    </FrameLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="16dp"
+        android:id="@+id/floatingButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:backgroundTint="@color/backgroundcardmain" />
+</RelativeLayout>

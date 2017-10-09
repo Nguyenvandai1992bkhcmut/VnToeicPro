@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@drawable/bg_app"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/recyclerView">
+    </android.support.v7.widget.RecyclerView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Rate"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:id="@+id/rate_txt"
+                android:textColor="@android:color/white"
+                android:layout_alignParentLeft="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/rate_num"
+                android:text="0.00"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textColor="@android:color/white"
+                android:layout_alignParentRight="true"/>
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:id="@+id/seekbar"
+                android:layout_toRightOf="@id/rate_txt"
+                android:layout_toLeftOf="@id/rate_num"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6">
+
+
+            <ImageView
+                android:id="@+id/play"
+                android:src="@mipmap/ic_pause"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentLeft="true"
+                android:layout_height="match_parent"/>
+            <ImageView
+                android:id="@+id/replay"
+                android:src="@mipmap/ic_doubleright"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_height="match_parent"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true">
+
+                <RelativeLayout
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/speaker_layout"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/speaker_img"
+                        android:src="@mipmap/ic_womanspeaker"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_toRightOf="@id/speaker_img"
+                        android:id="@+id/speaker_txt"
+                        android:text="locale"
+                        android:textColor="@android:color/white"
+                        android:padding="3dp"
+                        android:gravity="center_vertical"/>
+                </RelativeLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_toLeftOf="@id/speaker_layout"
+                    android:src="@mipmap/ic_singleleft"
+                    android:id="@+id/previous_speaker"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_toRightOf="@id/speaker_layout"
+                    android:layout_height="match_parent"
+                    android:id="@+id/next_speaker"
+                    android:src="@mipmap/ic_singleright"/>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

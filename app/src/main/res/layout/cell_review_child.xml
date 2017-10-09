@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:gravity="center"
+    android:padding="2dp"
+    android:background="@color/bg_listem"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/icon_checked"
+        android:id="@+id/line_check"/>
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:textColor="@android:color/white"
+        android:layout_centerVertical="true"
+        android:orientation="horizontal"
+        android:layout_toLeftOf="@id/line_check"
+        android:id="@+id/line_time"/>
+
+    <TableLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:gravity="center"
+        android:layout_below="@id/line_time"
+        android:visibility="gone"
+        android:id="@+id/line_control"
+        android:orientation="horizontal">
+        <TableRow>
+
+            <ImageView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:id="@+id/img_remove"
+                android:src="@mipmap/icon_remove2"/>
+        <ImageView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:id="@+id/img_review"
+            android:src="@mipmap/icon_review1"/>
+        </TableRow>
+    </TableLayout>
+
+    <TextView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="5dp"
+        android:textColor="@android:color/holo_green_light"
+        android:layout_below="@id/line_control"
+        android:id="@+id/text_line_bot"
+        android:text="✎✎✎✎✎✎✎✎"/>
+</RelativeLayout>

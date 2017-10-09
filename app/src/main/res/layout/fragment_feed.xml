@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="3dp"
+    android:id="@+id/line">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="title question"
+        android:textSize="20sp"
+        android:id="@+id/question_title"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        android:id="@+id/line_image">
+    </LinearLayout>
+
+    <supportview.FlowLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:id="@+id/line_tags"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/bg_content"
+            android:id="@+id/img_avatar"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:id="@+id/text_user"
+                android:text="aaaaaaaaaaa"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/small_approveicon"
+                    android:id="@+id/img_like_user"/>
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:layout_marginLeft="3dp"
+                    android:id="@+id/text_like_user"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/img_unlike_user"
+                    android:src="@mipmap/small_disapproveicon"/>
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_unlike_user"
+                    android:layout_marginLeft="3dp"
+                    android:text="1"/>
+            </LinearLayout>
+        </LinearLayout>
+        </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/hoticon"
+            android:backgroundTint="@android:color/holo_red_light"
+            android:id="@+id/img_hot"/>
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hot"
+            android:id="@+id/text_hot"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/img_comment"
+            android:src="@mipmap/answer_number"/>
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_count_number"
+            android:layout_marginLeft="3dp"
+            android:text="1"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/img_star"
+            android:src="@mipmap/gray_smallstar"/>
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_subcribe"
+            android:visibility="gone"
+            android:layout_marginLeft="3dp"
+            android:text="subcribe"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/img_like_post"
+            android:src="@mipmap/approve_icon"/>
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_like_post"
+            android:layout_marginLeft="3dp"
+            android:text="1"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/img_unlike_post"
+            android:layout_marginLeft="5dp"
+            android:src="@mipmap/disapprove_con"/>
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_unlike_post"
+            android:layout_marginLeft="3dp"
+            android:text="1"/>
+
+    </LinearLayout>
+
+        <ImageView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/icon_learned"
+            android:id="@+id/img_camera"
+            android:visibility="gone"/>
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:id="@+id/line_edit">
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:background="@drawable/rect_edit_gradient"
+                android:gravity="right|center_vertical"
+                android:paddingRight="30dp"
+                android:textColor="@android:color/white"
+                android:text="Edit"
+                android:id="@+id/text_edit"/>
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:background="@drawable/rect_delete_gradient"
+                android:text="Delete"
+                android:id="@+id/text_delete"
+                android:paddingLeft="30dp"/>
+        </LinearLayout>
+        <ImageView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/icon_review1"
+            android:id="@+id/img_edit"
+            android:visibility="gone"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:id="@+id/line_comment">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_search"
+            android:padding="2dp">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="left"
+                android:background="@null"
+                android:paddingLeft="5dp"
+                android:paddingRight="50dp"
+                android:id="@+id/edit_comment"/>
+            <ImageView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/icon_learned"
+                android:id="@+id/img_send"/>
+            </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:id="@+id/line_gallery">
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:padding="5dp"
+        android:visibility="gone"
+        android:id="@+id/recycle_reply"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@drawable/line_red"/>
+
+</LinearLayout>

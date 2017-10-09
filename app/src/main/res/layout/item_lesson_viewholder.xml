@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <customview.statable_viewgroup.StatableViewGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/statableViewGroup"
+        android:padding="5dp"
+        android:gravity="center_vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:button="@drawable/custom_drawable_checkbox"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_toRightOf="@+id/checkbox"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:id="@+id/txt_lesson"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/holo_green_dark"
+                android:id="@+id/txt_learn"/>
+        </LinearLayout>
+    </customview.statable_viewgroup.StatableViewGroup>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@android:color/holo_red_light"
+        android:paddingBottom="5dp"/>
+
+</LinearLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <tranthicamgiang.vntoei.com.foldingeffect.FoldingViewGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/foldingViewgroup"
+        android:orientation="horizontal">
+        <tranthicamgiang.vntoei.com.foldingeffect.FoldingLayout
+            android:layout_width="320dp"
+            android:layout_height="match_parent"
+            android:id="@+id/folding_layout">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/left_frame">
+            </FrameLayout>
+        </tranthicamgiang.vntoei.com.foldingeffect.FoldingLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:id="@+id/right_frame"
+            android:layout_height="match_parent">
+        </FrameLayout>
+    </tranthicamgiang.vntoei.com.foldingeffect.FoldingViewGroup>
+
+</RelativeLayout>

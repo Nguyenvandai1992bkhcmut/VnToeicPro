@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:gravity="center_vertical"
+    android:layout_height="wrap_content">
+    <ImageView android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@mipmap/icon_play_feed"
+        android:id="@+id/img_play"/>
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_notify"
+            android:text="This post containt audio &#x1f3A7;&#x1f3A7;&#x1f3A7; \n Click to listen and view its contents "/>
+    <SeekBar android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:id="@+id/seekbar_audio"
+        android:progress="0"/>
+        </LinearLayout>
+</LinearLayout>

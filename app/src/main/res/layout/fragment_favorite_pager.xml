@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <customview.CustomPinnedSectionListview
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listview"
+        android:background="@color/gray_green"/>
+
+    <FrameLayout
+    android:id="@+id/framelayout"
+    android:background="@color/transparent_3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <tranthicamgiang.vntoeic.com.favoritenote.FavoriteView
+        android:id="@+id/favoriteview"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_gravity="center">
+
+        </tranthicamgiang.vntoeic.com.favoritenote.FavoriteView>
+    </FrameLayout>
+</FrameLayout>

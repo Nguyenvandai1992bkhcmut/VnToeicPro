@@ -202,41 +202,7 @@ public class MainActivity extends BaseActivity implements AdapterWordSearch.onCl
 //    //        ModelWord[]md55= managerPart.searchWordPart(5,1);
 //    //
 //    //
-//    //        SqliteVocabulary vc = new SqliteVocabulary();
-//    //        ModelSection[]arr = vc.searchAllSection();
-//    //        ModelTag[]arr1 = vc.searchTaginSection(0);
-//    //        arr1= vc.searchTaginSection(1);
 //    //
-//    //        ModelLesson []arr11 = vc.searchLessonTag(1);
-//    //        ModelWord w = vc.searchWordId(10);
-//    //        arr11= vc.searchLessonTag(3);
-//    //        arr11= vc.searchLessonTag(2);
-//    //        arr11= vc.searchLessonTag(4);
-//    //
-//    //        ModelWord modelWord = vc.searchWordId(10);
-//    //        ModelWordLesson md[] = vc.searchWordLesson(1);
-//    //
-//    //        ModelFavoriteWord mm[] = vc.searchFavoriteWord();
-//    //        ModelFavoriteWord m = new ModelFavoriteWord(1,"nguyenvandai_time");
-//    //        ModelFavoriteWord m1 = new ModelFavoriteWord(1,"nguyenvandai_time");
-//    //        ModelFavoriteWord m2 = new ModelFavoriteWord(1,"nguyenvandai_time");
-//    //        vc.insertFavoriteWord(m);
-//    //        vc.insertFavoriteWord(m1);
-//    //        vc.insertFavoriteWord(m2);
-//    //        mm = vc.searchFavoriteWord();
-//    //
-//    //        ModelWordChecked checked[]=vc.searchWordCheckedId(1);
-//    //        ModelWordChecked modelWordChecked = new ModelWordChecked(29,0,1,"time_check_insert");
-//    //        vc.insertWordChecked(modelWordChecked);
-//    //        checked = vc.searchWordChecked();
-//    //
-//    //        Boolean b = vc.checkFavoriteWord(1);
-//    //
-//    //        b= vc.checkWordChecked(29);
-//    //        vc.deleteWordChecked(29);
-//    //        b= vc.checkWordChecked(29);
-//    //        vc.deleteWordFavorite(1);
-//    //        b= vc.checkFavoriteWord(1);
 //    //
 //
 //    //       SqlitePart1 sqlite = new SqlitePart1();
@@ -290,7 +256,46 @@ public class MainActivity extends BaseActivity implements AdapterWordSearch.onCl
 
     @Override
     protected void setUpLayoutContent() {
+        checkDatabase();
         setUplayout();
+
+
+        SqliteVocabulary vc = new SqliteVocabulary();
+            ModelSection[]arr = vc.searchAllSection();
+            ModelTag[]arr1 = vc.searchTaginSection(0);
+            arr1= vc.searchTaginSection(1);
+
+            ModelLesson []arr11 = vc.searchLessonTag(1);
+            ModelWord w = vc.searchWordId(10);
+            arr11= vc.searchLessonTag(3);
+            arr11= vc.searchLessonTag(2);
+            arr11= vc.searchLessonTag(4);
+
+            ModelWord modelWord = vc.searchWordId(10);
+            ModelWordLesson md[] = vc.searchWordLesson(1);
+
+//            ModelFavoriteWord mm[] = vc.searchFavoriteWord();
+            ModelFavoriteWord m = new ModelFavoriteWord(1,"nguyenvandai_time");
+            ModelFavoriteWord m1 = new ModelFavoriteWord(1,"nguyenvandai_time");
+            ModelFavoriteWord m2 = new ModelFavoriteWord(1,"nguyenvandai_time");
+            vc.insertFavoriteWord(1, m);
+            vc.insertFavoriteWord(1, m1);
+            vc.insertFavoriteWord(1, m2);
+//            mm = vc.searchFavoriteWord();
+
+            ModelWordChecked checked[]=vc.searchWordCheckedId(1);
+            ModelWordChecked modelWordChecked = new ModelWordChecked(29,0,1,"time_check_insert");
+            vc.insertWordChecked(modelWordChecked);
+            checked = vc.searchWordChecked();
+
+//            Boolean b = vc.checkFavoriteWord(1);
+
+//            b= vc.checkWordChecked(29);
+//            vc.deleteWordChecked(29);
+//            b= vc.checkWordChecked(29);
+//            vc.deleteWordFavorite(1);
+//            b= vc.checkFavoriteWord(1);
+
     }
 
     public static String getIPAddress(boolean useIPv4) {

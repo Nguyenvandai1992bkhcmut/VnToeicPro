@@ -15,8 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import de.halfbit.pinnedsection.PinnedSectionListView;
-import model.ModelAbstractFavoriteWord;
-import vocabulary.adapter.PinnedSectionFavoriteAdapter;
+import favoritevocabulary.FavoriteAdapter;
+import model.ModelAbstractWord;
 
 /**
  * Created by giang on 7/30/17.
@@ -27,7 +27,8 @@ public class CustomPinnedSectionListview extends PinnedSectionListView {
 
     private static final long DURATION = 500;
     private Context mContext;
-    private List<ModelAbstractFavoriteWord> mData;
+    private List<ModelAbstractWord> mData;
+
 
     public CustomPinnedSectionListview(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -39,12 +40,12 @@ public class CustomPinnedSectionListview extends PinnedSectionListView {
         mContext = context;
     }
 
-    public void setData(List<ModelAbstractFavoriteWord> data) {
+    public void setData(List<ModelAbstractWord> data) {
         this.mData = data;
     }
 
 
-    public void removeRow(final ModelAbstractFavoriteWord modelAbstractFavoriteWord, final int currentPosition, final int newPosition) {
+    public void removeRow(final ModelAbstractWord modelAbstractFavoriteWord, final int currentPosition, final int newPosition) {
 
         if (currentPosition < 0 || newPosition < 0) return;
 
@@ -58,7 +59,7 @@ public class CustomPinnedSectionListview extends PinnedSectionListView {
         set.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                final PinnedSectionFavoriteAdapter adapter = (PinnedSectionFavoriteAdapter) getAdapter();
+                final FavoriteAdapter adapter = (FavoriteAdapter) getAdapter();
 
                 final HashMap<Long, Rect> listviewItemBounds = new HashMap<Long, Rect>();
                 int firstVisiblePosition = getFirstVisiblePosition();
@@ -123,10 +124,10 @@ public class CustomPinnedSectionListview extends PinnedSectionListView {
         });
     }
 
-    public void addRow(ModelAbstractFavoriteWord modelAbstractFavoriteWord, final int newPosition) {
+    public void addRow(ModelAbstractWord modelAbstractFavoriteWord, final int newPosition) {
         if (newPosition < 0) return;
 
-        final PinnedSectionFavoriteAdapter adapter = (PinnedSectionFavoriteAdapter) getAdapter();
+        final FavoriteAdapter adapter = (FavoriteAdapter) getAdapter();
 
         final HashMap<Long, Rect> listviewItemBounds = new HashMap<>();
 

@@ -69,33 +69,33 @@ public class PinnedSectionAdapter extends ArrayAdapter<ModelAbstractWord> implem
 
     private void prepareList() {
         SqliteVocabulary sqliteVocabulary = new SqliteVocabulary();
-        mSections = sqliteVocabulary.searchLessonTag(mTagId);
-        int sectionPosition = 0, listPosition = 0;
-        for (int i = 0; i < mSections.length; i++) {
-            ModelAbstractWord section = new ModelAbstractWord(
-                    ModelAbstractWord.SECTION,
-                    mSections[i].getmLessonTitle(),
-                    mSections[i].getmLessonId(),
-                    null
-            );
-            section.sectionPosition = sectionPosition;
-            section.listPosition = listPosition ++;
-            add(section);
-            mSectionsList.add(section);
-            mListVisible.add(false);
+                mSections = sqliteVocabulary.searchLessonTag(mTagId);
+                int sectionPosition = 0, listPosition = 0;
+                for (int i = 0; i < mSections.length; i++) {
+                    ModelAbstractWord section = new ModelAbstractWord(
+                            ModelAbstractWord.SECTION,
+                            mSections[i].getmLessonTitle(),
+                            mSections[i].getmLessonId(),
+                            null
+                    );
+                    section.sectionPosition = sectionPosition;
+                    section.listPosition = listPosition ++;
+                    add(section);
+                    mSectionsList.add(section);
+                    mListVisible.add(false);
 
-            ModelWordLesson[] wordLessons = sqliteVocabulary.searchWordLesson(mSections[i].getmLessonId());
-            for (int j = 0; j < wordLessons.length; j++) {
-                ModelAbstractWord item = new ModelAbstractWord(
-                        ModelAbstractWord.ITEM,
-                        null,
-                        -1,
-                        wordLessons[j]
-                );
-                item.sectionPosition = sectionPosition;
-                item.listPosition = listPosition++;
-                add(item);
-                mListVisible.add(false);
+                    ModelWordLesson[] wordLessons = sqliteVocabulary.searchWordLesson(mSections[i].getmLessonId());
+                    for (int j = 0; j < wordLessons.length; j++) {
+                        ModelAbstractWord item = new ModelAbstractWord(
+                                ModelAbstractWord.ITEM,
+                                null,
+                                -1,
+                                wordLessons[j]
+                        );
+                        item.sectionPosition = sectionPosition;
+                        item.listPosition = listPosition++;
+                        add(item);
+                        mListVisible.add(false);
             }
             sectionPosition++;
         }
@@ -134,10 +134,12 @@ public class PinnedSectionAdapter extends ArrayAdapter<ModelAbstractWord> implem
             final ModelWord word = getItem(position).mWord.getmWord();
             itemViewHolder.setData(word);
 
-            if(getItem(position).isSection() == false) {
-                itemViewHolder.bind(mSections[getItem(position).sectionPosition].getmLessonId(),
-                        position - getItem(getItem(position).sectionPosition).listPosition,
-                        mListener);
+            if (getItem(position) != null){
+                if(!getItem(position).isSection()) {
+                    itemViewHolder.bind(mSections[getItem(position).sectionPosition].getmLessonId(),
+                            position - getItem(getItem(position).sectionPosition).listPosition,
+                            mListener);
+                }
             }
 
 

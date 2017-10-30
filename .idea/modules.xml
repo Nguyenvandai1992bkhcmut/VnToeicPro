@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/favoritelayout/favoritelayout.iml" filepath="$PROJECT_DIR$/favoritelayout/favoritelayout.iml" />
-      <module fileurl="file://$PROJECT_DIR$/foldingeffect/foldingeffect.iml" filepath="$PROJECT_DIR$/foldingeffect/foldingeffect.iml" />
+      <module fileurl="file://$PROJECT_DIR$/favoritenote/favoritenote.iml" filepath="$PROJECT_DIR$/favoritenote/favoritenote.iml" />
+      <module fileurl="file://$PROJECT_DIR$/folding/folding.iml" filepath="$PROJECT_DIR$/folding/folding.iml" />
       <module fileurl="file://$PROJECT_DIR$/vnToeic.iml" filepath="$PROJECT_DIR$/vnToeic.iml" />
     </modules>
   </component>

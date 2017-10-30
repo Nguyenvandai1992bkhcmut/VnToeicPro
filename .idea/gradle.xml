@@ -9,8 +9,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/favoritelayout" />
-            <option value="$PROJECT_DIR$/foldingeffect" />
+            <option value="$PROJECT_DIR$/favoritenote" />
+            <option value="$PROJECT_DIR$/folding" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

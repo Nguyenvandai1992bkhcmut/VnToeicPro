@@ -1,1 +1,1 @@
-include ':app', ':foldingeffect', ':favoritelayout'
+include ':app', ':favoritenote', ':favoritenote', ':folding', ':folding'

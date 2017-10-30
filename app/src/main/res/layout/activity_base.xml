@@ -5,12 +5,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <tranthicamgiang.vntoei.com.foldingeffect.FoldingViewGroup
+    <tranthicamgiang.vntoeic.com.folding.FoldingViewGroup
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/foldingViewgroup"
         android:orientation="horizontal">
-        <tranthicamgiang.vntoei.com.foldingeffect.FoldingLayout
+        <tranthicamgiang.vntoeic.com.folding.FoldingLayout
             android:layout_width="320dp"
             android:layout_height="match_parent"
             android:id="@+id/folding_layout">
@@ -19,12 +19,12 @@
                 android:layout_height="match_parent"
                 android:id="@+id/left_frame">
             </FrameLayout>
-        </tranthicamgiang.vntoei.com.foldingeffect.FoldingLayout>
+        </tranthicamgiang.vntoeic.com.folding.FoldingLayout>
         <FrameLayout
             android:layout_width="match_parent"
             android:id="@+id/right_frame"
             android:layout_height="match_parent">
         </FrameLayout>
-    </tranthicamgiang.vntoei.com.foldingeffect.FoldingViewGroup>
+    </tranthicamgiang.vntoeic.com.folding.FoldingViewGroup>
 
 </RelativeLayout>

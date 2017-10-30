@@ -7,8 +7,10 @@ import android.view.View;
 
 import com.facebook.FacebookSdk;
 
-import tranthicamgiang.vntoei.com.foldingeffect.FoldingLayout;
-import tranthicamgiang.vntoei.com.foldingeffect.FoldingViewGroup;
+import tranthicamgiang.vntoeic.com.favoritenote.*;
+import tranthicamgiang.vntoeic.com.folding.FoldingLayout;
+import tranthicamgiang.vntoeic.com.folding.FoldingViewGroup;
+
 
 /**
  * Created by giang on 10/8/17.

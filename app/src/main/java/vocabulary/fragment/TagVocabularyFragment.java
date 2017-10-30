@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -25,7 +26,7 @@ import vocabulary.adapter.TagPagerAdapter;
 public class TagVocabularyFragment extends Fragment implements LessonPagerFragment.LessonInterface, View.OnClickListener{
     private static final String TAG_ID = "tag id";
     private int mTagId;
-    public ViewPager mViewPager;
+    public CustomViewPager mViewPager;
     private FragmentManager mFragmentManager ;
     private ScrollableFragmentInterface mWordLessonPagerFragment;
     private LessonPagerFragment mLessonPagerFragment;
@@ -69,8 +70,9 @@ public class TagVocabularyFragment extends Fragment implements LessonPagerFragme
             /**
              * Favorite fragment
              */
-            if (mLessonPagerFragment == null) mLessonPagerFragment = LessonPagerFragment.create(mTagId);
-            if (mWordLessonPagerFragment == null) mWordLessonPagerFragment = new FavoriteFragment();
+//            if (mLessonPagerFragment == null) mLessonPagerFragment = LessonPagerFragment.create(mTagId);
+            if (mLessonPagerFragment == null) mLessonPagerFragment = LessonPagerFragment.create(15);
+            if (mWordLessonPagerFragment == null) mWordLessonPagerFragment = FavoriteFragment.create(mViewPager);
 
         } else {
             if (mLessonPagerFragment == null) mLessonPagerFragment = LessonPagerFragment.create(mTagId);
@@ -211,7 +213,8 @@ public class TagVocabularyFragment extends Fragment implements LessonPagerFragme
         this.mRightIcon.setOnClickListener(this);
         this.mFirstDot = (ImageView) view.findViewById(R.id.firstDot);
         this.mSecondDot = (ImageView) view.findViewById(R.id.secondDot);
-        this.mViewPager = (ViewPager) view.findViewById(R.id.viewPager);
+        this.mViewPager = (CustomViewPager) view.findViewById(R.id.viewPager);
+
     }
 
     @Override
